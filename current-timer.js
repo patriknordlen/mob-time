@@ -1,0 +1,1 @@
+exports.timeLeft = 12 * 60;

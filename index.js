@@ -6,7 +6,6 @@ const PORT = process.env.PORT || 3000;
 app.get("/", function (req, res) {
     res.send("Ceci n'est pas un test!\n");
 });
-
 app.post("/start", function (req, res) {
     res.sendStatus(200);
 });
