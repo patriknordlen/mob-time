@@ -1,7 +1,12 @@
-describe("JSON", function() {
-    describe(".parse()", function() {
-        it("should detect malformed JSON strings", function(){
-            //Test Goes Here
+var request = require("request");
+var expect  = require("chai").expect;
+
+describe("Mob Server", function() {
+    describe("index", function() {
+        it("returns 200", function(){
+            request.get("http://localhost:3000/", function(error, response, body){
+                expect(response.statusCode).to.equal(200);
+            })
         });
     });
 });
