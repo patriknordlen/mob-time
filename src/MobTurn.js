@@ -10,16 +10,15 @@ class MobTurn {
     timeLeftInMillis() {
         return this.lengthInSeconds * 1000 - this.elapsedMs;
     }
+
+    timeLeft() {
+        let millis = this.timeLeftInMillis();
+        let seconds = millis / 1000;
+        return {
+            millis: millis,
+            minutes: Math.floor(seconds / 60),
+            seconds: Math.floor(seconds % 60),
+        };
+    }
 }
-
-MobTurn.prototype.toString = function () {
-    let millis = this.timeLeftInMillis();
-    let seconds = millis / 1000;
-    return JSON.stringify({
-        millis: millis,
-        minutes: Math.floor(seconds / 60),
-        seconds: Math.floor(seconds % 60),
-    });
-};
-
 module.exports = MobTurn;

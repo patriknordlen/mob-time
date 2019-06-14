@@ -10,10 +10,10 @@ app.get("/", function (req, res) {
 });
 app.post("/start", function (req, res) {
     currentTurn = new MobTurn(parseInt(req.query.lengthInMinutes));
-    res.send(currentTurn.toString());
+    res.json(currentTurn.timeLeft());
 });
 app.get("/timeLeft", function (req, res) {
-    res.send(currentTurn.toString());
+    res.json(currentTurn.timeLeft());
 });
 
 app.listen(PORT, () => console.log(`Server started on http://0.0.0.0:${PORT}`));
