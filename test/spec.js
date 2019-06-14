@@ -9,4 +9,12 @@ describe("Mob Server", function() {
             })
         });
     });
+
+    describe("start", function() {
+        it("returns 200", function(){
+            request.post("http://localhost:3000/start", function(error, response, body){
+                expect(response.statusCode).to.equal(200);
+            })
+        });
+    });
 });

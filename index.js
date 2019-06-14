@@ -7,7 +7,7 @@ app.get("/", function (req, res) {
     res.send("Ceci n'est pas un test!\n");
 });
 
-app.post("/", function (req, res) {
+app.post("/start", function (req, res) {
     res.sendStatus(200);
 });
 
