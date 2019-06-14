@@ -11,4 +11,6 @@ app.post("/", function (req, res) {
     res.sendStatus(200);
 });
 
-app.listen(PORT);
+app.listen(PORT, function () {
+    console.log(`Server started on http://0.0.0.0:${PORT}`);
+});
