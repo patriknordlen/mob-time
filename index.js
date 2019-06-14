@@ -2,27 +2,36 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-let periodInSeconds = undefined;
-let elapsedMs = undefined;
-let startTime = undefined;
-let currentTimer = undefined;
+var mobTimer = {
+    periodInSeconds: 0,
+    elapsedMs: 0,
+    startTime: 0,
+    currentTimer: 0,
+
+    initTimer: function(periodInMinutes) {
+        this.periodInSeconds = parseInt(periodInMinutes) * 60;
+        this.startTime = new Date();
+
+        if (this.currentTimer) {
+            clearInterval(this.currentTimer);
+        }
+
+        var self = this;
+        this.currentTimer = setInterval(function () {
+            self.elapsedMs = new Date() - self.startTime;
+        }, 100);
+    }
+};
 
 app.get("/", function (req, res) {
     res.send("Ceci n'est pas un test!\n");
 });
 app.post("/start", function (req, res) {
-    periodInSeconds = parseInt(req.query.timeLeft) * 60;
-    startTime = new Date();
-    if (currentTimer) {
-        clearInterval(currentTimer);
-    }
-    currentTimer = setInterval(function () {
-        elapsedMs = new Date() - startTime;
-    }, 100);
+    mobTimer.initTimer(req.query.timeLeft);
     res.sendStatus(200);
 });
 app.get("/timeLeft", function (req, res) {
-   res.send((periodInSeconds * 1000 - elapsedMs) + "");
+   res.send((mobTimer.periodInSeconds * 1000 - mobTimer.elapsedMs) + "");
 });
 
 app.listen(PORT, function () {
