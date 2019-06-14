@@ -1,6 +1,5 @@
 var request = require("request");
 var expect  = require("chai").expect;
-var timer = require("../current-timer");
 
 describe("Mob Server", function() {
     describe("index", function() {
