@@ -24,7 +24,7 @@ var mobTimer = {
 };
 
 app.get("/", function (req, res) {
-    res.send("Ceci n'est pas un test!\n");
+    res.send("Mob Time Server !");
 });
 app.post("/start", function (req, res) {
     mobTimer.initTimer(req.query.timeLeft);
