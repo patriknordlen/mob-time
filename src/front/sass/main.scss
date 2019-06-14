@@ -1,0 +1,87 @@
+@import "compass";
+$color: #00b400;
+$color-counting: #b41300;
+$space: 15px;
+$font-excess-bottom-padding: 5px;
+
+body {
+  text-align: center;
+}
+
+#container {
+  margin: 20px;
+  font-size: 1.1em;
+  font-family: Righteous, sans-serif;
+  display: inline-block;
+  max-width: 450px;
+
+  #container.counting & {
+    color: $color-counting;
+  }
+
+  section {
+    display: inline-block;
+    vertical-align: bottom;
+    margin: $space/2;
+  }
+
+  fieldset {
+    padding: 0;
+    border: none;
+    margin-top: $space/2;
+  }
+}
+
+#start-pause, h1 {
+  width: 200px;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+}
+h1 {
+  font-size: 42px;
+  color: $color;
+  padding: $space 0 ($space - $font-excess-bottom-padding);
+  border-top: 4px solid;
+  border-bottom: 4px solid;
+  border-color: $color;
+  margin: 0;
+  margin-bottom: $space;
+  #container.counting & {
+    color: $color-counting;
+    border-color: $color-counting;
+  }
+}
+
+#minutes-by-person {
+  font-size: 1em;
+  width: 3em;
+  margin-right: 10px;
+  border-radius: 0;
+  border: solid 1px #ccc;
+  background: none;
+  padding: 2px 5px;
+}
+
+button#start-pause {
+  border-radius: 0;
+  border: solid 1px #ccc;
+  background: $color;
+  color: white;
+  height: 128px;
+  margin: 0;
+  font-size: 1.8em;
+  #container.counting & {
+    background: $color-counting;
+  }
+}
+
+label[for="alarm-url"] {
+  position: relative;
+  bottom: 112px;
+  padding-right: 10px;
+}
+#alarm-url {
+    width: 363px;
+    height: 228px;
+}

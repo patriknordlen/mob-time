@@ -2,9 +2,9 @@
   "name": "mob-time",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/back/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/back/index.js",
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "keywords": [],

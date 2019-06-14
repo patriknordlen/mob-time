@@ -1,0 +1,93 @@
+/* line 7, ../sass/main.scss */
+body {
+  text-align: center;
+}
+
+/* line 11, ../sass/main.scss */
+#container {
+  margin: 20px;
+  font-size: 1.1em;
+  font-family: Righteous, sans-serif;
+  display: inline-block;
+  max-width: 450px;
+}
+/* line 18, ../sass/main.scss */
+#container.counting #container {
+  color: #b41300;
+}
+/* line 22, ../sass/main.scss */
+#container section {
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 7.5px;
+}
+/* line 28, ../sass/main.scss */
+#container fieldset {
+  padding: 0;
+  border: none;
+  margin-top: 7.5px;
+}
+
+/* line 35, ../sass/main.scss */
+#start-pause, h1 {
+  width: 200px;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+}
+
+/* line 41, ../sass/main.scss */
+h1 {
+  font-size: 42px;
+  color: #00b400;
+  padding: 15px 0 10px;
+  border-top: 4px solid;
+  border-bottom: 4px solid;
+  border-color: #00b400;
+  margin: 0;
+  margin-bottom: 15px;
+}
+/* line 50, ../sass/main.scss */
+#container.counting h1 {
+  color: #b41300;
+  border-color: #b41300;
+}
+
+/* line 56, ../sass/main.scss */
+#minutes-by-person {
+  font-size: 1em;
+  width: 3em;
+  margin-right: 10px;
+  border-radius: 0;
+  border: solid 1px #ccc;
+  background: none;
+  padding: 2px 5px;
+}
+
+/* line 66, ../sass/main.scss */
+button#start-pause {
+  border-radius: 0;
+  border: solid 1px #ccc;
+  background: #00b400;
+  color: white;
+  height: 128px;
+  margin: 0;
+  font-size: 1.8em;
+}
+/* line 74, ../sass/main.scss */
+#container.counting button#start-pause {
+  background: #b41300;
+}
+
+/* line 79, ../sass/main.scss */
+label[for="alarm-url"] {
+  position: relative;
+  bottom: 112px;
+  padding-right: 10px;
+}
+
+/* line 84, ../sass/main.scss */
+#alarm-url {
+  width: 363px;
+  height: 228px;
+}

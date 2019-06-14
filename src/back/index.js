@@ -6,7 +6,7 @@ const MobTurn = require("./MobTurn");
 let currentTurn = undefined;
 
 app.get("/", function (req, res) {
-    res.send("Mob Time Server !");
+    res.redirect("/index.html")
 });
 app.post("/start", function (req, res) {
     currentTurn = new MobTurn(parseInt(req.query.lengthInMinutes));
@@ -15,5 +15,7 @@ app.post("/start", function (req, res) {
 app.get("/timeLeft", function (req, res) {
     res.json(currentTurn.timeLeft());
 });
+
+app.use(express.static('src/front'));
 
 app.listen(PORT, () => console.log(`Server started on http://0.0.0.0:${PORT}`));
