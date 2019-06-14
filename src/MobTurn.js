@@ -4,7 +4,14 @@ class MobTurn {
         this.elapsedMs = 0;
         this.startTime = new Date();
         let self = this;
-        this.timer = setInterval(() => self.elapsedMs = new Date() - self.startTime, 100);
+        this.timer = setInterval(() => self.updateTime(), 100);
+    }
+
+    updateTime() {
+        this.elapsedMs = Math.max(0, new Date() - this.startTime);
+        if (this.elapsedMs === 0) {
+            clearInterval(this.timer);
+        }
     }
 
     timeLeftInMillis() {
