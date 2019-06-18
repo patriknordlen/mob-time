@@ -2,3 +2,4 @@
 node_modules
 Supprimerait src/front/.sass-cache/
 ,sass-cache
+*/.sass-cache
