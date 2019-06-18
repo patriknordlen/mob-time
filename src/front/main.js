@@ -86,10 +86,11 @@ function toButtonValue(time) {
 }
 
 function toHumanReadableString(time) {
+    let minutes = time.millis / 1000 / 60;
     if (time.minutes <= 0) {
         return time.seconds + " s";
     }
-    return time.minutes + "min";
+    return Math.round(minutes) + "min";
 }
 
 // --------------------------------------------
