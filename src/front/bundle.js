@@ -10,7 +10,7 @@ var container = document.getElementById("container");
 var timeLeftResponse = undefined;
 
 function startCountdown() {
-  startMobTurn(minutesByPerson.value, display);
+  startMobTurn(minutesByPerson.value, displayTimeLeft);
   chooseSound();
   turnOnCountDownDisplayMode();
   var interval = setInterval(function () {
@@ -19,7 +19,7 @@ function startCountdown() {
       alarm.play();
       turnOffCountDownDisplayMode();
     } else {
-      updateTimeLeftAsync();
+      updateTimeLeftAsync(displayTimeLeft);
     }
   }, 100);
   return false;
@@ -56,13 +56,13 @@ function turnOffCountDownDisplayMode() {
   document.getElementsByTagName("h1")[0].innerText = appTitle;
 }
 
-function updateTimeLeftAsync() {
+function updateTimeLeftAsync(callback) {
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       timeLeftResponse = JSON.parse(this.responseText);
-      display(timeLeftResponse);
+      callback(timeLeftResponse);
     }
   };
 
@@ -73,7 +73,7 @@ function updateTimeLeftAsync() {
 // --------------------------------------------
 
 
-function display(time) {
+function displayTimeLeft(time) {
   document.title = toPageTitle(time);
   timeLeft.innerText = toButtonValue(time);
 }

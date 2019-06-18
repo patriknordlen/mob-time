@@ -8,7 +8,7 @@ const container = document.getElementById("container");
 let timeLeftResponse = undefined;
 
 function startCountdown() {
-	startMobTurn(minutesByPerson.value, display);
+	startMobTurn(minutesByPerson.value, displayTimeLeft);
     chooseSound();
     turnOnCountDownDisplayMode();
     let interval = setInterval(function () {
@@ -18,7 +18,7 @@ function startCountdown() {
             turnOffCountDownDisplayMode();
         }
         else {
-        	updateTimeLeftAsync();
+        	updateTimeLeftAsync(displayTimeLeft);
         }
     }, 100);
 
@@ -54,12 +54,12 @@ function turnOffCountDownDisplayMode() {
     document.getElementsByTagName("h1")[0].innerText = appTitle;
 }
 
-function updateTimeLeftAsync() {
+function updateTimeLeftAsync(callback) {
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
 			timeLeftResponse = JSON.parse(this.responseText);
-			display(timeLeftResponse);
+			callback(timeLeftResponse);
 		}
 	};
 	xhttp.open("GET", "/timeLeft", true);
@@ -70,7 +70,7 @@ function updateTimeLeftAsync() {
 // Display Time
 // --------------------------------------------
 
-function display(time) {
+function displayTimeLeft(time) {
     document.title = toPageTitle(time);
     timeLeft.innerText = toButtonValue(time);
 }
