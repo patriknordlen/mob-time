@@ -79,3 +79,7 @@ function resetTimeLeftAsync() {
     xhttp.send();
 }
 
+document.forms.container.onsubmit = function (event) {
+   event.preventDefault();
+   startCountdown();
+};
