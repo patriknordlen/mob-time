@@ -1,25 +1,24 @@
+let sound = require("./sound");
+
 const appTitle = "Mob Time";
-const alarm = document.getElementById("alarm-sound");
-const alarmUrl = document.getElementById("alarm-url");
 const timeLeft = document.getElementById("start-pause");
 const minutesByPerson = document.getElementById("minutes-by-person");
 const container = document.getElementById("container");
 
-let timeLeftResponse = undefined;
-
 function startCountdown() {
-	startMobTurn(minutesByPerson.value, displayTimeLeft);
-    chooseSound();
+    startMobTurn(minutesByPerson.value, displayTimeLeft);
+    sound.pick();
     turnOnCountDownDisplayMode();
     let interval = setInterval(function () {
-        if (timeLeftResponse.minutes <= 0 && timeLeftResponse.seconds <= 0) {
-            clearInterval(interval);
-            alarm.play();
-            turnOffCountDownDisplayMode();
-        }
-        else {
-        	updateTimeLeftAsync(displayTimeLeft);
-        }
+        getTimeLeft(function (timeLeft) {
+            if (timeLeft.millis <= 0) {
+                clearInterval(interval);
+                sound.play();
+                turnOffCountDownDisplayMode();
+            } else {
+                displayTimeLeft(timeLeft);
+            }
+        });
     }, 100);
 
     return false;
@@ -27,7 +26,7 @@ function startCountdown() {
 
 function startMobTurn(lengthInMinutes, callBack) {
     let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             timeLeftResponse = JSON.parse(this.responseText);
             callBack(timeLeftResponse);
@@ -35,12 +34,6 @@ function startMobTurn(lengthInMinutes, callBack) {
     };
     xhttp.open("POST", "/start?lengthInMinutes=" + lengthInMinutes, true);
     xhttp.send();
-}
-
-function chooseSound() {
-    let sounds = alarmUrl.value.trim().split("\n");
-    alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
-    alarm.load();
 }
 
 function turnOnCountDownDisplayMode() {
@@ -54,15 +47,15 @@ function turnOffCountDownDisplayMode() {
     document.getElementsByTagName("h1")[0].innerText = appTitle;
 }
 
-function updateTimeLeftAsync(callback) {
-	let xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-			timeLeftResponse = JSON.parse(this.responseText);
-			callback(timeLeftResponse);
-		}
-	};
-	xhttp.open("GET", "/timeLeft", true);
+function getTimeLeft(callback) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            timeLeftResponse = JSON.parse(this.responseText);
+            callback(timeLeftResponse);
+        }
+    };
+    xhttp.open("GET", "/timeLeft", true);
     xhttp.send();
 }
 
@@ -95,7 +88,7 @@ function toHumanReadableString(time) {
     if (time.minutes <= 0) {
         return time.seconds + " s";
     }
-    return Math.round(minutes) + "min";
+    return Math.round(minutes) + " min";
 }
 
 // --------------------------------------------
@@ -103,6 +96,6 @@ function toHumanReadableString(time) {
 // --------------------------------------------
 
 document.forms.container.onsubmit = function (event) {
-   event.preventDefault();
-   startCountdown();
+    event.preventDefault();
+    startCountdown();
 };
