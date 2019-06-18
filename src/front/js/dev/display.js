@@ -23,8 +23,8 @@ function toButtonValue(time) {
 function toHumanReadableString(time) {
     let seconds = time / 1000;
     let minutes = seconds / 60;
-    if (minutes === 0) {
-        return Math.ceil(seconds) + " s";
+    if (Math.floor(minutes) === 0) {
+        return Math.round(seconds) + " s";
     }
     return Math.round(minutes) + " min";
 }

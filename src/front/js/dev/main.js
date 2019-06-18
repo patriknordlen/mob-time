@@ -11,7 +11,7 @@ function startCountdown() {
     countDownMode.turnOn();
     let interval = setInterval(function () {
         mobTimer.passTimeLeftTo(function (timeLeft) {
-            if (timeLeft.millis <= 0) {
+            if (timeLeft === 0) {
                 clearInterval(interval);
                 sound.play();
                 countDownMode.turnOff();

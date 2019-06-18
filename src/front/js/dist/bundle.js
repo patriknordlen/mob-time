@@ -40,7 +40,7 @@ function displayTimeLeft(time) {
 }
 
 function toPageTitle(time) {
-  if (time.millis <= 0) {
+  if (time === 0) {
     return appTitle;
   } else {
     return toHumanReadableString(time) + " - " + appTitle;
@@ -48,7 +48,7 @@ function toPageTitle(time) {
 }
 
 function toButtonValue(time) {
-  if (time.millis <= 0) {
+  if (time === 0) {
     return "Start";
   }
 
@@ -56,11 +56,11 @@ function toButtonValue(time) {
 }
 
 function toHumanReadableString(time) {
-  var seconds = time.millis / 1000;
+  var seconds = time / 1000;
   var minutes = seconds / 60;
 
-  if (time.minutes <= 0) {
-    return Math.ceil(seconds) + " s";
+  if (Math.floor(minutes) === 0) {
+    return Math.round(seconds) + " s";
   }
 
   return Math.round(minutes) + " min";
