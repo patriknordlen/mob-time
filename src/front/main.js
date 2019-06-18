@@ -5,8 +5,12 @@ const timeLeft = document.getElementById("start-pause");
 const minutesByPerson = document.getElementById("minutes-by-person");
 const container = document.getElementById("container");
 
+let timeLeftResponse = undefined;
+
 function startCountdown() {
-    let sounds = alarmUrl.value.trim().split("\n");
+	resetTimeLeftAsinc();
+	
+	let sounds = alarmUrl.value.trim().split("\n");
     let chozenSound = sounds[Math.floor(Math.random()*sounds.length)]
     alarm.children[0].src = chozenSound;
     alarm.load();
@@ -14,19 +18,20 @@ function startCountdown() {
     container.classList.remove("counting");
     container.classList.add("counting");
     document.getElementsByTagName("h1")[0].innerText = "En cours";
-    let timeLeftInMinutes = minutesByPerson.value;
-    display(timeLeftInMinutes);
+
+	updateTimeLeftAsinc();
     let interval = setInterval(function () {
-        timeLeftInMinutes--;
-        if (timeLeftInMinutes <= 0) {
+        if (timeLeftResponse.minutes <= 0 && timeLeftResponse.seconds <= 0) {
             alarm.play();
             console.log(chozenSound);
             clearInterval(interval);
             container.classList.remove("counting");
             document.getElementsByTagName("h1")[0].innerText = appTitle;
         }
-        display(timeLeftInMinutes)
-    }, toMilliseconds(1));
+        else {
+        	updateTimeLeftAsinc();
+        }
+    }, 100);
 
     return false;
 }
@@ -52,10 +57,25 @@ function toPageTitle(time) {
 }
 
 function toHumanReadableString(time) {
-    return time + " min";
+    return time.minutes + "min " + time.seconds;
 
 }
 
-function toMilliseconds(minutes) {
-    return minutes * 1000 * 60;
+function updateTimeLeftAsinc() {
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			timeLeftResponse = JSON.parse(this.responseText);
+			display(timeLeftResponse);
+		}
+	};
+	xhttp.open("GET", "http://0.0.0.0:3000/timeLeft", true);
+    xhttp.send();
 }
+
+function resetTimeLeftAsinc() {
+	let xhttp = new XMLHttpRequest();
+	xhttp.open("POST", "http://0.0.0.0:3000/start?lengthInMinutes=" + minutesByPerson.value, true);
+    xhttp.send();
+}
+
