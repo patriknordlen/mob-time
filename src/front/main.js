@@ -8,25 +8,15 @@ const container = document.getElementById("container");
 let timeLeftResponse = undefined;
 
 function startCountdown() {
-	resetTimeLeftAsync();
-	
-	let sounds = alarmUrl.value.trim().split("\n");
-    let chozenSound = sounds[Math.floor(Math.random()*sounds.length)]
-    alarm.children[0].src = chozenSound;
-    alarm.load();
-
-    container.classList.remove("counting");
-    container.classList.add("counting");
-    document.getElementsByTagName("h1")[0].innerText = "En cours";
-
-	updateTimeLeftAsync();
+	startMobTurn(minutesByPerson.value);
+    chooseSound();
+    turnOnCountDownDisplayMode();
+    updateTimeLeftAsync();
     let interval = setInterval(function () {
         if (timeLeftResponse.minutes <= 0 && timeLeftResponse.seconds <= 0) {
-            alarm.play();
-            console.log(chozenSound);
             clearInterval(interval);
-            container.classList.remove("counting");
-            document.getElementsByTagName("h1")[0].innerText = appTitle;
+            alarm.play();
+            turnOffCountDownDisplayMode();
         }
         else {
         	updateTimeLeftAsync();
@@ -36,35 +26,33 @@ function startCountdown() {
     return false;
 }
 
-function display(time) {
-    document.title = toPageTitle(time);
-    timeLeft.innerText = toButtonValue(time);
+function startMobTurn(lengthInMinutes) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/start?lengthInMinutes=" + lengthInMinutes, true);
+    xhttp.send();
 }
 
-function toButtonValue(time) {
-    if (time <= 0) {
-        return "Start"
-    }
-    return toHumanReadableString(time);
+function chooseSound() {
+    let sounds = alarmUrl.value.trim().split("\n");
+    alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
+    alarm.load();
 }
 
-function toPageTitle(time) {
-    if (time <= 0) {
-        return appTitle;
-    } else {
-        return toHumanReadableString(time) + " - " + appTitle;
-    }
+function turnOnCountDownDisplayMode() {
+    container.classList.remove("counting");
+    container.classList.add("counting");
+    document.getElementsByTagName("h1")[0].innerText = "En cours";
 }
 
-function toHumanReadableString(time) {
-    return time.minutes + "min " + time.seconds;
-
+function turnOffCountDownDisplayMode() {
+    container.classList.remove("counting");
+    document.getElementsByTagName("h1")[0].innerText = appTitle;
 }
 
 function updateTimeLeftAsync() {
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
-		if (this.readyState === 4 && this.status === 200) {
+		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
 			timeLeftResponse = JSON.parse(this.responseText);
 			display(timeLeftResponse);
 		}
@@ -73,11 +61,40 @@ function updateTimeLeftAsync() {
     xhttp.send();
 }
 
-function resetTimeLeftAsync() {
-	let xhttp = new XMLHttpRequest();
-	xhttp.open("POST", "/start?lengthInMinutes=" + minutesByPerson.value, true);
-    xhttp.send();
+// --------------------------------------------
+// Display Time
+// --------------------------------------------
+
+function display(time) {
+    document.title = toPageTitle(time);
+    timeLeft.innerText = toButtonValue(time);
 }
+
+function toPageTitle(time) {
+    if (time.millis <= 0) {
+        return appTitle;
+    } else {
+        return toHumanReadableString(time) + " - " + appTitle;
+    }
+}
+
+function toButtonValue(time) {
+    if (time.millis <= 0) {
+        return "Start"
+    }
+    return toHumanReadableString(time);
+}
+
+function toHumanReadableString(time) {
+    if (time.minutes <= 0) {
+        return time.seconds + " s";
+    }
+    return time.minutes + "min";
+}
+
+// --------------------------------------------
+// Setup
+// --------------------------------------------
 
 document.forms.container.onsubmit = function (event) {
    event.preventDefault();
