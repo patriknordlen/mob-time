@@ -8,7 +8,7 @@ const container = document.getElementById("container");
 let timeLeftResponse = undefined;
 
 function startCountdown() {
-	resetTimeLeftAsinc();
+	resetTimeLeftAsync();
 	
 	let sounds = alarmUrl.value.trim().split("\n");
     let chozenSound = sounds[Math.floor(Math.random()*sounds.length)]
@@ -19,7 +19,7 @@ function startCountdown() {
     container.classList.add("counting");
     document.getElementsByTagName("h1")[0].innerText = "En cours";
 
-	updateTimeLeftAsinc();
+	updateTimeLeftAsync();
     let interval = setInterval(function () {
         if (timeLeftResponse.minutes <= 0 && timeLeftResponse.seconds <= 0) {
             alarm.play();
@@ -29,7 +29,7 @@ function startCountdown() {
             document.getElementsByTagName("h1")[0].innerText = appTitle;
         }
         else {
-        	updateTimeLeftAsinc();
+        	updateTimeLeftAsync();
         }
     }, 100);
 
@@ -61,7 +61,7 @@ function toHumanReadableString(time) {
 
 }
 
-function updateTimeLeftAsinc() {
+function updateTimeLeftAsync() {
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -73,7 +73,7 @@ function updateTimeLeftAsinc() {
     xhttp.send();
 }
 
-function resetTimeLeftAsinc() {
+function resetTimeLeftAsync() {
 	let xhttp = new XMLHttpRequest();
 	xhttp.open("POST", "/start?lengthInMinutes=" + minutesByPerson.value, true);
     xhttp.send();
