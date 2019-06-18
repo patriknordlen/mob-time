@@ -3,7 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const MobTurn = require("./MobTurn");
 
-let currentTurn = undefined;
+let currentTurn = new MobTurn(0);
 
 app.get("/", function (req, res) {
     res.redirect("/index.html")

@@ -19,13 +19,7 @@ class MobTurn {
     }
 
     timeLeft() {
-        let millis = this.timeLeftInMillis();
-        let seconds = millis / 1000;
-        return {
-            millis: millis,
-            minutes: Math.floor(seconds / 60),
-            seconds: Math.floor(seconds % 60),
-        };
+        return Math.max(0, this.timeLeftInMillis());
     }
 }
 module.exports = MobTurn;

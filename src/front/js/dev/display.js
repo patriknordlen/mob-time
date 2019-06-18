@@ -6,7 +6,7 @@ export function displayTimeLeft(time) {
 }
 
 function toPageTitle(time) {
-    if (time.millis <= 0) {
+    if (time === 0) {
         return appTitle;
     } else {
         return toHumanReadableString(time) + " - " + appTitle;
@@ -14,16 +14,16 @@ function toPageTitle(time) {
 }
 
 function toButtonValue(time) {
-    if (time.millis <= 0) {
+    if (time === 0) {
         return "Start"
     }
     return toHumanReadableString(time);
 }
 
 function toHumanReadableString(time) {
-    let seconds = time.millis / 1000;
+    let seconds = time / 1000;
     let minutes = seconds / 60;
-    if (time.minutes <= 0) {
+    if (minutes === 0) {
         return Math.ceil(seconds) + " s";
     }
     return Math.round(minutes) + " min";
