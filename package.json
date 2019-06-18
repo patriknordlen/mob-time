@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/back/index.js",
   "scripts": {
-    "build": "browserify src/front/main.js -o src/front/bundle.js",
+    "build": "browserify src/front/js/main.js -o src/front/bundle.js",
     "start": "node src/back/index.js",
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
