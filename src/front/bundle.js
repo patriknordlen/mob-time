@@ -10,10 +10,9 @@ var container = document.getElementById("container");
 var timeLeftResponse = undefined;
 
 function startCountdown() {
-  startMobTurn(minutesByPerson.value);
+  startMobTurn(minutesByPerson.value, display);
   chooseSound();
   turnOnCountDownDisplayMode();
-  updateTimeLeftAsync();
   var interval = setInterval(function () {
     if (timeLeftResponse.minutes <= 0 && timeLeftResponse.seconds <= 0) {
       clearInterval(interval);
@@ -26,8 +25,16 @@ function startCountdown() {
   return false;
 }
 
-function startMobTurn(lengthInMinutes) {
+function startMobTurn(lengthInMinutes, callBack) {
   var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      timeLeftResponse = JSON.parse(this.responseText);
+      callBack(timeLeftResponse);
+    }
+  };
+
   xhttp.open("POST", "/start?lengthInMinutes=" + lengthInMinutes, true);
   xhttp.send();
 }
