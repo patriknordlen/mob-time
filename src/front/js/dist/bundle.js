@@ -78,31 +78,28 @@ var countDownMode = require("./countDownMode");
 var mobTimer = require("./mobTimer");
 
 var minutesByPerson = document.getElementById("minutes-by-person");
+var mobInProgress = false;
+setInterval(function () {
+  mobTimer.passTimeLeftTo(function (timeLeft) {
+    if (timeLeft === 0 && mobInProgress === true) {
+      sound.play();
+      countDownMode.turnOff();
+      mobInProgress = false;
+    } else if (timeLeft > 0 && mobInProgress === false) {
+      sound.pick();
+      countDownMode.turnOn();
+      mobInProgress = true;
+    }
 
-function startCountdown() {
-  mobTimer.startMobTurn(minutesByPerson.value, display.displayTimeLeft);
-  sound.pick();
-  countDownMode.turnOn();
-  var interval = setInterval(function () {
-    mobTimer.passTimeLeftTo(function (timeLeft) {
-      if (timeLeft.millis <= 0) {
-        clearInterval(interval);
-        sound.play();
-        countDownMode.turnOff();
-      }
-
-      display.displayTimeLeft(timeLeft);
-    });
-  }, 100);
-  return false;
-} // --------------------------------------------
+    display.displayTimeLeft(timeLeft);
+  });
+}, 100); // --------------------------------------------
 // Setup
 // --------------------------------------------
 
-
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
-  startCountdown();
+  mobTimer.startMobTurn(minutesByPerson.value, display.displayTimeLeft);
 };
 
 },{"./countDownMode":1,"./display":2,"./mobTimer":4,"./sound":5}],4:[function(require,module,exports){

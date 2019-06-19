@@ -5,23 +5,21 @@ let mobTimer = require("./mobTimer");
 
 const minutesByPerson = document.getElementById("minutes-by-person");
 
-function startCountdown() {
-    mobTimer.startMobTurn(minutesByPerson.value, display.displayTimeLeft);
-    sound.pick();
-    countDownMode.turnOn();
-    let interval = setInterval(function () {
-        mobTimer.passTimeLeftTo(function (timeLeft) {
-            if (timeLeft === 0) {
-                clearInterval(interval);
-                sound.play();
-                countDownMode.turnOff();
-            }
-            display.displayTimeLeft(timeLeft);
-        });
-    }, 100);
-
-    return false;
-}
+let mobInProgress = false;
+setInterval(function () {
+    mobTimer.passTimeLeftTo(function (timeLeft) {
+        if (timeLeft === 0 && mobInProgress === true) {
+            sound.play();
+            countDownMode.turnOff();
+            mobInProgress = false;
+        } else if (timeLeft > 0  && mobInProgress === false) {
+            sound.pick();
+            countDownMode.turnOn();
+            mobInProgress = true;
+        }
+        display.displayTimeLeft(timeLeft);
+    });
+}, 100);
 
 // --------------------------------------------
 // Setup
@@ -29,5 +27,5 @@ function startCountdown() {
 
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
-    startCountdown();
+    mobTimer.startMobTurn(minutesByPerson.value, display.displayTimeLeft);
 };
