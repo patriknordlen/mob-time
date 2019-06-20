@@ -6,7 +6,7 @@
   "scripts": {
     "build": "browserify src/front/js/dev/main.js -o src/front/js/dist/bundle.js",
     "start": "node src/back/index.js",
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "mocha 'test/**/*.js' --reporter spec"
   },
   "keywords": [],
   "author": "",
