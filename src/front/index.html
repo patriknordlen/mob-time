@@ -21,20 +21,22 @@
     <section>
         <h1>Mob Time</h1>
     </section>
-    <section>
-        <fieldset>
-            <input id="minutes-by-person"
-                   type="number"
-                   min="1"
-                   max="60"
-                   required
-                   value="10"
-                   size="2"/>
-            <label for="minutes-by-person">minutes / pers.</label>
-        </fieldset>
-        <fieldset>
-            <label for="alarm-url">mp3</label>
-            <textarea id="alarm-url">https://www.myinstants.com/media/sounds/celebration.mp3
+</form>
+<section id="settings">
+    <h2>Settings</h2>
+    <fieldset>
+        <input id="minutes-by-person"
+               type="number"
+               min="1"
+               max="60"
+               required
+               value="10"
+               size="2"/>
+        <label for="minutes-by-person">minutes / pers.</label>
+    </fieldset>
+    <fieldset>
+        <label for="alarm-url">mp3</label>
+        <textarea id="alarm-url">https://www.myinstants.com/media/sounds/celebration.mp3
 https://www.myinstants.com/media/sounds/denis-brogniart-ah-original.mp3
 https://www.myinstants.com/media/sounds/motus-boule-noire.mp3
 https://www.myinstants.com/media/sounds/bazinga.swf.mp3
@@ -47,9 +49,8 @@ https://www.myinstants.com/media/sounds/the-sound-of-silence.mp3
 https://www.myinstants.com/media/sounds/11301.mp3
 https://www.myinstants.com/media/sounds/knock-knock-knock-penny.mp3
 https://www.myinstants.com/media/sounds/sound-9____.mp3</textarea>
-        </fieldset>
-    </section>
-</form>
+    </fieldset>
+</section>
 <audio id="alarm-sound">
     <source type="audio/mpeg" src=""/>
 </audio>

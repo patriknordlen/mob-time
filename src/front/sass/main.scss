@@ -3,15 +3,18 @@ $color: #00b400;
 $color-counting: #b41300;
 $space: 15px;
 $font-excess-bottom-padding: 5px;
+$settings-width: 400px;
+$grey: #efefef;
 
 body {
   text-align: center;
+  font-family: Righteous, sans-serif;
 }
 
 #container {
   margin: 20px;
+  //margin-right: $settings-width;
   font-size: 1.1em;
-  font-family: Righteous, sans-serif;
   display: inline-block;
   max-width: 450px;
 
@@ -26,9 +29,6 @@ body {
   }
 
   fieldset {
-    padding: 0;
-    border: none;
-    margin-top: $space/2;
   }
 }
 
@@ -85,8 +85,6 @@ button#start-pause {
 }
 
 label[for="alarm-url"] {
-  position: relative;
-  bottom: 112px;
   padding-right: 10px;
 }
 #alarm-url {
@@ -117,7 +115,7 @@ $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-paddi
   height: $enclosing-circle-diameter;
   width: $enclosing-circle-diameter;
   text-align: center;
-  background: rgba(100, 100, 100, 0.1);
+  background: $grey;
   border-radius: $enclosing-circle-diameter / 2;
   border: solid 1px #ccc;
 }
@@ -151,4 +149,26 @@ svg circle {
   #container.counting & {
     stroke: $color-counting;
   }
+}
+
+/*
+============================================
+Settings
+============================================
+ */
+fieldset {
+  padding: 0;
+  border: none;
+  margin-top: $space/2;
+}
+
+#settings {
+  width: $settings-width;
+  float: right;
+  border-left: 1px solid black;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: $grey;
 }

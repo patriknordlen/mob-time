@@ -1,31 +1,25 @@
-/* line 7, ../sass/main.scss */
+/* line 9, ../sass/main.scss */
 body {
   text-align: center;
+  font-family: Righteous, sans-serif;
 }
 
-/* line 11, ../sass/main.scss */
+/* line 14, ../sass/main.scss */
 #container {
   margin: 20px;
   font-size: 1.1em;
-  font-family: Righteous, sans-serif;
   display: inline-block;
   max-width: 450px;
 }
-/* line 18, ../sass/main.scss */
+/* line 21, ../sass/main.scss */
 #container.counting #container {
   color: #b41300;
 }
-/* line 22, ../sass/main.scss */
+/* line 25, ../sass/main.scss */
 #container section {
   display: inline-block;
   vertical-align: middle;
   margin: 7.5px;
-}
-/* line 28, ../sass/main.scss */
-#container fieldset {
-  padding: 0;
-  border: none;
-  margin-top: 7.5px;
 }
 
 /* line 35, ../sass/main.scss */
@@ -89,12 +83,10 @@ button#start-pause::-moz-focus-inner {
 
 /* line 87, ../sass/main.scss */
 label[for="alarm-url"] {
-  position: relative;
-  bottom: 112px;
   padding-right: 10px;
 }
 
-/* line 92, ../sass/main.scss */
+/* line 90, ../sass/main.scss */
 #alarm-url {
   width: 363px;
   height: 228px;
@@ -105,19 +97,19 @@ label[for="alarm-url"] {
 Round clock
 ============================================
  */
-/* line 114, ../sass/main.scss */
+/* line 112, ../sass/main.scss */
 #countdown {
   position: relative;
   margin: auto;
   height: 200px;
   width: 200px;
   text-align: center;
-  background: rgba(100, 100, 100, 0.1);
+  background: #efefef;
   border-radius: 100px;
   border: solid 1px #ccc;
 }
 
-/* line 125, ../sass/main.scss */
+/* line 123, ../sass/main.scss */
 #start-pause {
   display: inline-block;
   line-height: 172px;
@@ -128,7 +120,7 @@ Round clock
   margin-top: 14px;
 }
 
-/* line 135, ../sass/main.scss */
+/* line 133, ../sass/main.scss */
 svg {
   position: absolute;
   top: 0px;
@@ -138,7 +130,7 @@ svg {
   transform: rotateZ(-90deg);
 }
 
-/* line 144, ../sass/main.scss */
+/* line 142, ../sass/main.scss */
 svg circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
@@ -146,7 +138,31 @@ svg circle {
   stroke: #00b400;
   fill: none;
 }
-/* line 151, ../sass/main.scss */
+/* line 149, ../sass/main.scss */
 #container.counting svg circle {
   stroke: #b41300;
+}
+
+/*
+============================================
+Settings
+============================================
+ */
+/* line 159, ../sass/main.scss */
+fieldset {
+  padding: 0;
+  border: none;
+  margin-top: 7.5px;
+}
+
+/* line 165, ../sass/main.scss */
+#settings {
+  width: 400px;
+  float: right;
+  border-left: 1px solid black;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #efefef;
 }
