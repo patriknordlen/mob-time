@@ -21,7 +21,7 @@ body {
 
   section {
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
     margin: $space/2;
   }
 
@@ -46,7 +46,6 @@ h1 {
   border-bottom: 4px solid;
   border-color: $color;
   margin: 0;
-  margin-bottom: $space;
   #container.counting & {
     color: $color-counting;
     border-color: $color-counting;
@@ -64,15 +63,24 @@ h1 {
 }
 
 button#start-pause {
-  border-radius: 0;
   border: solid 1px #ccc;
-  background: $color;
-  color: white;
-  height: 128px;
-  margin: 0;
+  color: $color;
+  position: relative;
+  z-index: 10;
   font-size: 1.8em;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+
   #container.counting & {
-    background: $color-counting;
+    color: $color-counting;
+  }
+
+  &:focus {
+    outline: none;
+  }
+  &::-moz-focus-inner {
+    border: 0;
   }
 }
 
@@ -84,4 +92,63 @@ label[for="alarm-url"] {
 #alarm-url {
     width: 363px;
     height: 228px;
+}
+
+/*
+============================================
+Round clock
+============================================
+ */
+$circle-outside-diameter: 200px;
+$circle-stroke-width: 14px;
+$circle-middle-diameter: $circle-outside-diameter - $circle-stroke-width;
+$circle-inside-diameter: $circle-outside-diameter - ($circle-stroke-width * 2);
+$circle-middle-perimeter: $circle-middle-diameter * pi();
+$circle-dasharray: $circle-middle-perimeter;
+
+$enclosing-circle-padding: 5px;
+$enclosing-circle-diameter: $circle-outside-diameter + 2 * $enclosing-circle-padding;
+
+$enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-padding;
+
+#countdown {
+  position: relative;
+  margin: auto;
+  height: $enclosing-circle-diameter;
+  width: $enclosing-circle-diameter;
+  text-align: center;
+  background: rgba(100, 100, 100, 0.1);
+  border-radius: $enclosing-circle-diameter / 2;
+  border: solid 1px #ccc;
+}
+
+#start-pause {
+  display: inline-block;
+  line-height: $enclosed-circle-diameter;
+  background: white;
+  width: $enclosed-circle-diameter;
+  height: $enclosed-circle-diameter;
+  border-radius: $enclosed-circle-diameter / 2;
+  margin-top: $enclosing-circle-padding * 2 + $circle-stroke-width;
+}
+
+svg {
+  position: absolute;
+  top: $enclosing-circle-padding;
+  right: $enclosing-circle-padding;
+  width: $circle-outside-diameter;
+  height: $circle-outside-diameter;
+  transform: rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: $circle-dasharray;
+  stroke-dashoffset: $circle-dasharray;
+  stroke-width: $circle-stroke-width;
+  stroke: $color;
+  fill: none;
+
+  #container.counting & {
+    stroke: $color-counting;
+  }
 }

@@ -10,7 +10,18 @@
 <body>
 <form id="container" name="container">
     <section>
+        <div id="countdown">
+            <button id="start-pause"></button>
+            <svg>
+                <circle id="countdown-circle" r="93" cx="100" cy="100"></circle>
+            </svg>
+        </div>
+    </section>
+
+    <section>
         <h1>Mob Time</h1>
+    </section>
+    <section>
         <fieldset>
             <input id="minutes-by-person"
                    type="number"
@@ -21,11 +32,6 @@
                    size="2"/>
             <label for="minutes-by-person">minutes / pers.</label>
         </fieldset>
-    </section>
-    <section>
-        <button id="start-pause" type="submit">Start</button>
-    </section>
-    <section>
         <fieldset>
             <label for="alarm-url">mp3</label>
             <textarea id="alarm-url">https://www.myinstants.com/media/sounds/celebration.mp3

@@ -37,6 +37,7 @@ function displayTimeLeft(timerStatus) {
   document.title = toPageTitle(timerStatus.timeLeftInMillis);
   var timeLeft = document.getElementById("start-pause");
   timeLeft.innerText = toButtonValue(timerStatus.timeLeftInMillis);
+  displayOnCircle(timerStatus);
 }
 
 function toPageTitle(time) {
@@ -64,6 +65,17 @@ function toHumanReadableString(time) {
   }
 
   return Math.round(minutes) + " min";
+}
+
+function displayOnCircle(timerStatus) {
+  var circle = document.getElementById("countdown-circle");
+
+  if (timerStatus.timeLeftInMillis === 0) {
+    circle.style.strokeDashoffset = 0;
+  } else {
+    var dasharray = 584;
+    circle.style.strokeDashoffset = dasharray - dasharray * (timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000)) + "px";
+  }
 }
 
 },{}],3:[function(require,module,exports){

@@ -18,7 +18,7 @@ body {
 /* line 22, ../sass/main.scss */
 #container section {
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   margin: 7.5px;
 }
 /* line 28, ../sass/main.scss */
@@ -45,15 +45,14 @@ h1 {
   border-bottom: 4px solid;
   border-color: #00b400;
   margin: 0;
-  margin-bottom: 15px;
 }
-/* line 50, ../sass/main.scss */
+/* line 49, ../sass/main.scss */
 #container.counting h1 {
   color: #b41300;
   border-color: #b41300;
 }
 
-/* line 56, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 #minutes-by-person {
   font-size: 1em;
   width: 3em;
@@ -64,30 +63,90 @@ h1 {
   padding: 2px 5px;
 }
 
-/* line 66, ../sass/main.scss */
+/* line 65, ../sass/main.scss */
 button#start-pause {
-  border-radius: 0;
   border: solid 1px #ccc;
-  background: #00b400;
-  color: white;
-  height: 128px;
-  margin: 0;
+  color: #00b400;
+  position: relative;
+  z-index: 10;
   font-size: 1.8em;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
 }
-/* line 74, ../sass/main.scss */
+/* line 75, ../sass/main.scss */
 #container.counting button#start-pause {
-  background: #b41300;
+  color: #b41300;
+}
+/* line 79, ../sass/main.scss */
+button#start-pause:focus {
+  outline: none;
+}
+/* line 82, ../sass/main.scss */
+button#start-pause::-moz-focus-inner {
+  border: 0;
 }
 
-/* line 79, ../sass/main.scss */
+/* line 87, ../sass/main.scss */
 label[for="alarm-url"] {
   position: relative;
   bottom: 112px;
   padding-right: 10px;
 }
 
-/* line 84, ../sass/main.scss */
+/* line 92, ../sass/main.scss */
 #alarm-url {
   width: 363px;
   height: 228px;
+}
+
+/*
+============================================
+Round clock
+============================================
+ */
+/* line 114, ../sass/main.scss */
+#countdown {
+  position: relative;
+  margin: auto;
+  height: 210px;
+  width: 210px;
+  text-align: center;
+  background: rgba(100, 100, 100, 0.1);
+  border-radius: 105px;
+  border: solid 1px #ccc;
+}
+
+/* line 125, ../sass/main.scss */
+#start-pause {
+  display: inline-block;
+  line-height: 162px;
+  background: white;
+  width: 162px;
+  height: 162px;
+  border-radius: 81px;
+  margin-top: 24px;
+}
+
+/* line 135, ../sass/main.scss */
+svg {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 200px;
+  height: 200px;
+  transform: rotateZ(-90deg);
+}
+
+/* line 144, ../sass/main.scss */
+svg circle {
+  stroke-dasharray: 584.33623px;
+  stroke-dashoffset: 584.33623px;
+  stroke-width: 14px;
+  stroke: #00b400;
+  fill: none;
+}
+/* line 151, ../sass/main.scss */
+#container.counting svg circle {
+  stroke: #b41300;
 }
