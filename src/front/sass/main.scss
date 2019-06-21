@@ -119,7 +119,7 @@ $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-paddi
   height: $enclosing-circle-diameter;
   width: $enclosing-circle-diameter;
   text-align: center;
-  background: $grey;
+  background: #e4c2bb;
   border-radius: $enclosing-circle-diameter / 2;
   border: solid 1px #ccc;
 }
