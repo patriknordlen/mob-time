@@ -7,17 +7,17 @@ const minutesByPerson = document.getElementById("minutes-by-person");
 
 let mobInProgress = false;
 setInterval(function () {
-    mobTimer.passTimeLeftTo(function (timeLeft) {
-        if (timeLeft === 0 && mobInProgress === true) {
+    mobTimer.passTimeLeftTo(function (timerStatus) {
+        if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
             sound.play();
             countDownMode.turnOff();
             mobInProgress = false;
-        } else if (timeLeft > 0  && mobInProgress === false) {
+        } else if (timerStatus.timeLeftInMillis > 0  && mobInProgress === false) {
             sound.pick();
             countDownMode.turnOn();
             mobInProgress = true;
         }
-        display.displayTimeLeft(timeLeft);
+        display.displayTimeLeft(timerStatus);
     });
 }, 100);
 

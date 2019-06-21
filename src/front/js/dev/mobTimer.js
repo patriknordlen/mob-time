@@ -16,6 +16,6 @@ export function passTimeLeftTo(callback) {
             callback(JSON.parse(this.responseText));
         }
     };
-    xhttp.open("GET", "/timeLeft", true);
+    xhttp.open("GET", "/status", true);
     xhttp.send();
 }

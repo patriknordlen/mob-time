@@ -1,5 +1,6 @@
 class MobTurn {
     constructor(lengthInMinutes) {
+        this.lengthInMinutes = lengthInMinutes;
         this.lengthInSeconds = lengthInMinutes * 60;
         this.elapsedMs = 0;
         this.startTime = new Date();

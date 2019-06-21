@@ -1,8 +1,8 @@
 export const appTitle = "Mob Time";
-export function displayTimeLeft(time) {
-    document.title = toPageTitle(time);
+export function displayTimeLeft(timerStatus) {
+    document.title = toPageTitle(timerStatus.timeLeftInMillis);
     const timeLeft = document.getElementById("start-pause");
-    timeLeft.innerText = toButtonValue(time);
+    timeLeft.innerText = toButtonValue(timerStatus.timeLeftInMillis);
 }
 
 function toPageTitle(time) {

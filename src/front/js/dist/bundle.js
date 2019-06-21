@@ -33,10 +33,10 @@ exports.appTitle = void 0;
 var appTitle = "Mob Time";
 exports.appTitle = appTitle;
 
-function displayTimeLeft(time) {
-  document.title = toPageTitle(time);
+function displayTimeLeft(timerStatus) {
+  document.title = toPageTitle(timerStatus.timeLeftInMillis);
   var timeLeft = document.getElementById("start-pause");
-  timeLeft.innerText = toButtonValue(time);
+  timeLeft.innerText = toButtonValue(timerStatus.timeLeftInMillis);
 }
 
 function toPageTitle(time) {
@@ -80,18 +80,18 @@ var mobTimer = require("./mobTimer");
 var minutesByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
 setInterval(function () {
-  mobTimer.passTimeLeftTo(function (timeLeft) {
-    if (timeLeft === 0 && mobInProgress === true) {
+  mobTimer.passTimeLeftTo(function (timerStatus) {
+    if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
       sound.play();
       countDownMode.turnOff();
       mobInProgress = false;
-    } else if (timeLeft > 0 && mobInProgress === false) {
+    } else if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
       sound.pick();
       countDownMode.turnOn();
       mobInProgress = true;
     }
 
-    display.displayTimeLeft(timeLeft);
+    display.displayTimeLeft(timerStatus);
   });
 }, 100); // --------------------------------------------
 // Setup
@@ -133,7 +133,7 @@ function passTimeLeftTo(callback) {
     }
   };
 
-  xhttp.open("GET", "/timeLeft", true);
+  xhttp.open("GET", "/status", true);
   xhttp.send();
 }
 
