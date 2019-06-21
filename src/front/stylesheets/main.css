@@ -109,30 +109,30 @@ Round clock
 #countdown {
   position: relative;
   margin: auto;
-  height: 210px;
-  width: 210px;
+  height: 200px;
+  width: 200px;
   text-align: center;
   background: rgba(100, 100, 100, 0.1);
-  border-radius: 105px;
+  border-radius: 100px;
   border: solid 1px #ccc;
 }
 
 /* line 125, ../sass/main.scss */
 #start-pause {
   display: inline-block;
-  line-height: 162px;
+  line-height: 172px;
   background: white;
-  width: 162px;
-  height: 162px;
-  border-radius: 81px;
-  margin-top: 24px;
+  width: 172px;
+  height: 172px;
+  border-radius: 86px;
+  margin-top: 14px;
 }
 
 /* line 135, ../sass/main.scss */
 svg {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 0px;
+  right: 0px;
   width: 200px;
   height: 200px;
   transform: rotateZ(-90deg);

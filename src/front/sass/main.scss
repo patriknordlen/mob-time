@@ -106,7 +106,7 @@ $circle-inside-diameter: $circle-outside-diameter - ($circle-stroke-width * 2);
 $circle-middle-perimeter: $circle-middle-diameter * pi();
 $circle-dasharray: $circle-middle-perimeter;
 
-$enclosing-circle-padding: 5px;
+$enclosing-circle-padding: 0px;
 $enclosing-circle-diameter: $circle-outside-diameter + 2 * $enclosing-circle-padding;
 
 $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-padding;

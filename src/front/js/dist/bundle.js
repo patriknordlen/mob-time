@@ -13,13 +13,11 @@ function turnOn() {
   var container = document.getElementById("container");
   container.classList.remove("counting");
   container.classList.add("counting");
-  document.getElementsByTagName("h1")[0].innerText = "En cours";
 }
 
 function turnOff() {
   var container = document.getElementById("container");
   container.classList.remove("counting");
-  document.getElementsByTagName("h1")[0].innerText = display.appTitle;
 }
 
 },{"./display":2}],2:[function(require,module,exports){
