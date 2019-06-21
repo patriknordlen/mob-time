@@ -1,14 +1,17 @@
 @import "compass";
+@import "slideout";
 $color: #00b400;
 $color-counting: #b41300;
 $space: 15px;
 $font-excess-bottom-padding: 5px;
 $settings-width: 400px;
 $grey: #efefef;
+$settings-color: #666160;
 
 body {
   text-align: center;
   font-family: Righteous, sans-serif;
+  margin: 0;
 }
 
 #container {
@@ -60,6 +63,7 @@ h1 {
   border: solid 1px #ccc;
   background: none;
   padding: 2px 5px;
+  color: white;
 }
 
 button#start-pause {
@@ -162,13 +166,29 @@ fieldset {
   margin-top: $space/2;
 }
 
-#settings {
-  width: $settings-width;
-  float: right;
-  border-left: 1px solid black;
+#panel nav {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
-  background: $grey;
+  width: 50px;
+  border-left: 1px solid;
+  background: $settings-color;
+  color: white;
+  border-right: 1px solid #85807f;
+
+  button {
+    border: none;
+    border-bottom: 1px solid white;
+    background: none;
+    font-size: 3em;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+  }
+}
+
+#settings {
+  color: white;
+  background: $settings-color;
 }
