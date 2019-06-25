@@ -1,8 +1,7 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MobTurn = require("./MobTurn");
-const mobTurns = require("./mobTurns");
+const mobTurns = require("./mob_turns");
 const Settings = require("./Settings");
 
 let settings = new Settings();
@@ -21,7 +20,7 @@ app.get("/status", function (req, res) {
     res.json(currentTurn.getState());
 });
 
-app.put("/settings", function (req, res) {
+app.put("/settings", function (req) {
     settings = new Settings(JSON.parse(req.body));
 });
 
