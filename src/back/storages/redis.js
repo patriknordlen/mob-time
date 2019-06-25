@@ -11,9 +11,7 @@ client.on("error", function (err) {
 
 exports.currentTurn = async function (currentTurn) {
     if (currentTurn === undefined || currentTurn === null) {
-        let currentTurn1 = await getAsync("currentTurn");
-        console.log(currentTurn1);
-        return currentTurn1;
+        return await getAsync("currentTurn");
     } else {
         client.set("currentTurn", currentTurn, redis.print);
     }
