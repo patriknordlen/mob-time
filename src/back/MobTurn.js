@@ -1,26 +1,26 @@
 class MobTurn {
-    constructor(lengthInMinutes) {
-        this.lengthInMinutes = lengthInMinutes;
-        this.lengthInSeconds = lengthInMinutes * 60;
-        this.elapsedMs = 0;
-        this.startTime = new Date();
-        let self = this;
-        this.timer = setInterval(() => self.updateTime(), 100);
+    constructor(lengthInSeconds = 0, startTime = new Date()) {
+        this.lengthInSeconds = lengthInSeconds;
+        this.startTime = startTime;
     }
 
-    updateTime() {
-        this.elapsedMs = Math.max(0, new Date() - this.startTime);
-        if (this.elapsedMs === 0) {
-            clearInterval(this.timer);
-        }
-    }
-
-    timeLeftInMillis() {
-        return this.lengthInSeconds * 1000 - this.elapsedMs;
+    getState() {
+        return {
+            lengthInMinutes: this.lengthInSeconds / 60,
+            timeLeftInMillis: this.timeLeft()
+        };
     }
 
     timeLeft() {
         return Math.max(0, this.timeLeftInMillis());
+    }
+
+    timeLeftInMillis() {
+        return this.lengthInSeconds * 1000 - this.elapsedMs();
+    }
+
+    elapsedMs() {
+        return Math.max(0, new Date() - this.startTime);
     }
 }
 module.exports = MobTurn;
