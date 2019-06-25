@@ -5,7 +5,7 @@ const mobTurns = require("./mob_turns");
 const Settings = require("./Settings");
 
 let settings = new Settings();
-let currentTurn = mobTurns.currentTurn();
+let currentTurn = undefined;
 
 app.get("/", function (req, res) {
     res.redirect("/index.html")
@@ -26,4 +26,7 @@ app.put("/settings", function (req) {
 
 app.use(express.static('src/front'));
 
-app.listen(PORT, () => console.log(`Server started on http://0.0.0.0:${PORT}`));
+mobTurns.currentTurn().then(mobTurn => {
+    currentTurn = mobTurn;
+    app.listen(PORT, () => console.log(`Server started on http://0.0.0.0:${PORT}`));
+});

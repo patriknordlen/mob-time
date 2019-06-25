@@ -2,3 +2,4 @@
 node_modules
 **/.sass-cache
 mobTurns
+.env
