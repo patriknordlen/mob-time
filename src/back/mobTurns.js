@@ -7,7 +7,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 exports.currentTurn = function () {
     let data = JSON.parse(localStorage.getItem('currentTurn'));
-    if (data !== undefined) {
+    if (data != null) {
         return new MobTurn(data.lengthInSeconds, new Date(data.startTime));
     }
     let currentTurn = new MobTurn();
