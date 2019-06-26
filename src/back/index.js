@@ -16,6 +16,11 @@ app.post("/start", function (req, res) {
     res.json(currentTurn.getState());
 });
 
+app.post("/stop", function (req, res) {
+    currentTurn = mobTurns.stop();
+    res.json(currentTurn.getState());
+});
+
 app.get("/status", function (req, res) {
     res.json(currentTurn.getState());
 });

@@ -71,13 +71,37 @@ button#start-pause {
   color: $color;
   position: relative;
   z-index: 10;
-  font-size: 1.8em;
   font-weight: bold;
   cursor: pointer;
   outline: none;
 
+  #control-icons {
+    font-size: 5.8em;
+    display: inline-block;
+  }
+  #time-left {
+    font-size: 2.8em;
+    display: none;
+  }
+
   #container.counting & {
     color: $color-counting;
+
+    #control-icons {
+      display: none;
+    }
+    #time-left {
+      display: inline-block;
+    }
+
+    &:hover {
+      #control-icons {
+        display: inline-block;
+      }
+      #time-left {
+        display: none;
+      }
+    }
   }
 
   &:focus {

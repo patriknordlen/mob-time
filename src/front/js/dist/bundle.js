@@ -33,8 +33,7 @@ exports.appTitle = appTitle;
 
 function displayTimeLeft(timerStatus) {
   document.title = toPageTitle(timerStatus.timeLeftInMillis);
-  var timeLeft = document.getElementById("start-pause");
-  timeLeft.innerText = toButtonValue(timerStatus.timeLeftInMillis);
+  toButtonValue(timerStatus.timeLeftInMillis);
   displayOnCircle(timerStatus);
 }
 
@@ -47,11 +46,16 @@ function toPageTitle(time) {
 }
 
 function toButtonValue(time) {
+  var controls = document.getElementById("control-icons");
+
   if (time === 0) {
-    return "Start";
+    controls.innerText = "\u25B6";
+  } else {
+    controls.innerText = "\u25A0";
   }
 
-  return toHumanReadableString(time);
+  var timeLeft = document.getElementById("time-left");
+  timeLeft.innerText = toHumanReadableString(time);
 }
 
 function toHumanReadableString(time) {
@@ -89,27 +93,42 @@ var mobTimer = require("./mobTimer");
 
 var minutesByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
+mobTimer.passTimeLeftTo(update);
 setInterval(function () {
-  mobTimer.passTimeLeftTo(function (timerStatus) {
-    if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
-      sound.play();
-      countDownMode.turnOff();
-      mobInProgress = false;
-    } else if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
-      sound.pick();
-      countDownMode.turnOn();
-      mobInProgress = true;
-    }
+  return mobTimer.passTimeLeftTo(update);
+}, 100);
 
-    display.displayTimeLeft(timerStatus);
-  });
-}, 100); // --------------------------------------------
+function update(timerStatus) {
+  if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
+    sound.play();
+    countDownMode.turnOff();
+    mobInProgress = false;
+  } else if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
+    sound.pick();
+    countDownMode.turnOn();
+    mobInProgress = true;
+  }
+
+  display.displayTimeLeft(timerStatus);
+} // --------------------------------------------
 // Setup
 // --------------------------------------------
 
+
+function preventSoundFromPlaying() {
+  countDownMode.turnOff();
+  mobInProgress = false;
+}
+
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
-  mobTimer.startMobTurn(minutesByPerson.value, display.displayTimeLeft);
+
+  if (mobInProgress) {
+    mobTimer.stop(update);
+    preventSoundFromPlaying();
+  } else {
+    mobTimer.startMobTurn(minutesByPerson.value, update);
+  }
 };
 
 },{"./countDownMode":1,"./display":2,"./mobTimer":4,"./sound":5}],4:[function(require,module,exports){
@@ -118,8 +137,22 @@ document.forms.container.onsubmit = function (event) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.stop = stop;
 exports.startMobTurn = startMobTurn;
 exports.passTimeLeftTo = passTimeLeftTo;
+
+function stop(callBack) {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      callBack(JSON.parse(this.responseText));
+    }
+  };
+
+  xhttp.open("POST", "/stop", true);
+  xhttp.send();
+}
 
 function startMobTurn(lengthInMinutes, callBack) {
   var xhttp = new XMLHttpRequest();

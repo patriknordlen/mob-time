@@ -2,8 +2,7 @@ export const appTitle = "Mob Time";
 
 export function displayTimeLeft(timerStatus) {
     document.title = toPageTitle(timerStatus.timeLeftInMillis);
-    const timeLeft = document.getElementById("start-pause");
-    timeLeft.innerText = toButtonValue(timerStatus.timeLeftInMillis);
+    toButtonValue(timerStatus.timeLeftInMillis);
     displayOnCircle(timerStatus);
 }
 
@@ -16,10 +15,15 @@ function toPageTitle(time) {
 }
 
 function toButtonValue(time) {
+    let controls = document.getElementById("control-icons");
     if (time === 0) {
-        return "Start"
+        controls.innerText = "\u25B6";
     }
-    return toHumanReadableString(time);
+    else {
+        controls.innerText = "\u25A0";
+    }
+    let timeLeft = document.getElementById("time-left");
+    timeLeft.innerText = toHumanReadableString(time);
 }
 
 function toHumanReadableString(time) {
