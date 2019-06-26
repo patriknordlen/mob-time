@@ -111,7 +111,10 @@ setInterval(function () {
 }, 100);
 
 function update(timerStatus) {
-  if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
+  if (timerStatus.lengthInMinutes === 0) {
+    countDownMode.turnOff();
+    mobInProgress = false;
+  } else if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
     sound.play();
     countDownMode.turnOff();
     mobInProgress = false;
@@ -132,8 +135,6 @@ document.forms.container.onsubmit = function (event) {
 
   if (mobInProgress) {
     mobTimer.stop(update);
-    countDownMode.turnOff();
-    mobInProgress = false;
   } else {
     mobTimer.startMobTurn(minutesByPerson.value, update);
   }
