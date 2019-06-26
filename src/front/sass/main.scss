@@ -82,6 +82,7 @@ button#start-pause {
   #time-left {
     font-size: 2.8em;
     display: none;
+    max-width: 130px;
   }
 
   #container.counting & {
@@ -150,7 +151,6 @@ $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-paddi
 
 #start-pause {
   display: inline-block;
-  line-height: $enclosed-circle-diameter;
   background: white;
   width: $enclosed-circle-diameter;
   height: $enclosed-circle-diameter;

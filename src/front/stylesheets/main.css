@@ -123,42 +123,43 @@ button#start-pause #control-icons {
 button#start-pause #time-left {
   font-size: 2.8em;
   display: none;
+  max-width: 130px;
 }
-/* line 87, ../sass/main.scss */
+/* line 88, ../sass/main.scss */
 #container.counting button#start-pause {
   color: #b41300;
 }
-/* line 90, ../sass/main.scss */
+/* line 91, ../sass/main.scss */
 #container.counting button#start-pause #control-icons {
   display: none;
 }
-/* line 93, ../sass/main.scss */
+/* line 94, ../sass/main.scss */
 #container.counting button#start-pause #time-left {
   display: inline-block;
 }
-/* line 98, ../sass/main.scss */
+/* line 99, ../sass/main.scss */
 #container.counting button#start-pause:hover #control-icons {
   display: inline-block;
 }
-/* line 101, ../sass/main.scss */
+/* line 102, ../sass/main.scss */
 #container.counting button#start-pause:hover #time-left {
   display: none;
 }
-/* line 107, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 button#start-pause:focus {
   outline: none;
 }
-/* line 110, ../sass/main.scss */
+/* line 111, ../sass/main.scss */
 button#start-pause::-moz-focus-inner {
   border: 0;
 }
 
-/* line 115, ../sass/main.scss */
+/* line 116, ../sass/main.scss */
 label[for="alarm-url"] {
   padding-right: 10px;
 }
 
-/* line 118, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 #alarm-url {
   width: 363px;
   height: 228px;
@@ -169,7 +170,7 @@ label[for="alarm-url"] {
 Round clock
 ============================================
  */
-/* line 140, ../sass/main.scss */
+/* line 141, ../sass/main.scss */
 #countdown {
   position: relative;
   margin: auto;
@@ -181,10 +182,9 @@ Round clock
   border: solid 1px #ccc;
 }
 
-/* line 151, ../sass/main.scss */
+/* line 152, ../sass/main.scss */
 #start-pause {
   display: inline-block;
-  line-height: 172px;
   background: white;
   width: 172px;
   height: 172px;

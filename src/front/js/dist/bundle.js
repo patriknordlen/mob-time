@@ -59,8 +59,20 @@ function toButtonValue(time) {
 }
 
 function toHumanReadableString(time) {
+  var secondCountingMode = document.getElementById("second-counting-mode").checked;
   var seconds = time / 1000;
   var minutes = seconds / 60;
+
+  if (secondCountingMode) {
+    var repr = "";
+
+    if (Math.floor(minutes) !== 0) {
+      repr += Math.floor(minutes) + " min ";
+    }
+
+    repr += Math.round(seconds % 60) + "\xa0s";
+    return repr;
+  }
 
   if (Math.floor(minutes) === 0) {
     return Math.round(seconds) + " s";
@@ -115,17 +127,13 @@ function update(timerStatus) {
 // --------------------------------------------
 
 
-function preventSoundFromPlaying() {
-  countDownMode.turnOff();
-  mobInProgress = false;
-}
-
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
 
   if (mobInProgress) {
     mobTimer.stop(update);
-    preventSoundFromPlaying();
+    countDownMode.turnOff();
+    mobInProgress = false;
   } else {
     mobTimer.startMobTurn(minutesByPerson.value, update);
   }

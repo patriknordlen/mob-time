@@ -18,8 +18,7 @@ function toButtonValue(time) {
     let controls = document.getElementById("control-icons");
     if (time === 0) {
         controls.innerText = "\u25B6";
-    }
-    else {
+    } else {
         controls.innerText = "\u25A0";
     }
     let timeLeft = document.getElementById("time-left");
@@ -27,8 +26,19 @@ function toButtonValue(time) {
 }
 
 function toHumanReadableString(time) {
+    let secondCountingMode = document.getElementById("second-counting-mode").checked;
     let seconds = time / 1000;
     let minutes = seconds / 60;
+
+    if (secondCountingMode) {
+        let repr = "";
+        if (Math.floor(minutes) !== 0) {
+            repr += Math.floor(minutes) + " min ";
+        }
+        repr += Math.round(seconds % 60) + "\xa0s";
+        return repr
+    }
+
     if (Math.floor(minutes) === 0) {
         return Math.round(seconds) + " s";
     }
