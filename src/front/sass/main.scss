@@ -171,7 +171,6 @@ fieldset {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 50px;
   border-left: 1px solid;
   background: $settings-color;
   color: white;
@@ -181,9 +180,9 @@ fieldset {
     border: none;
     border-bottom: 1px solid white;
     background: none;
-    font-size: 3em;
+    font-size: 2em;
     color: white;
-    padding: 5px;
+    padding: 0 7px 5px 7px;
     cursor: pointer;
   }
 }

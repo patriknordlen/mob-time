@@ -208,24 +208,23 @@ fieldset {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 50px;
   border-left: 1px solid;
   background: #666160;
   color: white;
   border-right: 1px solid #85807f;
 }
-/* line 180, ../sass/main.scss */
+/* line 179, ../sass/main.scss */
 #panel nav button {
   border: none;
   border-bottom: 1px solid white;
   background: none;
-  font-size: 3em;
+  font-size: 2em;
   color: white;
-  padding: 5px;
+  padding: 0 7px 5px 7px;
   cursor: pointer;
 }
 
-/* line 191, ../sass/main.scss */
+/* line 190, ../sass/main.scss */
 #settings {
   color: white;
   background: #666160;
