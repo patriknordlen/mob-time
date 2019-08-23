@@ -9,6 +9,8 @@ export function pick() {
 export function init() {
     const alarm = document.getElementById("alarm-sound");
     const volume = document.getElementById("volume");
+
+    alarm.volume = volume.value / 100;
     volume.oninput = function() {
         alarm.volume = this.value / 100;
     };
