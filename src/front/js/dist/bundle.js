@@ -211,14 +211,13 @@ function pick() {
 function init() {
   var alarm = document.getElementById("alarm-sound");
   var volume = document.getElementById("volume");
-  console.log("alarm.volume = " + alarm.volume);
-  console.log("volume.value = " + volume.value);
+  volume.value = document.cookie["mobTimeVolume"];
+  console.log("document.cookie[\"mobTimeVolume\"] = " + document.cookie["mobTimeVolume"]);
   alarm.volume = volume.value / 100;
-  console.log("alarm.volume = " + alarm.volume);
-  console.log("volume.value = " + volume.value);
 
   volume.oninput = function () {
     alarm.volume = this.value / 100;
+    document.cookie = "mobTimeVolume=" + this.value;
   };
 }
 
