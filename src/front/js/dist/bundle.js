@@ -211,8 +211,7 @@ function pick() {
 function init() {
   var alarm = document.getElementById("alarm-sound");
   var volume = document.getElementById("volume");
-  volume.value = document.cookie["mobTimeVolume"];
-  console.log("document.cookie[\"mobTimeVolume\"] = " + document.cookie["mobTimeVolume"]);
+  volume.value = document.cookie.split("=")[1];
   alarm.volume = volume.value / 100;
 
   volume.oninput = function () {

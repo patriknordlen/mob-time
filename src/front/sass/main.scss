@@ -55,22 +55,15 @@ h1 {
   }
 }
 
+#volume-container {
+  width: 100%;
+  margin: 10px 0;
 
-section#title {
-  position: relative;
-  top: 17px;
-
-  #volume-container {
-    width: 100%;
-    margin: 10px 0;
-    text-align: left;
-
-    #volume {
-      vertical-align: bottom;
-      width: 171px;
-      margin-left: 5px;
-      display: inline-block;
-    }
+  #volume {
+    vertical-align: bottom;
+    width: 171px;
+    margin-left: 5px;
+    display: inline-block;
   }
 }
 
