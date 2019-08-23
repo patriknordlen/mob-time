@@ -27,10 +27,8 @@
 
         <section>
             <h1>Mob Time</h1>
+            <input id="volume" type="range" min="1" max="100" value="50">
         </section>
-        <audio id="alarm-sound" controls>
-            <source type="audio/mpeg" src=""/>
-        </audio>
     </form>
 </main>
 <section id="settings">
@@ -60,6 +58,11 @@ https://www.myinstants.com/media/sounds/poudreperlinpinpin.mp3
 https://www.myinstants.com/media/sounds/the-sound-of-silence.mp3</textarea>
     </fieldset>
 </section>
+
+<audio id="alarm-sound">
+    <source type="audio/mpeg" src=""/>
+</audio>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
 <script type="application/javascript" src="js/dist/bundle.js"></script>
 <script type="application/javascript">

@@ -6,6 +6,10 @@ export function pick() {
     alarm.load();
 }
 
+export function init() {
+    const volume = document.getElementById("volume");
+}
+
 export function play() {
     const alarm = document.getElementById("alarm-sound");
     alarm.play();
