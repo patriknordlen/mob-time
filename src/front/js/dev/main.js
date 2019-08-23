@@ -3,7 +3,7 @@ let display = require("./display");
 let countDownMode = require("./countDownMode");
 let mobTimer = require("./mobTimer");
 
-const minutesByPerson = document.getElementById("minutes-by-person");
+const durationByPerson = document.getElementById("minutes-by-person");
 
 let mobInProgress = false;
 mobTimer.passTimeLeftTo(update);
@@ -37,6 +37,9 @@ document.forms.container.onsubmit = function (event) {
     if (mobInProgress) {
         mobTimer.stop(update);
     } else {
-        mobTimer.startMobTurn(minutesByPerson.value, update);
+        let duration = {
+            minutes: durationByPerson.value
+        };
+        mobTimer.startMobTurn(duration, update);
     }
 };

@@ -103,7 +103,7 @@ var countDownMode = require("./countDownMode");
 
 var mobTimer = require("./mobTimer");
 
-var minutesByPerson = document.getElementById("minutes-by-person");
+var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
 mobTimer.passTimeLeftTo(update);
 setInterval(function () {
@@ -137,7 +137,10 @@ document.forms.container.onsubmit = function (event) {
   if (mobInProgress) {
     mobTimer.stop(update);
   } else {
-    mobTimer.startMobTurn(minutesByPerson.value, update);
+    var duration = {
+      minutes: durationByPerson.value
+    };
+    mobTimer.startMobTurn(duration, update);
   }
 };
 
@@ -164,7 +167,7 @@ function stop(callBack) {
   xhttp.send();
 }
 
-function startMobTurn(lengthInMinutes, callBack) {
+function startMobTurn(duration, callBack) {
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
@@ -173,7 +176,7 @@ function startMobTurn(lengthInMinutes, callBack) {
     }
   };
 
-  xhttp.open("POST", "/start?lengthInMinutes=" + lengthInMinutes, true);
+  xhttp.open("POST", "/start?lengthInMinutes=" + duration.minutes, true);
   xhttp.send();
 }
 
@@ -196,10 +199,10 @@ function passTimeLeftTo(callback) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.readVolume = readVolume;
+exports.volume = volume;
 exports.saveVolume = saveVolume;
 
-function readVolume() {
+function volume() {
   var volume = document.cookie.split("=")[1];
   if (volume) return volume;else return 100;
 }
@@ -223,7 +226,7 @@ var settings = require("./settings");
 function init() {
   var alarm = document.getElementById("alarm-sound");
   var volume = document.getElementById("volume");
-  volume.value = settings.readVolume();
+  volume.value = settings.volume();
   alarm.volume = toAudioVolume(volume.value);
 
   volume.oninput = function () {
