@@ -59,7 +59,7 @@ body {
 }
 /* line 24, ../sass/main.scss */
 #container.counting #container {
-  color: #b41300;
+  color: #00b400;
 }
 /* line 28, ../sass/main.scss */
 #container section {
@@ -79,17 +79,17 @@ body {
 /* line 44, ../sass/main.scss */
 h1 {
   font-size: 42px;
-  color: #00b400;
+  color: #707070;
   padding: 15px 0 10px;
   border-top: 4px solid;
   border-bottom: 4px solid;
-  border-color: #00b400;
+  border-color: #707070;
   margin: 0;
 }
 /* line 52, ../sass/main.scss */
 #container.counting h1 {
-  color: #b41300;
-  border-color: #b41300;
+  color: #00b400;
+  border-color: #00b400;
 }
 
 /* line 58, ../sass/main.scss */
@@ -120,7 +120,7 @@ h1 {
 /* line 81, ../sass/main.scss */
 button#start-pause {
   border: solid 1px #ccc;
-  color: #00b400;
+  color: #707070;
   position: relative;
   z-index: 10;
   font-weight: bold;
@@ -140,7 +140,7 @@ button#start-pause #time-left {
 }
 /* line 100, ../sass/main.scss */
 #container.counting button#start-pause {
-  color: #b41300;
+  color: #00b400;
 }
 /* line 103, ../sass/main.scss */
 #container.counting button#start-pause #control-icons {
@@ -220,12 +220,12 @@ svg circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
   stroke-width: 14px;
-  stroke: #00b400;
+  stroke: #707070;
   fill: none;
 }
 /* line 189, ../sass/main.scss */
 #container.counting svg circle {
-  stroke: #b41300;
+  stroke: #00b400;
 }
 
 /*
