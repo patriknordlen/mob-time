@@ -33,7 +33,7 @@ exports.appTitle = appTitle;
 
 function displayTimeLeft(timerStatus) {
   document.title = toPageTitle(timerStatus.timeLeftInMillis);
-  toButtonValue(timerStatus.timeLeftInMillis);
+  updateTheCircleText(timerStatus.timeLeftInMillis);
   displayOnCircle(timerStatus);
 }
 
@@ -45,7 +45,7 @@ function toPageTitle(time) {
   }
 }
 
-function toButtonValue(time) {
+function updateTheCircleText(time) {
   var controls = document.getElementById("control-icons");
 
   if (time === 0) {
@@ -109,6 +109,7 @@ mobTimer.passTimeLeftTo(update);
 setInterval(function () {
   return mobTimer.passTimeLeftTo(update);
 }, 100);
+sound.init();
 
 function update(timerStatus) {
   if (timerStatus.lengthInMinutes === 0) {
@@ -196,6 +197,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.pick = pick;
+exports.init = init;
 exports.play = play;
 
 function pick() {
@@ -204,6 +206,15 @@ function pick() {
   var sounds = alarmUrl.value.trim().split("\n");
   alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
   alarm.load();
+}
+
+function init() {
+  var alarm = document.getElementById("alarm-sound");
+  var volume = document.getElementById("volume");
+
+  volume.onchange = function () {
+    alarm.volume = this.value / 100;
+  };
 }
 
 function play() {

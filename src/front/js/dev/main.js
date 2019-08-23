@@ -8,6 +8,7 @@ const minutesByPerson = document.getElementById("minutes-by-person");
 let mobInProgress = false;
 mobTimer.passTimeLeftTo(update);
 setInterval(() => mobTimer.passTimeLeftTo(update), 100);
+sound.init();
 
 
 function update(timerStatus) {
