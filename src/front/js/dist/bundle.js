@@ -212,7 +212,7 @@ function init() {
   var alarm = document.getElementById("alarm-sound");
   var volume = document.getElementById("volume");
 
-  volume.onchange = function () {
+  volume.oninput = function () {
     alarm.volume = this.value / 100;
   };
 }
