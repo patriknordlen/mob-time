@@ -55,6 +55,17 @@ h1 {
   }
 }
 
+
+section#title {
+  position: relative;
+  top: 17px;
+
+  #volume {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
 #minutes-by-person {
   font-size: 1em;
   width: 3em;
