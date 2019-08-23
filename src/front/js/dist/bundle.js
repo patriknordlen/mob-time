@@ -196,9 +196,34 @@ function passTimeLeftTo(callback) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.pick = pick;
 exports.init = init;
+exports.pick = pick;
 exports.play = play;
+
+function init() {
+  var alarm = document.getElementById("alarm-sound");
+  var volume = document.getElementById("volume");
+  volume.value = readVolume();
+  alarm.volume = toAudioVolume(volume.value);
+
+  volume.oninput = function () {
+    alarm.volume = toAudioVolume(this.value);
+    saveVolume(this.value);
+  };
+}
+
+function toAudioVolume(percent) {
+  return percent / 100;
+}
+
+function readVolume() {
+  var volume = document.cookie.split("=")[1];
+  if (volume) return volume;else return 100;
+}
+
+function saveVolume() {
+  document.cookie = "mobTimeVolume=" + this.value;
+}
 
 function pick() {
   var alarm = document.getElementById("alarm-sound");
@@ -206,18 +231,6 @@ function pick() {
   var sounds = alarmUrl.value.trim().split("\n");
   alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
   alarm.load();
-}
-
-function init() {
-  var alarm = document.getElementById("alarm-sound");
-  var volume = document.getElementById("volume");
-  volume.value = document.cookie.split("=")[1];
-  alarm.volume = volume.value / 100;
-
-  volume.oninput = function () {
-    alarm.volume = this.value / 100;
-    document.cookie = "mobTimeVolume=" + this.value;
-  };
 }
 
 function play() {
