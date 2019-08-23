@@ -98,12 +98,20 @@ section#title {
   top: 17px;
 }
 /* line 63, ../sass/main.scss */
-section#title #volume {
+section#title #volume-container {
   width: 100%;
   margin: 10px 0;
+  text-align: left;
+}
+/* line 68, ../sass/main.scss */
+section#title #volume-container #volume {
+  vertical-align: bottom;
+  width: 171px;
+  margin-left: 5px;
+  display: inline-block;
 }
 
-/* line 69, ../sass/main.scss */
+/* line 77, ../sass/main.scss */
 #minutes-by-person {
   font-size: 1em;
   width: 3em;
@@ -115,7 +123,7 @@ section#title #volume {
   color: white;
 }
 
-/* line 80, ../sass/main.scss */
+/* line 88, ../sass/main.scss */
 button#start-pause {
   border: solid 1px #ccc;
   color: #00b400;
@@ -125,52 +133,52 @@ button#start-pause {
   cursor: pointer;
   outline: none;
 }
-/* line 89, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 button#start-pause #control-icons {
   font-size: 5.8em;
   display: inline-block;
 }
-/* line 93, ../sass/main.scss */
+/* line 101, ../sass/main.scss */
 button#start-pause #time-left {
   font-size: 2.8em;
   display: none;
   max-width: 130px;
 }
-/* line 99, ../sass/main.scss */
+/* line 107, ../sass/main.scss */
 #container.counting button#start-pause {
   color: #b41300;
 }
-/* line 102, ../sass/main.scss */
+/* line 110, ../sass/main.scss */
 #container.counting button#start-pause #control-icons {
   display: none;
 }
-/* line 105, ../sass/main.scss */
+/* line 113, ../sass/main.scss */
 #container.counting button#start-pause #time-left {
   display: inline-block;
 }
-/* line 110, ../sass/main.scss */
+/* line 118, ../sass/main.scss */
 #container.counting button#start-pause:hover #control-icons {
   display: inline-block;
 }
-/* line 113, ../sass/main.scss */
+/* line 121, ../sass/main.scss */
 #container.counting button#start-pause:hover #time-left {
   display: none;
 }
-/* line 119, ../sass/main.scss */
+/* line 127, ../sass/main.scss */
 button#start-pause:focus {
   outline: none;
 }
-/* line 122, ../sass/main.scss */
+/* line 130, ../sass/main.scss */
 button#start-pause::-moz-focus-inner {
   border: 0;
 }
 
-/* line 127, ../sass/main.scss */
+/* line 135, ../sass/main.scss */
 label[for="alarm-url"] {
   padding-right: 10px;
 }
 
-/* line 130, ../sass/main.scss */
+/* line 138, ../sass/main.scss */
 #alarm-url {
   width: 363px;
   height: 228px;
@@ -181,7 +189,7 @@ label[for="alarm-url"] {
 Round clock
 ============================================
  */
-/* line 152, ../sass/main.scss */
+/* line 160, ../sass/main.scss */
 #countdown {
   position: relative;
   margin: auto;
@@ -193,7 +201,7 @@ Round clock
   border: solid 1px #ccc;
 }
 
-/* line 163, ../sass/main.scss */
+/* line 171, ../sass/main.scss */
 #start-pause {
   display: inline-block;
   background: white;
@@ -203,7 +211,7 @@ Round clock
   margin-top: 14px;
 }
 
-/* line 172, ../sass/main.scss */
+/* line 180, ../sass/main.scss */
 svg {
   position: absolute;
   top: 0px;
@@ -213,7 +221,7 @@ svg {
   transform: rotateZ(-90deg);
 }
 
-/* line 181, ../sass/main.scss */
+/* line 189, ../sass/main.scss */
 svg circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
@@ -221,7 +229,7 @@ svg circle {
   stroke: #00b400;
   fill: none;
 }
-/* line 188, ../sass/main.scss */
+/* line 196, ../sass/main.scss */
 #container.counting svg circle {
   stroke: #b41300;
 }
@@ -231,14 +239,14 @@ svg circle {
 Settings
 ============================================
  */
-/* line 198, ../sass/main.scss */
+/* line 206, ../sass/main.scss */
 fieldset {
   padding: 0;
   border: none;
   margin-top: 7.5px;
 }
 
-/* line 204, ../sass/main.scss */
+/* line 212, ../sass/main.scss */
 #panel nav {
   position: absolute;
   top: 0;
@@ -249,7 +257,7 @@ fieldset {
   color: white;
   border-right: 1px solid #85807f;
 }
-/* line 214, ../sass/main.scss */
+/* line 222, ../sass/main.scss */
 #panel nav button {
   border: none;
   border-bottom: 1px solid white;
@@ -260,7 +268,7 @@ fieldset {
   cursor: pointer;
 }
 
-/* line 225, ../sass/main.scss */
+/* line 233, ../sass/main.scss */
 #settings {
   color: white;
   background: #666160;

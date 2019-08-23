@@ -60,9 +60,17 @@ section#title {
   position: relative;
   top: 17px;
 
-  #volume {
+  #volume-container {
     width: 100%;
     margin: 10px 0;
+    text-align: left;
+
+    #volume {
+      vertical-align: bottom;
+      width: 171px;
+      margin-left: 5px;
+      display: inline-block;
+    }
   }
 }
 

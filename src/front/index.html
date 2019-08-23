@@ -27,7 +27,10 @@
 
         <section id="title">
             <h1>Mob Time</h1>
-            <input id="volume" type="range" min="1" max="100" value="50">
+            <div id="volume-container">
+                <label for="volume"><i class="fas fa-volume-up"></i></label>
+                <input id="volume" type="range" min="1" max="100" value="50">
+            </div>
         </section>
     </form>
 </main>
@@ -64,6 +67,7 @@ https://www.myinstants.com/media/sounds/the-sound-of-silence.mp3</textarea>
 </audio>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+<script src="https://kit.fontawesome.com/36321d34e2.js"></script>
 <script type="application/javascript" src="js/dist/bundle.js"></script>
 <script type="application/javascript">
     var slideout = new Slideout({
