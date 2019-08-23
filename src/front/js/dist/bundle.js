@@ -141,7 +141,7 @@ document.forms.container.onsubmit = function (event) {
   }
 };
 
-},{"./countDownMode":1,"./display":2,"./mobTimer":4,"./sound":5}],4:[function(require,module,exports){
+},{"./countDownMode":1,"./display":2,"./mobTimer":4,"./sound":6}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -196,33 +196,44 @@ function passTimeLeftTo(callback) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.init = init;
-exports.pick = pick;
-exports.play = play;
-
-function init() {
-  var alarm = document.getElementById("alarm-sound");
-  var volume = document.getElementById("volume");
-  volume.value = readVolume();
-  alarm.volume = toAudioVolume(volume.value);
-
-  volume.oninput = function () {
-    alarm.volume = toAudioVolume(this.value);
-    saveVolume(this.value);
-  };
-}
-
-function toAudioVolume(percent) {
-  return percent / 100;
-}
+exports.readVolume = readVolume;
+exports.saveVolume = saveVolume;
 
 function readVolume() {
   var volume = document.cookie.split("=")[1];
   if (volume) return volume;else return 100;
 }
 
-function saveVolume() {
-  document.cookie = "mobTimeVolume=" + this.value;
+function saveVolume(value) {
+  document.cookie = "mobTimeVolume=" + value;
+}
+
+},{}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.init = init;
+exports.pick = pick;
+exports.play = play;
+
+var settings = require("./settings");
+
+function init() {
+  var alarm = document.getElementById("alarm-sound");
+  var volume = document.getElementById("volume");
+  volume.value = settings.readVolume();
+  alarm.volume = toAudioVolume(volume.value);
+
+  volume.oninput = function () {
+    alarm.volume = toAudioVolume(this.value);
+    settings.saveVolume(this.value);
+  };
+}
+
+function toAudioVolume(percent) {
+  return percent / 100;
 }
 
 function pick() {
@@ -238,4 +249,4 @@ function play() {
   alarm.play();
 }
 
-},{}]},{},[3]);
+},{"./settings":5}]},{},[3]);

@@ -1,30 +1,20 @@
+let settings = require("./settings");
+
 export function init() {
     const alarm = document.getElementById("alarm-sound");
     const volume = document.getElementById("volume");
 
-    volume.value = readVolume();
+    volume.value = settings.volume();
     alarm.volume = toAudioVolume(volume.value);
 
     volume.oninput = function () {
         alarm.volume = toAudioVolume(this.value);
-        saveVolume(this.value);
+        settings.saveVolume(this.value);
     };
 }
 
 function toAudioVolume(percent) {
     return percent / 100;
-}
-
-function readVolume() {
-    const volume = document.cookie.split("=")[1];
-    if (volume)
-        return volume;
-    else
-        return 100;
-}
-
-function saveVolume() {
-    document.cookie = "mobTimeVolume=" + this.value;
 }
 
 export function pick() {
