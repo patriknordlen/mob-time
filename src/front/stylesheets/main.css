@@ -43,32 +43,32 @@
   display: block;
 }
 
-/* line 11, ../sass/main.scss */
+/* line 12, ../sass/main.scss */
 body {
   text-align: center;
   font-family: Righteous, sans-serif;
   margin: 0;
 }
 
-/* line 17, ../sass/main.scss */
+/* line 18, ../sass/main.scss */
 #container {
   margin: 20px;
   font-size: 1.1em;
   display: inline-block;
   max-width: 450px;
 }
-/* line 24, ../sass/main.scss */
+/* line 25, ../sass/main.scss */
 #container.counting #container {
   color: #00b400;
 }
-/* line 28, ../sass/main.scss */
+/* line 29, ../sass/main.scss */
 #container section {
   display: inline-block;
   vertical-align: middle;
   margin: 7.5px;
 }
 
-/* line 38, ../sass/main.scss */
+/* line 39, ../sass/main.scss */
 #start-pause, h1 {
   width: 200px;
   box-sizing: border-box;
@@ -76,7 +76,7 @@ body {
   text-align: center;
 }
 
-/* line 44, ../sass/main.scss */
+/* line 45, ../sass/main.scss */
 h1 {
   font-size: 42px;
   color: #707070;
@@ -86,18 +86,18 @@ h1 {
   border-color: #707070;
   margin: 0;
 }
-/* line 52, ../sass/main.scss */
+/* line 53, ../sass/main.scss */
 #container.counting h1 {
   color: #00b400;
   border-color: #00b400;
 }
 
-/* line 58, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 #volume-container {
   width: 100%;
   margin: 10px 0;
 }
-/* line 62, ../sass/main.scss */
+/* line 63, ../sass/main.scss */
 #volume-container #volume {
   vertical-align: bottom;
   width: 171px;
@@ -105,7 +105,7 @@ h1 {
   display: inline-block;
 }
 
-/* line 70, ../sass/main.scss */
+/* line 71, ../sass/main.scss */
 #minutes-by-person {
   font-size: 1em;
   width: 3em;
@@ -117,7 +117,7 @@ h1 {
   color: white;
 }
 
-/* line 81, ../sass/main.scss */
+/* line 82, ../sass/main.scss */
 button#start-pause {
   border: solid 1px #ccc;
   color: #707070;
@@ -127,52 +127,52 @@ button#start-pause {
   cursor: pointer;
   outline: none;
 }
-/* line 90, ../sass/main.scss */
+/* line 91, ../sass/main.scss */
 button#start-pause #control-icons {
   font-size: 5.8em;
   display: inline-block;
 }
-/* line 94, ../sass/main.scss */
+/* line 95, ../sass/main.scss */
 button#start-pause #time-left {
   font-size: 2.8em;
   display: none;
   max-width: 130px;
 }
-/* line 100, ../sass/main.scss */
+/* line 101, ../sass/main.scss */
 #container.counting button#start-pause {
   color: #00b400;
 }
-/* line 103, ../sass/main.scss */
+/* line 104, ../sass/main.scss */
 #container.counting button#start-pause #control-icons {
   display: none;
 }
-/* line 106, ../sass/main.scss */
+/* line 107, ../sass/main.scss */
 #container.counting button#start-pause #time-left {
   display: inline-block;
 }
-/* line 111, ../sass/main.scss */
+/* line 112, ../sass/main.scss */
 #container.counting button#start-pause:hover #control-icons {
   display: inline-block;
 }
-/* line 114, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 #container.counting button#start-pause:hover #time-left {
   display: none;
 }
-/* line 120, ../sass/main.scss */
+/* line 121, ../sass/main.scss */
 button#start-pause:focus {
   outline: none;
 }
-/* line 123, ../sass/main.scss */
+/* line 124, ../sass/main.scss */
 button#start-pause::-moz-focus-inner {
   border: 0;
 }
 
-/* line 128, ../sass/main.scss */
+/* line 129, ../sass/main.scss */
 label[for="alarm-url"] {
   padding-right: 10px;
 }
 
-/* line 131, ../sass/main.scss */
+/* line 132, ../sass/main.scss */
 #alarm-url {
   width: 363px;
   height: 228px;
@@ -183,19 +183,19 @@ label[for="alarm-url"] {
 Round clock
 ============================================
  */
-/* line 153, ../sass/main.scss */
+/* line 154, ../sass/main.scss */
 #countdown {
   position: relative;
   margin: auto;
   height: 200px;
   width: 200px;
   text-align: center;
-  background: #e4c2bb;
+  background: #a6dea1;
   border-radius: 100px;
   border: solid 1px #ccc;
 }
 
-/* line 164, ../sass/main.scss */
+/* line 165, ../sass/main.scss */
 #start-pause {
   display: inline-block;
   background: white;
@@ -205,7 +205,7 @@ Round clock
   margin-top: 14px;
 }
 
-/* line 173, ../sass/main.scss */
+/* line 174, ../sass/main.scss */
 svg {
   position: absolute;
   top: 0px;
@@ -215,7 +215,7 @@ svg {
   transform: rotateZ(-90deg);
 }
 
-/* line 182, ../sass/main.scss */
+/* line 183, ../sass/main.scss */
 svg circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
@@ -223,7 +223,7 @@ svg circle {
   stroke: #707070;
   fill: none;
 }
-/* line 189, ../sass/main.scss */
+/* line 190, ../sass/main.scss */
 #container.counting svg circle {
   stroke: #00b400;
 }
@@ -233,14 +233,14 @@ svg circle {
 Settings
 ============================================
  */
-/* line 199, ../sass/main.scss */
+/* line 200, ../sass/main.scss */
 fieldset {
   padding: 0;
   border: none;
   margin-top: 7.5px;
 }
 
-/* line 205, ../sass/main.scss */
+/* line 206, ../sass/main.scss */
 #panel nav {
   position: absolute;
   top: 0;
@@ -251,7 +251,7 @@ fieldset {
   color: white;
   border-right: 1px solid #85807f;
 }
-/* line 215, ../sass/main.scss */
+/* line 216, ../sass/main.scss */
 #panel nav button {
   border: none;
   border-bottom: 1px solid white;
@@ -262,7 +262,7 @@ fieldset {
   cursor: pointer;
 }
 
-/* line 226, ../sass/main.scss */
+/* line 227, ../sass/main.scss */
 #settings {
   color: white;
   background: #666160;

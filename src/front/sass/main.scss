@@ -7,6 +7,7 @@ $font-excess-bottom-padding: 5px;
 $settings-width: 400px;
 $grey: #efefef;
 $settings-color: #666160;
+$countdown-circle-background-color-on: #a6dea1;
 
 body {
   text-align: center;
@@ -156,7 +157,7 @@ $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-paddi
   height: $enclosing-circle-diameter;
   width: $enclosing-circle-diameter;
   text-align: center;
-  background: #e4c2bb;
+  background: $countdown-circle-background-color-on;
   border-radius: $enclosing-circle-diameter / 2;
   border: solid 1px #ccc;
 }
