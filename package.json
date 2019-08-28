@@ -6,7 +6,8 @@
   "scripts": {
     "build": "browserify src/front/js/dev/main.js -o src/front/js/dist/bundle.js",
     "start": "node src/back/index.js",
-    "test": "mocha 'test/**/*.js' --reporter spec"
+    "test": "mocha 'test/**/*.js' --reporter spec",
+    "front-test": "mocha -r esm 'src/front/js/spec/**/*.js' --reporter spec"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +27,9 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
-    "babelify": "^10.0.0"
+    "async": "^3.1.0",
+    "babelify": "^10.0.0",
+    "esm": "^3.2.25"
   },
   "browserify": {
     "transform": [

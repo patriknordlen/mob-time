@@ -1,3 +1,5 @@
+let human_readable = require("./human_readable_time");
+
 export const appTitle = "Mob Time";
 
 export function displayTimeLeft(timerStatus) {
@@ -25,24 +27,12 @@ function updateTheCircleText(time) {
     timeLeft.innerText = toHumanReadableString(time);
 }
 
-function toHumanReadableString(time) {
+function toHumanReadableString(ms) {
     let secondCountingMode = document.getElementById("second-counting-mode").checked;
-    let seconds = time / 1000;
-    let minutes = seconds / 60;
-
     if (secondCountingMode) {
-        let repr = "";
-        if (Math.floor(minutes) !== 0) {
-            repr += Math.floor(minutes) + " min ";
-        }
-        repr += Math.round(seconds % 60) + "\xa0s";
-        return repr
+        return human_readable.extended_format(ms);
     }
-
-    if (Math.floor(minutes) === 0) {
-        return Math.round(seconds) + " s";
-    }
-    return Math.round(minutes) + " min";
+    return human_readable.simple_format(ms);
 }
 
 function displayOnCircle(timerStatus) {

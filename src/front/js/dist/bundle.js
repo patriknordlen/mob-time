@@ -28,6 +28,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.displayTimeLeft = displayTimeLeft;
 exports.appTitle = void 0;
+
+var human_readable = require("./human_readable_time");
+
 var appTitle = "Mob Time";
 exports.appTitle = appTitle;
 
@@ -58,27 +61,14 @@ function updateTheCircleText(time) {
   timeLeft.innerText = toHumanReadableString(time);
 }
 
-function toHumanReadableString(time) {
+function toHumanReadableString(ms) {
   var secondCountingMode = document.getElementById("second-counting-mode").checked;
-  var seconds = time / 1000;
-  var minutes = seconds / 60;
 
   if (secondCountingMode) {
-    var repr = "";
-
-    if (Math.floor(minutes) !== 0) {
-      repr += Math.floor(minutes) + " min ";
-    }
-
-    repr += Math.round(seconds % 60) + "\xa0s";
-    return repr;
+    return human_readable.extended_format(ms);
   }
 
-  if (Math.floor(minutes) === 0) {
-    return Math.round(seconds) + " s";
-  }
-
-  return Math.round(minutes) + " min";
+  return human_readable.simple_format(ms);
 }
 
 function displayOnCircle(timerStatus) {
@@ -92,7 +82,41 @@ function displayOnCircle(timerStatus) {
   }
 }
 
-},{}],3:[function(require,module,exports){
+},{"./human_readable_time":3}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.simple_format = simple_format;
+exports.extended_format = extended_format;
+
+function simple_format(milliseconds) {
+  var seconds = toSeconds(milliseconds);
+
+  if (seconds >= 60) {
+    return "".concat(Math.round(seconds / 60), " min");
+  }
+
+  return seconds + " s";
+}
+
+function extended_format(milliseconds) {
+  var seconds = toSeconds(milliseconds);
+  var human_readable = "";
+
+  if (seconds >= 60) {
+    human_readable += "".concat(Math.floor(seconds / 60), " min");
+  }
+
+  return "".concat(human_readable, " ").concat(seconds % 60, " s");
+}
+
+function toSeconds(milliseconds) {
+  return Math.round(milliseconds / 1000);
+}
+
+},{}],4:[function(require,module,exports){
 "use strict";
 
 var sound = require("./sound");
@@ -144,7 +168,7 @@ document.forms.container.onsubmit = function (event) {
   }
 };
 
-},{"./countDownMode":1,"./display":2,"./mobTimer":4,"./sound":6}],4:[function(require,module,exports){
+},{"./countDownMode":1,"./display":2,"./mobTimer":5,"./sound":7}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -193,7 +217,7 @@ function passTimeLeftTo(callback) {
   xhttp.send();
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -211,7 +235,7 @@ function saveVolume(value) {
   document.cookie = "mobTimeVolume=" + value;
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -252,4 +276,4 @@ function play() {
   alarm.play();
 }
 
-},{"./settings":5}]},{},[3]);
+},{"./settings":6}]},{},[4]);
