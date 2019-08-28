@@ -2,9 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const mobTurns = require("./mob_turns");
-const Settings = require("./Settings");
 
-let settings = new Settings();
 let currentTurn = undefined;
 
 app.get("/", function (req, res) {
@@ -23,10 +21,6 @@ app.post("/stop", function (req, res) {
 
 app.get("/status", function (req, res) {
     res.json(currentTurn.getState());
-});
-
-app.put("/settings", function (req) {
-    settings = new Settings(JSON.parse(req.body));
 });
 
 app.use(express.static('src/front'));

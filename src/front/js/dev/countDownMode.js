@@ -1,5 +1,3 @@
-const display = require("./display");
-
 export function turnOn() {
     const container = document.getElementById("container");
     container.classList.remove("counting");
