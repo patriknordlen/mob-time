@@ -35,11 +35,13 @@ function update(timerStatus) {
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
     if (mobInProgress) {
+        amplitude.getInstance().logEvent('STOP_MOB');
         mobTimer.stop(update);
     } else {
         let duration = {
             minutes: durationByPerson.value
         };
+        amplitude.getInstance().logEvent('START_MOB');
         mobTimer.startMobTurn(duration, update);
     }
 };

@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.turnOn = turnOn;
 exports.turnOff = turnOff;
 
-var display = require("./display");
-
 function turnOn() {
   var container = document.getElementById("container");
   container.classList.remove("counting");
@@ -20,7 +18,7 @@ function turnOff() {
   container.classList.remove("counting");
 }
 
-},{"./display":2}],2:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -159,11 +157,13 @@ document.forms.container.onsubmit = function (event) {
   event.preventDefault();
 
   if (mobInProgress) {
+    amplitude.getInstance().logEvent('STOP_MOB');
     mobTimer.stop(update);
   } else {
     var duration = {
       minutes: durationByPerson.value
     };
+    amplitude.getInstance().logEvent('START_MOB');
     mobTimer.startMobTurn(duration, update);
   }
 };
