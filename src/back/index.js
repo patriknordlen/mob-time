@@ -11,26 +11,16 @@ app.get("/", function (req, res) {
 
 app.post("/start", function (req, res) {
     currentTurn = mobTurns.start(parseInt(req.query.lengthInMinutes));
-    let state = currentTurn.getState();
-    state['event'] = 'turn started';
-    res.json(state);
+    res.json(currentTurn.getState());
 });
 
 app.post("/stop", function (req, res) {
     currentTurn = mobTurns.stop();
-    let state = currentTurn.getState();
-    state['event'] = 'turn interrupted';
-    res.json(state);
+    res.json(currentTurn.getState());
 });
 
 app.get("/status", function (req, res) {
-    let state = currentTurn.getState();
-    if (state['timeLeftInMillis'] === 0) {
-        state['event'] = 'turn ended';
-    } else {
-        state['event'] = 'time passed';
-    }
-    res.json(state);
+    res.json(currentTurn.getState());
 });
 
 app.use(express.static('src/front'));

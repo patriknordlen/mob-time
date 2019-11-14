@@ -132,31 +132,51 @@ setInterval(function () {
   return mobTimer.passTimeLeftTo(update);
 }, 100);
 sound.init();
+var events = {
+  TURN_ENDED: 'time ran out',
+  TURN_STARTED: 'started turn',
+  TURN_INTERRUPTED: 'interrupted turn',
+  TIME_PASSED: 'time passed'
+};
 
 function update(timerStatus) {
-  var event = timerStatus['event'];
+  var event = detectEvent(timerStatus);
   handle(event);
   mobInProgress = timerStatus.timeLeftInMillis > 0;
   display.displayTimeLeft(timerStatus);
 }
 
+function detectEvent(timerStatus) {
+  var event = events.TIME_PASSED;
+
+  if (timerStatus.lengthInMinutes === 0) {
+    event = events.TURN_INTERRUPTED;
+  } else if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
+    event = events.TURN_ENDED;
+  } else if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
+    event = events.TURN_STARTED;
+  }
+
+  return event;
+}
+
 function handle(event) {
   switch (event) {
-    case 'turn ended':
+    case events.TURN_ENDED:
       sound.play();
       countDownMode.turnOff();
       break;
 
-    case 'turn started':
+    case events.TURN_STARTED:
       sound.pick();
       countDownMode.turnOn();
       break;
 
-    case 'turn interrupted':
+    case events.TURN_INTERRUPTED:
       countDownMode.turnOff();
       break;
 
-    case 'time passed':
+    case events.TIME_PASSED:
       break;
 
     default:
