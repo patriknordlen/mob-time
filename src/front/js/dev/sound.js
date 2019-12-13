@@ -1,7 +1,7 @@
 let settings = require("./settings");
 
 export function init() {
-    const alarm = document.getElementById("alarm-sound");
+    const alarm = audioElement();
     const volume = document.getElementById("volume");
 
     volume.value = settings.volume();
@@ -18,7 +18,7 @@ function toAudioVolume(percent) {
 }
 
 export function pick() {
-    const alarm = document.getElementById("alarm-sound");
+    const alarm = audioElement();
     const alarmUrl = document.getElementById("alarm-url");
     let sounds = alarmUrl.value.trim().split("\n");
     alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
@@ -26,6 +26,14 @@ export function pick() {
 }
 
 export function play() {
-    const alarm = document.getElementById("alarm-sound");
+    const alarm = audioElement();
     alarm.play();
+}
+
+export function isPlaying() {
+    return !audioElement().ended;
+}
+
+function audioElement() {
+    return document.getElementById("alarm-sound");
 }

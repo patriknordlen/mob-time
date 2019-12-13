@@ -65,13 +65,16 @@ document.forms.container.onsubmit = function (event) {
     if (mobInProgress) {
         amplitude.getInstance().logEvent('STOP_MOB');
         mobTimer.stop(update);
-    } else {
-        let duration = {
-            minutes: durationByPerson.value
-        };
-        amplitude.getInstance().logEvent('START_MOB');
-        mobTimer.startMobTurn(duration, update);
+        return;
     }
+    if (sound,isPlaying()) {
+        // todo
+    }
+    let duration = {
+        minutes: durationByPerson.value
+    };
+    amplitude.getInstance().logEvent('START_MOB');
+    mobTimer.startMobTurn(duration, update);
 };
 
 // --------------------------------------------
