@@ -67,3 +67,5 @@
 
 
 amplitude.getInstance().init("3fecdc3572189da5ba6c3caab23a486f");
+
+export function get() { return amplitude };

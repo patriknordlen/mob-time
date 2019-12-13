@@ -1,6 +1,7 @@
 let sound = require("./sound");
 let display = require("./display/display");
 let countDownMode = require("./display/countDownMode");
+let amplitude = require("./amplitude,").get();
 let mobTimer = require("./spi/mobTimer");
 
 const durationByPerson = document.getElementById("minutes-by-person");

@@ -4,6 +4,108 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.get = get;
+
+(function (e, t) {
+  var n = e.amplitude || {
+    _q: [],
+    _iq: {}
+  };
+  var r = t.createElement("script");
+  r.type = "text/javascript";
+  r.integrity = "sha384-d/yhnowERvm+7eCU79T/bYjOiMmq4F11ElWYLmt0ktvYEVgqLDazh4+gW9CKMpYW";
+  r.crossOrigin = "anonymous";
+  r.async = true;
+  r.src = "https://cdn.amplitude.com/libs/amplitude-5.2.2-min.gz.js";
+
+  r.onload = function () {
+    if (!e.amplitude.runQueuedFunctions) {
+      console.log("[Amplitude] Error: could not load SDK");
+    }
+  };
+
+  var i = t.getElementsByTagName("script")[0];
+  i.parentNode.insertBefore(r, i);
+
+  function s(e, t) {
+    e.prototype[t] = function () {
+      this._q.push([t].concat(Array.prototype.slice.call(arguments, 0)));
+
+      return this;
+    };
+  }
+
+  var o = function o() {
+    this._q = [];
+    return this;
+  };
+
+  var a = ["add", "append", "clearAll", "prepend", "set", "setOnce", "unset"];
+
+  for (var u = 0; u < a.length; u++) {
+    s(o, a[u]);
+  }
+
+  n.Identify = o;
+
+  var c = function c() {
+    this._q = [];
+    return this;
+  };
+
+  var l = ["setProductId", "setQuantity", "setPrice", "setRevenueType", "setEventProperties"];
+
+  for (var p = 0; p < l.length; p++) {
+    s(c, l[p]);
+  }
+
+  n.Revenue = c;
+  var d = ["init", "logEvent", "logRevenue", "setUserId", "setUserProperties", "setOptOut", "setVersionName", "setDomain", "setDeviceId", "setGlobalUserProperties", "identify", "clearUserProperties", "setGroup", "logRevenueV2", "regenerateDeviceId", "groupIdentify", "onInit", "logEventWithTimestamp", "logEventWithGroups", "setSessionId", "resetSessionId"];
+
+  function v(e) {
+    function t(t) {
+      e[t] = function () {
+        e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)));
+      };
+    }
+
+    for (var n = 0; n < d.length; n++) {
+      t(d[n]);
+    }
+  }
+
+  v(n);
+
+  n.getInstance = function (e) {
+    e = (!e || e.length === 0 ? "$default_instance" : e).toLowerCase();
+
+    if (!n._iq.hasOwnProperty(e)) {
+      n._iq[e] = {
+        _q: []
+      };
+      v(n._iq[e]);
+    }
+
+    return n._iq[e];
+  };
+
+  e.amplitude = n;
+})(window, document);
+
+amplitude.getInstance().init("3fecdc3572189da5ba6c3caab23a486f");
+
+function get() {
+  return amplitude;
+}
+
+;
+
+},{}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.turnOn = turnOn;
 exports.turnOff = turnOff;
 
@@ -18,7 +120,7 @@ function turnOff() {
   container.classList.remove("counting");
 }
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52,7 +154,7 @@ function timeFormatter() {
   return human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":4,"./main_button":3}],3:[function(require,module,exports){
+},{"../functions/human_readable_time":5,"./main_button":4}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -89,7 +191,7 @@ function progression(timerStatus) {
   }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -123,7 +225,7 @@ function toSeconds(milliseconds) {
   return Math.round(milliseconds / 1000);
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 var sound = require("./sound");
@@ -131,6 +233,8 @@ var sound = require("./sound");
 var display = require("./display/display");
 
 var countDownMode = require("./display/countDownMode");
+
+var amplitude = require("./amplitude,").get();
 
 var mobTimer = require("./spi/mobTimer");
 
@@ -220,7 +324,7 @@ document.forms.container.onsubmit = function (event) {
 
 var socket = io();
 
-},{"./display/countDownMode":1,"./display/display":2,"./sound":6,"./spi/mobTimer":7}],6:[function(require,module,exports){
+},{"./amplitude,":1,"./display/countDownMode":2,"./display/display":3,"./sound":7,"./spi/mobTimer":8}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -270,7 +374,7 @@ function audioElement() {
   return document.getElementById("alarm-sound");
 }
 
-},{"./spi/settings":8}],7:[function(require,module,exports){
+},{"./spi/settings":9}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -319,7 +423,7 @@ function passTimeLeftTo(callback) {
   xhttp.send();
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -337,4 +441,4 @@ function saveVolume(value) {
   document.cookie = "mobTimeVolume=" + value;
 }
 
-},{}]},{},[5]);
+},{}]},{},[6]);
