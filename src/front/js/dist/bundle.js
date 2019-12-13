@@ -27,26 +27,45 @@ Object.defineProperty(exports, "__esModule", {
 exports.displayTimeLeft = displayTimeLeft;
 exports.appTitle = void 0;
 
-var human_readable = require("./human_readable_time");
+var human_readable = require("../functions/human_readable_time");
+
+var main_button = require("./main_button");
 
 var appTitle = "Mob Time";
 exports.appTitle = appTitle;
 
 function displayTimeLeft(timerStatus) {
-  document.title = toPageTitle(timerStatus.timeLeftInMillis);
-  updateTheCircleText(timerStatus.timeLeftInMillis);
-  displayOnCircle(timerStatus);
+  document.title = toPageTitle(timerStatus.timeLeftInMillis, timeFormatter());
+  main_button.update(timerStatus, timeFormatter());
 }
 
-function toPageTitle(time) {
-  if (time === 0) {
-    return appTitle;
-  } else {
-    return toHumanReadableString(time) + " - " + appTitle;
+function toPageTitle(time, timeFormatter) {
+  if (time === 0) return appTitle;
+  return timeFormatter(time) + " - " + appTitle;
+}
+
+function timeFormatter() {
+  if (document.getElementById("second-counting-mode").checked) {
+    return human_readable.extended_format;
   }
+
+  return human_readable.simple_format;
 }
 
-function updateTheCircleText(time) {
+},{"../functions/human_readable_time":4,"./main_button":3}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.update = update;
+
+function update(timerStatus, timeFormatter) {
+  text(timerStatus.timeLeftInMillis, timeFormatter);
+  progression(timerStatus);
+}
+
+function text(time, formatter) {
   var controls = document.getElementById("control-icons");
 
   if (time === 0) {
@@ -56,20 +75,10 @@ function updateTheCircleText(time) {
   }
 
   var timeLeft = document.getElementById("time-left");
-  timeLeft.innerText = toHumanReadableString(time);
+  timeLeft.innerText = formatter(time);
 }
 
-function toHumanReadableString(ms) {
-  var secondCountingMode = document.getElementById("second-counting-mode").checked;
-
-  if (secondCountingMode) {
-    return human_readable.extended_format(ms);
-  }
-
-  return human_readable.simple_format(ms);
-}
-
-function displayOnCircle(timerStatus) {
+function progression(timerStatus) {
   var circle = document.getElementById("countdown-circle");
 
   if (timerStatus.timeLeftInMillis === 0) {
@@ -80,7 +89,7 @@ function displayOnCircle(timerStatus) {
   }
 }
 
-},{"./human_readable_time":3}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -114,16 +123,16 @@ function toSeconds(milliseconds) {
   return Math.round(milliseconds / 1000);
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 var sound = require("./sound");
 
-var display = require("./display");
+var display = require("./display/display");
 
-var countDownMode = require("./countDownMode");
+var countDownMode = require("./display/countDownMode");
 
-var mobTimer = require("./mobTimer");
+var mobTimer = require("./spi/mobTimer");
 
 var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
@@ -193,16 +202,75 @@ document.forms.container.onsubmit = function (event) {
   if (mobInProgress) {
     amplitude.getInstance().logEvent('STOP_MOB');
     mobTimer.stop(update);
-  } else {
-    var duration = {
-      minutes: durationByPerson.value
-    };
-    amplitude.getInstance().logEvent('START_MOB');
-    mobTimer.startMobTurn(duration, update);
+    return;
   }
-};
 
-},{"./countDownMode":1,"./display":2,"./mobTimer":5,"./sound":7}],5:[function(require,module,exports){
+  if (sound.isPlaying()) {// todo
+  }
+
+  var duration = {
+    minutes: durationByPerson.value
+  };
+  amplitude.getInstance().logEvent('START_MOB');
+  mobTimer.startMobTurn(duration, update);
+}; // --------------------------------------------
+// Sockets
+// --------------------------------------------
+
+
+var socket = io();
+
+},{"./display/countDownMode":1,"./display/display":2,"./sound":6,"./spi/mobTimer":7}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.init = init;
+exports.pick = pick;
+exports.play = play;
+exports.isPlaying = isPlaying;
+
+var settings = require("./spi/settings");
+
+function init() {
+  var alarm = audioElement();
+  var volume = document.getElementById("volume");
+  volume.value = settings.volume();
+  alarm.volume = toAudioVolume(volume.value);
+
+  volume.oninput = function () {
+    alarm.volume = toAudioVolume(this.value);
+    settings.saveVolume(this.value);
+  };
+}
+
+function toAudioVolume(percent) {
+  return percent / 100;
+}
+
+function pick() {
+  var alarm = audioElement();
+  var alarmUrl = document.getElementById("alarm-url");
+  var sounds = alarmUrl.value.trim().split("\n");
+  alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
+  alarm.load();
+}
+
+function play() {
+  var alarm = audioElement();
+  alarm.play();
+}
+
+function isPlaying() {
+  return !audioElement().ended;
+}
+
+function audioElement() {
+  return document.getElementById("alarm-sound");
+}
+
+},{"./spi/settings":8}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -251,7 +319,7 @@ function passTimeLeftTo(callback) {
   xhttp.send();
 }
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -269,45 +337,4 @@ function saveVolume(value) {
   document.cookie = "mobTimeVolume=" + value;
 }
 
-},{}],7:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.init = init;
-exports.pick = pick;
-exports.play = play;
-
-var settings = require("./settings");
-
-function init() {
-  var alarm = document.getElementById("alarm-sound");
-  var volume = document.getElementById("volume");
-  volume.value = settings.volume();
-  alarm.volume = toAudioVolume(volume.value);
-
-  volume.oninput = function () {
-    alarm.volume = toAudioVolume(this.value);
-    settings.saveVolume(this.value);
-  };
-}
-
-function toAudioVolume(percent) {
-  return percent / 100;
-}
-
-function pick() {
-  var alarm = document.getElementById("alarm-sound");
-  var alarmUrl = document.getElementById("alarm-url");
-  var sounds = alarmUrl.value.trim().split("\n");
-  alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
-  alarm.load();
-}
-
-function play() {
-  var alarm = document.getElementById("alarm-sound");
-  alarm.play();
-}
-
-},{"./settings":6}]},{},[4]);
+},{}]},{},[5]);

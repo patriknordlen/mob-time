@@ -1,4 +1,4 @@
-let settings = require("./settings");
+let settings = require("./spi/settings");
 
 export function init() {
     const alarm = audioElement();

@@ -1,4 +1,4 @@
-var time = require("../dev/human_readable_time");
+var time = require("../dev/functions/human_readable_time");
 var async = require('async');
 var expect = require("chai").expect;
 

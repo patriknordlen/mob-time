@@ -1,7 +1,7 @@
 let sound = require("./sound");
-let display = require("./display");
-let countDownMode = require("./countDownMode");
-let mobTimer = require("./mobTimer");
+let display = require("./display/display");
+let countDownMode = require("./display/countDownMode");
+let mobTimer = require("./spi/mobTimer");
 
 const durationByPerson = document.getElementById("minutes-by-person");
 
@@ -67,7 +67,7 @@ document.forms.container.onsubmit = function (event) {
         mobTimer.stop(update);
         return;
     }
-    if (sound,isPlaying()) {
+    if (sound.isPlaying()) {
         // todo
     }
     let duration = {
