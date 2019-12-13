@@ -73,3 +73,9 @@ document.forms.container.onsubmit = function (event) {
         mobTimer.startMobTurn(duration, update);
     }
 };
+
+// --------------------------------------------
+// Sockets
+// --------------------------------------------
+
+var socket = io();

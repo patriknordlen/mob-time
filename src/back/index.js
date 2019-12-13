@@ -1,5 +1,7 @@
-const express = require("express");
+let express = require('express');
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000;
 const mobTurns = require("./mob_turns");
 
@@ -23,9 +25,16 @@ app.get("/status", function (req, res) {
     res.json(currentTurn.getState());
 });
 
+io.on('connection', function(socket){
+    console.log('a user connected');
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+});
+
 app.use(express.static('src/front'));
 
 mobTurns.currentTurn().then(mobTurn => {
     currentTurn = mobTurn;
-    app.listen(PORT, () => console.log(`Server started on http://0.0.0.0:${PORT}`));
+    http.listen(PORT, () => console.log(`Server started on http://0.0.0.0:${PORT}`));
 });
