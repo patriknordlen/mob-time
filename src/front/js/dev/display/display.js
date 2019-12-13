@@ -1,5 +1,5 @@
 let human_readable = require("../functions/human_readable_time");
-let main_button = require("./main_button");
+let main_button = require("./mainButton");
 
 export const appTitle = "Mob Time";
 
