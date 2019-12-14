@@ -1,7 +1,8 @@
 let settings = require("./spi/settings");
+const events = require("./events").events;
+const alarm = document.getElementById("alarm-sound");
 
 export function init() {
-    const alarm = audioElement();
     const volume = document.getElementById("volume");
 
     volume.value = settings.volume();
@@ -13,27 +14,20 @@ export function init() {
     };
 }
 
-function toAudioVolume(percent) {
-    return percent / 100;
-}
-
-export function pick() {
-    const alarm = audioElement();
+document.addEventListener(events.TURN_ENDED, function() {
+    document.getElementById("alarm-sound").play();
+});
+document.addEventListener(events.TURN_STARTED, function() {
     const alarmUrl = document.getElementById("alarm-url");
     let sounds = alarmUrl.value.trim().split("\n");
     alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
     alarm.load();
-}
+});
 
-export function play() {
-    const alarm = audioElement();
-    alarm.play();
+function toAudioVolume(percent) {
+    return percent / 100;
 }
 
 export function isPlaying() {
-    return !audioElement().ended;
-}
-
-function audioElement() {
-    return document.getElementById("alarm-sound");
+    return !alarm.ended;
 }
