@@ -1,5 +1,6 @@
 export function volume() {
-    const volume = document.cookie.split("=")[1];
+    const volumeCookie = document.cookie.split(";").filter(value => value.match("mobTimeVolume"));
+    const volume = volumeCookie[0]?.split("=")[1];
     if (volume)
         return volume;
     else

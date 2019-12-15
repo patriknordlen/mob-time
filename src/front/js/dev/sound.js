@@ -4,7 +4,6 @@ const alarm = document.getElementById("alarm-sound");
 
 export function init() {
     const volume = document.getElementById("volume");
-
     volume.value = settings.volume();
     alarm.volume = toAudioVolume(volume.value);
 

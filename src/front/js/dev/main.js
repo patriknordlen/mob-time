@@ -1,17 +1,14 @@
-let sound = require("./sound");
-let display = require("./display/display");
-let countDownMode = require("./display/countDownMode");
-let amplitude = require("./amplitude,").get();
-let mobTimer = require("./spi/mobTimer");
+const sound = require("./sound");
+const display = require("./display/display");
+require("./display/countDownMode");
+const amplitude = require("./amplitude,").get();
+const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
-const events = eventsModule.events;
 
 const durationByPerson = document.getElementById("minutes-by-person");
 let mobInProgress = false;
 mobTimer.passTimeLeftTo(update);
 setInterval(() => mobTimer.passTimeLeftTo(update), 100);
-
-sound.init();
 
 function update(timerStatus) {
     eventsModule.throwEventFor(timerStatus, mobInProgress);
@@ -22,7 +19,7 @@ function update(timerStatus) {
 // --------------------------------------------
 // Setup
 // --------------------------------------------
-
+sound.init();
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
     if (mobInProgress) {

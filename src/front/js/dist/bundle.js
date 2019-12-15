@@ -267,7 +267,7 @@ var sound = require("./sound");
 
 var display = require("./display/display");
 
-var countDownMode = require("./display/countDownMode");
+require("./display/countDownMode");
 
 var amplitude = require("./amplitude,").get();
 
@@ -275,14 +275,12 @@ var mobTimer = require("./spi/mobTimer");
 
 var eventsModule = require("./events");
 
-var events = eventsModule.events;
 var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
 mobTimer.passTimeLeftTo(update);
 setInterval(function () {
   return mobTimer.passTimeLeftTo(update);
 }, 100);
-sound.init();
 
 function update(timerStatus) {
   eventsModule.throwEventFor(timerStatus, mobInProgress);
@@ -292,6 +290,8 @@ function update(timerStatus) {
 // Setup
 // --------------------------------------------
 
+
+sound.init();
 
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
@@ -420,7 +420,12 @@ exports.volume = volume;
 exports.saveVolume = saveVolume;
 
 function volume() {
-  var volume = document.cookie.split("=")[1];
+  var _volumeCookie$;
+
+  var volumeCookie = document.cookie.split(";").filter(function (value) {
+    return value.match("mobTimeVolume");
+  });
+  var volume = (_volumeCookie$ = volumeCookie[0]) === null || _volumeCookie$ === void 0 ? void 0 : _volumeCookie$.split("=")[1];
   if (volume) return volume;else return 100;
 }
 
