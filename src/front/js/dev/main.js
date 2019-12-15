@@ -23,19 +23,20 @@ sound.init();
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
     if (mobInProgress) {
-        amplitude.getInstance().logEvent('STOP_MOB');
         mobTimer.stop(update);
+        amplitude.getInstance().logEvent('STOP_MOB');
         return;
     }
     if (sound.isPlaying()) {
         sound.stop();
+        amplitude.getInstance().logEvent('STOP_SOUND');
         return;
     }
     let duration = {
         minutes: durationByPerson.value
     };
-    amplitude.getInstance().logEvent('START_MOB');
     mobTimer.startMobTurn(duration, update);
+    amplitude.getInstance().logEvent('START_MOB');
 };
 
 // --------------------------------------------
