@@ -32,10 +32,7 @@ document.forms.container.onsubmit = function (event) {
         amplitude.getInstance().logEvent('STOP_SOUND');
         return;
     }
-    let duration = {
-        minutes: durationByPerson.value
-    };
-    mobTimer.startMobTurn(duration, update);
+    mobTimer.startMobTurn({minutes: durationByPerson.value}, update);
     amplitude.getInstance().logEvent('START_MOB');
 };
 

@@ -1,23 +1,29 @@
 const sound = require("../sound");
+
 export function update(timerStatus, timeFormatter) {
-    text(timerStatus.timeLeftInMillis, timeFormatter);
+    icon(timerStatus);
+    timeLeft(timeFormatter, timerStatus);
     progression(timerStatus);
 }
 
-function text(time, formatter) {
+function icon(timerStatus) {
     let controls = document.getElementById("control-icons");
-    controls.className = "";
-    if (time === 0) {
-        if (sound.isPlaying()) {
-            controls.classList.add("fas", "fa-volume-mute");
-        } else {
-            controls.classList.add("fas", "fa-play");
-        }
-    } else {
-        controls.classList.add("fas", "fa-stop");
+    controls.className = iconClass(timerStatus.timeLeftInMillis);
+}
+
+function iconClass(time) {
+    if (sound.isPlaying()) {
+        return "fas fa-volume-mute";
     }
+    if (time === 0) {
+        return "fas fa-play";
+    }
+    return "fas fa-stop";
+}
+
+function timeLeft(timeFormatter, timerStatus) {
     let timeLeft = document.getElementById("time-left");
-    timeLeft.innerText = formatter(time);
+    timeLeft.innerText = timeFormatter(timerStatus.timeLeftInMillis);
 }
 
 function progression(timerStatus) {

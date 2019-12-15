@@ -164,26 +164,31 @@ exports.update = update;
 var sound = require("../sound");
 
 function update(timerStatus, timeFormatter) {
-  text(timerStatus.timeLeftInMillis, timeFormatter);
+  icon(timerStatus);
+  timeLeft(timeFormatter, timerStatus);
   progression(timerStatus);
 }
 
-function text(time, formatter) {
+function icon(timerStatus) {
   var controls = document.getElementById("control-icons");
-  controls.className = "";
+  controls.className = iconClass(timerStatus.timeLeftInMillis);
+}
 
-  if (time === 0) {
-    if (sound.isPlaying()) {
-      controls.classList.add("fas", "fa-volume-mute");
-    } else {
-      controls.classList.add("fas", "fa-play");
-    }
-  } else {
-    controls.classList.add("fas", "fa-stop");
+function iconClass(time) {
+  if (sound.isPlaying()) {
+    return "fas fa-volume-mute";
   }
 
+  if (time === 0) {
+    return "fas fa-play";
+  }
+
+  return "fas fa-stop";
+}
+
+function timeLeft(timeFormatter, timerStatus) {
   var timeLeft = document.getElementById("time-left");
-  timeLeft.innerText = formatter(time);
+  timeLeft.innerText = timeFormatter(timerStatus.timeLeftInMillis);
 }
 
 function progression(timerStatus) {
@@ -304,21 +309,21 @@ document.forms.container.onsubmit = function (event) {
   event.preventDefault();
 
   if (mobInProgress) {
-    amplitude.getInstance().logEvent('STOP_MOB');
     mobTimer.stop(update);
+    amplitude.getInstance().logEvent('STOP_MOB');
     return;
   }
 
   if (sound.isPlaying()) {
     sound.stop();
+    amplitude.getInstance().logEvent('STOP_SOUND');
     return;
   }
 
-  var duration = {
+  mobTimer.startMobTurn({
     minutes: durationByPerson.value
-  };
+  }, update);
   amplitude.getInstance().logEvent('START_MOB');
-  mobTimer.startMobTurn(duration, update);
 }; // --------------------------------------------
 // Sockets
 // --------------------------------------------
