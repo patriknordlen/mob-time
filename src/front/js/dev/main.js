@@ -28,7 +28,8 @@ document.forms.container.onsubmit = function (event) {
         return;
     }
     if (sound.isPlaying()) {
-        // todo
+        sound.stop();
+        return;
     }
     let duration = {
         minutes: durationByPerson.value

@@ -1,3 +1,4 @@
+const sound = require("../sound");
 export function update(timerStatus, timeFormatter) {
     text(timerStatus.timeLeftInMillis, timeFormatter);
     progression(timerStatus);
@@ -5,10 +6,15 @@ export function update(timerStatus, timeFormatter) {
 
 function text(time, formatter) {
     let controls = document.getElementById("control-icons");
+    controls.className = "";
     if (time === 0) {
-        controls.innerText = "\u25B6";
+        if (sound.isPlaying()) {
+            controls.classList.add("fas", "fa-volume-mute");
+        } else {
+            controls.classList.add("fas", "fa-play");
+        }
     } else {
-        controls.innerText = "\u25A0";
+        controls.classList.add("fas", "fa-stop");
     }
     let timeLeft = document.getElementById("time-left");
     timeLeft.innerText = formatter(time);

@@ -161,6 +161,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.update = update;
 
+var sound = require("../sound");
+
 function update(timerStatus, timeFormatter) {
   text(timerStatus.timeLeftInMillis, timeFormatter);
   progression(timerStatus);
@@ -168,11 +170,16 @@ function update(timerStatus, timeFormatter) {
 
 function text(time, formatter) {
   var controls = document.getElementById("control-icons");
+  controls.className = "";
 
   if (time === 0) {
-    controls.innerText = "\u25B6";
+    if (sound.isPlaying()) {
+      controls.classList.add("fas", "fa-volume-mute");
+    } else {
+      controls.classList.add("fas", "fa-play");
+    }
   } else {
-    controls.innerText = "\u25A0";
+    controls.classList.add("fas", "fa-stop");
   }
 
   var timeLeft = document.getElementById("time-left");
@@ -190,7 +197,7 @@ function progression(timerStatus) {
   }
 }
 
-},{}],5:[function(require,module,exports){
+},{"../sound":8}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -302,7 +309,9 @@ document.forms.container.onsubmit = function (event) {
     return;
   }
 
-  if (sound.isPlaying()) {// todo
+  if (sound.isPlaying()) {
+    sound.stop();
+    return;
   }
 
   var duration = {
@@ -325,6 +334,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.init = init;
 exports.isPlaying = isPlaying;
+exports.stop = stop;
 
 var settings = require("./spi/settings");
 
@@ -358,7 +368,12 @@ function toAudioVolume(percent) {
 }
 
 function isPlaying() {
-  return !alarm.ended;
+  return !alarm.paused;
+}
+
+function stop() {
+  alarm.pause();
+  alarm.fastSeek(0);
 }
 
 },{"./events":5,"./spi/settings":10}],9:[function(require,module,exports){

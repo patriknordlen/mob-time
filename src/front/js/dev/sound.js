@@ -16,17 +16,22 @@ export function init() {
 document.addEventListener(events.TURN_ENDED, function() {
     document.getElementById("alarm-sound").play();
 });
+
 document.addEventListener(events.TURN_STARTED, function() {
     const alarmUrl = document.getElementById("alarm-url");
     let sounds = alarmUrl.value.trim().split("\n");
     alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
     alarm.load();
 });
-
 function toAudioVolume(percent) {
     return percent / 100;
 }
 
 export function isPlaying() {
-    return !alarm.ended;
+    return !alarm.paused;
+}
+
+export function stop() {
+    alarm.pause();
+    alarm.fastSeek(0);
 }
