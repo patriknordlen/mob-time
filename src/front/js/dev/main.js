@@ -17,14 +17,21 @@ function update(timerStatus) {
 }
 
 // --------------------------------------------
+// Sockets
+// --------------------------------------------
+
+var socket = io();
+socket.on('interrupt mob', () => { console.log("Mob interrupted"); });
+
+// --------------------------------------------
 // Setup
 // --------------------------------------------
 sound.init();
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
     if (mobInProgress) {
-        mobTimer.stop(update);
         amplitude.getInstance().logEvent('STOP_MOB');
+        socket.emit("interrupt mob");
         return;
     }
     if (sound.isPlaying()) {
@@ -35,9 +42,3 @@ document.forms.container.onsubmit = function (event) {
     mobTimer.startMobTurn({minutes: durationByPerson.value}, update);
     amplitude.getInstance().logEvent('START_MOB');
 };
-
-// --------------------------------------------
-// Sockets
-// --------------------------------------------
-
-var socket = io();

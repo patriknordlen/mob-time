@@ -299,9 +299,16 @@ function update(timerStatus) {
   mobInProgress = timerStatus.timeLeftInMillis > 0;
   display.displayTimeLeft(timerStatus);
 } // --------------------------------------------
-// Setup
+// Sockets
 // --------------------------------------------
 
+
+var socket = io();
+socket.on('interrupt mob', function () {
+  console.log("Mob interrupted");
+}); // --------------------------------------------
+// Setup
+// --------------------------------------------
 
 sound.init();
 
@@ -309,8 +316,8 @@ document.forms.container.onsubmit = function (event) {
   event.preventDefault();
 
   if (mobInProgress) {
-    mobTimer.stop(update);
     amplitude.getInstance().logEvent('STOP_MOB');
+    socket.emit("interrupt mob");
     return;
   }
 
@@ -324,12 +331,7 @@ document.forms.container.onsubmit = function (event) {
     minutes: durationByPerson.value
   }, update);
   amplitude.getInstance().logEvent('START_MOB');
-}; // --------------------------------------------
-// Sockets
-// --------------------------------------------
-
-
-var socket = io();
+};
 
 },{"./amplitude,":1,"./display/countDownMode":2,"./display/display":3,"./events":5,"./sound":8,"./spi/mobTimer":9}],8:[function(require,module,exports){
 "use strict";

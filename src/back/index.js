@@ -27,8 +27,10 @@ app.get("/status", function (req, res) {
 
 io.on('connection', function(socket){
     console.log('a user connected');
-    socket.on('stop-alarm', function(){
-        socket.broadcast.emit('stop-alarm');
+    socket.on('interrupt mob', function(){
+        console.log('Mob interrupted');
+        currentTurn = mobTurns.stop();
+        socket.emit('interrupt mob');
     });
 });
 
