@@ -35,7 +35,6 @@ io.on('connection', function(socket){
     socket.on('start mob', function(lengthInMinutes){
         console.log('Mob of length ' + lengthInMinutes + "min started");
         currentTurn = mobTurns.start(parseInt(lengthInMinutes));
-        socket.emit('start mob');
     });
 });
 
