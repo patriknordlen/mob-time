@@ -327,9 +327,7 @@ document.forms.container.onsubmit = function (event) {
     return;
   }
 
-  mobTimer.startMobTurn({
-    minutes: durationByPerson.value
-  }, update);
+  socket.emit("start mob", durationByPerson.value);
   amplitude.getInstance().logEvent('START_MOB');
 };
 
@@ -389,22 +387,8 @@ function stop() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.stop = stop;
 exports.startMobTurn = startMobTurn;
 exports.passTimeLeftTo = passTimeLeftTo;
-
-function stop(callBack) {
-  var xhttp = new XMLHttpRequest();
-
-  xhttp.onreadystatechange = function () {
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      callBack(JSON.parse(this.responseText));
-    }
-  };
-
-  xhttp.open("POST", "/stop", true);
-  xhttp.send();
-}
 
 function startMobTurn(duration, callBack) {
   var xhttp = new XMLHttpRequest();
