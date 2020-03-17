@@ -4,11 +4,13 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000;
 const mobTurns = require("./mob_turns");
+const fs = require("fs");
+const path = require("path");
 
 let currentTurn = undefined;
 
 app.get("/", function (req, res) {
-    res.redirect("/index.html")
+    res.render("index");
 });
 
 app.post("/start", function (req, res) {
@@ -39,6 +41,8 @@ io.on('connection', function(socket){
 });
 
 app.use(express.static('src/front'));
+app.set('views', path.join(__dirname, '../front'));
+app.set('view engine', 'pug');
 
 mobTurns.currentTurn().then(mobTurn => {
     currentTurn = mobTurn;
