@@ -1,0 +1,20 @@
+/* line 2, ../sass/home.scss */
+#home h1 {
+  font-size: 95px;
+  width: 433px;
+}
+/* line 7, ../sass/home.scss */
+#home #mob {
+  font-weight: normal;
+  font-size: 29px;
+}
+/* line 10, ../sass/home.scss */
+#home #mob #name {
+  width: 348px;
+}
+/* line 13, ../sass/home.scss */
+#home #mob #submit {
+  margin: 0 0 0 10px;
+  padding: 2px;
+  vertical-align: bottom;
+}
