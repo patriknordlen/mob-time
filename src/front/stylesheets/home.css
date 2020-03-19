@@ -6,15 +6,19 @@
   font-weight: normal;
 }
 /* line 9, ../sass/home.scss */
+#home #title {
+  width: auto;
+}
+/* line 13, ../sass/home.scss */
 #home #mob {
   font-weight: normal;
   font-size: 22px;
 }
-/* line 13, ../sass/home.scss */
+/* line 17, ../sass/home.scss */
 #home #mob #name {
   width: 355px;
 }
-/* line 17, ../sass/home.scss */
+/* line 21, ../sass/home.scss */
 #home #mob #submit {
   margin: 0 0 0 10px;
   padding: 2px;

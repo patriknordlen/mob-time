@@ -168,7 +168,7 @@ button#start-pause #control-icons {
 }
 /* line 131, ../sass/main.scss */
 button#start-pause #time-left {
-  font-size: 2.8em;
+  font-size: 2.2em;
   display: none;
   max-width: 130px;
 }
