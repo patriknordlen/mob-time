@@ -387,21 +387,7 @@ function stop() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.startMobTurn = startMobTurn;
 exports.passTimeLeftTo = passTimeLeftTo;
-
-function startMobTurn(duration, callBack) {
-  var xhttp = new XMLHttpRequest();
-
-  xhttp.onreadystatechange = function () {
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      callBack(JSON.parse(this.responseText));
-    }
-  };
-
-  xhttp.open("POST", "/start?lengthInMinutes=" + duration.minutes, true);
-  xhttp.send();
-}
 
 function passTimeLeftTo(callback) {
   var xhttp = new XMLHttpRequest();

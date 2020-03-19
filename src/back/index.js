@@ -13,16 +13,6 @@ app.get("/", function (req, res) {
     res.render("index");
 });
 
-app.post("/start", function (req, res) {
-    currentTurn = mobTurns.start(parseInt(req.query.lengthInMinutes));
-    res.json(currentTurn.getState());
-});
-
-app.post("/stop", function (req, res) {
-    currentTurn = mobTurns.stop();
-    res.json(currentTurn.getState());
-});
-
 app.get("/status", function (req, res) {
     res.json(currentTurn.getState());
 });
