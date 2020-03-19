@@ -287,7 +287,7 @@ var mobTimer = require("./spi/mobTimer");
 
 var eventsModule = require("./events");
 
-var mobName = "currentTurn";
+var mobName = window.location.pathname.split("/")[1];
 var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
 mobTimer.timeLeftIn(mobName, update);

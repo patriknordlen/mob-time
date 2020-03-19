@@ -8,6 +8,10 @@ const fs = require("fs");
 const path = require("path");
 
 app.get("/", function (req, res) {
+    res.redirect("/currentTurn");
+});
+
+app.get("/:mob", function (req, res) {
     res.render("index");
 });
 

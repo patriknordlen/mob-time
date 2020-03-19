@@ -5,7 +5,7 @@ const amplitude = require("./amplitude,").get();
 const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
 
-const mobName = "currentTurn";
+const mobName = window.location.pathname.split("/")[1];
 const durationByPerson = document.getElementById("minutes-by-person");
 let mobInProgress = false;
 mobTimer.timeLeftIn(mobName, update);
