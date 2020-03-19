@@ -2,24 +2,24 @@ const MobTurn = require("./MobTurn");
 const Mob = require("./Mob");
 const store = process.env.REDIS_URL === undefined ? require("./storages/local_storage") : require("./storages/redis");
 
-exports.currentTurn = async function () {
-    let json = await store.get('currentTurn');
+exports.get = async name => {
+    let json = await store.get(name);
     if (json != null) {
         let data = JSON.parse(json);
         let mobTurn = new MobTurn(data.lengthInSeconds, new Date(data.startTime));
         return new Mob(mobTurn);
     }
     let currentTurn = new MobTurn();
-    store.save('currentTurn', JSON.stringify(currentTurn));
+    store.save(name, JSON.stringify(currentTurn));
     return new Mob(currentTurn);
 };
-exports.start = function (lengthInMinutes) {
+exports.start = (name, lengthInMinutes) => {
     let mobTurn = new MobTurn(lengthInMinutes * 60);
-    store.save('currentTurn', JSON.stringify(mobTurn));
+    store.save(name, JSON.stringify(mobTurn));
     return new Mob(mobTurn);
 };
-exports.stop = function () {
+exports.stop = name => {
     let currentTurn = new MobTurn();
-    store.save('currentTurn', JSON.stringify(currentTurn));
+    store.save(name, JSON.stringify(currentTurn));
     return new Mob(currentTurn);
 };

@@ -22,13 +22,13 @@ io.on('connection', function(socket){
 
     socket.on('interrupt mob', () => {
         console.log('Mob interrupted');
-        currentTurn = mobTurns.stop();
+        currentTurn = mobTurns.stop('currentTurn');
         socket.emit('interrupt mob');
     });
 
     socket.on('start mob', lengthInMinutes => {
         console.log('Mob of length ' + lengthInMinutes + "min started");
-        currentTurn = mobTurns.start(parseInt(lengthInMinutes));
+        currentTurn = mobTurns.start('currentTurn', parseInt(lengthInMinutes));
     });
 });
 
@@ -36,7 +36,7 @@ app.use(express.static('src/front'));
 app.set('views', path.join(__dirname, '../front'));
 app.set('view engine', 'pug');
 
-mobTurns.currentTurn().then(mobTurn => {
+mobTurns.get("currentTurn").then(mobTurn => {
     currentTurn = mobTurn;
     http.listen(PORT, () => console.log(`Server started on http://0.0.0.0:${PORT}`));
 });
