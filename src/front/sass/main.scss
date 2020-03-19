@@ -103,17 +103,6 @@ h1 {
   }
 }
 
-#minutes-by-person {
-  font-size: 1em;
-  width: 3em;
-  margin-right: 10px;
-  border-radius: 0;
-  border: solid 1px #ccc;
-  background: none;
-  padding: 2px 5px;
-  color: white;
-}
-
 button#start-pause {
   border: solid 1px #ccc;
   color: $color;
@@ -266,6 +255,7 @@ Settings
   padding: 0 20px;
   box-sizing: border-box;
   overflow: hidden;
+  font-size: 1.2em;
 
   fieldset {
     padding: 0;
@@ -274,6 +264,17 @@ Settings
 
     input[type="checkbox"] {
       margin-right: 10px;
+    }
+
+    #minutes-by-person {
+      font-size: 1em;
+      width: 3em;
+      margin-right: 10px;
+      border-radius: 0;
+      border: solid 1px #ccc;
+      background: none;
+      padding: 2px 0px 2px 5px;
+      color: white;
     }
   }
 }
