@@ -3,17 +3,18 @@
   font-size: 89px;
   width: 433px;
   margin-left: 0;
+  font-weight: normal;
 }
-/* line 8, ../sass/home.scss */
+/* line 9, ../sass/home.scss */
 #home #mob {
   font-weight: normal;
   font-size: 22px;
 }
-/* line 11, ../sass/home.scss */
+/* line 13, ../sass/home.scss */
 #home #mob #name {
   width: 355px;
 }
-/* line 14, ../sass/home.scss */
+/* line 17, ../sass/home.scss */
 #home #mob #submit {
   margin: 0 0 0 10px;
   padding: 2px;
