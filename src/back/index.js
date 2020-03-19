@@ -12,7 +12,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/:mob", function (req, res) {
-    res.render("index");
+    res.render("mob.pug");
 });
 
 app.get("/:mob/status", function (req, res) {
