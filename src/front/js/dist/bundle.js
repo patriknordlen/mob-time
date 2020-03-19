@@ -287,11 +287,12 @@ var mobTimer = require("./spi/mobTimer");
 
 var eventsModule = require("./events");
 
+var mobName = "currentTurn";
 var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
-mobTimer.passTimeLeftTo(update);
+mobTimer.timeLeftIn(mobName, update);
 setInterval(function () {
-  return mobTimer.passTimeLeftTo(update);
+  return mobTimer.timeLeftIn(mobName, update);
 }, 100);
 
 function update(timerStatus) {
@@ -317,7 +318,7 @@ document.forms.container.onsubmit = function (event) {
 
   if (mobInProgress) {
     amplitude.getInstance().logEvent('STOP_MOB');
-    socket.emit("interrupt mob");
+    socket.emit("interrupt mob", mobName);
     return;
   }
 
@@ -327,7 +328,7 @@ document.forms.container.onsubmit = function (event) {
     return;
   }
 
-  socket.emit("start mob", durationByPerson.value);
+  socket.emit("start mob", mobName, durationByPerson.value);
   amplitude.getInstance().logEvent('START_MOB');
 };
 
@@ -387,9 +388,9 @@ function stop() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.passTimeLeftTo = passTimeLeftTo;
+exports.timeLeftIn = timeLeftIn;
 
-function passTimeLeftTo(callback) {
+function timeLeftIn(name, callback) {
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
@@ -398,7 +399,7 @@ function passTimeLeftTo(callback) {
     }
   };
 
-  xhttp.open("GET", "/status", true);
+  xhttp.open("GET", "/" + name + "/status", true);
   xhttp.send();
 }
 
