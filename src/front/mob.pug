@@ -4,8 +4,8 @@ head
     title Mob Time !
     link(rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css')
     link(href='https://fonts.googleapis.com/css?family=Fredericka+the+Great|Bangers|Righteous|Henny+Penny|Raleway&display=swap' rel='stylesheet')
-    link(rel='stylesheet' type='text/css' href='stylesheets/main.css')
-    link(rel='icon' type='image/png' href='image/favicon.png')
+    link(rel='stylesheet' type='text/css' href='/stylesheets/main.css')
+    link(rel='icon' type='image/png' href='/image/favicon.png')
 main#panel
     nav
         button.settings-button &#x2699;
@@ -19,6 +19,17 @@ main#panel
                     circle#countdown-circle(r='93' cx='100' cy='100')
         section#title
             h1 Mob Time
+            //ul#members
+            //    li#driver
+            //        i(class="fas fa-dharmachakra")
+            //        | Hadrien
+            //    li#navigator
+            //        i(class="fas fa-drafting-compass")
+            //        | Thomas
+            //    li#mobbers
+            //        i(class="fas fa-user-secret")
+            //        | Samy, Aurélien
+
 section#settings
     h2 Settings
     fieldset
@@ -42,8 +53,10 @@ section#settings
             | https://www.myinstants.com/media/sounds/-fort-boyard-audio-cutter.mp3
             | https://www.myinstants.com/media/sounds/poudreperlinpinpin.mp3
             | https://www.myinstants.com/media/sounds/the-sound-of-silence.mp3
+
 audio#alarm-sound
     source(type='audio/mpeg' src='')
+
 script(src='https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js')
 script(src='https://kit.fontawesome.com/36321d34e2.js')
 script(type='application/javascript' src='/socket.io/socket.io.js')

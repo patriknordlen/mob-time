@@ -1,5 +1,6 @@
 @import "compass";
 @import "slideout";
+
 $color: #707070;
 $color-counting: #00b400;
 $space: 15px;
@@ -32,8 +33,39 @@ body {
     margin: $space/2;
   }
 
-  fieldset {
+  #title {
+    margin: 0 0 0 22px;
+    width: 275px;
+
+    h1 {
+      margin: 0;
+    }
+
+    ul#members {
+      text-align: left;
+      padding: 0;
+      margin: 10px 0;
+
+      li {
+        list-style-type: none;
+
+        &#mobbers {
+          color: $color;
+          margin: 10px 0;
+        }
+
+        &#driver, &#navigator {
+          display: inline-block;
+          width: 50%;
+        }
+
+        i {
+          margin-right: 10px;
+        }
+      }
+    }
   }
+
 }
 
 #start-pause, h1 {
@@ -42,6 +74,7 @@ body {
   display: block;
   text-align: center;
 }
+
 h1 {
   font-size: 55px;
   color: $color;
@@ -51,7 +84,6 @@ h1 {
   border-color: $color;
   font-family: 'Fredericka the Great', cursive;
   font-weight: bold;
-  margin: 0 0 0 22px;
 
   #container.counting & {
     color: $color-counting;
@@ -95,6 +127,7 @@ button#start-pause {
     font-size: 5em;
     display: inline-block;
   }
+
   #time-left {
     font-size: 2.8em;
     display: none;
@@ -107,6 +140,7 @@ button#start-pause {
     #control-icons {
       display: none;
     }
+
     #time-left {
       display: inline-block;
     }
@@ -115,6 +149,7 @@ button#start-pause {
       #control-icons {
         display: inline-block;
       }
+
       #time-left {
         display: none;
       }
@@ -124,6 +159,7 @@ button#start-pause {
   &:focus {
     outline: none;
   }
+
   &::-moz-focus-inner {
     border: 0;
   }
@@ -132,9 +168,10 @@ button#start-pause {
 label[for="alarm-url"] {
   padding-right: 10px;
 }
+
 #alarm-url {
-    width: 363px;
-    height: 228px;
+  width: 363px;
+  height: 228px;
 }
 
 /*
