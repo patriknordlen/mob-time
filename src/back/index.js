@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 
 app.get("/", function (req, res) {
-    res.redirect("/currentTurn");
+    res.render("home.pug");
 });
 
 app.get("/:mob", function (req, res) {

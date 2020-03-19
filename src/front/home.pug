@@ -1,0 +1,24 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    title Mob Time !
+    link(rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css')
+    link(href='https://fonts.googleapis.com/css?family=Righteous&display=swap' rel='stylesheet')
+    link(rel='stylesheet' type='text/css' href='stylesheets/main.css')
+    link(rel='stylesheet' type='text/css' href='stylesheets/home.css')
+    link(rel='icon' type='image/png' href='image/favicon.png')
+main#home
+    div#container
+        img(src='/image/mob.png')
+        section#title
+            h1 Mob Time
+        form#mob(name='mob')
+            p What mob do you wish to join ?
+            input#name(
+                name='name' type='text'
+                placeholder='Name (like my-team)'
+                required='true' maxlength='20')
+            button#submit(type='submit') Join
+
+script(src='https://kit.fontawesome.com/36321d34e2.js')
+script(src='js/dev/home.js')
