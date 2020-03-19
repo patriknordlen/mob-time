@@ -11,7 +11,7 @@ $countdown-circle-background-color-on: #a6dea1;
 
 body {
   text-align: center;
-  font-family: Righteous, sans-serif;
+  font-family: Raleway, sans-serif;
   margin: 0;
 }
 
@@ -20,7 +20,7 @@ body {
   //margin-right: $settings-width;
   font-size: 1.1em;
   display: inline-block;
-  max-width: 450px;
+  max-width: 550px;
 
   #container.counting & {
     color: $color-counting;
@@ -37,19 +37,23 @@ body {
 }
 
 #start-pause, h1 {
-  width: 200px;
+  width: 275px;
   box-sizing: border-box;
   display: block;
   text-align: center;
 }
 h1 {
-  font-size: 42px;
+  font-size: 57px;
   color: $color;
   padding: $space 0 ($space - $font-excess-bottom-padding);
   border-top: 4px solid;
   border-bottom: 4px solid;
   border-color: $color;
   margin: 0;
+  font-family: 'Fredericka the Great', cursive;
+  font-weight: normal;
+  margin-left: 22px;
+
   #container.counting & {
     color: $color-counting;
     border-color: $color-counting;

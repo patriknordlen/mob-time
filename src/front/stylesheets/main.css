@@ -46,7 +46,7 @@
 /* line 12, ../sass/main.scss */
 body {
   text-align: center;
-  font-family: Righteous, sans-serif;
+  font-family: Raleway, sans-serif;
   margin: 0;
 }
 
@@ -55,7 +55,7 @@ body {
   margin: 20px;
   font-size: 1.1em;
   display: inline-block;
-  max-width: 450px;
+  max-width: 550px;
 }
 /* line 25, ../sass/main.scss */
 #container.counting #container {
@@ -70,7 +70,7 @@ body {
 
 /* line 39, ../sass/main.scss */
 #start-pause, h1 {
-  width: 200px;
+  width: 275px;
   box-sizing: border-box;
   display: block;
   text-align: center;
@@ -78,26 +78,29 @@ body {
 
 /* line 45, ../sass/main.scss */
 h1 {
-  font-size: 42px;
+  font-size: 57px;
   color: #707070;
   padding: 15px 0 10px;
   border-top: 4px solid;
   border-bottom: 4px solid;
   border-color: #707070;
   margin: 0;
+  font-family: 'Fredericka the Great', cursive;
+  font-weight: normal;
+  margin-left: 22px;
 }
-/* line 53, ../sass/main.scss */
+/* line 57, ../sass/main.scss */
 #container.counting h1 {
   color: #00b400;
   border-color: #00b400;
 }
 
-/* line 59, ../sass/main.scss */
+/* line 63, ../sass/main.scss */
 #volume-container {
   width: 100%;
   margin: 10px 0;
 }
-/* line 63, ../sass/main.scss */
+/* line 67, ../sass/main.scss */
 #volume-container #volume {
   vertical-align: bottom;
   width: 171px;
@@ -105,7 +108,7 @@ h1 {
   display: inline-block;
 }
 
-/* line 71, ../sass/main.scss */
+/* line 75, ../sass/main.scss */
 #minutes-by-person {
   font-size: 1em;
   width: 3em;
@@ -117,7 +120,7 @@ h1 {
   color: white;
 }
 
-/* line 82, ../sass/main.scss */
+/* line 86, ../sass/main.scss */
 button#start-pause {
   border: solid 1px #ccc;
   color: #707070;
@@ -127,52 +130,52 @@ button#start-pause {
   cursor: pointer;
   outline: none;
 }
-/* line 91, ../sass/main.scss */
+/* line 95, ../sass/main.scss */
 button#start-pause #control-icons {
   font-size: 5em;
   display: inline-block;
 }
-/* line 95, ../sass/main.scss */
+/* line 99, ../sass/main.scss */
 button#start-pause #time-left {
   font-size: 2.8em;
   display: none;
   max-width: 130px;
 }
-/* line 101, ../sass/main.scss */
+/* line 105, ../sass/main.scss */
 #container.counting button#start-pause {
   color: #00b400;
 }
-/* line 104, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 #container.counting button#start-pause #control-icons {
   display: none;
 }
-/* line 107, ../sass/main.scss */
+/* line 111, ../sass/main.scss */
 #container.counting button#start-pause #time-left {
   display: inline-block;
 }
-/* line 112, ../sass/main.scss */
+/* line 116, ../sass/main.scss */
 #container.counting button#start-pause:hover #control-icons {
   display: inline-block;
 }
-/* line 115, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 #container.counting button#start-pause:hover #time-left {
   display: none;
 }
-/* line 121, ../sass/main.scss */
+/* line 125, ../sass/main.scss */
 button#start-pause:focus {
   outline: none;
 }
-/* line 124, ../sass/main.scss */
+/* line 128, ../sass/main.scss */
 button#start-pause::-moz-focus-inner {
   border: 0;
 }
 
-/* line 129, ../sass/main.scss */
+/* line 133, ../sass/main.scss */
 label[for="alarm-url"] {
   padding-right: 10px;
 }
 
-/* line 132, ../sass/main.scss */
+/* line 136, ../sass/main.scss */
 #alarm-url {
   width: 363px;
   height: 228px;
@@ -183,7 +186,7 @@ label[for="alarm-url"] {
 Round clock
 ============================================
  */
-/* line 154, ../sass/main.scss */
+/* line 158, ../sass/main.scss */
 #countdown {
   position: relative;
   margin: auto;
@@ -195,7 +198,7 @@ Round clock
   border: solid 1px #ccc;
 }
 
-/* line 165, ../sass/main.scss */
+/* line 169, ../sass/main.scss */
 #start-pause {
   display: inline-block;
   background: white;
@@ -205,7 +208,7 @@ Round clock
   margin-top: 14px;
 }
 
-/* line 174, ../sass/main.scss */
+/* line 178, ../sass/main.scss */
 svg {
   position: absolute;
   top: 0px;
@@ -215,7 +218,7 @@ svg {
   transform: rotateZ(-90deg);
 }
 
-/* line 183, ../sass/main.scss */
+/* line 187, ../sass/main.scss */
 svg circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
@@ -223,7 +226,7 @@ svg circle {
   stroke: #707070;
   fill: none;
 }
-/* line 190, ../sass/main.scss */
+/* line 194, ../sass/main.scss */
 #container.counting svg circle {
   stroke: #00b400;
 }
@@ -233,14 +236,14 @@ svg circle {
 Settings
 ============================================
  */
-/* line 200, ../sass/main.scss */
+/* line 204, ../sass/main.scss */
 fieldset {
   padding: 0;
   border: none;
   margin-top: 7.5px;
 }
 
-/* line 206, ../sass/main.scss */
+/* line 210, ../sass/main.scss */
 #panel nav {
   position: absolute;
   top: 0;
@@ -251,7 +254,7 @@ fieldset {
   color: white;
   border-right: 1px solid #85807f;
 }
-/* line 216, ../sass/main.scss */
+/* line 220, ../sass/main.scss */
 #panel nav button {
   border: none;
   border-bottom: 1px solid white;
@@ -262,7 +265,7 @@ fieldset {
   cursor: pointer;
 }
 
-/* line 227, ../sass/main.scss */
+/* line 231, ../sass/main.scss */
 #settings {
   color: white;
   background: #666160;

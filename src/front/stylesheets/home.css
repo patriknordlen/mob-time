@@ -1,18 +1,19 @@
 /* line 2, ../sass/home.scss */
 #home h1 {
-  font-size: 95px;
+  font-size: 89px;
   width: 433px;
+  margin-left: 0;
 }
-/* line 7, ../sass/home.scss */
+/* line 8, ../sass/home.scss */
 #home #mob {
   font-weight: normal;
-  font-size: 29px;
+  font-size: 22px;
 }
-/* line 10, ../sass/home.scss */
+/* line 11, ../sass/home.scss */
 #home #mob #name {
-  width: 348px;
+  width: 355px;
 }
-/* line 13, ../sass/home.scss */
+/* line 14, ../sass/home.scss */
 #home #mob #submit {
   margin: 0 0 0 10px;
   padding: 2px;
