@@ -21,7 +21,7 @@ function update(timerStatus) {
 // Sockets
 // --------------------------------------------
 
-var socket = io();
+let socket = io();
 socket.on('interrupt mob', () => { console.log("Mob interrupted"); });
 
 // --------------------------------------------

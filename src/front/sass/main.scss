@@ -43,16 +43,15 @@ body {
   text-align: center;
 }
 h1 {
-  font-size: 57px;
+  font-size: 55px;
   color: $color;
   padding: $space 0 ($space - $font-excess-bottom-padding);
   border-top: 4px solid;
   border-bottom: 4px solid;
   border-color: $color;
-  margin: 0;
   font-family: 'Fredericka the Great', cursive;
-  font-weight: normal;
-  margin-left: 22px;
+  font-weight: bold;
+  margin: 0 0 0 22px;
 
   #container.counting & {
     color: $color-counting;
