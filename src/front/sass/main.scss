@@ -12,7 +12,7 @@ $countdown-circle-background-color-on: #a6dea1;
 
 body {
   text-align: center;
-  font-family: Raleway, sans-serif;
+  font-family: Quicksand, sans-serif;
   margin: 0;
 }
 
@@ -129,7 +129,7 @@ button#start-pause {
   }
 
   #time-left {
-    font-size: 2.2em;
+    font-size: 2.5em;
     display: none;
     max-width: 130px;
   }
@@ -237,11 +237,6 @@ svg circle {
 Settings
 ============================================
  */
-fieldset {
-  padding: 0;
-  border: none;
-  margin-top: $space/2;
-}
 
 #panel nav {
   position: absolute;
@@ -267,4 +262,18 @@ fieldset {
 #settings {
   color: white;
   background: $settings-color;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  fieldset {
+    padding: 0;
+    border: none;
+    margin-top: $space;
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  }
 }

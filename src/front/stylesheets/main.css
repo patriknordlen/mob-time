@@ -46,7 +46,7 @@
 /* line 13, ../sass/main.scss */
 body {
   text-align: center;
-  font-family: Raleway, sans-serif;
+  font-family: Quicksand, sans-serif;
   margin: 0;
 }
 
@@ -168,7 +168,7 @@ button#start-pause #control-icons {
 }
 /* line 131, ../sass/main.scss */
 button#start-pause #time-left {
-  font-size: 2.2em;
+  font-size: 2.5em;
   display: none;
   max-width: 130px;
 }
@@ -267,14 +267,7 @@ svg circle {
 Settings
 ============================================
  */
-/* line 240, ../sass/main.scss */
-fieldset {
-  padding: 0;
-  border: none;
-  margin-top: 7.5px;
-}
-
-/* line 246, ../sass/main.scss */
+/* line 241, ../sass/main.scss */
 #panel nav {
   position: absolute;
   top: 0;
@@ -285,7 +278,7 @@ fieldset {
   color: white;
   border-right: 1px solid #85807f;
 }
-/* line 256, ../sass/main.scss */
+/* line 251, ../sass/main.scss */
 #panel nav button {
   border: none;
   border-bottom: 1px solid white;
@@ -296,8 +289,22 @@ fieldset {
   cursor: pointer;
 }
 
-/* line 267, ../sass/main.scss */
+/* line 262, ../sass/main.scss */
 #settings {
   color: white;
   background: #666160;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+/* line 270, ../sass/main.scss */
+#settings fieldset {
+  padding: 0;
+  border: none;
+  margin-top: 15px;
+}
+/* line 275, ../sass/main.scss */
+#settings fieldset input[type="checkbox"] {
+  margin-right: 10px;
 }
