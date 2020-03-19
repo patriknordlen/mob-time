@@ -4,24 +4,12 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000;
 const mobTurns = require("./mob_turns");
-const fs = require("fs");
-const path = require("path");
 
-app.get("/", function (req, res) {
-    res.render("home.pug");
-});
-
-app.get("/index.html", function (req, res) {
-    res.redirect("/");
-});
-
-app.get("/:mob", function (req, res) {
-    res.render("mob.pug");
-});
-
-app.get("/:mob/status", function (req, res) {
-    mobTurns.get(req.params.mob).then(mob => res.json(mob.getState()));
-});
+app.get("/", (req, res) => res.render("home.pug"));
+app.get("/index.html", (req, res) => res.redirect("/"));
+app.get("/:mob", (req, res) => res.render("mob.pug"));
+app.get("/:mob/status", (req, res) => mobTurns.get(req.params.mob)
+                                              .then(mob => res.json(mob.getState())));
 
 io.on('connection', function (socket) {
     socket.on('interrupt mob', name => {
