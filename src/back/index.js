@@ -11,6 +11,10 @@ app.get("/", function (req, res) {
     res.render("home.pug");
 });
 
+app.get("/index.html", function (req, res) {
+    res.redirect("/");
+});
+
 app.get("/:mob", function (req, res) {
     res.render("mob.pug");
 });
