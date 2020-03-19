@@ -20,8 +20,6 @@ app.get("/:mob/status", function (req, res) {
 });
 
 io.on('connection', function (socket) {
-    console.log('a user connected');
-
     socket.on('interrupt mob', name => {
         console.log(`Mob "${name}" interrupted`);
         mobTurns.stop(name);
