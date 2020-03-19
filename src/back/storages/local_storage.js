@@ -3,9 +3,5 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage('./mobTurns');
 }
 
-exports.currentTurn = function (name, currentTurn) {
-    if (currentTurn === undefined) {
-        return localStorage.getItem(name);
-    }
-    localStorage.setItem(name, currentTurn);
-};
+exports.get = name => localStorage.getItem(name);
+exports.save = (name, turn) => localStorage.setItem(name, turn);

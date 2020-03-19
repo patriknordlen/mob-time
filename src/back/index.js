@@ -19,12 +19,14 @@ app.get("/status", function (req, res) {
 
 io.on('connection', function(socket){
     console.log('a user connected');
-    socket.on('interrupt mob', function(){
+
+    socket.on('interrupt mob', () => {
         console.log('Mob interrupted');
         currentTurn = mobTurns.stop();
         socket.emit('interrupt mob');
     });
-    socket.on('start mob', function(lengthInMinutes){
+
+    socket.on('start mob', lengthInMinutes => {
         console.log('Mob of length ' + lengthInMinutes + "min started");
         currentTurn = mobTurns.start(parseInt(lengthInMinutes));
     });

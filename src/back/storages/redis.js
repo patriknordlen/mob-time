@@ -9,10 +9,5 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-exports.currentTurn = async function (currentTurn) {
-    if (currentTurn === undefined || currentTurn === null) {
-        return await getAsync("currentTurn");
-    } else {
-        client.set("currentTurn", currentTurn, redis.print);
-    }
-};
+exports.get = async name => await getAsync(name);
+exports.save = (name, turn) => client.set(name, turn, redis.print);
