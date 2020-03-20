@@ -10,7 +10,7 @@
 #container {
   font-size: 1.1em;
   display: inline-block;
-  width: 460px;
+  width: 430px;
   padding: 54px 0 0;
   background: rgba(255, 255, 255, 0.8);
 
@@ -29,6 +29,37 @@
     }
   }
 
+  #members {
+    font-family: Roboto, sans-serif;
+    text-align: center;
+    padding: 0;
+
+    li.driver, li.navigator {
+      font-weight: bold;
+      font-size: 1.5em;
+      width: 50%;
+    }
+    li.driver:before {
+      content: "D:";
+      margin-right: 5px;
+      font-weight: normal;
+    }
+    li.navigator:before {
+      content: "Ñ:";
+      margin-right: 5px;
+      font-weight: normal;
+    }
+    li {
+      display: inline-block;
+      list-style-type: none;
+      margin: 10px 0;
+      width: 33%;
+      i {
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+  }
 }
 
 h1 {

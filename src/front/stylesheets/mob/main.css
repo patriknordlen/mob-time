@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* line 1, ../../sass/mob/_slideout.scss */
 .slideout-menu {
   position: fixed;
@@ -83,7 +84,7 @@ fieldset {
 #container {
   font-size: 1.1em;
   display: inline-block;
-  width: 460px;
+  width: 430px;
   padding: 54px 0 0;
   background: rgba(255, 255, 255, 0.8);
 }
@@ -102,14 +103,50 @@ fieldset {
   width: 433px;
   font-weight: normal;
 }
+/* line 32, ../../sass/mob/main.scss */
+#container #members {
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  padding: 0;
+}
+/* line 37, ../../sass/mob/main.scss */
+#container #members li.driver, #container #members li.navigator {
+  font-weight: bold;
+  font-size: 1.5em;
+  width: 50%;
+}
+/* line 42, ../../sass/mob/main.scss */
+#container #members li.driver:before {
+  content: "D:";
+  margin-right: 5px;
+  font-weight: normal;
+}
+/* line 47, ../../sass/mob/main.scss */
+#container #members li.navigator:before {
+  content: "Ñ:";
+  margin-right: 5px;
+  font-weight: normal;
+}
+/* line 52, ../../sass/mob/main.scss */
+#container #members li {
+  display: inline-block;
+  list-style-type: none;
+  margin: 10px 0;
+  width: 33%;
+}
+/* line 57, ../../sass/mob/main.scss */
+#container #members li i {
+  display: inline-block;
+  margin-right: 10px;
+}
 
-/* line 35, ../../sass/mob/main.scss */
+/* line 66, ../../sass/mob/main.scss */
 #container.counting h1 {
   color: #00b400;
   border-color: #00b400;
 }
 
-/* line 41, ../../sass/mob/main.scss */
+/* line 72, ../../sass/mob/main.scss */
 #start-pause, h1 {
   box-sizing: border-box;
   display: block;
