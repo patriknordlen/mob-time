@@ -43,73 +43,14 @@
   display: block;
 }
 
-/* line 13, ../sass/main.scss */
+/* line 2, ../sass/_common.scss */
 body {
   text-align: center;
   font-family: Quicksand, sans-serif;
   margin: 0;
 }
 
-/* line 19, ../sass/main.scss */
-#container {
-  margin: 20px;
-  font-size: 1.1em;
-  display: inline-block;
-  max-width: 550px;
-}
-/* line 26, ../sass/main.scss */
-#container.counting #container {
-  color: #00b400;
-}
-/* line 30, ../sass/main.scss */
-#container section {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 7.5px;
-}
-/* line 36, ../sass/main.scss */
-#container #title {
-  margin: 0 0 0 22px;
-  width: 275px;
-}
-/* line 40, ../sass/main.scss */
-#container #title h1 {
-  margin: 0;
-}
-/* line 44, ../sass/main.scss */
-#container #title ul#members {
-  text-align: left;
-  padding: 0;
-  margin: 10px 0;
-}
-/* line 49, ../sass/main.scss */
-#container #title ul#members li {
-  list-style-type: none;
-}
-/* line 52, ../sass/main.scss */
-#container #title ul#members li#mobbers {
-  color: #707070;
-  margin: 10px 0;
-}
-/* line 57, ../sass/main.scss */
-#container #title ul#members li#driver, #container #title ul#members li#navigator {
-  display: inline-block;
-  width: 50%;
-}
-/* line 62, ../sass/main.scss */
-#container #title ul#members li i {
-  margin-right: 10px;
-}
-
-/* line 71, ../sass/main.scss */
-#start-pause, h1 {
-  width: 275px;
-  box-sizing: border-box;
-  display: block;
-  text-align: center;
-}
-
-/* line 78, ../sass/main.scss */
+/* line 7, ../sass/_common.scss */
 h1 {
   font-size: 55px;
   color: #707070;
@@ -119,14 +60,71 @@ h1 {
   border-color: #707070;
   font-family: 'Fredericka the Great', cursive;
   font-weight: bold;
+  margin: auto;
 }
-/* line 88, ../sass/main.scss */
+
+/* line 6, ../sass/main.scss */
+#container {
+  margin: 20px;
+  font-size: 1.1em;
+  display: inline-block;
+  max-width: 550px;
+}
+/* line 12, ../sass/main.scss */
+#container.counting #container {
+  color: #00b400;
+}
+/* line 16, ../sass/main.scss */
+#container section {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 7.5px;
+}
+/* line 22, ../sass/main.scss */
+#container #title {
+  margin: 0 0 0 22px;
+  width: 275px;
+}
+/* line 29, ../sass/main.scss */
+#container #title ul#members {
+  text-align: left;
+  padding: 0;
+  margin: 10px 0;
+}
+/* line 34, ../sass/main.scss */
+#container #title ul#members li {
+  list-style-type: none;
+}
+/* line 37, ../sass/main.scss */
+#container #title ul#members li#mobbers {
+  color: #707070;
+  margin: 10px 0;
+}
+/* line 42, ../sass/main.scss */
+#container #title ul#members li#driver, #container #title ul#members li#navigator {
+  display: inline-block;
+  width: 50%;
+}
+/* line 47, ../sass/main.scss */
+#container #title ul#members li i {
+  margin-right: 10px;
+}
+
+/* line 57, ../sass/main.scss */
 #container.counting h1 {
   color: #00b400;
   border-color: #00b400;
 }
 
-/* line 94, ../sass/main.scss */
+/* line 63, ../sass/main.scss */
+#start-pause, h1 {
+  width: 275px;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+}
+
+/* line 3, ../sass/_clock.scss */
 button#start-pause {
   border: solid 1px #ccc;
   color: #707070;
@@ -136,55 +134,44 @@ button#start-pause {
   cursor: pointer;
   outline: none;
 }
-/* line 103, ../sass/main.scss */
+/* line 12, ../sass/_clock.scss */
 button#start-pause #control-icons {
   font-size: 5em;
   display: inline-block;
 }
-/* line 108, ../sass/main.scss */
+/* line 17, ../sass/_clock.scss */
 button#start-pause #time-left {
   font-size: 2.5em;
   display: none;
   max-width: 130px;
 }
-/* line 114, ../sass/main.scss */
+/* line 23, ../sass/_clock.scss */
 #container.counting button#start-pause {
   color: #00b400;
 }
-/* line 117, ../sass/main.scss */
+/* line 26, ../sass/_clock.scss */
 #container.counting button#start-pause #control-icons {
   display: none;
 }
-/* line 121, ../sass/main.scss */
+/* line 30, ../sass/_clock.scss */
 #container.counting button#start-pause #time-left {
   display: inline-block;
 }
-/* line 126, ../sass/main.scss */
+/* line 35, ../sass/_clock.scss */
 #container.counting button#start-pause:hover #control-icons {
   display: inline-block;
 }
-/* line 130, ../sass/main.scss */
+/* line 39, ../sass/_clock.scss */
 #container.counting button#start-pause:hover #time-left {
   display: none;
 }
-/* line 136, ../sass/main.scss */
+/* line 45, ../sass/_clock.scss */
 button#start-pause:focus {
   outline: none;
 }
-/* line 140, ../sass/main.scss */
+/* line 49, ../sass/_clock.scss */
 button#start-pause::-moz-focus-inner {
   border: 0;
-}
-
-/* line 145, ../sass/main.scss */
-label[for="alarm-url"] {
-  padding-right: 10px;
-}
-
-/* line 149, ../sass/main.scss */
-#alarm-url {
-  width: 363px;
-  height: 228px;
 }
 
 /*
@@ -192,7 +179,7 @@ label[for="alarm-url"] {
 Round clock
 ============================================
  */
-/* line 18, ../sass/_roundClock.scss */
+/* line 20, ../sass/_disappearingCircle.scss */
 #countdown {
   position: relative;
   margin: auto;
@@ -204,7 +191,7 @@ Round clock
   border: solid 1px #ccc;
 }
 
-/* line 29, ../sass/_roundClock.scss */
+/* line 31, ../sass/_disappearingCircle.scss */
 #start-pause {
   display: inline-block;
   background: white;
@@ -214,7 +201,7 @@ Round clock
   margin-top: 14px;
 }
 
-/* line 38, ../sass/_roundClock.scss */
+/* line 40, ../sass/_disappearingCircle.scss */
 svg {
   position: absolute;
   top: 0px;
@@ -224,7 +211,7 @@ svg {
   transform: rotateZ(-90deg);
 }
 
-/* line 47, ../sass/_roundClock.scss */
+/* line 49, ../sass/_disappearingCircle.scss */
 svg circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
@@ -232,7 +219,7 @@ svg circle {
   stroke: #707070;
   fill: none;
 }
-/* line 54, ../sass/_roundClock.scss */
+/* line 56, ../sass/_disappearingCircle.scss */
 #container.counting svg circle {
   stroke: #00b400;
 }
@@ -242,7 +229,7 @@ svg circle {
 Settings
 ============================================
  */
-/* line 7, ../sass/_settings.scss */
+/* line 9, ../sass/_settings.scss */
 #panel nav {
   position: absolute;
   top: 0;
@@ -253,7 +240,7 @@ Settings
   color: white;
   border-right: 1px solid #85807f;
 }
-/* line 17, ../sass/_settings.scss */
+/* line 19, ../sass/_settings.scss */
 #panel nav button {
   border: none;
   border-bottom: 1px solid white;
@@ -264,7 +251,7 @@ Settings
   cursor: pointer;
 }
 
-/* line 28, ../sass/_settings.scss */
+/* line 30, ../sass/_settings.scss */
 #settings {
   color: white;
   background: #666160;
@@ -274,17 +261,17 @@ Settings
   overflow: hidden;
   font-size: 1.2em;
 }
-/* line 37, ../sass/_settings.scss */
+/* line 39, ../sass/_settings.scss */
 #settings fieldset {
   padding: 0;
   border: none;
   margin-top: 15px;
 }
-/* line 42, ../sass/_settings.scss */
+/* line 44, ../sass/_settings.scss */
 #settings fieldset input[type="checkbox"] {
   margin-right: 10px;
 }
-/* line 46, ../sass/_settings.scss */
+/* line 48, ../sass/_settings.scss */
 #settings fieldset #minutes-by-person {
   font-size: 1em;
   width: 3em;
@@ -295,15 +282,24 @@ Settings
   padding: 2px 0px 2px 5px;
   color: white;
 }
-/* line 58, ../sass/_settings.scss */
+/* line 60, ../sass/_settings.scss */
 #settings #volume-container {
   width: 100%;
   margin: 10px 0;
 }
-/* line 62, ../sass/_settings.scss */
+/* line 64, ../sass/_settings.scss */
 #settings #volume-container #volume {
   vertical-align: text-bottom;
   width: 171px;
   margin-left: 5px;
   display: inline-block;
+}
+/* line 72, ../sass/_settings.scss */
+#settings label[for="alarm-url"] {
+  padding-right: 10px;
+}
+/* line 76, ../sass/_settings.scss */
+#settings #alarm-url {
+  width: 363px;
+  height: 228px;
 }

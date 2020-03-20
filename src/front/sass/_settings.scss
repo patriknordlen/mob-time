@@ -1,3 +1,5 @@
+@import "variables";
+
 /*
 ============================================
 Settings
@@ -65,5 +67,14 @@ Settings
       margin-left: 5px;
       display: inline-block;
     }
+  }
+
+  label[for="alarm-url"] {
+    padding-right: 10px;
+  }
+
+  #alarm-url {
+    width: 363px;
+    height: 228px;
   }
 }

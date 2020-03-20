@@ -1,26 +1,46 @@
-/* line 2, ../sass/home.scss */
+/* line 2, ../sass/_common.scss */
+body {
+  text-align: center;
+  font-family: Quicksand, sans-serif;
+  margin: 0;
+}
+
+/* line 7, ../sass/_common.scss */
+h1 {
+  font-size: 55px;
+  color: #707070;
+  padding: 15px 0 10px;
+  border-top: 4px solid;
+  border-bottom: 4px solid;
+  border-color: #707070;
+  font-family: 'Fredericka the Great', cursive;
+  font-weight: bold;
+  margin: auto;
+}
+
+/* line 3, ../sass/home.scss */
 #home h1 {
   font-size: 89px;
   width: 433px;
   font-weight: normal;
 }
-/* line 8, ../sass/home.scss */
+/* line 9, ../sass/home.scss */
 #home #title {
   width: auto;
   margin-left: 0;
 }
-/* line 13, ../sass/home.scss */
+/* line 14, ../sass/home.scss */
 #home #mob {
   font-weight: normal;
   font-size: 22px;
 }
-/* line 17, ../sass/home.scss */
+/* line 18, ../sass/home.scss */
 #home #mob #name {
   width: 355px;
   padding: 2px 4px;
   border: 1px solid grey;
 }
-/* line 23, ../sass/home.scss */
+/* line 24, ../sass/home.scss */
 #home #mob #submit {
   margin: 0 0 0 10px;
   vertical-align: bottom;

@@ -1,0 +1,17 @@
+@import "variables";
+body {
+  text-align: center;
+  font-family: Quicksand, sans-serif;
+  margin: 0;
+}
+h1 {
+  font-size: 55px;
+  color: $color;
+  padding: $space 0 ($space - $font-excess-bottom-padding);
+  border-top: 4px solid;
+  border-bottom: 4px solid;
+  border-color: $color;
+  font-family: 'Fredericka the Great', cursive;
+  font-weight: bold;
+  margin: auto;
+}

@@ -1,24 +1,10 @@
 @import "compass";
 @import "slideout";
-
-$color: #707070;
-$color-counting: #00b400;
-$space: 15px;
-$font-excess-bottom-padding: 5px;
-$settings-width: 400px;
-$grey: #efefef;
-$settings-color: #666160;
-$countdown-circle-background-color-on: #a6dea1;
-
-body {
-  text-align: center;
-  font-family: Quicksand, sans-serif;
-  margin: 0;
-}
+@import "variables";
+@import "common";
 
 #container {
   margin: 20px;
-  //margin-right: $settings-width;
   font-size: 1.1em;
   display: inline-block;
   max-width: 550px;
@@ -38,7 +24,6 @@ body {
     width: 275px;
 
     h1 {
-      margin: 0;
     }
 
     ul#members {
@@ -68,6 +53,13 @@ body {
 
 }
 
+h1 {
+  #container.counting & {
+    color: $color-counting;
+    border-color: $color-counting;
+  }
+}
+
 #start-pause, h1 {
   width: 275px;
   box-sizing: border-box;
@@ -75,81 +67,6 @@ body {
   text-align: center;
 }
 
-h1 {
-  font-size: 55px;
-  color: $color;
-  padding: $space 0 ($space - $font-excess-bottom-padding);
-  border-top: 4px solid;
-  border-bottom: 4px solid;
-  border-color: $color;
-  font-family: 'Fredericka the Great', cursive;
-  font-weight: bold;
-
-  #container.counting & {
-    color: $color-counting;
-    border-color: $color-counting;
-  }
-}
-
-button#start-pause {
-  border: solid 1px #ccc;
-  color: $color;
-  position: relative;
-  z-index: 10;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-
-  #control-icons {
-    font-size: 5em;
-    display: inline-block;
-  }
-
-  #time-left {
-    font-size: 2.5em;
-    display: none;
-    max-width: 130px;
-  }
-
-  #container.counting & {
-    color: $color-counting;
-
-    #control-icons {
-      display: none;
-    }
-
-    #time-left {
-      display: inline-block;
-    }
-
-    &:hover {
-      #control-icons {
-        display: inline-block;
-      }
-
-      #time-left {
-        display: none;
-      }
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &::-moz-focus-inner {
-    border: 0;
-  }
-}
-
-label[for="alarm-url"] {
-  padding-right: 10px;
-}
-
-#alarm-url {
-  width: 363px;
-  height: 228px;
-}
-
-@import "roundClock";
+@import "clock";
+@import "disappearingCircle";
 @import "settings";
