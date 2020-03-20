@@ -63,6 +63,13 @@ h1 {
   margin: auto;
 }
 
+/* line 19, ../../sass/_common.scss */
+fieldset {
+  padding: 0;
+  border: none;
+  margin-top: 15px;
+}
+
 /* line 6, ../../sass/mob/main.scss */
 #container {
   margin: 20px;
@@ -261,17 +268,11 @@ Settings
   overflow: hidden;
   font-size: 1.2em;
 }
-/* line 39, ../../sass/mob/_settings.scss */
-#settings fieldset {
-  padding: 0;
-  border: none;
-  margin-top: 15px;
-}
-/* line 44, ../../sass/mob/_settings.scss */
+/* line 41, ../../sass/mob/_settings.scss */
 #settings fieldset input[type="checkbox"] {
   margin-right: 10px;
 }
-/* line 48, ../../sass/mob/_settings.scss */
+/* line 45, ../../sass/mob/_settings.scss */
 #settings fieldset #minutes-by-person {
   font-size: 1em;
   width: 3em;
@@ -282,23 +283,23 @@ Settings
   padding: 2px 0px 2px 5px;
   color: white;
 }
-/* line 60, ../../sass/mob/_settings.scss */
+/* line 57, ../../sass/mob/_settings.scss */
 #settings #volume-container {
   width: 100%;
   margin: 10px 0;
 }
-/* line 64, ../../sass/mob/_settings.scss */
+/* line 61, ../../sass/mob/_settings.scss */
 #settings #volume-container #volume {
   vertical-align: text-bottom;
   width: 171px;
   margin-left: 5px;
   display: inline-block;
 }
-/* line 72, ../../sass/mob/_settings.scss */
+/* line 69, ../../sass/mob/_settings.scss */
 #settings label[for="alarm-url"] {
   padding-right: 10px;
 }
-/* line 76, ../../sass/mob/_settings.scss */
+/* line 73, ../../sass/mob/_settings.scss */
 #settings #alarm-url {
   width: 363px;
   height: 228px;

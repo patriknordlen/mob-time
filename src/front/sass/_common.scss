@@ -11,7 +11,13 @@ h1 {
   border-top: 4px solid;
   border-bottom: 4px solid;
   border-color: $color;
-  font-family: 'Fredericka the Great', cursive;
+  @include displayFontFamily;
   font-weight: bold;
   margin: auto;
+}
+
+fieldset {
+  padding: 0;
+  border: none;
+  margin-top: $space;
 }

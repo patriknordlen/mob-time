@@ -13,19 +13,46 @@
 
   #mob {
     font-weight: normal;
-    font-size: 22px;
+    font-size: 17px;
+    width: 433px;
+    margin: 10px auto;
 
-    #name {
-      width: 355px;
+    fieldset {
+      text-align: left;
+      white-space: nowrap;
+      margin: 15px 0;
+    }
+    fieldset * {
+      display: inline-block;
+      width: 50%;
+      box-sizing: border-box;
+      white-space: normal;
+      vertical-align: middle;
+    }
+
+    label {
+      padding-right: 10px;
+    }
+
+    #mob-name, #nickname {
       padding: 2px 4px;
       border: 1px solid grey;
     }
 
     #submit {
-      margin: 0 0 0 10px;
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
       vertical-align: bottom;
-      padding: 2px 4px;
+      padding: 8px 4px;
       border: 1px solid grey;
+      font-weight: bold;
+      display: block;
+
+      i {
+        margin-right: 10px;
+        font-size: .8em;
+      }
     }
   }
 }

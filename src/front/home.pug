@@ -12,12 +12,15 @@ main#home
         section#title
             h1 Mob Time
         form#mob(name='mob')
-            p What mob do you wish to join ?
-            input#name(
-                name='name' type='text'
-                placeholder='Name (like my-team)'
-                required='true' maxlength='20')
-            button#submit(type='submit') Join
+            fieldset
+                label(for="mob-name") What's your mob&nbsp;?
+                input#mob-name(
+                    name='mob-name' type='text'
+                    placeholder='Mob Name'
+                    required='true' maxlength='20')
+            button#submit(type='submit')
+                i(class="fas fa-paper-plane")
+                | Join
 
 script(src='https://kit.fontawesome.com/36321d34e2.js')
 script(src='js/dev/home.js')

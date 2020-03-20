@@ -6,3 +6,7 @@ $settings-width: 400px;
 $grey: #efefef;
 $settings-color: #666160;
 $countdown-circle-background-color-on: #a6dea1;
+
+@mixin displayFontFamily {
+  font-family: 'Fredericka the Great', cursive;
+}

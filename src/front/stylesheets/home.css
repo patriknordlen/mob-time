@@ -18,6 +18,13 @@ h1 {
   margin: auto;
 }
 
+/* line 19, ../sass/_common.scss */
+fieldset {
+  padding: 0;
+  border: none;
+  margin-top: 15px;
+}
+
 /* line 3, ../sass/home.scss */
 #home h1 {
   font-size: 89px;
@@ -32,18 +39,46 @@ h1 {
 /* line 14, ../sass/home.scss */
 #home #mob {
   font-weight: normal;
-  font-size: 22px;
+  font-size: 17px;
+  width: 433px;
+  margin: 10px auto;
 }
-/* line 18, ../sass/home.scss */
-#home #mob #name {
-  width: 355px;
+/* line 20, ../sass/home.scss */
+#home #mob fieldset {
+  text-align: left;
+  white-space: nowrap;
+  margin: 15px 0;
+}
+/* line 25, ../sass/home.scss */
+#home #mob fieldset * {
+  display: inline-block;
+  width: 50%;
+  box-sizing: border-box;
+  white-space: normal;
+  vertical-align: middle;
+}
+/* line 33, ../sass/home.scss */
+#home #mob label {
+  padding-right: 10px;
+}
+/* line 37, ../sass/home.scss */
+#home #mob #mob-name, #home #mob #nickname {
   padding: 2px 4px;
   border: 1px solid grey;
 }
-/* line 24, ../sass/home.scss */
+/* line 42, ../sass/home.scss */
 #home #mob #submit {
-  margin: 0 0 0 10px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
   vertical-align: bottom;
-  padding: 2px 4px;
+  padding: 8px 4px;
   border: 1px solid grey;
+  font-weight: bold;
+  display: block;
+}
+/* line 52, ../sass/home.scss */
+#home #mob #submit i {
+  margin-right: 10px;
+  font-size: .8em;
 }
