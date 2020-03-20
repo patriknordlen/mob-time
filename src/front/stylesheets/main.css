@@ -127,19 +127,6 @@ h1 {
 }
 
 /* line 94, ../sass/main.scss */
-#volume-container {
-  width: 100%;
-  margin: 10px 0;
-}
-/* line 98, ../sass/main.scss */
-#volume-container #volume {
-  vertical-align: bottom;
-  width: 171px;
-  margin-left: 5px;
-  display: inline-block;
-}
-
-/* line 106, ../sass/main.scss */
 button#start-pause {
   border: solid 1px #ccc;
   color: #707070;
@@ -149,52 +136,52 @@ button#start-pause {
   cursor: pointer;
   outline: none;
 }
-/* line 115, ../sass/main.scss */
+/* line 103, ../sass/main.scss */
 button#start-pause #control-icons {
   font-size: 5em;
   display: inline-block;
 }
-/* line 120, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 button#start-pause #time-left {
   font-size: 2.5em;
   display: none;
   max-width: 130px;
 }
-/* line 126, ../sass/main.scss */
+/* line 114, ../sass/main.scss */
 #container.counting button#start-pause {
   color: #00b400;
 }
-/* line 129, ../sass/main.scss */
+/* line 117, ../sass/main.scss */
 #container.counting button#start-pause #control-icons {
   display: none;
 }
-/* line 133, ../sass/main.scss */
+/* line 121, ../sass/main.scss */
 #container.counting button#start-pause #time-left {
   display: inline-block;
 }
-/* line 138, ../sass/main.scss */
+/* line 126, ../sass/main.scss */
 #container.counting button#start-pause:hover #control-icons {
   display: inline-block;
 }
-/* line 142, ../sass/main.scss */
+/* line 130, ../sass/main.scss */
 #container.counting button#start-pause:hover #time-left {
   display: none;
 }
-/* line 148, ../sass/main.scss */
+/* line 136, ../sass/main.scss */
 button#start-pause:focus {
   outline: none;
 }
-/* line 152, ../sass/main.scss */
+/* line 140, ../sass/main.scss */
 button#start-pause::-moz-focus-inner {
   border: 0;
 }
 
-/* line 157, ../sass/main.scss */
+/* line 145, ../sass/main.scss */
 label[for="alarm-url"] {
   padding-right: 10px;
 }
 
-/* line 161, ../sass/main.scss */
+/* line 149, ../sass/main.scss */
 #alarm-url {
   width: 363px;
   height: 228px;
@@ -205,7 +192,7 @@ label[for="alarm-url"] {
 Round clock
 ============================================
  */
-/* line 183, ../sass/main.scss */
+/* line 18, ../sass/_roundClock.scss */
 #countdown {
   position: relative;
   margin: auto;
@@ -217,7 +204,7 @@ Round clock
   border: solid 1px #ccc;
 }
 
-/* line 194, ../sass/main.scss */
+/* line 29, ../sass/_roundClock.scss */
 #start-pause {
   display: inline-block;
   background: white;
@@ -227,7 +214,7 @@ Round clock
   margin-top: 14px;
 }
 
-/* line 203, ../sass/main.scss */
+/* line 38, ../sass/_roundClock.scss */
 svg {
   position: absolute;
   top: 0px;
@@ -237,7 +224,7 @@ svg {
   transform: rotateZ(-90deg);
 }
 
-/* line 212, ../sass/main.scss */
+/* line 47, ../sass/_roundClock.scss */
 svg circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
@@ -245,7 +232,7 @@ svg circle {
   stroke: #707070;
   fill: none;
 }
-/* line 219, ../sass/main.scss */
+/* line 54, ../sass/_roundClock.scss */
 #container.counting svg circle {
   stroke: #00b400;
 }
@@ -255,7 +242,7 @@ svg circle {
 Settings
 ============================================
  */
-/* line 230, ../sass/main.scss */
+/* line 7, ../sass/_settings.scss */
 #panel nav {
   position: absolute;
   top: 0;
@@ -266,7 +253,7 @@ Settings
   color: white;
   border-right: 1px solid #85807f;
 }
-/* line 240, ../sass/main.scss */
+/* line 17, ../sass/_settings.scss */
 #panel nav button {
   border: none;
   border-bottom: 1px solid white;
@@ -277,7 +264,7 @@ Settings
   cursor: pointer;
 }
 
-/* line 251, ../sass/main.scss */
+/* line 28, ../sass/_settings.scss */
 #settings {
   color: white;
   background: #666160;
@@ -287,17 +274,17 @@ Settings
   overflow: hidden;
   font-size: 1.2em;
 }
-/* line 260, ../sass/main.scss */
+/* line 37, ../sass/_settings.scss */
 #settings fieldset {
   padding: 0;
   border: none;
   margin-top: 15px;
 }
-/* line 265, ../sass/main.scss */
+/* line 42, ../sass/_settings.scss */
 #settings fieldset input[type="checkbox"] {
   margin-right: 10px;
 }
-/* line 269, ../sass/main.scss */
+/* line 46, ../sass/_settings.scss */
 #settings fieldset #minutes-by-person {
   font-size: 1em;
   width: 3em;
@@ -307,4 +294,16 @@ Settings
   background: none;
   padding: 2px 0px 2px 5px;
   color: white;
+}
+/* line 58, ../sass/_settings.scss */
+#settings #volume-container {
+  width: 100%;
+  margin: 10px 0;
+}
+/* line 62, ../sass/_settings.scss */
+#settings #volume-container #volume {
+  vertical-align: text-bottom;
+  width: 171px;
+  margin-left: 5px;
+  display: inline-block;
 }
