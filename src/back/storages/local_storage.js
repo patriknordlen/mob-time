@@ -5,3 +5,4 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 exports.get = name => localStorage.getItem(name);
 exports.save = (name, turn) => localStorage.setItem(name, turn);
+exports.delete = name => localStorage.removeItem(name);

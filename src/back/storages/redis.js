@@ -11,3 +11,4 @@ client.on("error", function (err) {
 
 exports.get = async name => await getAsync(name);
 exports.save = (name, turn) => client.set(name, turn, redis.print);
+exports.delete = name => client.del(name);

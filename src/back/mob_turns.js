@@ -11,4 +11,4 @@ exports.start = (name, lengthInMinutes) => {
     let mobTurn = new MobTurn(lengthInMinutes * 60);
     store.save(name, JSON.stringify(mobTurn));
 };
-exports.stop = name => store.save(name, JSON.stringify(new MobTurn()));
+exports.stop = name => store.delete(name);
