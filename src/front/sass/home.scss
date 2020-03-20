@@ -2,12 +2,12 @@
   h1 {
     font-size: 89px;
     width: 433px;
-    margin-left: 0;
     font-weight: normal;
   }
 
   #title {
     width: auto;
+    margin-left: 0;
   }
 
   #mob {
@@ -16,12 +16,15 @@
 
     #name {
       width: 355px;
+      padding: 2px 4px;
+      border: 1px solid grey;
     }
 
     #submit {
       margin: 0 0 0 10px;
-      padding: 2px;
       vertical-align: bottom;
+      padding: 2px 4px;
+      border: 1px solid grey;
     }
   }
 }

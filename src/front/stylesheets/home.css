@@ -2,12 +2,12 @@
 #home h1 {
   font-size: 89px;
   width: 433px;
-  margin-left: 0;
   font-weight: normal;
 }
-/* line 9, ../sass/home.scss */
+/* line 8, ../sass/home.scss */
 #home #title {
   width: auto;
+  margin-left: 0;
 }
 /* line 13, ../sass/home.scss */
 #home #mob {
@@ -17,10 +17,13 @@
 /* line 17, ../sass/home.scss */
 #home #mob #name {
   width: 355px;
+  padding: 2px 4px;
+  border: 1px solid grey;
 }
-/* line 21, ../sass/home.scss */
+/* line 23, ../sass/home.scss */
 #home #mob #submit {
   margin: 0 0 0 10px;
-  padding: 2px;
   vertical-align: bottom;
+  padding: 2px 4px;
+  border: 1px solid grey;
 }
