@@ -18,7 +18,13 @@ h1 {
   margin: auto;
 }
 
-/* line 19, ../sass/_common.scss */
+/* line 18, ../sass/_common.scss */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* line 22, ../sass/_common.scss */
 fieldset {
   padding: 0;
   border: none;
