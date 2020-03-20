@@ -1,14 +1,14 @@
 @import "common";
 #home {
-  h1 {
-    font-size: 89px;
-    width: 433px;
-    font-weight: normal;
-  }
-
   #title {
     width: auto;
     margin-left: 0;
+
+    h1 {
+      font-size: 89px;
+      width: 433px;
+      font-weight: normal;
+    }
   }
 
   #mob {

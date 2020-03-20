@@ -26,15 +26,15 @@ fieldset {
 }
 
 /* line 3, ../sass/home.scss */
-#home h1 {
-  font-size: 89px;
-  width: 433px;
-  font-weight: normal;
-}
-/* line 9, ../sass/home.scss */
 #home #title {
   width: auto;
   margin-left: 0;
+}
+/* line 7, ../sass/home.scss */
+#home #title h1 {
+  font-size: 89px;
+  width: 433px;
+  font-weight: normal;
 }
 /* line 14, ../sass/home.scss */
 #home #mob {

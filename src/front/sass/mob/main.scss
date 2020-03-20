@@ -3,51 +3,29 @@
 @import "../variables";
 @import "../common";
 
+#panel {
+  background: url("/image/mob.png") no-repeat center top white;
+}
+
 #container {
-  margin: 20px;
   font-size: 1.1em;
   display: inline-block;
-  max-width: 550px;
+  width: 460px;
+  padding: 54px 0 0;
+  background: rgba(255, 255, 255, 0.8);
 
   #container.counting & {
     color: $color-counting;
   }
 
-  section {
-    display: inline-block;
-    vertical-align: middle;
-    margin: $space/2;
-  }
-
   #title {
-    margin: 0 0 0 22px;
-    width: 275px;
+    width: auto;
+    margin: 41px 0 0;
 
     h1 {
-    }
-
-    ul#members {
-      text-align: left;
-      padding: 0;
-      margin: 10px 0;
-
-      li {
-        list-style-type: none;
-
-        &#mobbers {
-          color: $color;
-          margin: 10px 0;
-        }
-
-        &#driver, &#navigator {
-          display: inline-block;
-          width: 50%;
-        }
-
-        i {
-          margin-right: 10px;
-        }
-      }
+      font-size: 89px;
+      width: 433px;
+      font-weight: normal;
     }
   }
 
@@ -61,7 +39,6 @@ h1 {
 }
 
 #start-pause, h1 {
-  width: 275px;
   box-sizing: border-box;
   display: block;
   text-align: center;

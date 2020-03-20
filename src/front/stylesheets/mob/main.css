@@ -26,8 +26,6 @@
   position: relative;
   z-index: 1;
   will-change: transform;
-  background-color: #FFF;
-  /* A background-color is required */
   min-height: 100vh;
 }
 
@@ -71,61 +69,42 @@ fieldset {
 }
 
 /* line 6, ../../sass/mob/main.scss */
+#panel {
+  background: url("/image/mob.png") no-repeat center top white;
+}
+
+/* line 10, ../../sass/mob/main.scss */
 #container {
-  margin: 20px;
   font-size: 1.1em;
   display: inline-block;
-  max-width: 550px;
+  width: 460px;
+  padding: 54px 0 0;
+  background: rgba(255, 255, 255, 0.8);
 }
-/* line 12, ../../sass/mob/main.scss */
+/* line 17, ../../sass/mob/main.scss */
 #container.counting #container {
   color: #00b400;
 }
-/* line 16, ../../sass/mob/main.scss */
-#container section {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 7.5px;
-}
-/* line 22, ../../sass/mob/main.scss */
+/* line 21, ../../sass/mob/main.scss */
 #container #title {
-  margin: 0 0 0 22px;
-  width: 275px;
+  width: auto;
+  margin: 41px 0 0;
 }
-/* line 29, ../../sass/mob/main.scss */
-#container #title ul#members {
-  text-align: left;
-  padding: 0;
-  margin: 10px 0;
-}
-/* line 34, ../../sass/mob/main.scss */
-#container #title ul#members li {
-  list-style-type: none;
-}
-/* line 37, ../../sass/mob/main.scss */
-#container #title ul#members li#mobbers {
-  color: #707070;
-  margin: 10px 0;
-}
-/* line 42, ../../sass/mob/main.scss */
-#container #title ul#members li#driver, #container #title ul#members li#navigator {
-  display: inline-block;
-  width: 50%;
-}
-/* line 47, ../../sass/mob/main.scss */
-#container #title ul#members li i {
-  margin-right: 10px;
+/* line 25, ../../sass/mob/main.scss */
+#container #title h1 {
+  font-size: 89px;
+  width: 433px;
+  font-weight: normal;
 }
 
-/* line 57, ../../sass/mob/main.scss */
+/* line 35, ../../sass/mob/main.scss */
 #container.counting h1 {
   color: #00b400;
   border-color: #00b400;
 }
 
-/* line 63, ../../sass/mob/main.scss */
+/* line 41, ../../sass/mob/main.scss */
 #start-pause, h1 {
-  width: 275px;
   box-sizing: border-box;
   display: block;
   text-align: center;
