@@ -1,4 +1,6 @@
 @import "common";
+@import "compass";
+
 #home {
   #title {
     width: auto;
@@ -48,6 +50,8 @@
       border: 1px solid grey;
       font-weight: bold;
       display: block;
+      background: repeating-linear-gradient(-45deg, #f8f8f8, #f8f8f8 20px, $grey 20px, $grey 40px);
+      cursor: pointer;
 
       i {
         margin-right: 10px;
