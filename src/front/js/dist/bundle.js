@@ -314,6 +314,7 @@ function update(timerStatus) {
 
 
 var socket = io();
+socket.emit("join", mobName);
 socket.on('interrupt mob', function () {
   console.log("Mob interrupted");
 });
@@ -346,7 +347,7 @@ document.forms.container.onsubmit = function (event) {
 };
 
 document.getElementById("minutes-by-person").onchange = function () {
-  socket.emit("change length", this.value);
+  socket.emit("change length", mobName, this.value);
 };
 
 },{"./amplitude,":1,"./display/countDownMode":2,"./display/display":3,"./events":5,"./sound":8,"./spi/mobTimer":9}],8:[function(require,module,exports){

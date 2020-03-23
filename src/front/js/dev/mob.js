@@ -22,6 +22,7 @@ function update(timerStatus) {
 // --------------------------------------------
 
 let socket = io();
+socket.emit("join", mobName);
 socket.on('interrupt mob', () => { console.log("Mob interrupted"); });
 socket.on('change length', length => document.getElementById("minutes-by-person").value = length);
 // --------------------------------------------
@@ -46,5 +47,5 @@ document.forms.container.onsubmit = function (event) {
 };
 
 document.getElementById("minutes-by-person").onchange = function () {
-    socket.emit("change length", this.value);
+    socket.emit("change length", mobName, this.value);
 };

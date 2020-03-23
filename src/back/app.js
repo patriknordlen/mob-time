@@ -13,6 +13,8 @@ app.get("/:mob/status", (req, res) => mobTurns.get(req.params.mob)
                                               .then(mob => res.json(mob.getState())));
 
 io.on('connection', function (socket) {
+    socket.on('join', name => socket.join(name));
+
     socket.on('interrupt mob', name => {
         console.log(`Mob "${name}" interrupted`);
         mobTurns.stop(name);
@@ -23,7 +25,7 @@ io.on('connection', function (socket) {
         mobTurns.start(name, parseInt(lengthInMinutes));
     });
 
-    socket.on('change length', lengthInMinutes => socket.broadcast.emit('change length', lengthInMinutes));
+    socket.on('change length', (mobName, lengthInMinutes) => socket.to(mobName).emit('change length', lengthInMinutes));
 });
 
 app.use(express.static('src/front'));
