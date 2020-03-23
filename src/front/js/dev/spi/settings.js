@@ -7,6 +7,15 @@ export function volume() {
         return 100;
 }
 
+const inMilliseconds = year => year * 365 * 24 * 60 * 60 * 1000;
+
+function expirationDate() {
+    const date = new Date();
+    date.setTime(date.getTime() + inMilliseconds(1));
+    return date;
+}
+
 export function saveVolume(value) {
-    document.cookie = "mobTimeVolume=" + value;
+    const date = expirationDate();
+    document.cookie = `mobTimeVolume=${value}; expires=${date.toUTCString()}`;
 }

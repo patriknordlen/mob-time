@@ -422,8 +422,19 @@ function volume() {
   if (volume) return volume;else return 100;
 }
 
+var inMilliseconds = function inMilliseconds(year) {
+  return year * 365 * 24 * 60 * 60 * 1000;
+};
+
+function expirationDate() {
+  var date = new Date();
+  date.setTime(date.getTime() + inMilliseconds(1));
+  return date;
+}
+
 function saveVolume(value) {
-  document.cookie = "mobTimeVolume=" + value;
+  var date = expirationDate();
+  document.cookie = "mobTimeVolume=".concat(value, "; expires=").concat(date.toUTCString());
 }
 
 },{}]},{},[7]);
