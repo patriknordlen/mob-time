@@ -426,15 +426,12 @@ var inMilliseconds = function inMilliseconds(year) {
   return year * 365 * 24 * 60 * 60 * 1000;
 };
 
-function expirationDate() {
-  var date = new Date();
-  date.setTime(date.getTime() + inMilliseconds(1));
-  return date;
-}
+var expirationDate = function expirationDate() {
+  return new Date(new Date().getTime() + inMilliseconds(1));
+};
 
 function saveVolume(value) {
-  var date = expirationDate();
-  document.cookie = "mobTimeVolume=".concat(value, "; expires=").concat(date.toUTCString());
+  document.cookie = "mobTimeVolume=".concat(value, "; expires=").concat(expirationDate().toUTCString());
 }
 
 },{}]},{},[7]);
