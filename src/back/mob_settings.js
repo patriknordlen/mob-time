@@ -4,8 +4,8 @@ exports.saveLength = function(name, lengthInMinutes) {
     store.save(toSettingsName(name), lengthInMinutes);
 };
 
-exports.getLength = function(name) {
-    return store.get(toSettingsName(name)) || 10;
+exports.getLength = async function (name) {
+    return await store.get(toSettingsName(name)) || 10;
 };
 
 function toSettingsName(name) {
