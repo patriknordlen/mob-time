@@ -4,6 +4,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000;
 const mobTurns = require("./mob_turns");
+const mobSettings = require("./mob_settings");
 const path = require("path");
 
 app.get("/", (req, res) => res.render("home.pug"));
@@ -25,7 +26,10 @@ io.on('connection', function (socket) {
         mobTurns.start(name, parseInt(lengthInMinutes));
     });
 
-    socket.on('change length', (mobName, lengthInMinutes) => socket.to(mobName).emit('change length', lengthInMinutes));
+    socket.on('change length', (mobName, lengthInMinutes) => {
+        mobSettings.saveLength(mobName, lengthInMinutes);
+        socket.to(mobName).emit('change length', lengthInMinutes);
+    });
 });
 
 app.use(express.static('src/front'));
