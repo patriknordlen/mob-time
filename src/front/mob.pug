@@ -2,8 +2,8 @@ doctype html
 head
     meta(charset='UTF-8')
     title Mob Time !
-    link(rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css')
-    link(href='https://fonts.googleapis.com/css?family=Fredericka+the+Great|Oswald|Oswald:600|Oswald:700|Roboto&display=swap' rel='stylesheet')
+    link(rel='stylesheet' type='text/css' href='/stylesheets/normalize.css')
+    link(href='/stylesheets/google-fonts.css' rel='stylesheet')
     link(rel='stylesheet' type='text/css' href='/stylesheets/mob/main.css')
     link(rel='icon' type='image/png' href='/image/favicon.png')
 main#panel
@@ -54,8 +54,8 @@ section#settings
 audio#alarm-sound
     source(type='audio/mpeg' src='')
 
-script(src='https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js')
-script(src='https://kit.fontawesome.com/36321d34e2.js')
+script(src='/js/slideout.min.js')
+script(src='/js/fontawesome.js')
 script(type='application/javascript' src='/socket.io/socket.io.js')
 script(type='application/javascript' src='/js/dist/bundle.js')
 script(type='application/javascript').
