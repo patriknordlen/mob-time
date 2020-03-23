@@ -350,6 +350,14 @@ document.getElementById("minutes-by-person").onchange = function () {
   socket.emit("change length", mobName, this.value);
 };
 
+new ClipboardJS("#share-room", {
+  text: function text() {
+    return window.location.href;
+  }
+}).on('success', function () {
+  alert('A link to this mob has been copied in your clipboard');
+});
+
 },{"./amplitude,":1,"./display/countDownMode":2,"./display/display":3,"./events":5,"./sound":8,"./spi/mobTimer":9}],8:[function(require,module,exports){
 "use strict";
 

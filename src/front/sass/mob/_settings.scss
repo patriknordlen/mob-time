@@ -23,9 +23,9 @@ Settings
     border: none;
     border-bottom: 1px solid white;
     background: none;
-    font-size: 2em;
+    font-size: 1.3em;
     color: white;
-    padding: 0 7px 10px 7px;
+    padding: 10px 10px 12px 12px;
     cursor: pointer;
   }
 }
@@ -43,11 +43,11 @@ Settings
   h2 {
     margin: 38px 0 10px;
     border-bottom: 1px solid #a0a0a0;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
     font-size: 1.2em;
 
     &:first-child {
-      margin-top: 17px;
+      margin-top: 14px;
     }
 
     i {

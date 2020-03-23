@@ -8,7 +8,8 @@ head
     link(rel='icon' type='image/png' href='/image/favicon.png')
 main#panel
     nav
-        button.settings-button &#x2699;
+        button.settings-button
+            i(class="fas fa-cog")
     form#container(name='container')
         section
             #countdown
@@ -19,6 +20,9 @@ main#panel
                     circle#countdown-circle(r='93' cx='100' cy='100')
         section#title
             h1: a(href="/" title="Home") Mob Time
+            h2 You are in the #{mobName} mob
+                a(href="javascript:" id="share-room" title="Copy mob url to clipboard")
+                    i(class="fas fa-link")
         ul#members
 
 section#settings
@@ -57,6 +61,7 @@ audio#alarm-sound
 script(src='/js/slideout.min.js')
 script(src='/js/fontawesome.js')
 script(type='application/javascript' src='/socket.io/socket.io.js')
+script(type='application/javascript' src='https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js')
 script(type='application/javascript' src='/js/dist/bundle.js')
 script(type='application/javascript').
     var slideout = new Slideout({

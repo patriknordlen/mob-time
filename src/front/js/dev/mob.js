@@ -49,3 +49,9 @@ document.forms.container.onsubmit = function (event) {
 document.getElementById("minutes-by-person").onchange = function () {
     socket.emit("change length", mobName, this.value);
 };
+
+new ClipboardJS("#share-room", {
+    text: () => window.location.href
+}).on('success', () => {
+    alert('A link to this mob has been copied in your clipboard');
+});
