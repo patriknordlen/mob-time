@@ -347,15 +347,25 @@ var settings = require("./spi/settings");
 var events = require("./events").events;
 
 var alarm = document.getElementById("alarm-sound");
+var volume = document.getElementById("volume");
+var alarmUrl = document.getElementById("alarm-url");
 
 function init() {
-  var volume = document.getElementById("volume");
   volume.value = settings.volume();
   alarm.volume = toAudioVolume(volume.value);
+  var musics = settings.musics();
+
+  if (musics) {
+    alarmUrl.value = musics;
+  }
 
   volume.oninput = function () {
     alarm.volume = toAudioVolume(this.value);
     settings.saveVolume(this.value);
+  };
+
+  alarmUrl.onchange = function () {
+    settings.saveMusics(this.value);
   };
 }
 
@@ -363,7 +373,6 @@ document.addEventListener(events.TURN_ENDED, function () {
   document.getElementById("alarm-sound").play();
 });
 document.addEventListener(events.TURN_STARTED, function () {
-  var alarmUrl = document.getElementById("alarm-url");
   var sounds = alarmUrl.value.trim().split("\n");
   alarm.children[0].src = sounds[Math.floor(Math.random() * sounds.length)];
   alarm.load();
@@ -411,27 +420,51 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.volume = volume;
 exports.saveVolume = saveVolume;
+exports.musics = musics;
+exports.saveMusics = saveMusics;
 
 function volume() {
-  var _volumeCookie$;
-
-  var volumeCookie = document.cookie.split(";").filter(function (value) {
-    return value.match("mobTimeVolume");
-  });
-  var volume = (_volumeCookie$ = volumeCookie[0]) === null || _volumeCookie$ === void 0 ? void 0 : _volumeCookie$.split("=")[1];
+  var volume = get("mobTimeVolume");
   if (volume) return volume;else return 100;
 }
 
-var inMilliseconds = function inMilliseconds(year) {
-  return year * 365 * 24 * 60 * 60 * 1000;
-};
+function saveVolume(value) {
+  save("mobTimeVolume", value);
+}
+
+function musics() {
+  var musics = get("musics");
+
+  if (musics) {
+    return musics.replace(/\\n/g, "\n");
+  }
+
+  return null;
+}
+
+function saveMusics(value) {
+  save("musics", value.replace(/\n/g, "\\n"));
+}
+
+function get(key) {
+  var _volumeCookie$;
+
+  var volumeCookie = document.cookie.split(";").filter(function (value) {
+    return value.match(key);
+  });
+  return (_volumeCookie$ = volumeCookie[0]) === null || _volumeCookie$ === void 0 ? void 0 : _volumeCookie$.split("=")[1];
+}
+
+function save(key, value) {
+  document.cookie = "".concat(key, "=").concat(value, "; expires=").concat(expirationDate().toUTCString());
+}
 
 var expirationDate = function expirationDate() {
   return new Date(new Date().getTime() + inMilliseconds(1));
 };
 
-function saveVolume(value) {
-  document.cookie = "mobTimeVolume=".concat(value, "; expires=").concat(expirationDate().toUTCString());
-}
+var inMilliseconds = function inMilliseconds(year) {
+  return year * 365 * 24 * 60 * 60 * 1000;
+};
 
 },{}]},{},[7]);

@@ -1,15 +1,34 @@
 export function volume() {
-    const volumeCookie = document.cookie.split(";").filter(value => value.match("mobTimeVolume"));
-    const volume = volumeCookie[0]?.split("=")[1];
+    const volume = get("mobTimeVolume");
     if (volume)
         return volume;
     else
         return 100;
 }
 
-const inMilliseconds = year => year * 365 * 24 * 60 * 60 * 1000;
-const expirationDate = () => new Date(new Date().getTime() + inMilliseconds(1));
-
 export function saveVolume(value) {
-    document.cookie = `mobTimeVolume=${value}; expires=${expirationDate().toUTCString()}`;
+    save(`mobTimeVolume`, value);
 }
+
+export function musics() {
+    const musics = get("musics");
+    if (musics) {
+        return musics.replace(/\\n/g, "\n");
+    }
+    return null;
+}
+
+export function saveMusics(value) {
+    save("musics", value.replace(/\n/g, "\\n"));
+}
+
+function get(key) {
+    const volumeCookie = document.cookie.split(";").filter(value => value.match(key));
+    return volumeCookie[0]?.split("=")[1];
+}
+
+function save(key, value) {
+    document.cookie = `${key}=${value}; expires=${expirationDate().toUTCString()}`;
+}
+const expirationDate = () => new Date(new Date().getTime() + inMilliseconds(1));
+const inMilliseconds = year => year * 365 * 24 * 60 * 60 * 1000;
