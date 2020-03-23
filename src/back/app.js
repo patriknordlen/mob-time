@@ -23,6 +23,8 @@ io.on('connection', function (socket) {
         console.log(`Mob "${name}", of length ${lengthInMinutes}min started`);
         mobTurns.start(name, parseInt(lengthInMinutes));
     });
+
+    socket.on('change length', lengthInMinutes => socket.broadcast.emit('change length', lengthInMinutes));
 });
 
 app.use(express.static('src/front'));
