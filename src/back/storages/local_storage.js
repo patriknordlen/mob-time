@@ -1,6 +1,6 @@
 if (typeof localStorage === "undefined" || localStorage === null) {
     const LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./mobTurns');
+    localStorage = new LocalStorage('./mobs');
 }
 
 exports.get = name => localStorage.getItem(name);
