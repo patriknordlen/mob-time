@@ -16,7 +16,6 @@ io.on('connection', function (socket) {
     socket.on('interrupt mob', name => {
         console.log(`Mob "${name}" interrupted`);
         mobTurns.stop(name);
-        socket.emit('interrupt mob');
     });
 
     socket.on('start mob', (name, lengthInMinutes) => {
