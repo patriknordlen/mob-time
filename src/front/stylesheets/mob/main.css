@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* line 1, ../../sass/mob/_slideout.scss */
 .slideout-menu {
   position: fixed;
@@ -75,9 +74,14 @@ fieldset {
   margin-top: 15px;
 }
 
+/* line 27, ../../sass/_common.scss */
+#container {
+  margin-top: 20px;
+}
+
 /* line 6, ../../sass/mob/main.scss */
 #panel {
-  background: url("/image/mob.png") no-repeat center top white;
+  background: url("/image/mob.png") no-repeat center 20px white;
 }
 
 /* line 10, ../../sass/mob/main.scss */
@@ -123,7 +127,7 @@ fieldset {
 }
 /* line 47, ../../sass/mob/main.scss */
 #container #members li.navigator:before {
-  content: "Ñ:";
+  content: "N:";
   margin-right: 5px;
   font-weight: normal;
 }

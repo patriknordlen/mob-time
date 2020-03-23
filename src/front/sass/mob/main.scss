@@ -4,7 +4,7 @@
 @import "../common";
 
 #panel {
-  background: url("/image/mob.png") no-repeat center top white;
+  background: url("/image/mob.png") no-repeat center 20px white;
 }
 
 #container {
@@ -45,7 +45,7 @@
       font-weight: normal;
     }
     li.navigator:before {
-      content: "Ñ:";
+      content: "N:";
       margin-right: 5px;
       font-weight: normal;
     }
