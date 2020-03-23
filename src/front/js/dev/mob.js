@@ -28,6 +28,7 @@ socket.on('interrupt mob', () => { console.log("Mob interrupted"); });
 // Setup
 // --------------------------------------------
 sound.init();
+display.init();
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
     if (mobInProgress) {

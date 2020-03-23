@@ -22,6 +22,13 @@ export function saveMusics(value) {
     save("musics", value.replace(/\n/g, "\\n"));
 }
 
+export function displaySeconds() {
+    return get("displaySeconds") === "true";
+}
+export function saveDisplaySeconds(value) {
+    save("displaySeconds", value);
+}
+
 function get(key) {
     const volumeCookie = document.cookie.split(";").filter(value => value.match(key));
     return volumeCookie[0]?.split("=")[1];

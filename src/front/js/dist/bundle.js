@@ -125,12 +125,25 @@ function turnOff() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.init = init;
 exports.displayTimeLeft = displayTimeLeft;
 exports.appTitle = void 0;
 
 var human_readable = require("../functions/human_readable_time");
 
 var main_button = require("./mainButton");
+
+var settings = require("../spi/settings");
+
+var countingMode = document.getElementById("second-counting-mode");
+
+function init() {
+  countingMode.value = settings.displaySeconds();
+
+  countingMode.onchange = function () {
+    settings.saveDisplaySeconds(this.checked);
+  };
+}
 
 var appTitle = "Mob Time";
 exports.appTitle = appTitle;
@@ -146,14 +159,10 @@ function toPageTitle(time, timeFormatter) {
 }
 
 function timeFormatter() {
-  if (document.getElementById("second-counting-mode").checked) {
-    return human_readable.extended_format;
-  }
-
-  return human_readable.simple_format;
+  return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":6,"./mainButton":4}],4:[function(require,module,exports){
+},{"../functions/human_readable_time":6,"../spi/settings":10,"./mainButton":4}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -312,6 +321,7 @@ socket.on('interrupt mob', function () {
 // --------------------------------------------
 
 sound.init();
+display.init();
 
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
@@ -422,6 +432,8 @@ exports.volume = volume;
 exports.saveVolume = saveVolume;
 exports.musics = musics;
 exports.saveMusics = saveMusics;
+exports.displaySeconds = displaySeconds;
+exports.saveDisplaySeconds = saveDisplaySeconds;
 
 function volume() {
   var volume = get("mobTimeVolume");
@@ -444,6 +456,14 @@ function musics() {
 
 function saveMusics(value) {
   save("musics", value.replace(/\n/g, "\\n"));
+}
+
+function displaySeconds() {
+  return get("displaySeconds") === "true";
+}
+
+function saveDisplaySeconds(value) {
+  save("displaySeconds", value);
 }
 
 function get(key) {
