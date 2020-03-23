@@ -9,7 +9,11 @@ const path = require("path");
 
 app.get("/", (req, res) => res.render("home.pug"));
 app.get("/index.html", (req, res) => res.redirect("/"));
-app.get("/:mob", (req, res) => res.render("mob.pug"));
+app.get("/:mob", (req, res) => {
+    let length = mobSettings.getLength(req.params.mob);
+    console.log("This is the length !!! : ", length, " minutes.");
+    return res.render("mob.pug", {length: length});
+});
 app.get("/:mob/status", (req, res) => mobTurns.get(req.params.mob)
                                               .then(mob => res.json(mob.getState())));
 
