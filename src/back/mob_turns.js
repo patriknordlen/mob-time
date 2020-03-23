@@ -1,5 +1,5 @@
 const MobTurn = require("./MobTurn");
-const store = process.env.REDIS_URL === undefined ? require("./storages/local_storage") : require("./storages/redis");
+const store = require("./stores/stores").get();
 
 exports.get = async name => {
     let json = await store.get(toTurnName(name));

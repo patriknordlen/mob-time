@@ -1,4 +1,4 @@
-const store = process.env.REDIS_URL === undefined ? require("./storages/local_storage") : require("./storages/redis");
+const store = require("./stores/stores").get();
 
 exports.saveLength = function(name, lengthInMinutes) {
     store.save(toSettingsName(name), lengthInMinutes);
