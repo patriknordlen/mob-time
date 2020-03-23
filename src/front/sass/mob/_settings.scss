@@ -1,4 +1,7 @@
 @import "../variables";
+@import "../fontawesome/fontawesome.scss";
+@import "../fontawesome/solid.scss";
+@import "../fontawesome/brands.scss";
 
 /*
 ============================================
@@ -37,8 +40,24 @@ Settings
   font-size: 1.1em;
   font-family: Roboto, sans-serif;
 
-  fieldset {
+  h2 {
+    margin: 38px 0 10px;
+    border-bottom: 1px solid #a0a0a0;
+    padding-bottom: 5px;
+    font-size: 1.2em;
 
+    &:first-child {
+      margin-top: 17px;
+    }
+
+    i {
+      font-size: .9em;
+      float: right;
+    }
+  }
+
+  fieldset {
+    margin-top: 20px;
     input[type="checkbox"] {
       margin-right: 10px;
     }
@@ -57,7 +76,6 @@ Settings
 
   #volume-container {
     width: 100%;
-    margin: 10px 0;
 
     #volume {
       vertical-align: text-bottom;
