@@ -7,7 +7,7 @@
     "bundle": "watchify src/front/js/dev/mob.js -o src/front/js/dist/bundle.js",
     "start": "node src/back/index.js",
     "dev": "nodemon src/back/index.js",
-    "test": "mocha 'test/**/*.js' --reporter spec",
+    "test": "mocha 'src/back/spec/**/*.js' --reporter spec",
     "front-test": "mocha -r esm 'src/front/js/spec/**/*.js' --reporter spec"
   },
   "keywords": [],
