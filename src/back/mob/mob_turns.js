@@ -1,5 +1,5 @@
 const MobTurn = require("./MobTurn");
-const store = require("./stores/stores").get();
+const store = require("../stores/stores").get();
 
 exports.get = async name => {
     let json = await store.get(toTurnName(name));

@@ -1,4 +1,4 @@
-const store = require("./stores/stores").get();
+const store = require("../stores/stores").get();
 
 exports.saveLength = function(name, lengthInMinutes) {
     store.save(toSettingsName(name), lengthInMinutes);
