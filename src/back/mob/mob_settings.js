@@ -5,6 +5,9 @@ const defaultSettings = {
     lengthInMinutes: 10
 };
 
+// ---------------------------------------
+// Length
+// ---------------------------------------
 exports.saveLength = async function(name, lengthInMinutes) {
     let settings = {
         formatVersion: 1,
@@ -13,12 +16,13 @@ exports.saveLength = async function(name, lengthInMinutes) {
     await this.save(name, settings);
 };
 
-exports.save = async function(name, settings) {
-    await store.save(toSettingsName(name), JSON.stringify(settings));
-};
-
 exports.getLength = async function (name) {
     return this.get(name).then(value => value.lengthInMinutes);
+};
+// ---------------------------------------
+
+exports.save = async function(name, settings) {
+    await store.save(toSettingsName(name), JSON.stringify(settings));
 };
 
 exports.get = async function (name) {
