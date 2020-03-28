@@ -93,88 +93,78 @@ fieldset {
   background: rgba(255, 255, 255, 0.8);
 }
 /* line 17, ../../sass/mob/main.scss */
-#container.counting #container {
-  color: #00b400;
-}
-/* line 21, ../../sass/mob/main.scss */
 #container #title {
   width: auto;
   margin: 41px 0 0;
 }
-/* line 25, ../../sass/mob/main.scss */
+/* line 21, ../../sass/mob/main.scss */
 #container #title h1 {
   font-size: 89px;
   width: 433px;
   font-weight: normal;
 }
-/* line 30, ../../sass/mob/main.scss */
+/* line 26, ../../sass/mob/main.scss */
 #container #title h2 {
   font-weight: normal;
   text-align: left;
   font-size: 1.3em;
 }
-/* line 34, ../../sass/mob/main.scss */
+/* line 30, ../../sass/mob/main.scss */
 #container #title h2 em {
   font-weight: bold;
   font-style: normal;
 }
-/* line 38, ../../sass/mob/main.scss */
+/* line 34, ../../sass/mob/main.scss */
 #container #title h2 a {
   float: right;
   color: #707070;
 }
-/* line 41, ../../sass/mob/main.scss */
+/* line 37, ../../sass/mob/main.scss */
 #container #title h2 a:hover {
   color: black;
 }
-/* line 44, ../../sass/mob/main.scss */
+/* line 40, ../../sass/mob/main.scss */
 #container #title h2 a i {
   font-size: .9em;
 }
-/* line 51, ../../sass/mob/main.scss */
+/* line 47, ../../sass/mob/main.scss */
 #container #members {
   font-family: Roboto, sans-serif;
   text-align: center;
   padding: 0;
 }
-/* line 56, ../../sass/mob/main.scss */
+/* line 52, ../../sass/mob/main.scss */
 #container #members li.driver, #container #members li.navigator {
   font-weight: bold;
   font-size: 1.5em;
   width: 50%;
 }
-/* line 61, ../../sass/mob/main.scss */
+/* line 57, ../../sass/mob/main.scss */
 #container #members li.driver:before {
   content: "D:";
   margin-right: 5px;
   font-weight: normal;
 }
-/* line 66, ../../sass/mob/main.scss */
+/* line 62, ../../sass/mob/main.scss */
 #container #members li.navigator:before {
   content: "N:";
   margin-right: 5px;
   font-weight: normal;
 }
-/* line 71, ../../sass/mob/main.scss */
+/* line 67, ../../sass/mob/main.scss */
 #container #members li {
   display: inline-block;
   list-style-type: none;
   margin: 10px 0;
   width: 33%;
 }
-/* line 76, ../../sass/mob/main.scss */
+/* line 72, ../../sass/mob/main.scss */
 #container #members li i {
   display: inline-block;
   margin-right: 10px;
 }
 
-/* line 85, ../../sass/mob/main.scss */
-#container.counting h1 {
-  color: #00b400;
-  border-color: #00b400;
-}
-
-/* line 91, ../../sass/mob/main.scss */
+/* line 80, ../../sass/mob/main.scss */
 #start-pause, h1 {
   box-sizing: border-box;
   display: block;
@@ -183,7 +173,6 @@ fieldset {
 
 /* line 3, ../../sass/mob/_clock.scss */
 button#start-pause {
-  border: solid 1px #ccc;
   color: #707070;
   position: relative;
   z-index: 10;
@@ -191,42 +180,42 @@ button#start-pause {
   cursor: pointer;
   outline: none;
 }
-/* line 12, ../../sass/mob/_clock.scss */
+/* line 11, ../../sass/mob/_clock.scss */
 button#start-pause #control-icons {
   font-size: 5em;
   display: inline-block;
 }
-/* line 17, ../../sass/mob/_clock.scss */
+/* line 16, ../../sass/mob/_clock.scss */
 button#start-pause #time-left {
   font-size: 2.7em;
   display: none;
   max-width: 130px;
 }
-/* line 23, ../../sass/mob/_clock.scss */
+/* line 22, ../../sass/mob/_clock.scss */
 #container.counting button#start-pause {
   color: #00b400;
 }
-/* line 26, ../../sass/mob/_clock.scss */
+/* line 25, ../../sass/mob/_clock.scss */
 #container.counting button#start-pause #control-icons {
   display: none;
 }
-/* line 30, ../../sass/mob/_clock.scss */
+/* line 29, ../../sass/mob/_clock.scss */
 #container.counting button#start-pause #time-left {
   display: inline-block;
 }
-/* line 35, ../../sass/mob/_clock.scss */
+/* line 34, ../../sass/mob/_clock.scss */
 #container.counting button#start-pause:hover #control-icons {
   display: inline-block;
 }
-/* line 39, ../../sass/mob/_clock.scss */
+/* line 38, ../../sass/mob/_clock.scss */
 #container.counting button#start-pause:hover #time-left {
   display: none;
 }
-/* line 45, ../../sass/mob/_clock.scss */
+/* line 44, ../../sass/mob/_clock.scss */
 button#start-pause:focus {
   outline: none;
 }
-/* line 49, ../../sass/mob/_clock.scss */
+/* line 48, ../../sass/mob/_clock.scss */
 button#start-pause::-moz-focus-inner {
   border: 0;
 }
@@ -248,6 +237,7 @@ Round clock
 
 /* line 29, ../../sass/mob/_disappearingCircle.scss */
 #start-pause {
+  border: solid 2px #999;
   display: inline-block;
   background: rgba(255, 255, 255, 0.6);
   width: 172px;
@@ -259,7 +249,7 @@ Round clock
   box-sizing: border-box;
 }
 
-/* line 42, ../../sass/mob/_disappearingCircle.scss */
+/* line 43, ../../sass/mob/_disappearingCircle.scss */
 svg#countdown {
   position: absolute;
   top: 50%;
@@ -271,28 +261,28 @@ svg#countdown {
   border: solid 1px #ccc;
   box-sizing: border-box;
 }
-/* line 54, ../../sass/mob/_disappearingCircle.scss */
+/* line 55, ../../sass/mob/_disappearingCircle.scss */
 svg#countdown #countdown-circle, svg#countdown #countdown-circle-background {
   stroke-width: 14px;
   fill: none;
 }
-/* line 59, ../../sass/mob/_disappearingCircle.scss */
+/* line 60, ../../sass/mob/_disappearingCircle.scss */
 svg#countdown circle#countdown-circle-background {
   stroke: #a6dea1;
 }
-/* line 63, ../../sass/mob/_disappearingCircle.scss */
+/* line 64, ../../sass/mob/_disappearingCircle.scss */
 svg#countdown circle#countdown-circle {
   stroke-dasharray: 578.05305px;
   stroke: #707070;
   transition-property: stroke-dashoffset;
   transition-duration: 100ms;
 }
-/* line 70, ../../sass/mob/_disappearingCircle.scss */
+/* line 71, ../../sass/mob/_disappearingCircle.scss */
 #container.counting svg#countdown circle#countdown-circle {
   stroke: #00b400;
 }
 
-/* line 75, ../../sass/mob/_disappearingCircle.scss */
+/* line 76, ../../sass/mob/_disappearingCircle.scss */
 svg#pomodoro {
   position: absolute;
   top: 0px;
@@ -301,24 +291,22 @@ svg#pomodoro {
   height: 240px;
   transform: rotateZ(-90deg);
 }
-/* line 84, ../../sass/mob/_disappearingCircle.scss */
+/* line 85, ../../sass/mob/_disappearingCircle.scss */
 svg#pomodoro circle {
   fill: none;
+  stroke-width: 7px;
 }
-/* line 88, ../../sass/mob/_disappearingCircle.scss */
+/* line 90, ../../sass/mob/_disappearingCircle.scss */
 svg#pomodoro #pomodoro-background {
-  stroke-width: 15px;
   stroke: #ddd;
-  transition-property: stroke-dashoffset;
 }
 /* line 93, ../../sass/mob/_disappearingCircle.scss */
 svg#pomodoro circle#pomodoro-circle {
-  stroke-dasharray: 691.15038px;
-  stroke-width: 15px;
-  stroke: #707070;
+  stroke-dasharray: 647.16809px;
+  stroke: #999;
   transition-property: stroke-dashoffset;
 }
-/* line 100, ../../sass/mob/_disappearingCircle.scss */
+/* line 99, ../../sass/mob/_disappearingCircle.scss */
 svg#pomodoro circle#pomodoro-outer {
   stroke-width: 1px;
   stroke: #ccc;

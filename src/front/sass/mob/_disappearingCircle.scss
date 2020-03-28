@@ -27,6 +27,7 @@ $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-paddi
 }
 
 #start-pause {
+  border: solid 2px #999;
   $text-circle-diameter: $enclosed-circle-diameter - 40px;
   display: inline-block;
   background: rgba(255,255,255,.6);
@@ -83,17 +84,16 @@ svg#pomodoro {
 
   circle {
     fill: none;
+    stroke-width: 7px;
   }
 
   #pomodoro-background {
-    stroke-width: $circle-stroke-width + 1px;
     stroke: #ddd;
   }
   circle#pomodoro-circle {
-    $dasharray-pomodoro: 220px * pi();
+    $dasharray-pomodoro: 103px * 2 * pi();
     stroke-dasharray: $dasharray-pomodoro;
-    stroke-width: $circle-stroke-width + 1px;
-    stroke: $color;
+    stroke: #999;
     transition-property: stroke-dashoffset;
   }
   circle#pomodoro-outer {

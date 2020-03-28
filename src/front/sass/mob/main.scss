@@ -14,10 +14,6 @@
   padding: 13px 0 0;
   background: rgba(255, 255, 255, 0.8);
 
-  #container.counting & {
-    color: $color-counting;
-  }
-
   #title {
     width: auto;
     margin: 41px 0 0;
@@ -78,13 +74,6 @@
         margin-right: 10px;
       }
     }
-  }
-}
-
-h1 {
-  #container.counting & {
-    color: $color-counting;
-    border-color: $color-counting;
   }
 }
 
