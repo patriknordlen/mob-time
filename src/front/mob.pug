@@ -17,8 +17,9 @@ main#panel
                 span#time-left
             svg#countdown
                 circle#countdown-circle(r='93' cx='100' cy='100')
-            svg#pomodoro
-                circle#countdown-circle(r='110' cx='120' cy='120')
+            if pomodoro
+                svg#pomodoro
+                    circle#countdown-circle(r='110' cx='120' cy='120')
         section#title
             h1: a(href="/" title="Home") Mob Time
             h2 You are in the <em>#{mobName}</em> mob
