@@ -103,6 +103,38 @@ function get() {
 },{}],2:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.animate = animate;
+exports.progression = progression;
+exports.dasharray = dasharray;
+
+function animate(circle, refreshFunc, refreshPeriod) {
+  if (!circle) return;
+  refreshPeriod = refreshPeriod || 1000;
+  circle.style.transitionDuration = refreshPeriod + "ms";
+  setInterval(function () {
+    return progression(circle, refreshFunc());
+  }, refreshPeriod);
+}
+
+function progression(circle, ratio, dash) {
+  if (ratio === 0) {
+    circle.style.strokeDashoffset = "0";
+  } else {
+    dash = dash || dasharray(circle);
+    circle.style.strokeDashoffset = dash - dash * ratio + "px";
+  }
+}
+
+function dasharray(circle) {
+  return window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
+}
+
+},{}],3:[function(require,module,exports){
+"use strict";
+
 var events = require("../events").events;
 
 var container = document.getElementById("container");
@@ -119,7 +151,7 @@ function turnOff() {
   container.classList.remove("counting");
 }
 
-},{"../events":5}],3:[function(require,module,exports){
+},{"../events":6}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -162,7 +194,7 @@ function timeFormatter() {
   return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":6,"../spi/settings":11,"./mainButton":4}],4:[function(require,module,exports){
+},{"../functions/human_readable_time":7,"../spi/settings":12,"./mainButton":5}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -172,10 +204,15 @@ exports.update = update;
 
 var sound = require("../sound");
 
+var circleAnimation = require("../circle-animation");
+
+var circle = document.getElementById("countdown-circle");
+var dasharray = circleAnimation.dasharray(circle);
+
 function update(timerStatus, timeFormatter) {
   icon(timerStatus);
   timeLeft(timeFormatter, timerStatus);
-  progression(timerStatus);
+  circleAnimation.progression(circle, ratio(timerStatus), dasharray);
 }
 
 function icon(timerStatus) {
@@ -200,18 +237,12 @@ function timeLeft(timeFormatter, timerStatus) {
   timeLeft.innerText = timeFormatter(timerStatus.timeLeftInMillis);
 }
 
-var circle = document.getElementById("countdown-circle");
-var dasharray = window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
-
-function progression(timerStatus) {
-  if (timerStatus.timeLeftInMillis === 0) {
-    circle.style.strokeDashoffset = "0";
-  } else {
-    circle.style.strokeDashoffset = dasharray - dasharray * (timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000)) + "px";
-  }
+function ratio(timerStatus) {
+  if (timerStatus.lengthInMinutes === 0) return 0;
+  return timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000);
 }
 
-},{"../sound":9}],5:[function(require,module,exports){
+},{"../circle-animation":2,"../sound":10}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -247,7 +278,7 @@ function detectFrom(timerStatus, mobInProgress) {
   return event;
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -281,7 +312,7 @@ function toSeconds(milliseconds) {
   return Math.round(milliseconds / 1000);
 }
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 var sound = require("./sound");
@@ -360,7 +391,7 @@ new ClipboardJS("#share-room", {
   alert('A link to this mob has been copied in your clipboard');
 });
 
-},{"./amplitude,":1,"./display/countDownMode":2,"./display/display":3,"./events":5,"./pomodoro":8,"./sound":9,"./spi/mobTimer":10}],8:[function(require,module,exports){
+},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro":9,"./sound":10,"./spi/mobTimer":11}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -368,28 +399,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setup = setup;
 
+var circleAnimation = require("./circle-animation");
+
 function setup() {
   var circle = document.getElementById("pomodoro-circle");
-  if (!circle) return;
-  var dasharray = window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
-  circle.style.transitionDuration = "1000ms";
-  var ttl = 24 * 60;
-  setInterval(function () {
-    ttl--;
-    progression(ttl);
-  }, 1000);
-
-  function progression(ttl) {
-    if (ttl === 0) {
-      circle.style.strokeDashoffset = 0;
-    } else {
-      console.log(ttl, dasharray);
-      circle.style.strokeDashoffset = dasharray - dasharray * (ttl / (24 * 60)) + "px";
-    }
-  }
+  var pomodoroLength = 24 * 60;
+  var ttl = pomodoroLength;
+  circleAnimation.animate(circle, function () {
+    return ttl-- / pomodoroLength;
+  }, 1000, circleAnimation.dasharray(circle));
 }
 
-},{}],9:[function(require,module,exports){
+},{"./circle-animation":2}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -448,7 +469,7 @@ function stop() {
   alarm.fastSeek(0);
 }
 
-},{"./events":5,"./spi/settings":11}],10:[function(require,module,exports){
+},{"./events":6,"./spi/settings":12}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -469,7 +490,7 @@ function timeLeftIn(name, callback) {
   xhttp.send();
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -534,4 +555,4 @@ var inMilliseconds = function inMilliseconds(year) {
   return year * 365 * 24 * 60 * 60 * 1000;
 };
 
-},{}]},{},[7]);
+},{}]},{},[8]);

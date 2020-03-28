@@ -21,11 +21,11 @@ function update(timerStatus) {
 // --------------------------------------------
 // Sockets
 // --------------------------------------------
-
 let socket = io();
 socket.emit("join", mobName);
 socket.on('interrupt mob', () => { console.log("Mob interrupted"); });
 socket.on('change length', length => document.getElementById("minutes-by-person").value = length);
+
 // --------------------------------------------
 // Setup
 // --------------------------------------------
