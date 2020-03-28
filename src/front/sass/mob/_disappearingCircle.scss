@@ -5,7 +5,7 @@
 Round clock
 ============================================
  */
-$circle-outside-diameter: 200px;
+$circle-outside-diameter: 240px;
 $circle-stroke-width: 14px;
 $circle-middle-diameter: $circle-outside-diameter - $circle-stroke-width;
 $circle-inside-diameter: $circle-outside-diameter - ($circle-stroke-width * 2);
@@ -17,43 +17,63 @@ $enclosing-circle-diameter: $circle-outside-diameter + 2 * $enclosing-circle-pad
 
 $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-padding;
 
-#countdown {
+#container section:first-child {
   position: relative;
   margin: auto;
   height: $enclosing-circle-diameter;
   width: $enclosing-circle-diameter;
   text-align: center;
-  background: $countdown-circle-background-color-on;
   border-radius: $enclosing-circle-diameter / 2;
-  border: solid 1px #ccc;
 }
 
 #start-pause {
+  $text-circle-diameter: $enclosed-circle-diameter - 40px;
   display: inline-block;
   background: white;
-  width: $enclosed-circle-diameter;
-  height: $enclosed-circle-diameter;
-  border-radius: $enclosed-circle-diameter / 2;
-  margin-top: $enclosing-circle-padding * 2 + $circle-stroke-width;
+  width: $text-circle-diameter;
+  height: $text-circle-diameter;
+  border-radius: $text-circle-diameter / 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-svg {
+svg#countdown {
+  $countdown-circle-diameter: $circle-outside-diameter - 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $countdown-circle-diameter;
+  height: $countdown-circle-diameter;
+  transform: translateY(-50%) translateX(-50%) rotateZ(-90deg);
+  background: $countdown-circle-background-color-on;
+  border-radius: $countdown-circle-diameter / 2;
+  border: solid 1px #ccc;
+
+  circle {
+    $dasharray: ($countdown-circle-diameter - $circle-stroke-width) * pi();
+    stroke-dasharray: $dasharray;
+    stroke-dashoffset: $dasharray;
+    stroke-width: $circle-stroke-width;
+    stroke: $color;
+    fill: none;
+
+    #container.counting & {
+      stroke: $color-counting;
+    }
+  }
+}
+svg#pomodoro {
   position: absolute;
   top: $enclosing-circle-padding;
   right: $enclosing-circle-padding;
   width: $circle-outside-diameter;
   height: $circle-outside-diameter;
   transform: rotateZ(-90deg);
-}
 
-svg circle {
-  stroke-dasharray: $circle-dasharray;
-  stroke-dashoffset: $circle-dasharray;
-  stroke-width: $circle-stroke-width;
-  stroke: $color;
-  fill: none;
-
-  #container.counting & {
-    stroke: $color-counting;
+  circle {
+    stroke-width: $circle-stroke-width;
+    stroke: $color;
+    fill: none;
   }
 }

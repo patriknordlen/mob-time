@@ -89,7 +89,7 @@ fieldset {
   font-size: 1.1em;
   display: inline-block;
   width: 430px;
-  padding: 54px 0 0;
+  padding: 13px 0 0;
   background: rgba(255, 255, 255, 0.8);
 }
 /* line 17, ../../sass/mob/main.scss */
@@ -237,48 +237,66 @@ Round clock
 ============================================
  */
 /* line 20, ../../sass/mob/_disappearingCircle.scss */
-#countdown {
+#container section:first-child {
   position: relative;
   margin: auto;
-  height: 200px;
-  width: 200px;
+  height: 240px;
+  width: 240px;
   text-align: center;
-  background: #a6dea1;
-  border-radius: 100px;
-  border: solid 1px #ccc;
+  border-radius: 120px;
 }
 
-/* line 31, ../../sass/mob/_disappearingCircle.scss */
+/* line 29, ../../sass/mob/_disappearingCircle.scss */
 #start-pause {
   display: inline-block;
   background: white;
   width: 172px;
   height: 172px;
   border-radius: 86px;
-  margin-top: 14px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* line 40, ../../sass/mob/_disappearingCircle.scss */
-svg {
+/* line 41, ../../sass/mob/_disappearingCircle.scss */
+svg#countdown {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 50%;
+  left: 50%;
   width: 200px;
   height: 200px;
-  transform: rotateZ(-90deg);
+  transform: translateY(-50%) translateX(-50%) rotateZ(-90deg);
+  background: #a6dea1;
+  border-radius: 100px;
+  border: solid 1px #ccc;
 }
-
-/* line 49, ../../sass/mob/_disappearingCircle.scss */
-svg circle {
+/* line 53, ../../sass/mob/_disappearingCircle.scss */
+svg#countdown circle {
   stroke-dasharray: 584.33623px;
   stroke-dashoffset: 584.33623px;
   stroke-width: 14px;
   stroke: #707070;
   fill: none;
 }
-/* line 56, ../../sass/mob/_disappearingCircle.scss */
-#container.counting svg circle {
+/* line 61, ../../sass/mob/_disappearingCircle.scss */
+#container.counting svg#countdown circle {
   stroke: #00b400;
+}
+
+/* line 66, ../../sass/mob/_disappearingCircle.scss */
+svg#pomodoro {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 240px;
+  height: 240px;
+  transform: rotateZ(-90deg);
+}
+/* line 74, ../../sass/mob/_disappearingCircle.scss */
+svg#pomodoro circle {
+  stroke-width: 14px;
+  stroke: #707070;
+  fill: none;
 }
 
 /*!
