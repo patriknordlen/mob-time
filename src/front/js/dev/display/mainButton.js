@@ -26,12 +26,12 @@ function timeLeft(timeFormatter, timerStatus) {
     timeLeft.innerText = timeFormatter(timerStatus.timeLeftInMillis);
 }
 
+const circle = document.getElementById("countdown-circle");
+const dasharray = window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
 function progression(timerStatus) {
-    const circle = document.getElementById("countdown-circle");
     if (timerStatus.timeLeftInMillis === 0) {
-        circle.style.strokeDashoffset = 0;
+        circle.style.strokeDashoffset = "0";
     } else {
-        const dasharray = 584;
         circle.style.strokeDashoffset = (dasharray - dasharray * (timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000))) + "px";
     }
 }

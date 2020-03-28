@@ -162,7 +162,7 @@ function timeFormatter() {
   return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":6,"../spi/settings":10,"./mainButton":4}],4:[function(require,module,exports){
+},{"../functions/human_readable_time":6,"../spi/settings":11,"./mainButton":4}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -200,18 +200,18 @@ function timeLeft(timeFormatter, timerStatus) {
   timeLeft.innerText = timeFormatter(timerStatus.timeLeftInMillis);
 }
 
-function progression(timerStatus) {
-  var circle = document.getElementById("countdown-circle");
+var circle = document.getElementById("countdown-circle");
+var dasharray = window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
 
+function progression(timerStatus) {
   if (timerStatus.timeLeftInMillis === 0) {
-    circle.style.strokeDashoffset = 0;
+    circle.style.strokeDashoffset = "0";
   } else {
-    var dasharray = 584;
     circle.style.strokeDashoffset = dasharray - dasharray * (timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000)) + "px";
   }
 }
 
-},{"../sound":8}],5:[function(require,module,exports){
+},{"../sound":9}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -296,6 +296,8 @@ var mobTimer = require("./spi/mobTimer");
 
 var eventsModule = require("./events");
 
+require("./pomodoro").setup();
+
 var mobName = window.location.pathname.split("/")[1];
 var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
@@ -358,7 +360,36 @@ new ClipboardJS("#share-room", {
   alert('A link to this mob has been copied in your clipboard');
 });
 
-},{"./amplitude,":1,"./display/countDownMode":2,"./display/display":3,"./events":5,"./sound":8,"./spi/mobTimer":9}],8:[function(require,module,exports){
+},{"./amplitude,":1,"./display/countDownMode":2,"./display/display":3,"./events":5,"./pomodoro":8,"./sound":9,"./spi/mobTimer":10}],8:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setup = setup;
+
+function setup() {
+  var circle = document.getElementById("pomodoro-circle");
+  if (!circle) return;
+  var dasharray = window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
+  circle.style.transitionDuration = "1000ms";
+  var ttl = 24 * 60;
+  setInterval(function () {
+    ttl--;
+    progression(ttl);
+  }, 1000);
+
+  function progression(ttl) {
+    if (ttl === 0) {
+      circle.style.strokeDashoffset = 0;
+    } else {
+      console.log(ttl, dasharray);
+      circle.style.strokeDashoffset = dasharray - dasharray * (ttl / (24 * 60)) + "px";
+    }
+  }
+}
+
+},{}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -417,7 +448,7 @@ function stop() {
   alarm.fastSeek(0);
 }
 
-},{"./events":5,"./spi/settings":10}],9:[function(require,module,exports){
+},{"./events":5,"./spi/settings":11}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -438,7 +469,7 @@ function timeLeftIn(name, callback) {
   xhttp.send();
 }
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

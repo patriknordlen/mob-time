@@ -16,10 +16,13 @@ main#panel
                 i#control-icons.fas
                 span#time-left
             svg#countdown
-                circle#countdown-circle(r='93' cx='100' cy='100')
+                circle#countdown-circle-background(r='92' cx='99' cy='99')
+                circle#countdown-circle(r='92' cx='99' cy='99')
             if pomodoro
                 svg#pomodoro
-                    circle#countdown-circle(r='110' cx='120' cy='120')
+                    circle#pomodoro-outer(r='118' cx='120' cy='120')
+                    circle#pomodoro-background(r='110' cx='120' cy='120')
+                    circle#pomodoro-circle(r='110' cx='120' cy='120')
         section#title
             h1: a(href="/" title="Home") Mob Time
             h2 You are in the <em>#{mobName}</em> mob

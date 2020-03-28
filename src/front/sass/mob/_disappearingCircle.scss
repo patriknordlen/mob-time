@@ -29,13 +29,14 @@ $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-paddi
 #start-pause {
   $text-circle-diameter: $enclosed-circle-diameter - 40px;
   display: inline-block;
-  background: white;
+  background: rgba(255,255,255,.6);
   width: $text-circle-diameter;
   height: $text-circle-diameter;
   border-radius: $text-circle-diameter / 2;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  box-sizing: border-box;
 }
 
 svg#countdown {
@@ -46,17 +47,25 @@ svg#countdown {
   width: $countdown-circle-diameter;
   height: $countdown-circle-diameter;
   transform: translateY(-50%) translateX(-50%) rotateZ(-90deg);
-  background: $countdown-circle-background-color-on;
   border-radius: $countdown-circle-diameter / 2;
   border: solid 1px #ccc;
+  box-sizing: border-box;
 
-  circle {
-    $dasharray: ($countdown-circle-diameter - $circle-stroke-width) * pi();
-    stroke-dasharray: $dasharray;
-    stroke-dashoffset: $dasharray;
+  #countdown-circle, #countdown-circle-background {
     stroke-width: $circle-stroke-width;
-    stroke: $color;
     fill: none;
+  }
+
+  circle#countdown-circle-background {
+    stroke: $countdown-circle-background-color-on;
+  }
+
+  circle#countdown-circle {
+    $dasharray: 92px * 2 * pi();
+    stroke-dasharray: $dasharray;
+    stroke: $color;
+    transition-property: stroke-dashoffset;
+    transition-duration: 100ms;
 
     #container.counting & {
       stroke: $color-counting;
@@ -64,6 +73,7 @@ svg#countdown {
   }
 }
 svg#pomodoro {
+  $pomodoro-circle-diameter: $circle-outside-diameter;
   position: absolute;
   top: $enclosing-circle-padding;
   right: $enclosing-circle-padding;
@@ -72,8 +82,23 @@ svg#pomodoro {
   transform: rotateZ(-90deg);
 
   circle {
-    stroke-width: $circle-stroke-width;
-    stroke: $color;
     fill: none;
+  }
+
+  #pomodoro-background {
+    stroke-width: $circle-stroke-width + 1px;
+    stroke: #ddd;
+  }
+  circle#pomodoro-circle {
+    $dasharray-pomodoro: 220px * pi();
+    stroke-dasharray: $dasharray-pomodoro;
+    stroke-width: $circle-stroke-width + 1px;
+    stroke: $color;
+    transition-property: stroke-dashoffset;
+  }
+  circle#pomodoro-outer {
+    $dasharray-pomodoro: 120px + 2 * pi();
+    stroke-width: 1px;
+    stroke: #ccc;
   }
 }
