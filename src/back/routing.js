@@ -8,14 +8,13 @@ exports.start = app => {
     app.get("/:mob", (req, res) =>
         mobSettings.get(req.params.mob)
                    .then(settings => {
-                       const pomodoroSettings = settings.pomodoro || { active: false, turns: 3 };
                        const data = {
                            mobName: req.params.mob,
                            length: settings.lengthInMinutes,
                            pomodoro: {
                                feature: pomodoro.status(),
-                               active: pomodoroSettings.active || false,
-                               turns: pomodoroSettings.turns || 3,
+                               active: settings.pomodoro.active,
+                               turns: settings.pomodoro.turns,
                            }
                        };
                        return res.render("mob.pug", data);

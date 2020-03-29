@@ -21,7 +21,6 @@ exports.setup = io => {
 
         socket.on('pomodoro activation change', (mobName, status) => {
             mobSettings.get(mobName).then(settings => {
-                settings.pomodoro = settings.pomodoro || {active: false, turns: 3};
                 settings.pomodoro.active = status;
                 mobSettings.save(mobName, settings);
             });
@@ -30,7 +29,6 @@ exports.setup = io => {
 
         socket.on("change turns by pomodoro", (mobName, number) => {
             mobSettings.get(mobName).then(settings => {
-                settings.pomodoro = settings.pomodoro || {active: false, turns: 3};
                 settings.pomodoro.turns = number;
                 mobSettings.save(mobName, settings);
             });

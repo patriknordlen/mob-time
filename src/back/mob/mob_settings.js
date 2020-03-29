@@ -2,7 +2,11 @@ const store = require("../stores/stores").get();
 
 const defaultSettings = {
     formatVersion: 1,
-    lengthInMinutes: 10
+    lengthInMinutes: 10,
+    pomodoro: {
+        active: false,
+        turns: 3
+    }
 };
 
 // ---------------------------------------
@@ -32,7 +36,9 @@ exports.get = async function (name) {
         await this.saveLength(name, rawSettings);
         return this.get(name);
     }
-    return  JSON.parse(rawSettings);
+    let settings = JSON.parse(rawSettings);
+    settings.pomodoro = settings.pomodoro || defaultSettings.pomodoro;
+    return settings;
 };
 
 function isRawLength(rawSettings) {
