@@ -407,13 +407,17 @@ var circleAnimation = require("../circle-animation");
 
 var circle = document.getElementById("pomodoro-circle");
 var pomodoroLength = 24 * 60;
+var counting = false;
 
 function setup() {
   if (!circle) return;
-  document.addEventListener(events.TURN_STARTED, turnOn);
+  document.addEventListener(events.TURN_STARTED, function () {
+    if (!counting) turnOn();
+  });
 }
 
 function turnOn() {
+  counting = true;
   var ttl = pomodoroLength;
   circleAnimation.animate(circle, function () {
     return ttl-- / pomodoroLength;
