@@ -428,16 +428,20 @@ function setup(socket, mobName) {
   // ---------------------------------
 
   var fieldset = document.getElementById("turns-by-pomodoro-fieldset");
+  var circle = document.getElementById("pomodoro");
   fieldset.style.display = active.checked ? "block" : "none";
+  circle.style.display = active.checked ? "block" : "none";
 
   active.onchange = function () {
     socket.emit("pomodoro activation change", mobName, active.checked);
     fieldset.style.display = active.checked ? "block" : "none";
+    circle.style.display = active.checked ? "block" : "none";
   };
 
   socket.on("pomodoro activation change", function (status) {
     active.checked = status;
     fieldset.style.display = active.checked ? "block" : "none";
+    circle.style.display = active.checked ? "block" : "none";
   }); // ---------------------------------
   // Turns by pomodoro
   // ---------------------------------
