@@ -18,5 +18,9 @@ exports.setup = io => {
             mobSettings.saveLength(mobName, lengthInMinutes);
             socket.to(mobName).emit('change length', lengthInMinutes);
         });
+
+        socket.on('pomodoro activation change', (mobName, status) => {
+            socket.to(mobName).emit('pomodoro activation change', status);
+        });
     });
 };

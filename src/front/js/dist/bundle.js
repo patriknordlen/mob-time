@@ -327,10 +327,6 @@ var mobTimer = require("./spi/mobTimer");
 
 var eventsModule = require("./events");
 
-require("./pomodoro/countdown").setup();
-
-require("./pomodoro/settings").setup();
-
 var mobName = window.location.pathname.split("/")[1];
 var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
@@ -393,6 +389,10 @@ new ClipboardJS("#share-room", {
   alert('A link to this mob has been copied in your clipboard');
 });
 
+require("./pomodoro/countdown").setup();
+
+require("./pomodoro/settings").setup(socket, mobName);
+
 },{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro/countdown":9,"./pomodoro/settings":10,"./sound":11,"./spi/mobTimer":12}],9:[function(require,module,exports){
 "use strict";
 
@@ -421,14 +421,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setup = setup;
 
-function setup() {
+function setup(socket, mobName) {
   var active = document.getElementById("pomodoro-active");
   if (!active) return;
   var fieldset = document.getElementById("turns-by-pomodoro-fieldset");
   fieldset.style.display = active.checked ? "block" : "none";
 
   active.onchange = function () {
-    return fieldset.style.display = active.checked ? "block" : "none";
+    socket.emit("pomodoro activation change", mobName, active.checked);
+    fieldset.style.display = active.checked ? "block" : "none";
+  };
+
+  socket.on("pomodoro activation change", function (status) {
+    active.checked = status;
+    fieldset.style.display = active.checked ? "block" : "none";
+  });
+  var field = document.getElementById("turns-by-pomodoro");
+
+  field.onchange = function () {
+    socket.emit("change turns by pomodoro", mobName, field.value);
   };
 }
 

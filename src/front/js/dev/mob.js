@@ -4,8 +4,6 @@ require("./display/countDownMode");
 const amplitude = require("./amplitude,").get();
 const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
-require("./pomodoro/countdown").setup();
-require("./pomodoro/settings").setup();
 
 const mobName = window.location.pathname.split("/")[1];
 const durationByPerson = document.getElementById("minutes-by-person");
@@ -58,3 +56,5 @@ new ClipboardJS("#share-room", {
     alert('A link to this mob has been copied in your clipboard');
 });
 
+require("./pomodoro/countdown").setup();
+require("./pomodoro/settings").setup(socket, mobName);
