@@ -4,7 +4,8 @@ require("./display/countDownMode");
 const amplitude = require("./amplitude,").get();
 const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
-require("./pomodoro").setup();
+require("./pomodoro/countdown").setup();
+require("./pomodoro/settings").setup();
 
 const mobName = window.location.pathname.split("/")[1];
 const durationByPerson = document.getElementById("minutes-by-person");

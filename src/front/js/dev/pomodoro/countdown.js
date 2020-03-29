@@ -1,7 +1,8 @@
-const circleAnimation = require("./circle-animation");
+const circleAnimation = require("../circle-animation");
 
 export function setup() {
     const circle = document.getElementById("pomodoro-circle");
+    if (!circle) return;
     const pomodoroLength = 24 * 60;
     let ttl = pomodoroLength;
     circleAnimation.animate(circle,

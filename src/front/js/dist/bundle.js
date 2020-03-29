@@ -194,7 +194,7 @@ function timeFormatter() {
   return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":7,"../spi/settings":12,"./mainButton":5}],5:[function(require,module,exports){
+},{"../functions/human_readable_time":7,"../spi/settings":13,"./mainButton":5}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -242,7 +242,7 @@ function ratio(timerStatus) {
   return timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000);
 }
 
-},{"../circle-animation":2,"../sound":10}],6:[function(require,module,exports){
+},{"../circle-animation":2,"../sound":11}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -327,7 +327,9 @@ var mobTimer = require("./spi/mobTimer");
 
 var eventsModule = require("./events");
 
-require("./pomodoro").setup();
+require("./pomodoro/countdown").setup();
+
+require("./pomodoro/settings").setup();
 
 var mobName = window.location.pathname.split("/")[1];
 var durationByPerson = document.getElementById("minutes-by-person");
@@ -391,7 +393,7 @@ new ClipboardJS("#share-room", {
   alert('A link to this mob has been copied in your clipboard');
 });
 
-},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro":9,"./sound":10,"./spi/mobTimer":11}],9:[function(require,module,exports){
+},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro/countdown":9,"./pomodoro/settings":10,"./sound":11,"./spi/mobTimer":12}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -399,10 +401,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setup = setup;
 
-var circleAnimation = require("./circle-animation");
+var circleAnimation = require("../circle-animation");
 
 function setup() {
   var circle = document.getElementById("pomodoro-circle");
+  if (!circle) return;
   var pomodoroLength = 24 * 60;
   var ttl = pomodoroLength;
   circleAnimation.animate(circle, function () {
@@ -410,7 +413,26 @@ function setup() {
   }, 1000, circleAnimation.dasharray(circle));
 }
 
-},{"./circle-animation":2}],10:[function(require,module,exports){
+},{"../circle-animation":2}],10:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setup = setup;
+
+function setup() {
+  var active = document.getElementById("pomodoro-active");
+  if (!active) return;
+  var fieldset = document.getElementById("turns-by-pomodoro-fieldset");
+  fieldset.style.display = active.checked ? "block" : "none";
+
+  active.onchange = function () {
+    return fieldset.style.display = active.checked ? "block" : "none";
+  };
+}
+
+},{}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -469,7 +491,7 @@ function stop() {
   alarm.fastSeek(0);
 }
 
-},{"./events":6,"./spi/settings":12}],11:[function(require,module,exports){
+},{"./events":6,"./spi/settings":13}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -490,7 +512,7 @@ function timeLeftIn(name, callback) {
   xhttp.send();
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

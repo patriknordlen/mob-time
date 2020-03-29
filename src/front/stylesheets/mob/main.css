@@ -7716,7 +7716,7 @@ Settings
   margin-right: 10px;
 }
 /* line 65, ../../sass/mob/_settings.scss */
-#settings fieldset #minutes-by-person {
+#settings fieldset input[type="number"] {
   font-size: 1em;
   width: 3em;
   margin-right: 10px;
