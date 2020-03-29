@@ -4,9 +4,9 @@ require("./display/countDownMode");
 const amplitude = require("./amplitude,").get();
 const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
+const settings = require("./settings");
 
 const mobName = window.location.pathname.split("/")[1];
-const durationByPerson = document.getElementById("minutes-by-person");
 let mobInProgress = false;
 mobTimer.timeLeftIn(mobName, update);
 setInterval(() => mobTimer.timeLeftIn(mobName, update), 100);
@@ -22,8 +22,6 @@ function update(timerStatus) {
 // --------------------------------------------
 let socket = io();
 socket.emit("join", mobName);
-socket.on('interrupt mob', () => { console.log("Mob interrupted"); });
-socket.on('change length', length => document.getElementById("minutes-by-person").value = length);
 
 // --------------------------------------------
 // Setup
@@ -42,12 +40,8 @@ document.forms.container.onsubmit = function (event) {
         amplitude.getInstance().logEvent('STOP_SOUND');
         return;
     }
-    socket.emit("start mob", mobName, durationByPerson.value);
+    socket.emit("start mob", mobName, settings.minutesByPerson());
     amplitude.getInstance().logEvent('START_MOB');
-};
-
-document.getElementById("minutes-by-person").onchange = function () {
-    socket.emit("change length", mobName, this.value);
 };
 
 new ClipboardJS("#share-room", {
@@ -58,3 +52,4 @@ new ClipboardJS("#share-room", {
 
 require("./pomodoro/countdown").setup();
 require("./pomodoro/settings").setup(socket, mobName);
+settings.setup(socket, mobName);

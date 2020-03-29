@@ -194,7 +194,7 @@ function timeFormatter() {
   return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":7,"../spi/settings":13,"./mainButton":5}],5:[function(require,module,exports){
+},{"../functions/human_readable_time":7,"../spi/settings":14,"./mainButton":5}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -242,7 +242,7 @@ function ratio(timerStatus) {
   return timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000);
 }
 
-},{"../circle-animation":2,"../sound":11}],6:[function(require,module,exports){
+},{"../circle-animation":2,"../sound":12}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -327,8 +327,9 @@ var mobTimer = require("./spi/mobTimer");
 
 var eventsModule = require("./events");
 
+var settings = require("./settings");
+
 var mobName = window.location.pathname.split("/")[1];
-var durationByPerson = document.getElementById("minutes-by-person");
 var mobInProgress = false;
 mobTimer.timeLeftIn(mobName, update);
 setInterval(function () {
@@ -345,13 +346,7 @@ function update(timerStatus) {
 
 
 var socket = io();
-socket.emit("join", mobName);
-socket.on('interrupt mob', function () {
-  console.log("Mob interrupted");
-});
-socket.on('change length', function (length) {
-  return document.getElementById("minutes-by-person").value = length;
-}); // --------------------------------------------
+socket.emit("join", mobName); // --------------------------------------------
 // Setup
 // --------------------------------------------
 
@@ -373,12 +368,8 @@ document.forms.container.onsubmit = function (event) {
     return;
   }
 
-  socket.emit("start mob", mobName, durationByPerson.value);
+  socket.emit("start mob", mobName, settings.minutesByPerson());
   amplitude.getInstance().logEvent('START_MOB');
-};
-
-document.getElementById("minutes-by-person").onchange = function () {
-  socket.emit("change length", mobName, this.value);
 };
 
 new ClipboardJS("#share-room", {
@@ -393,7 +384,9 @@ require("./pomodoro/countdown").setup();
 
 require("./pomodoro/settings").setup(socket, mobName);
 
-},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro/countdown":9,"./pomodoro/settings":10,"./sound":11,"./spi/mobTimer":12}],9:[function(require,module,exports){
+settings.setup(socket, mobName);
+
+},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro/countdown":9,"./pomodoro/settings":10,"./settings":11,"./sound":12,"./spi/mobTimer":13}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -474,6 +467,30 @@ function setup(socket, mobName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.setup = setup;
+exports.minutesByPerson = minutesByPerson;
+var durationByPerson = document.getElementById("minutes-by-person");
+
+function setup(socket, mobName) {
+  socket.on('change length', function (length) {
+    return durationByPerson.value = length;
+  });
+
+  durationByPerson.onchange = function () {
+    socket.emit("change length", mobName, this.value);
+  };
+}
+
+function minutesByPerson() {
+  return durationByPerson.value;
+}
+
+},{}],12:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.init = init;
 exports.isPlaying = isPlaying;
 exports.stop = stop;
@@ -527,7 +544,7 @@ function stop() {
   alarm.fastSeek(0);
 }
 
-},{"./events":6,"./spi/settings":13}],12:[function(require,module,exports){
+},{"./events":6,"./spi/settings":14}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -548,7 +565,7 @@ function timeLeftIn(name, callback) {
   xhttp.send();
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
