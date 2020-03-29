@@ -401,19 +401,26 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setup = setup;
 
+var events = require("../events").events;
+
 var circleAnimation = require("../circle-animation");
 
+var circle = document.getElementById("pomodoro-circle");
+var pomodoroLength = 24 * 60;
+
 function setup() {
-  var circle = document.getElementById("pomodoro-circle");
   if (!circle) return;
-  var pomodoroLength = 24 * 60;
+  document.addEventListener(events.TURN_STARTED, turnOn);
+}
+
+function turnOn() {
   var ttl = pomodoroLength;
   circleAnimation.animate(circle, function () {
     return ttl-- / pomodoroLength;
   }, 1000, circleAnimation.dasharray(circle));
 }
 
-},{"../circle-animation":2}],10:[function(require,module,exports){
+},{"../circle-animation":2,"../events":6}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

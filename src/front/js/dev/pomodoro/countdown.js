@@ -1,9 +1,14 @@
+const events = require("../events").events;
 const circleAnimation = require("../circle-animation");
+const circle = document.getElementById("pomodoro-circle");
+const pomodoroLength = 24 * 60;
 
 export function setup() {
-    const circle = document.getElementById("pomodoro-circle");
     if (!circle) return;
-    const pomodoroLength = 24 * 60;
+    document.addEventListener(events.TURN_STARTED, turnOn);
+}
+
+function turnOn() {
     let ttl = pomodoroLength;
     circleAnimation.animate(circle,
         () => (ttl--) / pomodoroLength,
