@@ -423,7 +423,10 @@ exports.setup = setup;
 
 function setup(socket, mobName) {
   var active = document.getElementById("pomodoro-active");
-  if (!active) return;
+  if (!active) return; // ---------------------------------
+  // Activation
+  // ---------------------------------
+
   var fieldset = document.getElementById("turns-by-pomodoro-fieldset");
   fieldset.style.display = active.checked ? "block" : "none";
 
@@ -435,12 +438,19 @@ function setup(socket, mobName) {
   socket.on("pomodoro activation change", function (status) {
     active.checked = status;
     fieldset.style.display = active.checked ? "block" : "none";
-  });
+  }); // ---------------------------------
+  // Turns by pomodoro
+  // ---------------------------------
+
   var field = document.getElementById("turns-by-pomodoro");
 
   field.onchange = function () {
-    socket.emit("change turns by pomodoro", mobName, field.value);
+    return socket.emit("change turns by pomodoro", mobName, field.value);
   };
+
+  socket.on("change turns by pomodoro", function (number) {
+    return field.value = number;
+  });
 }
 
 },{}],11:[function(require,module,exports){

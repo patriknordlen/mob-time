@@ -22,5 +22,9 @@ exports.setup = io => {
         socket.on('pomodoro activation change', (mobName, status) => {
             socket.to(mobName).emit('pomodoro activation change', status);
         });
+
+        socket.on("change turns by pomodoro", (mobName, number) => {
+            socket.to(mobName).emit("change turns by pomodoro", number);
+        });
     });
 };
