@@ -1,12 +1,3 @@
-export function animate(circle, refreshFunc, refreshPeriod) {
-    if (!circle) return;
-    refreshPeriod = refreshPeriod || 1000;
-    circle.style.transitionDuration = refreshPeriod + "ms";
-
-    setInterval(() => progression(circle, refreshFunc()), refreshPeriod);
-
-}
-
 export function progression(circle, ratio, dash) {
     if (ratio === 0) {
         circle.style.strokeDashoffset = "0";

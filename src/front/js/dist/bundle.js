@@ -106,18 +106,8 @@ function get() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.animate = animate;
 exports.progression = progression;
 exports.dasharray = dasharray;
-
-function animate(circle, refreshFunc, refreshPeriod) {
-  if (!circle) return;
-  refreshPeriod = refreshPeriod || 1000;
-  circle.style.transitionDuration = refreshPeriod + "ms";
-  setInterval(function () {
-    return progression(circle, refreshFunc());
-  }, refreshPeriod);
-}
 
 function progression(circle, ratio, dash) {
   if (ratio === 0) {
@@ -403,8 +393,9 @@ var mobSettings = require("../settings");
 var settings = require("./settings");
 
 var circle = document.getElementById("pomodoro-circle");
-var pomodoroLength = 24 * 60;
+var pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
 var counting = false;
+var interval = null;
 
 function setup() {
   if (!circle) return;
@@ -417,9 +408,18 @@ function turnOn() {
   counting = true;
   pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
   var ttl = pomodoroLength;
-  circleAnimation.animate(circle, function () {
-    return ttl-- / pomodoroLength;
-  }, 1000, circleAnimation.dasharray(circle));
+  var refreshPeriod = 1000;
+  circle.style.transitionDuration = refreshPeriod + "ms";
+  interval = setInterval(function () {
+    var ratio = ttl-- / pomodoroLength;
+    circleAnimation.progression(circle, ratio);
+    if (ratio <= 0) turnOff();
+  }, refreshPeriod);
+}
+
+function turnOff() {
+  counting = false;
+  clearInterval(interval);
 }
 
 },{"../circle-animation":2,"../events":6,"../settings":11,"./settings":10}],10:[function(require,module,exports){

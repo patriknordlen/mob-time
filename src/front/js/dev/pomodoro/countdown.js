@@ -6,6 +6,7 @@ const circle = document.getElementById("pomodoro-circle");
 
 let pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
 let counting = false;
+let interval = null;
 
 export function setup() {
     if (!circle) return;
@@ -18,8 +19,17 @@ function turnOn() {
     counting = true;
     pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
     let ttl = pomodoroLength;
-    circleAnimation.animate(circle,
-        () => (ttl--) / pomodoroLength,
-        1000,
-        circleAnimation.dasharray(circle));
+    let refreshPeriod = 1000;
+    circle.style.transitionDuration = refreshPeriod + "ms";
+
+    interval = setInterval(() => {
+        let ratio = (ttl--) / pomodoroLength;
+        circleAnimation.progression(circle, ratio);
+        if (ratio <= 0) turnOff();
+    }, refreshPeriod);
+}
+
+function turnOff() {
+    counting = false;
+    clearInterval(interval);
 }
