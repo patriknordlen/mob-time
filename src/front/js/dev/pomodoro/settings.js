@@ -27,3 +27,7 @@ export function setup(socket, mobName) {
     field.onchange = () => socket.emit("change turns by pomodoro", mobName, field.value);
     socket.on("change turns by pomodoro", number => field.value = number);
 }
+
+export function turnsByPomodoro() {
+    return document.getElementById("turns-by-pomodoro").value;
+}

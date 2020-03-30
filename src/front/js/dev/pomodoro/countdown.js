@@ -1,7 +1,10 @@
 const events = require("../events").events;
 const circleAnimation = require("../circle-animation");
+const mobSettings = require("../settings");
+const settings = require("./settings");
 const circle = document.getElementById("pomodoro-circle");
-const pomodoroLength = 24 * 60;
+
+let pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
 let counting = false;
 
 export function setup() {
@@ -13,6 +16,7 @@ export function setup() {
 
 function turnOn() {
     counting = true;
+    pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
     let ttl = pomodoroLength;
     circleAnimation.animate(circle,
         () => (ttl--) / pomodoroLength,

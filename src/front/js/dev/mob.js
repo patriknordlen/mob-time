@@ -52,4 +52,4 @@ new ClipboardJS("#share-room", {
 
 require("./pomodoro/countdown").setup();
 require("./pomodoro/settings").setup(socket, mobName);
-settings.setup(socket, mobName);
+settings.setupSync(socket, mobName);

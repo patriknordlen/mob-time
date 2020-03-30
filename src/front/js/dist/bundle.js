@@ -384,7 +384,7 @@ require("./pomodoro/countdown").setup();
 
 require("./pomodoro/settings").setup(socket, mobName);
 
-settings.setup(socket, mobName);
+settings.setupSync(socket, mobName);
 
 },{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro/countdown":9,"./pomodoro/settings":10,"./settings":11,"./sound":12,"./spi/mobTimer":13}],9:[function(require,module,exports){
 "use strict";
@@ -397,6 +397,10 @@ exports.setup = setup;
 var events = require("../events").events;
 
 var circleAnimation = require("../circle-animation");
+
+var mobSettings = require("../settings");
+
+var settings = require("./settings");
 
 var circle = document.getElementById("pomodoro-circle");
 var pomodoroLength = 24 * 60;
@@ -411,19 +415,21 @@ function setup() {
 
 function turnOn() {
   counting = true;
+  pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
   var ttl = pomodoroLength;
   circleAnimation.animate(circle, function () {
     return ttl-- / pomodoroLength;
   }, 1000, circleAnimation.dasharray(circle));
 }
 
-},{"../circle-animation":2,"../events":6}],10:[function(require,module,exports){
+},{"../circle-animation":2,"../events":6,"../settings":11,"./settings":10}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.setup = setup;
+exports.turnsByPomodoro = turnsByPomodoro;
 
 function setup(socket, mobName) {
   var active = document.getElementById("pomodoro-active");
@@ -461,17 +467,21 @@ function setup(socket, mobName) {
   });
 }
 
+function turnsByPomodoro() {
+  return document.getElementById("turns-by-pomodoro").value;
+}
+
 },{}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setup = setup;
+exports.setupSync = setupSync;
 exports.minutesByPerson = minutesByPerson;
 var durationByPerson = document.getElementById("minutes-by-person");
 
-function setup(socket, mobName) {
+function setupSync(socket, mobName) {
   socket.on('change length', function (length) {
     return durationByPerson.value = length;
   });

@@ -1,6 +1,6 @@
 const durationByPerson = document.getElementById("minutes-by-person");
 
-export function setup(socket, mobName) {
+export function setupSync(socket, mobName) {
     socket.on('change length', length => durationByPerson.value = length);
 
     durationByPerson.onchange = function () {
