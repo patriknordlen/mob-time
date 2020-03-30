@@ -12,13 +12,17 @@ export function throwEventFor(timerStatus, mobInProgress) {
 }
 
 function detectFrom(timerStatus, mobInProgress) {
-    let event = events.TIME_PASSED;
-    if (timerStatus.lengthInMinutes === 0) {
-        event = events.TURN_INTERRUPTED;
-    } else if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
-        event = events.TURN_ENDED;
-    } else if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
-        event = events.TURN_STARTED;
+    if (timerStatus.lengthInMinutes === 0 && mobInProgress === true) {
+        console.log(events.TURN_INTERRUPTED);
+        return events.TURN_INTERRUPTED;
     }
-    return event;
+    if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
+        console.log(events.TURN_ENDED);
+        return events.TURN_ENDED;
+    }
+    if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
+        console.log(events.TURN_STARTED);
+        return  events.TURN_STARTED;
+    }
+    return events.TIME_PASSED;
 }

@@ -5,15 +5,14 @@ const amplitude = require("./amplitude,").get();
 const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
 const settings = require("./settings");
+const turn = require("./mob/turn");
 
 const mobName = window.location.pathname.split("/")[1];
-let mobInProgress = false;
 mobTimer.timeLeftIn(mobName, update);
 setInterval(() => mobTimer.timeLeftIn(mobName, update), 100);
 
 function update(timerStatus) {
-    eventsModule.throwEventFor(timerStatus, mobInProgress);
-    mobInProgress = timerStatus.timeLeftInMillis > 0;
+    eventsModule.throwEventFor(timerStatus, turn.isInProgress());
     display.displayTimeLeft(timerStatus);
 }
 
@@ -30,7 +29,7 @@ sound.init();
 display.init();
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
-    if (mobInProgress) {
+    if (turn.isInProgress()) {
         amplitude.getInstance().logEvent('STOP_MOB');
         socket.emit("interrupt mob", mobName);
         return;

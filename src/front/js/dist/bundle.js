@@ -184,7 +184,7 @@ function timeFormatter() {
   return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":7,"../spi/settings":14,"./mainButton":5}],5:[function(require,module,exports){
+},{"../functions/human_readable_time":7,"../spi/settings":15,"./mainButton":5}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -232,7 +232,7 @@ function ratio(timerStatus) {
   return timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000);
 }
 
-},{"../circle-animation":2,"../sound":12}],6:[function(require,module,exports){
+},{"../circle-animation":2,"../sound":13}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -255,17 +255,22 @@ function throwEventFor(timerStatus, mobInProgress) {
 }
 
 function detectFrom(timerStatus, mobInProgress) {
-  var event = events.TIME_PASSED;
-
-  if (timerStatus.lengthInMinutes === 0) {
-    event = events.TURN_INTERRUPTED;
-  } else if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
-    event = events.TURN_ENDED;
-  } else if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
-    event = events.TURN_STARTED;
+  if (timerStatus.lengthInMinutes === 0 && mobInProgress === true) {
+    console.log(events.TURN_INTERRUPTED);
+    return events.TURN_INTERRUPTED;
   }
 
-  return event;
+  if (timerStatus.timeLeftInMillis === 0 && mobInProgress === true) {
+    console.log(events.TURN_ENDED);
+    return events.TURN_ENDED;
+  }
+
+  if (timerStatus.timeLeftInMillis > 0 && mobInProgress === false) {
+    console.log(events.TURN_STARTED);
+    return events.TURN_STARTED;
+  }
+
+  return events.TIME_PASSED;
 }
 
 },{}],7:[function(require,module,exports){
@@ -319,16 +324,16 @@ var eventsModule = require("./events");
 
 var settings = require("./settings");
 
+var turn = require("./mob/turn");
+
 var mobName = window.location.pathname.split("/")[1];
-var mobInProgress = false;
 mobTimer.timeLeftIn(mobName, update);
 setInterval(function () {
   return mobTimer.timeLeftIn(mobName, update);
 }, 100);
 
 function update(timerStatus) {
-  eventsModule.throwEventFor(timerStatus, mobInProgress);
-  mobInProgress = timerStatus.timeLeftInMillis > 0;
+  eventsModule.throwEventFor(timerStatus, turn.isInProgress());
   display.displayTimeLeft(timerStatus);
 } // --------------------------------------------
 // Sockets
@@ -346,7 +351,7 @@ display.init();
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
 
-  if (mobInProgress) {
+  if (turn.isInProgress()) {
     amplitude.getInstance().logEvent('STOP_MOB');
     socket.emit("interrupt mob", mobName);
     return;
@@ -376,7 +381,32 @@ require("./pomodoro/settings").setup(socket, mobName);
 
 settings.setupSync(socket, mobName);
 
-},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./pomodoro/countdown":9,"./pomodoro/settings":10,"./settings":11,"./sound":12,"./spi/mobTimer":13}],9:[function(require,module,exports){
+},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./mob/turn":9,"./pomodoro/countdown":10,"./pomodoro/settings":11,"./settings":12,"./sound":13,"./spi/mobTimer":14}],9:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isInProgress = isInProgress;
+
+var events = require("../events").events;
+
+document.addEventListener(events.TURN_STARTED, function () {
+  return inProgress = true;
+});
+document.addEventListener(events.TURN_ENDED, function () {
+  return inProgress = false;
+});
+document.addEventListener(events.TURN_INTERRUPTED, function () {
+  return inProgress = false;
+});
+var inProgress = false;
+
+function isInProgress() {
+  return inProgress;
+}
+
+},{"../events":6}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -392,37 +422,49 @@ var mobSettings = require("../settings");
 
 var settings = require("./settings");
 
+var turn = require("../mob/turn");
+
 var circle = document.getElementById("pomodoro-circle");
 var pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
 var counting = false;
 var interval = null;
+var takeABreak = false;
 
 function setup() {
   if (!circle) return;
   document.addEventListener(events.TURN_STARTED, function () {
     if (!counting) turnOn();
   });
+  document.addEventListener(events.TURN_ENDED, signalBreak);
+  document.addEventListener(events.TURN_STARTED, signalBreak);
 }
 
 function turnOn() {
   counting = true;
   pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
   var ttl = pomodoroLength;
-  var refreshPeriod = 1000;
-  circle.style.transitionDuration = refreshPeriod + "ms";
   interval = setInterval(function () {
     var ratio = ttl-- / pomodoroLength;
     circleAnimation.progression(circle, ratio);
     if (ratio <= 0) turnOff();
-  }, refreshPeriod);
+  }, 1000);
 }
 
 function turnOff() {
   counting = false;
   clearInterval(interval);
+  takeABreak = true;
+  if (!turn.isInProgress()) signalBreak();
 }
 
-},{"../circle-animation":2,"../events":6,"../settings":11,"./settings":10}],10:[function(require,module,exports){
+function signalBreak() {
+  if (takeABreak) {
+    alert("Take a break");
+    takeABreak = false;
+  }
+}
+
+},{"../circle-animation":2,"../events":6,"../mob/turn":9,"../settings":12,"./settings":11}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -471,7 +513,7 @@ function turnsByPomodoro() {
   return document.getElementById("turns-by-pomodoro").value;
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -495,7 +537,7 @@ function minutesByPerson() {
   return durationByPerson.value;
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -554,7 +596,7 @@ function stop() {
   alarm.fastSeek(0);
 }
 
-},{"./events":6,"./spi/settings":14}],13:[function(require,module,exports){
+},{"./events":6,"./spi/settings":15}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -575,7 +617,7 @@ function timeLeftIn(name, callback) {
   xhttp.send();
 }
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
