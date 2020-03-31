@@ -27,15 +27,11 @@ function turnOn() {
     interval = setInterval(() => {
         const elapsedMs = new Date() - startTime;
         let ratio = (pomodoroLength - elapsedMs) / pomodoroLength;
-        console.log(
-            (elapsedMs / 1000) + "s",
-            (pomodoroLength / 1000) + "s",
-            ratio,
-            mobSettings.minutesByPerson(),
-            settings.turnsByPomodoro(),
-            mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60);
         circleAnimation.progression(circle, ratio);
-        if (ratio <= 0) turnOff();
+        if (ratio <= 0) {
+            circleAnimation.progression(circle, 0);
+            turnOff();
+        }
     }, 100);
 }
 
