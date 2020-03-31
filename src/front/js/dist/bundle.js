@@ -447,12 +447,13 @@ function turnOn() {
   interval = setInterval(function () {
     var elapsedMs = new Date() - startTime;
     var ratio = (pomodoroLength - elapsedMs) / pomodoroLength;
-    circleAnimation.progression(circle, ratio);
 
     if (ratio <= 0) {
-      circleAnimation.progression(circle, 0);
+      ratio = 0;
       turnOff();
     }
+
+    circleAnimation.progression(circle, ratio);
   }, 100);
 }
 
