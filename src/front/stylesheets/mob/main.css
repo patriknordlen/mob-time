@@ -305,7 +305,7 @@ svg#pomodoro circle#pomodoro-circle {
   stroke-dasharray: 647.16809px;
   stroke: #999;
   transition-property: stroke-dashoffset;
-  transition-duration: 100s;
+  transition-duration: 100ms;
 }
 /* line 100, ../../sass/mob/_disappearingCircle.scss */
 svg#pomodoro circle#pomodoro-outer {

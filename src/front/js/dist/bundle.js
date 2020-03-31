@@ -425,10 +425,11 @@ var settings = require("./settings");
 var turn = require("../mob/turn");
 
 var circle = document.getElementById("pomodoro-circle");
-var pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
+var pomodoroLength;
 var counting = false;
 var interval = null;
 var takeABreak = false;
+var startTime = null;
 
 function setup() {
   if (!circle) return;
@@ -441,13 +442,15 @@ function setup() {
 
 function turnOn() {
   counting = true;
-  pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60;
-  var ttl = pomodoroLength;
+  pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60 * 1000.0;
+  startTime = new Date();
   interval = setInterval(function () {
-    var ratio = ttl-- / pomodoroLength;
+    var elapsedMs = new Date() - startTime;
+    var ratio = (pomodoroLength - elapsedMs) / pomodoroLength;
+    console.log(elapsedMs / 1000 + "s", pomodoroLength / 1000 + "s", ratio, mobSettings.minutesByPerson(), settings.turnsByPomodoro(), mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60);
     circleAnimation.progression(circle, ratio);
     if (ratio <= 0) turnOff();
-  }, 1000);
+  }, 100);
 }
 
 function turnOff() {
@@ -510,7 +513,7 @@ function setup(socket, mobName) {
 }
 
 function turnsByPomodoro() {
-  return document.getElementById("turns-by-pomodoro").value;
+  return parseInt(document.getElementById("turns-by-pomodoro").value);
 }
 
 },{}],12:[function(require,module,exports){
@@ -534,7 +537,7 @@ function setupSync(socket, mobName) {
 }
 
 function minutesByPerson() {
-  return durationByPerson.value;
+  return parseInt(durationByPerson.value);
 }
 
 },{}],13:[function(require,module,exports){

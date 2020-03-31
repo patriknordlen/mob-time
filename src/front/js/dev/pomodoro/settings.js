@@ -29,5 +29,5 @@ export function setup(socket, mobName) {
 }
 
 export function turnsByPomodoro() {
-    return document.getElementById("turns-by-pomodoro").value;
+    return parseInt(document.getElementById("turns-by-pomodoro").value);
 }

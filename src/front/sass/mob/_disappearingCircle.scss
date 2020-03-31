@@ -95,7 +95,7 @@ svg#pomodoro {
     stroke-dasharray: $dasharray-pomodoro;
     stroke: #999;
     transition-property: stroke-dashoffset;
-    transition-duration: 100s;
+    transition-duration: 100ms;
   }
   circle#pomodoro-outer {
     $dasharray-pomodoro: 120px + 2 * pi();

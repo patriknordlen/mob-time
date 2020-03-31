@@ -9,5 +9,5 @@ export function setupSync(socket, mobName) {
 }
 
 export function minutesByPerson() {
-    return durationByPerson.value;
+    return parseInt(durationByPerson.value);
 }
