@@ -1,4 +1,4 @@
-/* line 2, ../sass/_common.scss */
+/* line 3, ../sass/_common.scss */
 body {
   text-align: center;
   font-family: Oswald, sans-serif;
@@ -6,45 +6,55 @@ body {
   font-size: 17px;
 }
 
-/* line 8, ../sass/_common.scss */
+/* line 10, ../sass/_common.scss */
 h1 {
-  font-size: 55px;
+  margin: 0;
+}
+/* line 13, ../sass/_common.scss */
+h1 a {
   color: #707070;
   padding: 15px 0 10px;
   border-top: 4px solid;
   border-bottom: 4px solid;
   border-color: #707070;
   font-family: 'Fredericka the Great', cursive;
-  font-weight: bold;
   margin: auto;
+  font-size: 89px;
+  font-weight: normal;
+  display: block;
 }
 
-/* line 19, ../sass/_common.scss */
+/* line 27, ../sass/_common.scss */
 a {
   text-decoration: none;
   color: inherit;
+  outline: none;
+}
+/* line 31, ../sass/_common.scss */
+a:focus {
+  outline: none;
 }
 
-/* line 23, ../sass/_common.scss */
+/* line 36, ../sass/_common.scss */
 fieldset {
   padding: 0;
   border: none;
   margin-top: 15px;
 }
 
-/* line 28, ../sass/_common.scss */
+/* line 42, ../sass/_common.scss */
 i {
   margin-top: -4px;
   vertical-align: middle;
 }
 
-/* line 32, ../sass/_common.scss */
+/* line 47, ../sass/_common.scss */
 #container {
   margin: 20px auto;
   width: 433px;
 }
 
-/* line 36, ../sass/_common.scss */
+/* line 52, ../sass/_common.scss */
 #github {
   display: block;
   margin: 20px auto;
@@ -54,12 +64,12 @@ i {
   padding: 12px;
   box-sizing: border-box;
 }
-/* line 45, ../sass/_common.scss */
+/* line 61, ../sass/_common.scss */
 #github i {
   margin-right: 10px;
   font-size: 1.5em;
 }
-/* line 50, ../sass/_common.scss */
+/* line 66, ../sass/_common.scss */
 #github:hover {
   color: white;
   background: #707070;
@@ -68,26 +78,21 @@ i {
 /* line 5, ../sass/home.scss */
 #home #title {
   width: auto;
-  margin-top: 10px;
+  margin: 10px 0 20px;
 }
-/* line 9, ../sass/home.scss */
-#home #title h1 {
-  font-size: 89px;
-  font-weight: normal;
-}
-/* line 16, ../sass/home.scss */
+/* line 10, ../sass/home.scss */
 #home #mob {
   font-size: 1.2em;
   font-weight: normal;
   margin: 10px auto;
 }
-/* line 21, ../sass/home.scss */
+/* line 15, ../sass/home.scss */
 #home #mob fieldset {
   text-align: left;
   white-space: nowrap;
   margin: 15px 0;
 }
-/* line 26, ../sass/home.scss */
+/* line 20, ../sass/home.scss */
 #home #mob fieldset * {
   display: inline-block;
   width: 50%;
@@ -95,34 +100,34 @@ i {
   white-space: normal;
   vertical-align: middle;
 }
-/* line 34, ../sass/home.scss */
+/* line 28, ../sass/home.scss */
 #home #mob label {
   padding-right: 10px;
 }
-/* line 38, ../sass/home.scss */
+/* line 32, ../sass/home.scss */
 #home #mob #mob-name, #home #mob #nickname {
   padding: 2px 4px;
   border: 1px solid grey;
 }
-/* line 43, ../sass/home.scss */
+/* line 37, ../sass/home.scss */
 #home #mob #submit {
   margin: 10px 0;
   width: 100%;
   box-sizing: border-box;
   vertical-align: bottom;
   padding: 8px 4px;
-  border: 2px solid grey;
+  border: 1px solid grey;
   font-weight: bold;
   display: block;
   background: repeating-linear-gradient(-45deg, #f8f8f8, #f8f8f8 20px, #efefef 20px, #efefef 40px);
   cursor: pointer;
 }
-/* line 55, ../sass/home.scss */
+/* line 49, ../sass/home.scss */
 #home #mob #submit i {
   margin-right: 10px;
   font-size: .8em;
 }
-/* line 60, ../sass/home.scss */
+/* line 54, ../sass/home.scss */
 #home #mob #submit:hover {
   color: white;
   background: #707070;

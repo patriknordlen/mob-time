@@ -41,7 +41,7 @@
   display: block;
 }
 
-/* line 2, ../../sass/_common.scss */
+/* line 3, ../../sass/_common.scss */
 body {
   text-align: center;
   font-family: Oswald, sans-serif;
@@ -49,45 +49,55 @@ body {
   font-size: 17px;
 }
 
-/* line 8, ../../sass/_common.scss */
+/* line 10, ../../sass/_common.scss */
 h1 {
-  font-size: 55px;
+  margin: 0;
+}
+/* line 13, ../../sass/_common.scss */
+h1 a {
   color: #707070;
   padding: 15px 0 10px;
   border-top: 4px solid;
   border-bottom: 4px solid;
   border-color: #707070;
   font-family: 'Fredericka the Great', cursive;
-  font-weight: bold;
   margin: auto;
+  font-size: 89px;
+  font-weight: normal;
+  display: block;
 }
 
-/* line 19, ../../sass/_common.scss */
+/* line 27, ../../sass/_common.scss */
 a {
   text-decoration: none;
   color: inherit;
+  outline: none;
+}
+/* line 31, ../../sass/_common.scss */
+a:focus {
+  outline: none;
 }
 
-/* line 23, ../../sass/_common.scss */
+/* line 36, ../../sass/_common.scss */
 fieldset {
   padding: 0;
   border: none;
   margin-top: 15px;
 }
 
-/* line 28, ../../sass/_common.scss */
+/* line 42, ../../sass/_common.scss */
 i {
   margin-top: -4px;
   vertical-align: middle;
 }
 
-/* line 32, ../../sass/_common.scss */
+/* line 47, ../../sass/_common.scss */
 #container {
   margin: 20px auto;
   width: 433px;
 }
 
-/* line 36, ../../sass/_common.scss */
+/* line 52, ../../sass/_common.scss */
 #github {
   display: block;
   margin: 20px auto;
@@ -97,12 +107,12 @@ i {
   padding: 12px;
   box-sizing: border-box;
 }
-/* line 45, ../../sass/_common.scss */
+/* line 61, ../../sass/_common.scss */
 #github i {
   margin-right: 10px;
   font-size: 1.5em;
 }
-/* line 50, ../../sass/_common.scss */
+/* line 66, ../../sass/_common.scss */
 #github:hover {
   color: white;
   background: #707070;
@@ -119,79 +129,73 @@ i {
   display: inline-block;
   background: rgba(255, 255, 255, 0.8);
 }
-/* line 16, ../../sass/mob/main.scss */
+/* line 15, ../../sass/mob/main.scss */
 #container #title {
   width: auto;
   margin: 25px 0 0;
 }
-/* line 21, ../../sass/mob/main.scss */
-#container #title h1 {
-  font-size: 89px;
-  width: 433px;
-  font-weight: normal;
-}
-/* line 26, ../../sass/mob/main.scss */
+/* line 19, ../../sass/mob/main.scss */
 #container #title h2 {
   font-weight: normal;
   text-align: left;
   font-size: 1.3em;
 }
-/* line 30, ../../sass/mob/main.scss */
+/* line 23, ../../sass/mob/main.scss */
 #container #title h2 em {
   font-weight: bold;
   font-style: normal;
 }
-/* line 34, ../../sass/mob/main.scss */
+/* line 27, ../../sass/mob/main.scss */
 #container #title h2 a {
   float: right;
   color: #707070;
 }
-/* line 37, ../../sass/mob/main.scss */
+/* line 30, ../../sass/mob/main.scss */
 #container #title h2 a:hover {
   color: black;
 }
-/* line 40, ../../sass/mob/main.scss */
+/* line 33, ../../sass/mob/main.scss */
 #container #title h2 a i {
   font-size: .9em;
 }
-/* line 47, ../../sass/mob/main.scss */
+/* line 40, ../../sass/mob/main.scss */
 #container #members {
   font-family: Roboto, sans-serif;
   text-align: center;
   padding: 0;
 }
-/* line 52, ../../sass/mob/main.scss */
+/* line 45, ../../sass/mob/main.scss */
 #container #members li.driver, #container #members li.navigator {
   font-weight: bold;
   font-size: 1.5em;
   width: 50%;
 }
-/* line 57, ../../sass/mob/main.scss */
+/* line 50, ../../sass/mob/main.scss */
 #container #members li.driver:before {
   content: "D:";
   margin-right: 5px;
   font-weight: normal;
 }
-/* line 62, ../../sass/mob/main.scss */
+/* line 55, ../../sass/mob/main.scss */
 #container #members li.navigator:before {
   content: "N:";
   margin-right: 5px;
   font-weight: normal;
 }
-/* line 67, ../../sass/mob/main.scss */
+/* line 60, ../../sass/mob/main.scss */
 #container #members li {
   display: inline-block;
   list-style-type: none;
   margin: 10px 0;
   width: 33%;
 }
-/* line 72, ../../sass/mob/main.scss */
+/* line 65, ../../sass/mob/main.scss */
 #container #members li i {
   display: inline-block;
   margin-right: 10px;
 }
 
-/* line 80, ../../sass/mob/main.scss */
+/* line 73, ../../sass/mob/main.scss */
 #start-pause, h1 {
   box-sizing: border-box;
   display: block;
