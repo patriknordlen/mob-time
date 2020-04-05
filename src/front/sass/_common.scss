@@ -3,6 +3,7 @@ body {
   text-align: center;
   font-family: Oswald, sans-serif;
   margin: 0;
+  font-size: 17px;
 }
 h1 {
   font-size: 55px;
@@ -24,6 +25,30 @@ fieldset {
   border: none;
   margin-top: $space;
 }
+i {
+  margin-top: -4px;
+  vertical-align: middle;
+}
 #container {
-  margin-top: 20px;
+  margin: 20px auto;
+  width: $container-width;
+}
+#github {
+  display: block;
+  margin: 20px auto;
+  border-top: 1px solid $color;
+  border-bottom: 1px solid $color;
+  color: $color;
+  padding: 12px;
+  box-sizing: border-box;
+
+  i {
+    margin-right: 10px;
+    font-size: 1.5em;
+  }
+
+  &:hover {
+    color: white;
+    background: $color;
+  }
 }

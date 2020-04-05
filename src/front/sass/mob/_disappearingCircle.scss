@@ -17,9 +17,9 @@ $enclosing-circle-diameter: $circle-outside-diameter + 2 * $enclosing-circle-pad
 
 $enclosed-circle-diameter: $circle-inside-diameter - 2 * $enclosing-circle-padding;
 
-#container section:first-child {
+#container #clock {
   position: relative;
-  margin: auto;
+  margin: 40px auto 0;
   height: $enclosing-circle-diameter;
   width: $enclosing-circle-diameter;
   text-align: center;

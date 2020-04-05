@@ -46,9 +46,10 @@ body {
   text-align: center;
   font-family: Oswald, sans-serif;
   margin: 0;
+  font-size: 17px;
 }
 
-/* line 7, ../../sass/_common.scss */
+/* line 8, ../../sass/_common.scss */
 h1 {
   font-size: 55px;
   color: #707070;
@@ -61,22 +62,50 @@ h1 {
   margin: auto;
 }
 
-/* line 18, ../../sass/_common.scss */
+/* line 19, ../../sass/_common.scss */
 a {
   text-decoration: none;
   color: inherit;
 }
 
-/* line 22, ../../sass/_common.scss */
+/* line 23, ../../sass/_common.scss */
 fieldset {
   padding: 0;
   border: none;
   margin-top: 15px;
 }
 
-/* line 27, ../../sass/_common.scss */
+/* line 28, ../../sass/_common.scss */
+i {
+  margin-top: -4px;
+  vertical-align: middle;
+}
+
+/* line 32, ../../sass/_common.scss */
 #container {
-  margin-top: 20px;
+  margin: 20px auto;
+  width: 433px;
+}
+
+/* line 36, ../../sass/_common.scss */
+#github {
+  display: block;
+  margin: 20px auto;
+  border-top: 1px solid #707070;
+  border-bottom: 1px solid #707070;
+  color: #707070;
+  padding: 12px;
+  box-sizing: border-box;
+}
+/* line 45, ../../sass/_common.scss */
+#github i {
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+/* line 50, ../../sass/_common.scss */
+#github:hover {
+  color: white;
+  background: #707070;
 }
 
 /* line 6, ../../sass/mob/main.scss */
@@ -88,14 +117,12 @@ fieldset {
 #container {
   font-size: 1.1em;
   display: inline-block;
-  width: 430px;
-  padding: 13px 0 0;
   background: rgba(255, 255, 255, 0.8);
 }
-/* line 17, ../../sass/mob/main.scss */
+/* line 16, ../../sass/mob/main.scss */
 #container #title {
   width: auto;
-  margin: 41px 0 0;
+  margin: 25px 0 0;
 }
 /* line 21, ../../sass/mob/main.scss */
 #container #title h1 {
@@ -226,9 +253,9 @@ Round clock
 ============================================
  */
 /* line 20, ../../sass/mob/_disappearingCircle.scss */
-#container section:first-child {
+#container #clock {
   position: relative;
-  margin: auto;
+  margin: 40px auto 0;
   height: 240px;
   width: 240px;
   text-align: center;
@@ -7707,16 +7734,17 @@ Settings
 #settings h2 i {
   font-size: .9em;
   float: right;
+  margin-top: 2px;
 }
-/* line 59, ../../sass/mob/_settings.scss */
+/* line 60, ../../sass/mob/_settings.scss */
 #settings fieldset {
   margin-top: 20px;
 }
-/* line 61, ../../sass/mob/_settings.scss */
+/* line 62, ../../sass/mob/_settings.scss */
 #settings fieldset input[type="checkbox"] {
   margin-right: 10px;
 }
-/* line 65, ../../sass/mob/_settings.scss */
+/* line 66, ../../sass/mob/_settings.scss */
 #settings fieldset input[type="number"] {
   font-size: 1em;
   width: 3em;
@@ -7727,22 +7755,22 @@ Settings
   padding: 2px 0px 2px 5px;
   color: white;
 }
-/* line 77, ../../sass/mob/_settings.scss */
+/* line 78, ../../sass/mob/_settings.scss */
 #settings #volume-container {
   width: 100%;
 }
-/* line 80, ../../sass/mob/_settings.scss */
+/* line 81, ../../sass/mob/_settings.scss */
 #settings #volume-container #volume {
   vertical-align: text-bottom;
   width: 171px;
   margin-left: 5px;
   display: inline-block;
 }
-/* line 88, ../../sass/mob/_settings.scss */
+/* line 89, ../../sass/mob/_settings.scss */
 #settings label[for="alarm-url"] {
   padding-right: 10px;
 }
-/* line 92, ../../sass/mob/_settings.scss */
+/* line 93, ../../sass/mob/_settings.scss */
 #settings #alarm-url {
   width: 363px;
   height: 228px;
