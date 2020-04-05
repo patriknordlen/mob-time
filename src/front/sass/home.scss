@@ -8,15 +8,16 @@
 
     h1 {
       font-size: 89px;
-      width: 433px;
+      width: $container-width;
       font-weight: normal;
+
     }
   }
 
   #mob {
     font-weight: normal;
     font-size: 17px;
-    width: 433px;
+    width: $container-width;
     margin: 10px auto;
 
     fieldset {
