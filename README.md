@@ -10,11 +10,11 @@ Fork the repo and submit a pull request !
 - Install compass sass ```gem install compass```
 - Download the project dependencies ```npm install```
 ### Run
-2. Launch the server with ```npm dev```, it will start a server that restarts 
+1. Launch the server with ```npm dev```, it will start a server that restarts 
 automatically on change
-3. Launch in parallel ```npm bundle``` that runs browserify when a change to the
+2. Launch in parallel ```npm bundle``` that runs browserify when a change to the
 front javascript is detected
-4. Launch in parallel ```compass watch``` from the src/front repository
+3. Launch in parallel ```compass watch``` from the src/front repository
 
 ## Deploy in production
 - Specify the port you want the server to run on by adding a PORT environment variable
