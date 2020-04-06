@@ -1,5 +1,6 @@
+let active = document.getElementById("pomodoro-active");
+
 export function setup(socket, mobName) {
-    let active = document.getElementById("pomodoro-active");
     if (!active) return;
 
     // ---------------------------------
@@ -30,4 +31,8 @@ export function setup(socket, mobName) {
 
 export function turnsByPomodoro() {
     return parseInt(document.getElementById("turns-by-pomodoro").value);
+}
+
+export function isOn() {
+    return active.checked;
 }

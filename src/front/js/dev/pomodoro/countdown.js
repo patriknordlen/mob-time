@@ -12,9 +12,8 @@ let takeABreak = false;
 let startTime = null;
 
 export function setup() {
-    if (!circle) return;
     document.addEventListener(events.TURN_STARTED, () => {
-        if (!counting) turnOn();
+        if (!counting && settings.isOn()) turnOn();
     });
     document.addEventListener(events.TURN_ENDED, signalBreak);
     document.addEventListener(events.TURN_STARTED, signalBreak);
@@ -44,7 +43,9 @@ function turnOff() {
 
 function signalBreak() {
     if (takeABreak) {
-        alert("Take a break");
-        takeABreak = false;
+        if (settings.isOn()) {
+            alert("Take a break");
+        }
     }
+    takeABreak = false;
 }

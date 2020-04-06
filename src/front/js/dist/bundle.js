@@ -432,9 +432,8 @@ var takeABreak = false;
 var startTime = null;
 
 function setup() {
-  if (!circle) return;
   document.addEventListener(events.TURN_STARTED, function () {
-    if (!counting) turnOn();
+    if (!counting && settings.isOn()) turnOn();
   });
   document.addEventListener(events.TURN_ENDED, signalBreak);
   document.addEventListener(events.TURN_STARTED, signalBreak);
@@ -466,9 +465,12 @@ function turnOff() {
 
 function signalBreak() {
   if (takeABreak) {
-    alert("Take a break");
-    takeABreak = false;
+    if (settings.isOn()) {
+      alert("Take a break");
+    }
   }
+
+  takeABreak = false;
 }
 
 },{"../circle-animation":2,"../events":6,"../mob/turn":9,"../settings":12,"./settings":11}],11:[function(require,module,exports){
@@ -479,9 +481,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setup = setup;
 exports.turnsByPomodoro = turnsByPomodoro;
+exports.isOn = isOn;
+var active = document.getElementById("pomodoro-active");
 
 function setup(socket, mobName) {
-  var active = document.getElementById("pomodoro-active");
   if (!active) return; // ---------------------------------
   // Activation
   // ---------------------------------
@@ -518,6 +521,10 @@ function setup(socket, mobName) {
 
 function turnsByPomodoro() {
   return parseInt(document.getElementById("turns-by-pomodoro").value);
+}
+
+function isOn() {
+  return active.checked;
 }
 
 },{}],12:[function(require,module,exports){
