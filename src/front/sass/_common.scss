@@ -40,7 +40,6 @@ fieldset {
 }
 
 i {
-  margin-top: -4px;
   vertical-align: middle;
 }
 
@@ -61,6 +60,7 @@ i {
   i {
     margin-right: 10px;
     font-size: 1.5em;
+    margin-top: -4px;
   }
 
   &:hover {

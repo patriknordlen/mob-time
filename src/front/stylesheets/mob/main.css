@@ -87,17 +87,16 @@ fieldset {
 
 /* line 42, ../../sass/_common.scss */
 i {
-  margin-top: -4px;
   vertical-align: middle;
 }
 
-/* line 47, ../../sass/_common.scss */
+/* line 46, ../../sass/_common.scss */
 #container {
   margin: 20px auto;
   width: 433px;
 }
 
-/* line 52, ../../sass/_common.scss */
+/* line 51, ../../sass/_common.scss */
 #github {
   display: block;
   margin: 20px auto;
@@ -107,10 +106,11 @@ i {
   padding: 12px;
   box-sizing: border-box;
 }
-/* line 61, ../../sass/_common.scss */
+/* line 60, ../../sass/_common.scss */
 #github i {
   margin-right: 10px;
   font-size: 1.5em;
+  margin-top: -4px;
 }
 /* line 66, ../../sass/_common.scss */
 #github:hover {
