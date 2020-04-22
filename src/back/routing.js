@@ -1,9 +1,11 @@
 const mobTurns = require("./mob/mob_turns");
 const mobSettings = require("./mob/mob_settings");
 const pomodoro = require("./pomodoro").get();
+const slugify = require("slugify");
 
 exports.start = app => {
     app.get("/", (req, res) => res.render("home.pug"));
+    app.post("/", (req, res) => res.redirect("/" + slugify(req.body.mobName)));
     app.get("/index.html", (req, res) => res.redirect("/"));
     app.get("/:mob", (req, res) =>
         mobSettings.get(req.params.mob)

@@ -11,11 +11,11 @@ main#home
         img#logo(src='/image/mob.png')
         section#title
             h1: a(href="/" title="Home") Mob Time
-        form#mob(name='mob')
+        form#mob(name='mob' method="post")
             fieldset
                 label(for="mob-name") What's your mob&nbsp;?
                 input#mob-name(
-                    name='mob-name' type='text'
+                    name='mobName' type='text'
                     placeholder='Mob Name'
                     required='true' maxlength='20')
             button#submit(type='submit')
@@ -28,4 +28,3 @@ main#home
 
 
 script(src='/js/fontawesome.js')
-script(src='js/dev/home.js')
