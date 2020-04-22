@@ -1,5 +1,5 @@
-describe("Stuff", () => {
-    it("does stuff", () => {
+describe("Mob name with spaces", () => {
+    it("can have a turn started", () => {
         cy.visit("http://localhost:3000/");
         cy.get("#mob-name").type("with spaces");
         cy.get("#submit").click();
