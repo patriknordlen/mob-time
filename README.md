@@ -1,4 +1,6 @@
 # Mob time
+[![Build Status](https://travis-ci.org/HadrienMP/tdd-xp-60-minutes.svg?branch=master)](https://travis-ci.org/HadrienMP/tdd-xp-60-minutes)
+
 A shared timer that plays fun, random sounds at the end.  
 It has been designed as a timer for remote mob/pair programming. We wanted something
 fun and easy. 
