@@ -7,8 +7,7 @@
     "bundle": "watchify src/front/js/dev/mob.js -o src/front/js/dist/bundle.js",
     "start": "node src/back/app.js",
     "dev": "nodemon src/back/app.js",
-    "test": "mocha 'src/back/spec/**/*.js' --reporter spec",
-    "front-test": "mocha -r esm 'src/front/js/spec/**/*.js' --reporter spec",
+    "test": "mocha -r esm 'src/front/js/spec/**/*.js' --reporter spec",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "gui-test": "start-server-and-test start http://localhost:3000 cy:run"
