@@ -1,11 +1,11 @@
-describe("Mob room", () => {
-    it("can have a turn started", () => {
+describe("Mob turns", () => {
+    it("can be started", () => {
         cy.join("cypress-test-mob");
         cy.get("#start-pause").click();
         isTurnStarted();
         cy.get("#start-pause").click();
     });
-    it("can have a turn interrupted", () => {
+    it("can be interrupted", () => {
         cy.join("cypress-test-mob");
         cy.get("#start-pause").click();
         cy.get("#start-pause").click();

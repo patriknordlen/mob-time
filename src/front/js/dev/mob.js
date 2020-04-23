@@ -7,7 +7,6 @@ const eventsModule = require("./events");
 const settings = require("./settings");
 const turn = require("./mob/turn");
 
-const mobName = window.location.pathname.split("/")[1];
 mobTimer.timeLeftIn(mobName, update);
 setInterval(() => mobTimer.timeLeftIn(mobName, update), 100);
 

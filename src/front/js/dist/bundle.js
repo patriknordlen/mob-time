@@ -326,7 +326,6 @@ var settings = require("./settings");
 
 var turn = require("./mob/turn");
 
-var mobName = window.location.pathname.split("/")[1];
 mobTimer.timeLeftIn(mobName, update);
 setInterval(function () {
   return mobTimer.timeLeftIn(mobName, update);
