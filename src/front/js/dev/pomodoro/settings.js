@@ -34,5 +34,5 @@ export function turnsByPomodoro() {
 }
 
 export function isOn() {
-    return active.checked;
+    return active ? active.checked : false;
 }

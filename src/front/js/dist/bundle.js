@@ -524,7 +524,7 @@ function turnsByPomodoro() {
 }
 
 function isOn() {
-  return active.checked;
+  return active ? active.checked : false;
 }
 
 },{}],12:[function(require,module,exports){
