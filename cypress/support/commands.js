@@ -23,3 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("join", mob => {
+    cy.visit("http://localhost:3000/");
+    cy.get("#mob-name").type(mob);
+    cy.get("#submit").click();
+});
