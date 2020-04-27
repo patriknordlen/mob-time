@@ -16,7 +16,7 @@ Fork the repo and submit a pull request !
 automatically on change
 2. Launch in parallel ```npm bundle``` that runs browserify when a change to the
 front javascript is detected
-3. Launch in parallel ```compass watch``` from the src/front repository
+3. Launch in parallel ```compass watch``` 
 
 ## Deploy in production
 - Specify the port you want the server to run on by adding a PORT environment variable

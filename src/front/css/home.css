@@ -65,32 +65,30 @@ i {
 }
 /* line 60, ../sass/_common.scss */
 #github i {
-    margin-right: 10px;
-    font-size: 1.5em;
-    margin-top: -4px;
+  margin-right: 10px;
+  font-size: 1.5em;
+  margin-top: -4px;
 }
-
 /* line 66, ../sass/_common.scss */
 #github:hover {
-    color: white;
-    background: #707070;
+  color: white;
+  background: #707070;
 }
 
 /* line 72, ../sass/_common.scss */
 p a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* line 5, ../sass/home.scss */
 #home #title {
-    width: auto;
-    margin: 10px 0 20px;
+  width: auto;
+  margin: 10px 0 20px;
 }
-
 /* line 10, ../sass/home.scss */
 #home #mob {
-    font-size: 1.2em;
-    font-weight: normal;
+  font-size: 1.2em;
+  font-weight: normal;
   margin: 10px auto;
 }
 /* line 15, ../sass/home.scss */
