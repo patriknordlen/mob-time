@@ -26,12 +26,13 @@ exports.getLength = async function (name) {
 // ---------------------------------------
 
 exports.save = async function(name, settings) {
-    await store.save(toSettingsName(name), JSON.stringify(settings));
+    const toSave = settings || defaultSettings;
+    await store.save(toSettingsName(name), JSON.stringify(toSave));
 };
 
 exports.get = async function (name) {
     let rawSettings = await store.get(toSettingsName(name));
-    if (!rawSettings) return defaultSettings;
+    if (!rawSettings) return null;
     if (isRawLength(rawSettings)) {
         await this.saveLength(name, rawSettings);
         return this.get(name);

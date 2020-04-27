@@ -1,0 +1,21 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    title Mob Time !
+    link(rel='stylesheet' type='text/css' href='/stylesheets/normalize.css')
+    link(href='/stylesheets/google-fonts.css' rel='stylesheet')
+    link(rel='stylesheet' type='text/css' href='/stylesheets/home.css')
+    link(rel='icon' type='image/png' href='image/favicon.png')
+main#home
+    div#container
+        img#logo(src='/image/mob.png')
+        section#title
+            h1: a(href="/" title="Home") 404 - Oops
+        p!=message
+
+
+        a#github(href="https://github.com/HadrienMP/mob-time" target="_blank")
+            i.fab.fa-github
+            | Fork, contribute, improve, deploy, have fun !
+
+script(src='/js/fontawesome.js')

@@ -112,10 +112,16 @@ i {
   font-size: 1.5em;
   margin-top: -4px;
 }
+
 /* line 66, ../../sass/_common.scss */
 #github:hover {
   color: white;
   background: #707070;
+}
+
+/* line 72, ../../sass/_common.scss */
+p a {
+  text-decoration: underline;
 }
 
 /* line 6, ../../sass/mob/main.scss */
