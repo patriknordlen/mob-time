@@ -98,8 +98,6 @@ function get() {
   return amplitude;
 }
 
-;
-
 },{}],2:[function(require,module,exports){
 "use strict";
 

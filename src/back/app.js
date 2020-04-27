@@ -6,8 +6,7 @@ const bodyParser = require('body-parser');
 
 // Setup server express
 const path = require("path");
-app.use(express.static('src/front'));
-app.set('views', path.join(__dirname, '../front'));
+app.use(express.static('public'));
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
