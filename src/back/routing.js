@@ -1,5 +1,5 @@
-const mobTurns = require("./mob/mob_turns");
-const mobSettings = require("./mob/mob_settings");
+const mobTurns = require("./mob/turns");
+const mobSettings = require("./mob/settings");
 const pomodoro = require("./pomodoro").get();
 const slugify = require("slugify");
 

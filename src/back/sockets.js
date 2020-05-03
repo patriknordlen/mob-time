@@ -1,5 +1,5 @@
-const mobTurns = require("./mob/mob_turns");
-const mobSettings = require("./mob/mob_settings");
+const mobTurns = require("./mob/turns");
+const mobSettings = require("./mob/settings");
 exports.setup = io => {
     io.on('connection', function (socket) {
         socket.on('join', name => socket.join(name));

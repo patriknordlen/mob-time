@@ -4,5 +4,5 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 exports.get = name => localStorage.getItem(name);
-exports.save = (name, turn) => localStorage.setItem(name, turn);
+exports.save = (name, document) => localStorage.setItem(name, document);
 exports.delete = name => localStorage.removeItem(name);
