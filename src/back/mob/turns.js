@@ -11,6 +11,7 @@ exports.get = async name => {
 exports.start = (name, lengthInMinutes) => {
     let mobTurn = new MobTurn(lengthInMinutes * 60);
     store.save(toTurnName(name), JSON.stringify(mobTurn));
+    return mobTurn;
 };
 
 function toTurnName(name) {

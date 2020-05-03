@@ -34,6 +34,6 @@ class Off {
         return null;
     }
 
-    turnStarted() {
+    async turnStarted() {
     }
 }

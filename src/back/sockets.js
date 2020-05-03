@@ -1,5 +1,6 @@
 const mobTurns = require("./mob/turns");
 const mobSettings = require("./mob/settings");
+const pomodoro = require("./pomodoro").get();
 exports.setup = io => {
     io.on('connection', function (socket) {
         socket.on('join', name => socket.join(name));
@@ -11,7 +12,8 @@ exports.setup = io => {
 
         socket.on('start mob', (name, lengthInMinutes) => {
             console.log(`Mob "${name}", of length ${lengthInMinutes}min started`);
-            mobTurns.start(name, parseInt(lengthInMinutes));
+            let mobTurn = mobTurns.start(name, parseInt(lengthInMinutes));
+            pomodoro.turnStarted(name, mobTurn.startTime).then(console.debug);
         });
 
         socket.on('change length', (mobName, lengthInMinutes) => {

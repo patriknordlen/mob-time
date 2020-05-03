@@ -1,15 +1,20 @@
 describe("Mob turns", () => {
-    it("can be started", () => {
-        cy.join("cypress-test-mob");
-        cy.get("#start-pause").click();
-        isTurnStarted();
-        cy.get("#start-pause").click();
-    });
-    it("can be interrupted", () => {
-        cy.join("cypress-test-mob");
-        cy.get("#start-pause").click();
-        cy.get("#start-pause").click();
-        isTurnStopped();
+    ["", "pomodoro"].forEach(features => {
+        describe(`with features : ${features}`, () => {
+            process.env.FEATURES = features
+            it("can be started", () => {
+                cy.join("cypress-test-mob");
+                cy.get("#start-pause").click();
+                isTurnStarted();
+                cy.get("#start-pause").click();
+            });
+            it("can be interrupted", () => {
+                cy.join("cypress-test-mob");
+                cy.get("#start-pause").click();
+                cy.get("#start-pause").click();
+                isTurnStopped();
+            });
+        });
     });
 });
 
