@@ -1,4 +1,4 @@
-class MobTurn {
+class Turn {
     constructor(lengthInSeconds = 0, startTime = new Date()) {
         this.lengthInSeconds = lengthInSeconds;
         this.startTime = startTime;
@@ -23,4 +23,5 @@ class MobTurn {
         return Math.max(0, new Date() - this.startTime);
     }
 }
-module.exports = MobTurn;
+
+module.exports = Turn;

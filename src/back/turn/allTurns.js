@@ -1,4 +1,4 @@
-const MobTurn = require("./MobTurn");
+const MobTurn = require("./Turn");
 const store = require("../stores/stores").get();
 
 exports.get = async name => {

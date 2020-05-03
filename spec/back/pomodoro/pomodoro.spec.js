@@ -1,6 +1,6 @@
 const store = require("../../../src/back/stores/stores").get();
 const pomodoro = require("../../../src/back/pomodoro/pomodoro");
-const settings = require("../../../src/back/mob/settings");
+const settings = require("../../../src/back/allSettings");
 const chai = require("chai");
 const sinon = require("sinon");
 const sinonChai = require("sinon-chai");

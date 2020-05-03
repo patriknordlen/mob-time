@@ -1,16 +1,16 @@
-const mobTurns = require("./mob/turns");
-const mobSettings = require("./mob/settings");
+const allTurns = require("./turn/allTurns");
+const allSettings = require("./allSettings");
 const slugify = require("slugify");
 
 exports.start = app => {
     app.get("/", (req, res) => res.render("home.pug"));
     app.post("/", (req, res) => {
         const mobName = slugify(req.body.mobName);
-        mobSettings.save(mobName).then(_ => res.redirect("/" + mobName));
+        allSettings.save(mobName).then(_ => res.redirect("/" + mobName));
     });
     app.get("/index.html", (req, res) => res.redirect("/"));
     app.get("/:mob", (req, res) =>
-        mobSettings.get(req.params.mob)
+        allSettings.get(req.params.mob)
                    .then(settings => {
                        const data = {
                            mobName: req.params.mob,
@@ -29,7 +29,7 @@ exports.start = app => {
                        );
                    }));
     app.get("/:mob/status", async (req, res) => {
-        let turn = await mobTurns.get(req.params.mob);
+        let turn = await allTurns.get(req.params.mob);
         return res.json(turn.getState());
     });
 };

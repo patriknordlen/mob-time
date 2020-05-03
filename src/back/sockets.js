@@ -1,5 +1,5 @@
-const mobTurns = require("./mob/turns");
-const mobSettings = require("./mob/settings");
+const mobTurns = require("./turn/allTurns");
+const mobSettings = require("./allSettings");
 const pomodoro = require("./pomodoro/pomodoro").get();
 exports.setup = io => {
     io.on('connection', function (socket) {

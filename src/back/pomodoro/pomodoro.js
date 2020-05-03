@@ -1,7 +1,7 @@
 const crate = require("./crate");
 const Pomodoro = require("./Pomodoro");
 const Off = require("./Off");
-const allSettings = require("../mob/settings");
+const allSettings = require("../allSettings");
 
 exports.get = function () {
     const features = process.env.FEATURES || "";
