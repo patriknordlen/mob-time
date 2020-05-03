@@ -1,6 +1,6 @@
 const mobTurns = require("./mob/turns");
 const mobSettings = require("./mob/settings");
-const pomodoro = require("./pomodoro").get();
+const pomodoro = require("./pomodoro/pomodoro").get();
 exports.setup = io => {
     io.on('connection', function (socket) {
         socket.on('join', name => socket.join(name));

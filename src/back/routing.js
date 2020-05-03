@@ -1,6 +1,5 @@
 const mobTurns = require("./mob/turns");
 const mobSettings = require("./mob/settings");
-const pomodoro = require("./pomodoro").get();
 const slugify = require("slugify");
 
 exports.start = app => {
@@ -17,7 +16,6 @@ exports.start = app => {
                            mobName: req.params.mob,
                            length: settings.lengthInMinutes,
                            pomodoro: {
-                               feature: pomodoro.status(),
                                active: settings.pomodoro.active,
                                turns: settings.pomodoro.turns,
                            }
@@ -30,6 +28,8 @@ exports.start = app => {
                            {message: "The new-room mob does not seem to exist. You can create it from <a href=\"/\">the home page</a>."}
                        );
                    }));
-    app.get("/:mob/status", (req, res) => mobTurns.get(req.params.mob)
-                                                  .then(mob => res.json(mob.getState())));
+    app.get("/:mob/status", async (req, res) => {
+        let turn = await mobTurns.get(req.params.mob);
+        return res.json(turn.getState());
+    });
 };
