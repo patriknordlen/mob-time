@@ -16,11 +16,11 @@ class FeatureOn {
     }
 
     async turnStarted(name, start) {
-        if (await crate.contains(name)) return;
+        let lastPomodoro = await crate.findBy(name);
+        if (lastPomodoro !== null && lastPomodoro.inProgress()) return;
         let pomodoro = new Pomodoro(start, await this.length(name));
         crate.save(name, pomodoro);
     }
-
     async length(name) {
         let settings = await allSettings.get(name);
         return settings.lengthInMinutes * settings.pomodoro.turns;

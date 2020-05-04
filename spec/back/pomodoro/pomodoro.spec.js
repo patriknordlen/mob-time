@@ -61,6 +61,20 @@ describe("Pomodoro", () => {
 
             expect(store.save).to.not.have.been.called;
         });
+
+        it("stars when the last pomodoro is over", async () => {
+            settings.get.resolves(aMob());
+            let now = new Date();
+            store.get.withArgs('test-mob-pomodoro').returns(JSON.stringify({
+                formatVersion: 1,
+                start: new Date(now.getTime() - 30 * 60_000),
+                length: 30
+            }));
+
+            await pomodoro.get().turnStarted('test-mob', new Date());
+
+            expect(store.save).to.have.been.called;
+        });
     });
 
     describe("status", () => {

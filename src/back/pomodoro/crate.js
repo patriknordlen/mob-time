@@ -16,8 +16,6 @@ exports.findBy = async function (name) {
     return new Pomodoro(new Date(raw.start), raw.length);
 }
 
-exports.contains = async name => await this.findBy(name) !== null;
-
 async function isPomodoroOff(name) {
     let settings = await allSettings.get(name);
     return !settings.pomodoro.active;

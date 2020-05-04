@@ -8,6 +8,10 @@ class Pomodoro {
         return {ratio: this.ratio()};
     }
 
+    inProgress() {
+        return this.ratio() < 1
+    }
+
     ratio() {
         let raw = this.elapsedMinutes() / this.length;
         return this.to4Digits(raw);
