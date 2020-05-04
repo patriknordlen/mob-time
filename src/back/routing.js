@@ -1,5 +1,6 @@
 const allTurns = require("./turn/allTurns");
 const allSettings = require("./allSettings");
+const pomodoro = require("./pomodoro/pomodoro");
 const slugify = require("slugify");
 
 exports.start = app => {
@@ -16,6 +17,7 @@ exports.start = app => {
                            mobName: req.params.mob,
                            length: settings.lengthInMinutes,
                            pomodoro: {
+                               featureOn: pomodoro.featureOn(),
                                active: settings.pomodoro.active,
                                turns: settings.pomodoro.turns,
                            }

@@ -18,7 +18,7 @@ main#panel
             svg#countdown
                 circle#countdown-circle-background(r='92' cx='99' cy='99')
                 circle#countdown-circle(r='92' cx='99' cy='99')
-            if pomodoro.active
+            if pomodoro.featureOn
                 svg#pomodoro
                     circle#pomodoro-outer(r='107' cx='120' cy='120')
                     circle#pomodoro-background(r='103' cx='120' cy='120')
@@ -41,7 +41,7 @@ section#settings
     fieldset
         input#minutes-by-person(type='number' min='1' max='60' required='' value=length size='2')
         label(for='minutes-by-person') minutes / pers.
-    if pomodoro.active
+    if pomodoro.featureOn
         fieldset
             input#pomodoro-active(type='checkbox' checked=pomodoro.active)
             label(for='pomodoro-active') Pomodoro (experimental)
