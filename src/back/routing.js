@@ -7,7 +7,11 @@ exports.start = app => {
     app.get("/", (req, res) => res.render("home.pug"));
     app.post("/", (req, res) => {
         const mobName = slugify(req.body.mobName);
-        allSettings.save(mobName).then(_ => res.redirect("/" + mobName));
+        allSettings
+            .get(mobName)
+            .then(settings => allSettings
+                .save(mobName, settings)
+                .then(_ => res.redirect("/" + mobName)));
     });
     app.get("/index.html", (req, res) => res.redirect("/"));
     app.get("/:mob", (req, res) =>
