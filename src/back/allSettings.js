@@ -26,7 +26,6 @@ exports.getLength = async function (name) {
 // ---------------------------------------
 
 exports.save = async function(name, settings) {
-    console.log("Save in settings", name, settings);
     const toSave = settings || defaultSettings;
     await store.save(toSettingsName(name), JSON.stringify(toSave));
 };
