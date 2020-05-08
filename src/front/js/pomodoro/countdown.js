@@ -1,51 +1,19 @@
 const events = require("../events").events;
 const circleAnimation = require("../circle-animation");
-const mobSettings = require("../settings");
-const settings = require("./settings");
-const turn = require("../mob/turn");
+const core = require("./core");
 const circle = document.getElementById("pomodoro-circle");
 
-let pomodoroLength;
-let counting = false;
-let interval = null;
-let takeABreak = false;
-let startTime = null;
+let state = {breakSignaled: true};
+
+function handle(evt) {
+    state = core.handle(
+        {"ratio": evt.detail.pomodoro.ratio, "turnInProgress": evt.detail.turn.active, "state": state},
+        leftRatio => circleAnimation.progression(circle, leftRatio),
+        () => alert("Take a break!")
+    );
+}
 
 export function setup() {
-    document.addEventListener(events.TURN_STARTED, () => {
-        if (!counting && settings.isOn()) turnOn();
-    });
-    document.addEventListener(events.TURN_ENDED, signalBreak);
-    document.addEventListener(events.TURN_STARTED, signalBreak);
-}
-
-function turnOn() {
-    counting = true;
-    pomodoroLength = mobSettings.minutesByPerson() * settings.turnsByPomodoro() * 60 * 1000.0;
-    startTime = new Date();
-    interval = setInterval(() => {
-        const elapsedMs = new Date() - startTime;
-        let ratio = (pomodoroLength - elapsedMs) / pomodoroLength;
-        if (ratio <= 0) {
-            ratio = 0;
-            turnOff();
-        }
-        circleAnimation.progression(circle, ratio);
-    }, 100);
-}
-
-function turnOff() {
-    counting = false;
-    clearInterval(interval);
-    takeABreak = true;
-    if (!turn.isInProgress()) signalBreak();
-}
-
-function signalBreak() {
-    if (takeABreak) {
-        if (settings.isOn()) {
-            alert("Take a break");
-        }
-    }
-    takeABreak = false;
+    document.addEventListener(events.TURN_ENDED, handle);
+    document.addEventListener(events.TIME_PASSED, handle);
 }

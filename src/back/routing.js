@@ -36,6 +36,8 @@ exports.start = app => {
                    }));
     app.get("/:mob/status", async (req, res) => {
         let turn = await allTurns.get(req.params.mob);
-        return res.json(turn.getState());
+        let data = turn.getState();
+        data["pomodoro"] = await pomodoro.get().status(req.params.mob);
+        return res.json(data);
     });
 };

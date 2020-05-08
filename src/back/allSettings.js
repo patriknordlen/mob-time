@@ -13,10 +13,8 @@ const defaultSettings = {
 // Length
 // ---------------------------------------
 exports.saveLength = async function(name, lengthInMinutes) {
-    let settings = {
-        formatVersion: 1,
-        lengthInMinutes: lengthInMinutes
-    };
+    let settings = await this.get(name) || defaultSettings;
+    settings.lengthInMinutes = lengthInMinutes;
     await this.save(name, settings);
 };
 

@@ -5,6 +5,7 @@
   "main": "src/back/app.js",
   "scripts": {
     "bundle": "watchify src/front/js/mob.js -o public/js/bundle.js",
+    "build": "browserify src/front/js/mob.js -o public/js/bundle.js",
     "start": "node src/back/app.js",
     "dev": "nodemon src/back/app.js",
     "test": "mocha -r esm 'spec/**/*.js' --reporter spec",

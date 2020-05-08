@@ -6,6 +6,7 @@ const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
 const settings = require("./settings");
 const turn = require("./mob/turn");
+const pomodoro = require("./pomodoro/countdown");
 
 mobTimer.timeLeftIn(mobName, update);
 setInterval(() => mobTimer.timeLeftIn(mobName, update), 100);
@@ -48,6 +49,6 @@ new ClipboardJS("#share-room", {
     alert('A link to this mob has been copied in your clipboard');
 });
 
-require("./pomodoro/countdown").setup();
+pomodoro.setup();
 require("./pomodoro/settings").setup(socket, mobName);
 settings.setupSync(socket, mobName);
