@@ -6,3 +6,4 @@ mobs
 npm-debug.log
 cypress/videos
 cypress/screenshots
+.nyc_output
