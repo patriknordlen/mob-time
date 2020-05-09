@@ -1,6 +1,6 @@
 const allTurns = require("./turn/allTurns");
 const allSettings = require("./allSettings");
-const pomodoro = require("./pomodoro/pomodoro").get();
+const pomodoro = require("./pomodoro/facade").get();
 exports.setup = io => {
     io.on('connection', function (socket) {
         socket.on('join', name => socket.join(name));

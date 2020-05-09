@@ -1,6 +1,6 @@
 const allTurns = require("./turn/allTurns");
 const allSettings = require("./allSettings");
-const pomodoro = require("./pomodoro/pomodoro");
+const pomodoro = require("./pomodoro/facade");
 const slugify = require("slugify");
 
 exports.start = app => {
