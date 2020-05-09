@@ -20,16 +20,18 @@ class FeatureOn {
         return pomodoro.status();
     }
 
-    async turnStarted(name, start) {
+    async turnStarted(name, turn) {
         let lastPomodoro = await crate.findBy(name);
         if (lastPomodoro !== null && lastPomodoro.inProgress()) return;
-        let pomodoro = new Pomodoro(start, await this.length(name));
+        let pomodoro = new Pomodoro(turn.startTime, await this.length(name, turn));
         crate.save(name, pomodoro);
     }
 
-    async length(name) {
+    async length(name, turn) {
         let settings = await allSettings.get(name);
-        return settings.lengthInMinutes * settings.pomodoro.turns;
+        let length = turn.lengthInSeconds * settings.pomodoro.turns / 60;
+        console.log(`Pomodoro of length ${length} min started`)
+        return length;
     }
 }
 

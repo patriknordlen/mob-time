@@ -1,6 +1,7 @@
 const store = require("../../../src/back/stores/stores").get();
 const pomodoro = require("../../../src/back/pomodoro/facade");
 const settings = require("../../../src/back/allSettings");
+const Turn = require("../../../src/back/turn/Turn");
 const chai = require("chai");
 const sinon = require("sinon");
 const sinonChai = require("sinon-chai");
@@ -20,13 +21,13 @@ describe("Pomodoro", () => {
     describe("When a turn was started", () => {
 
         it("Starts", async () => {
-            const mob = aMob();
+            const mob = aMobSettings();
             mob.lengthInMinutes = 10;
             mob.pomodoro.turns = 3;
             settings.get.resolves(mob);
             store.get.withArgs('test-mob-pomodoro').returns(null);
 
-            await pomodoro.get().turnStarted('test-mob', new Date("2020-05-03T16:09:55.587Z"));
+            await pomodoro.get().turnStarted('test-mob', aTurn(new Date("2020-05-03T16:09:55.587Z")));
 
             const pomodoroDoc = `{"formatVersion":1,"start":"2020-05-03T16:09:55.587Z","length":30}`;
             expect(store.save).to.have.been.calledOnceWith('test-mob-pomodoro', pomodoroDoc);
@@ -35,35 +36,35 @@ describe("Pomodoro", () => {
         it("Does not start when the feature is disabled", async () => {
             process.env.FEATURES = "";
 
-            await pomodoro.get().turnStarted('test-mob', new Date());
+            await pomodoro.get().turnStarted('test-mob', aTurn());
 
             expect(store.save).to.not.have.been.called;
         });
 
         it("Does not start if pomodoro is not active in the room", async () => {
-            let mob = aMob();
+            let mob = aMobSettings();
             mob.pomodoro.active = false;
             settings.get.resolves(mob);
-            await pomodoro.get().turnStarted('test-mob', new Date());
+            await pomodoro.get().turnStarted('test-mob', aTurn());
 
             expect(store.save).to.not.have.been.called;
         });
 
         it("Does not start when a pomodoro is already started", async () => {
-            settings.get.resolves(aMob());
+            settings.get.resolves(aMobSettings());
             store.get.withArgs('test-mob-pomodoro').returns(JSON.stringify({
                 formatVersion: 1,
                 start: new Date(),
                 length: 30
             }));
 
-            await pomodoro.get().turnStarted('test-mob', new Date());
+            await pomodoro.get().turnStarted('test-mob', aTurn());
 
             expect(store.save).to.not.have.been.called;
         });
 
         it("stars when the last pomodoro is over", async () => {
-            settings.get.resolves(aMob());
+            settings.get.resolves(aMobSettings());
             let now = new Date();
             store.get.withArgs('test-mob-pomodoro').returns(JSON.stringify({
                 formatVersion: 1,
@@ -71,7 +72,7 @@ describe("Pomodoro", () => {
                 length: 30
             }));
 
-            await pomodoro.get().turnStarted('test-mob', new Date());
+            await pomodoro.get().turnStarted('test-mob', aTurn());
 
             expect(store.save).to.have.been.called;
         });
@@ -80,7 +81,7 @@ describe("Pomodoro", () => {
     describe("status", () => {
 
         it("contains the ratio of the current pomodoro", async () => {
-            settings.get.resolves(aMob());
+            settings.get.resolves(aMobSettings());
             let now = new Date();
             store.get.withArgs('test-mob-pomodoro').returns(JSON.stringify({
                 formatVersion: 1,
@@ -102,7 +103,7 @@ describe("Pomodoro", () => {
         });
 
         it("is null when pomodoro is off for the mob", async () => {
-            let mob = aMob();
+            let mob = aMobSettings();
             mob.pomodoro.active = false;
             settings.get.resolves(mob);
 
@@ -112,7 +113,7 @@ describe("Pomodoro", () => {
         });
 
         it("is null when there is no pomodoro in progress", async () => {
-            settings.get.resolves(aMob());
+            settings.get.resolves(aMobSettings());
             store.get.withArgs('test-mob-pomodoro').returns(null);
 
             let status = await pomodoro.get().status("test-mob");
@@ -122,7 +123,7 @@ describe("Pomodoro", () => {
     });
 });
 
-function aMob() {
+function aMobSettings() {
     return {
         formatVersion: 1,
         lengthInMinutes: 10,
@@ -131,4 +132,8 @@ function aMob() {
             turns: 3
         }
     };
+}
+
+function aTurn(startTime) {
+    return new Turn(10 * 60, startTime || new Date());
 }

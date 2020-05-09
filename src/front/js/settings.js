@@ -9,5 +9,7 @@ export function setupSync(socket, mobName) {
 }
 
 export function minutesByPerson() {
+    if (mods === "fast") return parseInt(durationByPerson.value) / 60;
+    if (mods === "faster") return parseInt(durationByPerson.value) / 600;
     return parseInt(durationByPerson.value);
 }

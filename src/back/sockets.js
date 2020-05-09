@@ -11,9 +11,9 @@ exports.setup = io => {
         });
 
         socket.on('start mob', (name, lengthInMinutes) => {
-            console.log(`Mob "${name}", of length ${lengthInMinutes}min started`);
-            let mobTurn = allTurns.start(name, parseInt(lengthInMinutes));
-            pomodoro.turnStarted(name, mobTurn.startTime).then(console.debug);
+            console.log(`Mob "${name}", of length ${lengthInMinutes} min started`);
+            let mobTurn = allTurns.start(name, parseFloat(lengthInMinutes));
+            pomodoro.turnStarted(name, mobTurn).then(console.debug);
         });
 
         socket.on('change length', (mobName, lengthInMinutes) => {

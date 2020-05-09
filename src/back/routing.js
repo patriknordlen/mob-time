@@ -5,6 +5,7 @@ const slugify = require("slugify");
 
 exports.start = app => {
     app.get("/", (req, res) => res.render("home.pug"));
+
     app.post("/", (req, res) => {
         const mobName = slugify(req.body.mobName);
         allSettings
@@ -13,12 +14,15 @@ exports.start = app => {
                 .save(mobName, settings)
                 .then(_ => res.redirect("/" + mobName)));
     });
+
     app.get("/index.html", (req, res) => res.redirect("/"));
+
     app.get("/:mob", (req, res) =>
         allSettings.get(req.params.mob)
                    .then(settings => {
                        const data = {
                            mobName: req.params.mob,
+                           mods: req.query.mods,
                            length: settings.lengthInMinutes,
                            pomodoro: {
                                featureOn: pomodoro.featureOn(),
@@ -34,6 +38,7 @@ exports.start = app => {
                            {message: "The new-room mob does not seem to exist. You can create it from <a href=\"/\">the home page</a>."}
                        );
                    }));
+
     app.get("/:mob/status", async (req, res) => {
         let turn = await allTurns.get(req.params.mob);
         let data = turn.getState();
