@@ -1,4 +1,4 @@
-describe("Pomodoro", () => {
+describe.skip("Pomodoro", () => {
     process.env.FEATURES = "pomodoro"
     it("is off by default", () => {
         cy.join(`off-by-default`);
