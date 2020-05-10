@@ -1,6 +1,7 @@
 const allTurns = require("./turn/allTurns");
 const allSettings = require("./settings/allSettings");
 const pomodoro = require("./pomodoro/facade");
+let features = require("./features/facade");
 const slugify = require("slugify");
 
 exports.start = app => {
@@ -27,7 +28,7 @@ exports.start = app => {
             mods: req.query.mods,
             length: settings.lengthInMinutes,
             pomodoro: {
-                featureOn: pomodoro.featureOn(),
+                featureOn: features.isOn("pomodoro", mobName),
                 active: settings.pomodoro.active,
                 turns: settings.pomodoro.turns,
             }

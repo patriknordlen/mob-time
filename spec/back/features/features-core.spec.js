@@ -2,7 +2,7 @@ const chai = require("chai");
 const {isOn, activate, clean} = require("../../../src/back/features/core");
 const expect = chai.expect;
 
-describe("Features", () => {
+describe("Features - core", () => {
     describe("isOn", () => {
         it('is off when the feature is neither in the server or the mob', function () {
             expect(isOn("pomodoro", "", "")).to.be.false;

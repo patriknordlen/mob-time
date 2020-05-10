@@ -2,17 +2,25 @@ const crate = require("./crate");
 const Pomodoro = require("./Pomodoro");
 const Off = require("./Off");
 const allSettings = require("../settings/allSettings");
+const features = require("../features/facade");
 
-exports.featureOn = () => {
-    const features = process.env.FEATURES || "";
-    return features.includes("pomodoro");
+class FeatureToggle {
+    on = new FeatureOn();
+    off = new FeatureOff();
+
+    async status(name) {
+        return this.feature(name).status(name);
+    }
+
+    async turnStarted(name, turn) {
+        return this.feature(name).turnStarted(name, turn);
+    }
+
+    feature(name) {
+        if (features.isOn("pomodoro", name)) return this.on;
+        return this.off;
+    }
 }
-
-exports.get = function () {
-    return this.featureOn()
-        ? new FeatureOn()
-        : new FeatureOff();
-};
 
 class FeatureOn {
     async status(name) {
@@ -43,3 +51,9 @@ class FeatureOff {
     async turnStarted() {
     }
 }
+
+const featureToggle = new FeatureToggle();
+
+exports.get = function () {
+    return featureToggle;
+};
