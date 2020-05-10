@@ -1,5 +1,5 @@
-const chai = require("chai");
 const {toSettings} = require("../../../src/back/settings/settings");
+const chai = require("chai");
 const expect = chai.expect;
 
 describe("Mob Settings", () => {

@@ -6,13 +6,11 @@ const slugify = require("slugify");
 exports.start = app => {
     app.get("/", (req, res) => res.render("home.pug"));
 
-    app.post("/", (req, res) => {
+    app.post("/", async (req, res) => {
         const mobName = slugify(req.body.mobName);
-        allSettings
-            .get(mobName)
-            .then(settings => allSettings
-                .save(mobName, settings)
-                .then(_ => res.redirect("/" + mobName)));
+        let settings = await allSettings.get(mobName);
+        await allSettings.save(mobName, settings);
+        res.redirect("/" + mobName);
     });
 
     app.get("/index.html", (req, res) => res.redirect("/"));
