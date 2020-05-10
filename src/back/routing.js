@@ -17,27 +17,25 @@ exports.start = app => {
 
     app.get("/index.html", (req, res) => res.redirect("/"));
 
-    app.get("/:mob", (req, res) =>
-        allSettings.get(req.params.mob)
-                   .then(settings => {
-                       const data = {
-                           mobName: req.params.mob,
-                           mods: req.query.mods,
-                           length: settings.lengthInMinutes,
-                           pomodoro: {
-                               featureOn: pomodoro.featureOn(),
-                               active: settings.pomodoro.active,
-                               turns: settings.pomodoro.turns,
-                           }
-                       };
-                       return res.render("mob.pug", data);
-                   })
-                   .catch(_ => {
-                       res.status(404);
-                       return res.render("404.pug",
-                           {message: "The new-room mob does not seem to exist. You can create it from <a href=\"/\">the home page</a>."}
-                       );
-                   }));
+    app.get("/:mob", async (req, res) => {
+        let mobName = req.params.mob;
+        let settings = await allSettings.get(mobName);
+        if (!settings) {
+            return notFound(mobName, res);
+        }
+
+        let data = {
+            mobName: mobName,
+            mods: req.query.mods,
+            length: settings.lengthInMinutes,
+            pomodoro: {
+                featureOn: pomodoro.featureOn(),
+                active: settings.pomodoro.active,
+                turns: settings.pomodoro.turns,
+            }
+        };
+        return res.render("mob.pug", data);
+    });
 
     app.get("/:mob/status", async (req, res) => {
         let turn = await allTurns.get(req.params.mob);
@@ -46,3 +44,12 @@ exports.start = app => {
         return res.json(data);
     });
 };
+
+function notFound(mobName, res) {
+    res.status(404);
+    return res.render("404.pug",
+        {message: `The ${mobName} mob does not seem to exist. You can create it from <a href="/">the home page</a>.`}
+    );
+}
+
+
