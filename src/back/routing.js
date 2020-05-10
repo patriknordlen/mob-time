@@ -1,5 +1,5 @@
 const allTurns = require("./turn/allTurns");
-const allSettings = require("./allSettings");
+const allSettings = require("./settings/allSettings");
 const pomodoro = require("./pomodoro/facade");
 const slugify = require("slugify");
 

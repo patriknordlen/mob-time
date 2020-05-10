@@ -1,4 +1,4 @@
-const allSettings = require("../allSettings");
+const allSettings = require("../settings/allSettings");
 const store = require("../stores/stores").get();
 const Pomodoro = require("./Pomodoro");
 const Off = require("./Off");

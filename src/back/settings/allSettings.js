@@ -1,4 +1,4 @@
-const store = require("./stores/stores").get();
+const store = require("../stores/stores").get();
 
 const defaultSettings = {
     formatVersion: 1,
