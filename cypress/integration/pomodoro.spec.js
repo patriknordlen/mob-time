@@ -8,28 +8,39 @@ describe("Pomodoro", () => {
     it("is on when turn is started", () => {
         let mobName = `on-when-started`;
         cy.join(mobName);
-        cy.visit(`/${mobName}?mods=faster`);
-        activatePomodoro();
-        cy.get("#start-pause").click();
-        cy.wait(200);
-        isPomodoroStarted();
+        withFasterMod(() => {
+            activatePomodoro();
+            cy.get("#start-pause").click();
+            cy.wait(200);
+            isPomodoroStarted();
+        });
     });
     it("turns off when the time runs out", () => {
         let mobName = `pomodoro-time-out`;
         cy.join(mobName);
-        cy.visit(`/${mobName}?mods=faster`);
-        activatePomodoro();
-        cy.get("#start-pause").click();
-        cy.wait(100);
-        isPomodoroStarted();
-        cy.wait(500);
-        isPomodoroStopped();
+        withFasterMod(() => {
+            activatePomodoro();
+            cy.get("#start-pause").click();
+            cy.wait(100);
+            isPomodoroStarted();
+            cy.wait(500);
+            isPomodoroStopped();
+        });
     });
 });
 
+function withFasterMod(func) {
+    cy.url().then($url => {
+        cy.log($url);
+        cy.visit(`${$url}?mods=faster`);
+        func();
+    });
+}
+
 function activatePomodoro() {
     cy.get(".settings-button").click();
-    cy.get("#pomodoro-active").click();
+    cy.wait(200);
+    cy.get("#pomodoro-active").check();
 }
 
 function isPomodoroStarted() {
