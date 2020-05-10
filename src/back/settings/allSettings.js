@@ -1,19 +1,13 @@
 const store = require("../stores/stores").get();
+const {toSettings} = require("./settings");
 
-const defaultSettings = {
-    formatVersion: 1,
-    lengthInMinutes: 10,
-    pomodoro: {
-        active: false,
-        turns: 3
-    }
-};
+exports.default = toSettings({});
 
 // ---------------------------------------
 // Length
 // ---------------------------------------
 exports.saveLength = async function(name, lengthInMinutes) {
-    let settings = await this.get(name) || defaultSettings;
+    let settings = await this.get(name) || this.default;
     settings.lengthInMinutes = lengthInMinutes;
     await this.save(name, settings);
 };
@@ -24,20 +18,19 @@ exports.getLength = async function (name) {
 // ---------------------------------------
 
 exports.save = async function(name, settings) {
-    const toSave = settings || defaultSettings;
+    const toSave = settings || this.default;
     await store.save(toSettingsName(name), JSON.stringify(toSave));
 };
 
 exports.get = async function (name) {
-    let rawSettings = await store.get(toSettingsName(name));
-    if (!rawSettings) return null;
-    if (isRawLength(rawSettings)) {
-        await this.saveLength(name, rawSettings);
+    let rawJsonSettings = await store.get(toSettingsName(name));
+    if (!rawJsonSettings) return null;
+    if (isRawLength(rawJsonSettings)) {
+        await this.saveLength(name, rawJsonSettings);
         return this.get(name);
     }
-    let settings = JSON.parse(rawSettings);
-    settings.pomodoro = settings.pomodoro || defaultSettings.pomodoro;
-    return settings;
+    let rawSettings = JSON.parse(rawJsonSettings);
+    return toSettings(rawSettings);
 };
 
 function isRawLength(rawSettings) {
