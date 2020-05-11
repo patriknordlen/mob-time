@@ -24,6 +24,12 @@ describe("Features - core", () => {
         it('adds the feature to the mob feature list', function () {
             expect(activate("pomodoro", "fasterTime", ["pomodoro", "fasterTime"])).to.equal("fasterTime,pomodoro");
         });
+        it('adds the features that not already present', function () {
+            expect(activate("pomodoro,fasterTime", "fasterTime", ["pomodoro", "fasterTime"])).to.equal("fasterTime,pomodoro");
+        });
+        it('adds no feature when they are all present', function () {
+            expect(activate("pomodoro,fasterTime", "pomodoro,fasterTime", ["pomodoro", "fasterTime"])).to.equal("pomodoro,fasterTime");
+        });
         it('does nothing for an unknown feature', function () {
             expect(activate("unknownFeature", "fasterTime", ["pomodoro", "fasterTime"])).to.equal("fasterTime");
         });
