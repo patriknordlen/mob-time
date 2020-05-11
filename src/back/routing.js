@@ -35,7 +35,7 @@ exports.start = app => {
                 turns: settings.pomodoro.turns,
             }
         };
-        return res.render("mob.pug", data);
+        return res.render("mob/mob.pug", data);
     });
 
     app.get("/:mob/status", async (req, res) => {

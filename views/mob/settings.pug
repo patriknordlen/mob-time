@@ -1,0 +1,36 @@
+section#settings
+    h2
+        i(class='fas fa-users')
+        | Shared with the mob
+    fieldset
+        input#minutes-by-person(type='number' min='1' max='60' required='' value=length size='2')
+        label(for='minutes-by-person') minutes / pers.
+    if pomodoro.featureOn
+        fieldset
+            input#pomodoro-active(type='checkbox' checked=pomodoro.active)
+            label(for='pomodoro-active') Pomodoro (experimental)
+        fieldset#turns-by-pomodoro-fieldset
+            input#turns-by-pomodoro(type='number' min='1' max='25' required='' value=pomodoro.turns size='2')
+            label(for='turns-by-pomodoro') Number of turns by pomodoro
+
+    h2
+        i(class='fas fa-user-secret')
+        | Personal
+    fieldset
+        input#second-counting-mode(type='checkbox')
+        label(for='second-counting-mode') Display seconds
+    fieldset#volume-container
+        label(for='volume')
+            i.fas.fa-volume-up
+        input#volume(type='range' min='1' max='100' value='50')
+    fieldset
+        label(for='alarm-url') mp3
+        textarea#alarm-url
+            | https://www.myinstants.com/media/sounds/celebration.mp3
+            | https://www.myinstants.com/media/sounds/denis-brogniart-ah-original.mp3
+            | https://www.myinstants.com/media/sounds/over-9000.mp3
+            | https://www.myinstants.com/media/sounds/psy-gangnam-style-1.mp3
+            | https://www.myinstants.com/media/sounds/intro-uefa-champions-league2.mp3
+            | https://www.myinstants.com/media/sounds/-fort-boyard-audio-cutter.mp3
+            | https://www.myinstants.com/media/sounds/poudreperlinpinpin.mp3
+            | https://www.myinstants.com/media/sounds/the-sound-of-silence.mp3

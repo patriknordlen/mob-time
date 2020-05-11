@@ -1,0 +1,42 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    title Mob Time !
+    link(rel='stylesheet' type='text/css' href='/css/normalize.css')
+    link(href='/css/google-fonts.css' rel='stylesheet')
+    link(rel='stylesheet' type='text/css' href='/css/mob/main.css')
+    link(rel='icon' type='image/png' href='/image/favicon.png')
+main#panel
+    nav
+        button.settings-button
+            i(class="fas fa-cog")
+    form#container(name='container')
+        section#clock
+            button#start-pause
+                i#control-icons.fas
+                span#time-left
+            svg#countdown
+                circle#countdown-circle-background(r='92' cx='99' cy='99')
+                circle#countdown-circle(r='92' cx='99' cy='99')
+            if pomodoro.featureOn
+                svg#pomodoro
+                    circle#pomodoro-outer(r='107' cx='120' cy='120')
+                    circle#pomodoro-background(r='103' cx='120' cy='120')
+                    circle#pomodoro-circle(r='103' cx='120' cy='120')
+        section#title
+            h1: a(href="/" title="Home") Mob Time
+            h2 You are in the <em>#{mobName}</em> mob
+                a(href="javascript:" id="share-room" title="Copy mob url to clipboard")
+                    i(class="fas fa-link")
+        ul#members
+
+        a#github(href="https://github.com/HadrienMP/mob-time" target="_blank")
+            i.fab.fa-github
+            | Fork, contribute, improve, deploy, have fun !
+
+include settings
+
+audio#alarm-sound
+    source(type='audio/mpeg' src='')
+
+include scripts
