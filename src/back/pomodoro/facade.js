@@ -38,7 +38,7 @@ class FeatureOn {
     async length(name, turn) {
         let settings = await allSettings.get(name);
         let length = turn.lengthInSeconds * settings.pomodoro.turns / 60;
-        console.log(`Pomodoro of length ${length} min started`)
+
         return length;
     }
 }

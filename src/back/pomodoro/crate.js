@@ -22,7 +22,7 @@ async function isPomodoroOff(name) {
 }
 
 exports.save = function (name, pomodoro) {
-    console.log(pomodoro);
+
     store.save(toPomodoroName(name), JSON.stringify({
         formatVersion: 1,
         start: pomodoro.start,

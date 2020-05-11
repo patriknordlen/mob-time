@@ -22,11 +22,12 @@ exports.start = app => {
         if (!settings) {
             return notFound(mobName, res);
         }
-        await features.activate(req.query.mods, mobName);
+        let mods = req.query.mods;
+        await features.activate(mods, mobName);
 
         let data = {
             mobName: mobName,
-            mods: req.query.mods,
+            mods: mods,
             length: settings.lengthInMinutes,
             pomodoro: {
                 featureOn: await features.isOn("pomodoro", mobName),

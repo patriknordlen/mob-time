@@ -1,14 +1,15 @@
-describe.skip("Pomodoro", () => {
-    process.env.FEATURES = "pomodoro"
+describe("Pomodoro", () => {
     it("is off by default", () => {
         cy.join(`off-by-default`);
-        activatePomodoro();
-        isPomodoroStopped();
+        withMods("faster,pomodoro", () => {
+            activatePomodoro();
+            isPomodoroStopped();
+        });
     });
     it("is on when turn is started", () => {
         let mobName = `on-when-started`;
         cy.join(mobName);
-        withFasterMod(() => {
+        withMods("faster,pomodoro", () => {
             activatePomodoro();
             cy.get("#start-pause").click();
             cy.wait(200);
@@ -18,7 +19,7 @@ describe.skip("Pomodoro", () => {
     it("turns off when the time runs out", () => {
         let mobName = `pomodoro-time-out`;
         cy.join(mobName);
-        withFasterMod(() => {
+        withMods("faster,pomodoro", () => {
             activatePomodoro();
             cy.get("#start-pause").click();
             cy.wait(100);
@@ -29,10 +30,9 @@ describe.skip("Pomodoro", () => {
     });
 });
 
-function withFasterMod(func) {
+function withMods(mods, func) {
     cy.url().then($url => {
-        cy.log($url);
-        cy.visit(`${$url}?mods=faster`);
+        cy.visit(`${$url}?mods=${mods}`);
         func();
     });
 }

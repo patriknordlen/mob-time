@@ -20,7 +20,7 @@ describe("Mob turns", () => {
             it("stops when the time runs out", () => {
                 let mobName = `${features}-3`;
                 cy.join(mobName);
-                cy.visit(`http://localhost:3000/${mobName}?mods=faster`)
+                cy.visit(`/${mobName}?mods=faster`)
                 cy.get("#start-pause").click();
                 cy.wait(200);
                 isTurnStopped();

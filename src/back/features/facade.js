@@ -11,6 +11,6 @@ exports.isOn = async (feature, mob) => {
 exports.activate = async (features, mob) => {
     let settings = await allSettings.get(mob) || allSettings.default;
     settings.features = core.activate(features, settings.features, legalFeatures);
-    console.log(settings.features);
+
     await allSettings.save(mob, settings);
 }

@@ -80,16 +80,17 @@ script(type='application/javascript' src='/socket.io/socket.io.js')
 script(type='application/javascript' src='https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js')
 script(type='application/javascript').
     mobName = "#{mobName}";
-    mods = "#{mods}";
+    mods = "#{mods}".split(",");
+
 script(type='application/javascript' src='/js/bundle.js')
 script(type='application/javascript').
     var slideout = new Slideout({
-                                    'panel': document.getElementById('panel'),
-                                    'menu': document.getElementById('settings'),
-                                    'padding': 400,
-                                    'tolerance': 70,
-                                    'side': 'right'
-                                });
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('settings'),
+        'padding': 400,
+        'tolerance': 70,
+        'side': 'right'
+    });
     // Toggle button
     document.querySelector('.settings-button').addEventListener('click', function () {
         slideout.toggle();
