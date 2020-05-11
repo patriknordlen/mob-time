@@ -33,4 +33,14 @@ describe("Mob Settings", () => {
             expect(settings.pomodoro.turns).to.be.equal(3);
         });
     });
+    describe("features", () => {
+        it('is empty by default', function () {
+            let settings = toSettings({});
+            expect(settings.features).to.be.equal("");
+        });
+        it('is the provided value', function () {
+            let settings = toSettings({features: "pomodoro,fasterTime"});
+            expect(settings.features).to.be.equal("pomodoro,fasterTime");
+        });
+    });
 });
