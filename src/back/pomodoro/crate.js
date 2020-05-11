@@ -17,7 +17,7 @@ exports.findBy = async function (name) {
 }
 
 async function isPomodoroOff(name) {
-    let settings = await allSettings.get(name);
+    let settings = await allSettings.get(name) || allSettings.default;
     return !settings.pomodoro.active;
 }
 

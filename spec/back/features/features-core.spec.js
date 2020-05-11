@@ -33,6 +33,12 @@ describe("Features - core", () => {
         it('does nothing for an unknown feature', function () {
             expect(activate("unknownFeature", "fasterTime", ["pomodoro", "fasterTime"])).to.equal("fasterTime");
         });
+        it('does nothing for undefined features', function () {
+            expect(activate(undefined, "fasterTime", ["pomodoro", "fasterTime"])).to.equal("fasterTime");
+        });
+        it('the features for an empty mob features list', function () {
+            expect(activate("pomodoro", "", ["pomodoro", "fasterTime"])).to.equal("pomodoro");
+        });
     });
     describe("clean", () => {
         [
