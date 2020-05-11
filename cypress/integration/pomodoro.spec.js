@@ -1,3 +1,5 @@
+const {withMods} = require("../support/mods");
+
 describe("Pomodoro", () => {
     it("is off by default", () => {
         cy.join(`off-by-default`);
@@ -29,13 +31,6 @@ describe("Pomodoro", () => {
         });
     });
 });
-
-function withMods(mods, func) {
-    cy.url().then($url => {
-        cy.visit(`${$url}?mods=${mods}`);
-        func();
-    });
-}
 
 function activatePomodoro() {
     cy.get(".settings-button").click();
