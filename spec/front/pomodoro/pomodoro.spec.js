@@ -70,9 +70,9 @@ describe("Pomodoro", () => {
                 expect(displayLeftRatio).to.have.been.calledOnceWith(0);
             });
 
-            it("does nothing when the ratio is absent", () => {
-                core.handle({}, displayLeftRatio, breakSignal);
-                expect(displayLeftRatio).not.to.have.been.called;
+            it("display the progress bar full when ratio absent", () => {
+                core.handle({"ratio": null, "state": {"breakSignaled": false}}, displayLeftRatio, breakSignal);
+                expect(displayLeftRatio).to.have.been.calledOnceWith(0);
             });
         });
 

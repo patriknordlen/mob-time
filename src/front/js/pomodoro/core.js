@@ -1,5 +1,6 @@
 export function handle(data, displayTimeLeftRatio, breakSignal) {
     if (!data.ratio) {
+        displayTimeLeftRatio(0);
         return data.state;
     }
 

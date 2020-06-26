@@ -29,6 +29,10 @@ exports.setup = io => {
             socket.to(mobName).emit('pomodoro activation change', status);
         });
 
+        socket.on('pomodoro stop', (mobName) => {
+            pomodoro.feature(mobName).stop(mobName);
+        });
+
         socket.on("change turns by pomodoro", (mobName, number) => {
             allSettings.get(mobName).then(settings => {
                 settings.pomodoro.turns = number;

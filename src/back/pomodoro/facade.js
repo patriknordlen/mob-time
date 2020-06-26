@@ -41,6 +41,10 @@ class FeatureOn {
 
         return length;
     }
+
+    async stop(name) {
+        crate.delete(name); 
+    }
 }
 
 class FeatureOff {
@@ -50,6 +54,7 @@ class FeatureOff {
 
     async turnStarted() {
     }
+    async stop() {}
 }
 
 const featureToggle = new FeatureToggle();

@@ -29,3 +29,7 @@ exports.save = function (name, pomodoro) {
         length: pomodoro.length
     }));
 }
+
+exports.delete = function (name) {
+    store.delete(toPomodoroName(name));
+}
