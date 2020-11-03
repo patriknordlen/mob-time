@@ -29,7 +29,21 @@ main#panel
             h2 You are in the <em>#{mobName}</em> mob
                 a(href="javascript:" id="share-room" title="Copy mob url to clipboard")
                     i(class="fas fa-link")
-        ul#members
+        if members
+            ul#members
+                each member, i in members
+                    if i == 0
+                        li#driver
+                            i(class="fas fa-dharmachakra")
+                            | #{member}
+                    else if i == 1
+                        li#navigator
+                            i(class="fas fa-drafting-compass")
+                            | #{member}
+                    else
+                        li#mobbers
+                            i(class="fas fa-user-secret")
+                            | #{member}
 
         a#github(href="https://github.com/HadrienMP/mob-time" target="_blank")
             i.fab.fa-github

@@ -6,19 +6,22 @@ exports.setup = io => {
         socket.on('join', name => socket.join(name));
 
         socket.on('interrupt mob', name => {
-
             allTurns.stop(name);
         });
 
-        socket.on('start mob', async (name, lengthInMinutes) => {
-
-            let mobTurn = allTurns.start(name, parseFloat(lengthInMinutes));
+        socket.on('start mob', async (name, members, lengthInMinutes) => {
+            let mobTurn = allTurns.start(name, members, parseFloat(lengthInMinutes));
             await pomodoro.turnStarted(name, mobTurn);
         });
 
         socket.on('change length', async (mobName, lengthInMinutes) => {
             await allSettings.saveLength(mobName, lengthInMinutes);
             socket.to(mobName).emit('change length', lengthInMinutes);
+        });
+
+        socket.on('change members', async (mobName, members) => {
+            await allSettings.saveMembers(mobName, members);
+            socket.to(mobName).emit('change members', members);
         });
 
         socket.on('pomodoro activation change', (mobName, status) => {

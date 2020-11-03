@@ -5,11 +5,11 @@ exports.get = async name => {
     let json = await store.get(toTurnName(name));
     if (json == null) return new MobTurn();
     let data = JSON.parse(json);
-    return new MobTurn(data.lengthInSeconds, new Date(data.startTime));
+    return new MobTurn(data.members, data.lengthInSeconds, new Date(data.startTime));
 };
 
-exports.start = (name, lengthInMinutes) => {
-    let mobTurn = new MobTurn(lengthInMinutes * 60);
+exports.start = (name, members, lengthInMinutes) => {
+    let mobTurn = new MobTurn(members, lengthInMinutes * 60);
     store.save(toTurnName(name), JSON.stringify(mobTurn));
     return mobTurn;
 };

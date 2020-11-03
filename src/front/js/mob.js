@@ -39,8 +39,8 @@ document.forms.container.onsubmit = function (event) {
         amplitude.getInstance().logEvent('STOP_SOUND');
         return;
     }
-    socket.emit("start mob", mobName, settings.minutesByPerson());
-    amplitude.getInstance().logEvent('START_MOB');
+    socket.emit("start mob", mobName, settings.membersAsArray(), settings.minutesByPerson());
+    // amplitude.getInstance().logEvent('START_MOB');
 };
 
 new ClipboardJS("#share-room", {
