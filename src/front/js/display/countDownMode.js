@@ -18,7 +18,7 @@ function turnOff() {
 }
 
 function rotateMembers() {
-    const memberArray = settings.membersAsArray();
-    memberList.value = [].concat(memberArray[memberArray.length - 1], memberArray.slice(0, memberArray.length - 1)).join(",");
+    var memberArray = settings.membersAsArray();
+    memberList.value = [].concat(memberArray.slice(1, memberArray.length), memberArray[0]).join(",");
     memberList.onchange();
-}
+  }
