@@ -53,3 +53,11 @@ new ClipboardJS("#share-room", {
 pomodoro.setup();
 require("./pomodoro/settings").setup(socket, mobName);
 settings.setupSync(socket, mobName);
+
+socket.on("start mob", function(member) {
+    if (Notification.permission != 'granted') {
+        Notification.requestPermission();
+    }
+
+    var notify = new Notification("Turn started", { body: member + " started their turn."});
+});

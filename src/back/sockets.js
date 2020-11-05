@@ -12,6 +12,10 @@ exports.setup = io => {
         socket.on('start mob', async (name, members, lengthInMinutes) => {
             let mobTurn = allTurns.start(name, members, parseFloat(lengthInMinutes));
             await pomodoro.turnStarted(name, mobTurn);
+
+            if (members.length > 0) {
+                socket.to(mobName).emit('start mob', members[0]);
+            }
         });
 
         socket.on('change length', async (mobName, lengthInMinutes) => {
