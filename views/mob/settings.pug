@@ -6,8 +6,8 @@ section#settings
         input#minutes-by-person(type='number' min='1' max='60' required='' value=length size='2')
         label(for='minutes-by-person') minutes / pers.
     fieldset
-        | Members
         label(for='memberList')
+        | Members
         input#memberList(type='text' value=memberList)
     if pomodoro.featureOn
         fieldset
