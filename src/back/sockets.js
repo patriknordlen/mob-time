@@ -14,7 +14,7 @@ exports.setup = io => {
             await pomodoro.turnStarted(name, mobTurn);
 
             if (members.length > 0) {
-                socket.to(mobName).emit('start mob', members[0]);
+                socket.to(name).emit('start mob', members[0]);
             }
         });
 
