@@ -166,7 +166,7 @@ p a {
 /* line 40, ../../../src/front/sass/mob/main.scss */
 #container #members {
   font-family: Roboto, sans-serif;
-  text-align: center;
+  text-align: start;
   padding: 0;
 }
 /* line 45, ../../../src/front/sass/mob/main.scss */
