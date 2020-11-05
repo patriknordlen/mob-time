@@ -5,7 +5,6 @@ const members = document.getElementById("members");
 export function setupSync(socket, mobName) {
     socket.on('change length', length => durationByPerson.value = length);
     socket.on('change members', changedMembers => {
-        console.log(changedMembers);
         memberList.value = changedMembers;
         updateMembers(changedMembers);
     });
