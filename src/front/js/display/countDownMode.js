@@ -4,7 +4,7 @@ const container = document.getElementById("container");
 const memberList = document.getElementById("memberList");
 
 document.addEventListener(events.TURN_ENDED, turnOff);
-document.addEventListener(events.TURN_ENDED, rotateMembers);
+document.addEventListener(events.TURN_ENDED, rotateMembersAndShowNotification);
 document.addEventListener(events.TURN_INTERRUPTED, turnOff);
 document.addEventListener(events.TURN_STARTED, turnOn);
 
@@ -17,8 +17,11 @@ function turnOff() {
     container.classList.remove("counting");
 }
 
-function rotateMembers() {
+function rotateMembersAndShowNotification() {
     var memberArray = settings.membersAsArray();
-    memberList.value = [].concat(memberArray.slice(1, memberArray.length), memberArray[0]).join(",");
+    var rotatedMemberArray = [].concat(memberArray.slice(1, memberArray.length), memberArray[0]);
+    memberList.value = rotatedMemberArray.join(",");
     memberList.onchange();
-  }
+
+    var notify = new Notification("Turn ended, time to switch!", { body: "Next up: " + rotatedMemberArray[0]})
+}

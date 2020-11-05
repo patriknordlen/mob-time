@@ -28,6 +28,11 @@ sound.init();
 display.init();
 document.forms.container.onsubmit = function (event) {
     event.preventDefault();
+
+    if (Notification.permission != 'granted') {
+        Notification.requestPermission();
+    }
+    
     if (turn.isInProgress()) {
         socket.emit("interrupt mob", mobName);
         return;
