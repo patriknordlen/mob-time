@@ -8,7 +8,7 @@ const turn = require("./mob/turn");
 const pomodoro = require("./pomodoro/countdown");
 
 mobTimer.timeLeftIn(mobName, update);
-setInterval(() => mobTimer.timeLeftIn(mobName, update), 100);
+setInterval(() => mobTimer.timeLeftIn(mobName, update), 500);
 
 function update(timerStatus) {
     eventsModule.throwEventFor(timerStatus, turn.isInProgress());
@@ -59,5 +59,5 @@ socket.on("start mob", function(member) {
         Notification.requestPermission();
     }
 
-    var notify = new Notification("Turn started", { body: member + " started their turn."});
+    var notify = new Notification("Turn started", { body: member + " started a turn."});
 });
