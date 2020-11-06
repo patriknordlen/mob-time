@@ -1,5 +1,5 @@
 # Mob time
-[![Build Status](https://travis-ci.com/HadrienMP/mob-time.svg?branch=master)](https://travis-ci.com/HadrienMP/mob-time)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=mob-time)]
 
 A shared timer that plays fun, random sounds at the end.  
 It has been designed as a timer for remote mob/pair programming. We wanted something
