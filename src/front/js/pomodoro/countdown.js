@@ -1,7 +1,7 @@
 const events = require("../events").events;
 const circleAnimation = require("../circle-animation");
 const core = require("./core");
-const circle = document.getElementById("pomodoro-circle");
+const circle = document.getElementById("countdown-circle");
 
 let state = {breakSignaled: true};
 

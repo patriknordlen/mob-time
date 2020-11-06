@@ -39,7 +39,7 @@
 
   #members {
     font-family: Roboto, sans-serif;
-    text-align: center;
+    text-align: start;
     padding: 0;
 
     li.driver, li.navigator {
@@ -58,7 +58,7 @@
       font-weight: normal;
     }
     li {
-      display: inline-block;
+      display: block;
       list-style-type: none;
       margin: 10px 0;
       width: 33%;

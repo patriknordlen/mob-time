@@ -17,6 +17,20 @@ exports.getLength = async function (name) {
 };
 // ---------------------------------------
 
+// ---------------------------------------
+// Members
+// ---------------------------------------
+exports.saveMembers = async function(name, members) {
+    let settings = await this.get(name) || this.default;
+    settings.members = members;
+    await this.save(name, settings);
+};
+
+exports.getMembers = async function (name) {
+    return this.get(name).then(value => value.members);
+};
+// ---------------------------------------
+
 exports.save = async function(name, settings) {
     const toSave = settings || this.default;
     await store.save(toSettingsName(name), JSON.stringify(toSave));

@@ -29,6 +29,8 @@ exports.start = app => {
             mobName: mobName,
             mods: mods,
             length: settings.lengthInMinutes,
+            members: settings.members,
+            memberList: settings.members.join(","),
             pomodoro: {
                 featureOn: await features.isOn("pomodoro", mobName),
                 active: settings.pomodoro.active,

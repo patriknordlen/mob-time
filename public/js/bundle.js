@@ -4,106 +4,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.get = get;
-
-(function (e, t) {
-  var n = e.amplitude || {
-    _q: [],
-    _iq: {}
-  };
-  var r = t.createElement("script");
-  r.type = "text/javascript";
-  r.integrity = "sha384-d/yhnowERvm+7eCU79T/bYjOiMmq4F11ElWYLmt0ktvYEVgqLDazh4+gW9CKMpYW";
-  r.crossOrigin = "anonymous";
-  r.async = true;
-  r.src = "https://cdn.amplitude.com/libs/amplitude-5.2.2-min.gz.js";
-
-  r.onload = function () {
-    if (!e.amplitude.runQueuedFunctions) {
-      console.log("[Amplitude] Error: could not load SDK");
-    }
-  };
-
-  var i = t.getElementsByTagName("script")[0];
-  i.parentNode.insertBefore(r, i);
-
-  function s(e, t) {
-    e.prototype[t] = function () {
-      this._q.push([t].concat(Array.prototype.slice.call(arguments, 0)));
-
-      return this;
-    };
-  }
-
-  var o = function o() {
-    this._q = [];
-    return this;
-  };
-
-  var a = ["add", "append", "clearAll", "prepend", "set", "setOnce", "unset"];
-
-  for (var u = 0; u < a.length; u++) {
-    s(o, a[u]);
-  }
-
-  n.Identify = o;
-
-  var c = function c() {
-    this._q = [];
-    return this;
-  };
-
-  var l = ["setProductId", "setQuantity", "setPrice", "setRevenueType", "setEventProperties"];
-
-  for (var p = 0; p < l.length; p++) {
-    s(c, l[p]);
-  }
-
-  n.Revenue = c;
-  var d = ["init", "logEvent", "logRevenue", "setUserId", "setUserProperties", "setOptOut", "setVersionName", "setDomain", "setDeviceId", "setGlobalUserProperties", "identify", "clearUserProperties", "setGroup", "logRevenueV2", "regenerateDeviceId", "groupIdentify", "onInit", "logEventWithTimestamp", "logEventWithGroups", "setSessionId", "resetSessionId"];
-
-  function v(e) {
-    function t(t) {
-      e[t] = function () {
-        e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)));
-      };
-    }
-
-    for (var n = 0; n < d.length; n++) {
-      t(d[n]);
-    }
-  }
-
-  v(n);
-
-  n.getInstance = function (e) {
-    e = (!e || e.length === 0 ? "$default_instance" : e).toLowerCase();
-
-    if (!n._iq.hasOwnProperty(e)) {
-      n._iq[e] = {
-        _q: []
-      };
-      v(n._iq[e]);
-    }
-
-    return n._iq[e];
-  };
-
-  e.amplitude = n;
-})(window, document);
-
-amplitude.getInstance().init("3fecdc3572189da5ba6c3caab23a486f");
-
-function get() {
-  return amplitude;
-}
-
-},{}],2:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.progression = progression;
 exports.dasharray = dasharray;
 
@@ -120,13 +20,17 @@ function dasharray(circle) {
   return window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
 }
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 "use strict";
 
 var events = require("../events").events;
 
+var settings = require("../settings");
+
 var container = document.getElementById("container");
+var memberList = document.getElementById("memberList");
 document.addEventListener(events.TURN_ENDED, turnOff);
+document.addEventListener(events.TURN_ENDED, rotateMembersAndShowNotification);
 document.addEventListener(events.TURN_INTERRUPTED, turnOff);
 document.addEventListener(events.TURN_STARTED, turnOn);
 
@@ -139,7 +43,17 @@ function turnOff() {
   container.classList.remove("counting");
 }
 
-},{"../events":6}],4:[function(require,module,exports){
+function rotateMembersAndShowNotification() {
+  var memberArray = settings.membersAsArray();
+  var rotatedMemberArray = [].concat(memberArray.slice(1, memberArray.length), memberArray[0]);
+  memberList.value = rotatedMemberArray.join(",");
+  memberList.onchange();
+  var notify = new Notification("Turn ended, time to switch!", {
+    body: "Next up: " + rotatedMemberArray[0]
+  });
+}
+
+},{"../events":5,"../settings":12}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -182,7 +96,7 @@ function timeFormatter() {
   return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":7,"../spi/settings":16,"./mainButton":5}],5:[function(require,module,exports){
+},{"../functions/human_readable_time":6,"../spi/settings":15,"./mainButton":4}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -230,7 +144,7 @@ function ratio(timerStatus) {
   return timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000);
 }
 
-},{"../circle-animation":2,"../sound":14}],6:[function(require,module,exports){
+},{"../circle-animation":1,"../sound":13}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -246,7 +160,7 @@ var events = {
 };
 exports.events = events;
 
-function throwEventFor(timerStatus, mobInProgress) {
+function throwEventFor(timerStatus, mob) {
   return detectFrom(timerStatus, mobInProgress);
 }
 
@@ -293,7 +207,7 @@ function details(timerStatus, mobInProgress) {
   };
 }
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -327,7 +241,7 @@ function toSeconds(milliseconds) {
   return Math.round(milliseconds / 1000);
 }
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 var sound = require("./sound");
@@ -335,8 +249,6 @@ var sound = require("./sound");
 var display = require("./display/display");
 
 require("./display/countDownMode");
-
-var amplitude = require("./amplitude,").get();
 
 var mobTimer = require("./spi/mobTimer");
 
@@ -351,7 +263,7 @@ var pomodoro = require("./pomodoro/countdown");
 mobTimer.timeLeftIn(mobName, update);
 setInterval(function () {
   return mobTimer.timeLeftIn(mobName, update);
-}, 100);
+}, 500);
 
 function update(timerStatus) {
   eventsModule.throwEventFor(timerStatus, turn.isInProgress());
@@ -372,20 +284,21 @@ display.init();
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
 
+  if (Notification.permission != 'granted') {
+    Notification.requestPermission();
+  }
+
   if (turn.isInProgress()) {
-    amplitude.getInstance().logEvent('STOP_MOB');
     socket.emit("interrupt mob", mobName);
     return;
   }
 
   if (sound.isPlaying()) {
     sound.stop();
-    amplitude.getInstance().logEvent('STOP_SOUND');
     return;
   }
 
-  socket.emit("start mob", mobName, settings.minutesByPerson());
-  amplitude.getInstance().logEvent('START_MOB');
+  socket.emit("start mob", mobName, settings.membersAsArray(), settings.minutesByPerson());
 };
 
 new ClipboardJS("#share-room", {
@@ -400,8 +313,17 @@ pomodoro.setup();
 require("./pomodoro/settings").setup(socket, mobName);
 
 settings.setupSync(socket, mobName);
+socket.on("start mob", function (member) {
+  if (Notification.permission != 'granted') {
+    Notification.requestPermission();
+  }
 
-},{"./amplitude,":1,"./display/countDownMode":3,"./display/display":4,"./events":6,"./mob/turn":9,"./pomodoro/countdown":11,"./pomodoro/settings":12,"./settings":13,"./sound":14,"./spi/mobTimer":15}],9:[function(require,module,exports){
+  var notify = new Notification("Turn started", {
+    body: member + " started a turn."
+  });
+});
+
+},{"./display/countDownMode":2,"./display/display":3,"./events":5,"./mob/turn":8,"./pomodoro/countdown":10,"./pomodoro/settings":11,"./settings":12,"./sound":13,"./spi/mobTimer":14}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -426,7 +348,7 @@ function isInProgress() {
   return inProgress;
 }
 
-},{"../events":6}],10:[function(require,module,exports){
+},{"../events":5}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -462,7 +384,7 @@ function isPomodoroOver(data) {
   return data.ratio >= 1;
 }
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -476,7 +398,7 @@ var circleAnimation = require("../circle-animation");
 
 var core = require("./core");
 
-var circle = document.getElementById("pomodoro-circle");
+var circle = document.getElementById("countdown-circle");
 var state = {
   breakSignaled: true
 };
@@ -498,7 +420,7 @@ function setup() {
   document.addEventListener(events.TIME_PASSED, handle);
 }
 
-},{"../circle-animation":2,"../events":6,"./core":10}],12:[function(require,module,exports){
+},{"../circle-animation":1,"../events":5,"./core":9}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -552,7 +474,7 @@ function isOn() {
   return active ? active.checked : false;
 }
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -560,15 +482,29 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setupSync = setupSync;
 exports.minutesByPerson = minutesByPerson;
+exports.updateMembers = updateMembers;
+exports.membersAsArray = membersAsArray;
 var durationByPerson = document.getElementById("minutes-by-person");
+var memberList = document.getElementById("memberList");
+var members = document.getElementById("members");
 
 function setupSync(socket, mobName) {
   socket.on('change length', function (length) {
     return durationByPerson.value = length;
   });
+  socket.on('change members', function (changedMembers) {
+    memberList.value = changedMembers;
+    updateMembers(changedMembers);
+  });
 
   durationByPerson.onchange = function () {
     socket.emit("change length", mobName, this.value);
+  };
+
+  memberList.onchange = function () {
+    var memberArray = this.value.split(",");
+    socket.emit("change members", mobName, memberArray);
+    updateMembers(memberArray);
   };
 }
 
@@ -578,7 +514,34 @@ function minutesByPerson() {
   return parseInt(durationByPerson.value);
 }
 
-},{}],14:[function(require,module,exports){
+function updateMembers(changedMembers) {
+  members.innerHTML = "";
+  var li_ids = ["driver", "navigator", "mobbers"];
+  var i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
+
+  for (var index = 0; index < changedMembers.length; index++) {
+    var i = document.createElement("i");
+    var li = document.createElement("li");
+
+    if (index < li_ids.length) {
+      li.id = li_ids[index];
+      i.className = i_classes[index];
+    } else {
+      li.id = li_ids[li_ids.length - 1];
+      i.className = i_classes[i_classes.length - 1];
+    }
+
+    li.appendChild(i);
+    li.append(changedMembers[index]);
+    members.appendChild(li);
+  }
+}
+
+function membersAsArray() {
+  return memberList.value.split(",");
+}
+
+},{}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -637,7 +600,7 @@ function stop() {
   alarm.fastSeek(0);
 }
 
-},{"./events":6,"./spi/settings":16}],15:[function(require,module,exports){
+},{"./events":5,"./spi/settings":15}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -658,7 +621,7 @@ function timeLeftIn(name, callback) {
   xhttp.send();
 }
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -723,4 +686,4 @@ var inMilliseconds = function inMilliseconds(year) {
   return year * 365 * 24 * 60 * 60 * 1000;
 };
 
-},{}]},{},[8]);
+},{}]},{},[7]);

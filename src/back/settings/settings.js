@@ -1,6 +1,7 @@
 exports.toSettings = function (data) {
     return new Settings(
         data.lengthInMinutes || 10,
+        data.members || [],
         toPomodoroSettings(data),
         data.features || ""
     );
@@ -12,18 +13,17 @@ function toPomodoroSettings(data) {
 }
 
 class Settings {
-    constructor(lengthInMinutes, pomodoroSettings, features) {
+    constructor(lengthInMinutes, members, pomodoroSettings, features) {
         this.lengthInMinutes = lengthInMinutes;
+        this.members = members;
         this.pomodoro = pomodoroSettings;
         this.features = features;
     }
 }
 
 class PomodoroSettings {
-    turns;
-
     constructor(active, turns) {
-        this.active = active
+        this.active = active;
         this.turns = turns;
     }
 }
