@@ -21,7 +21,7 @@ function rotateMembersAndShowNotification() {
     var memberArray = settings.membersAsArray();
     var rotatedMemberArray = [].concat(memberArray.slice(1, memberArray.length), memberArray[0]);
     memberList.value = rotatedMemberArray.join(",");
-    memberList.onchange();
+    settings.updateMembers(rotatedMemberArray);
 
     var notify = new Notification("Turn ended, time to switch!", { body: "Next up: " + rotatedMemberArray[0]})
 }
