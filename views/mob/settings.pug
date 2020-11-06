@@ -8,7 +8,7 @@ section#settings
     fieldset
         label(for='memberList')
         | Members
-        input#memberList(type='text' value=memberList)
+        input#memberList(type='text' data-role="tagsinput" value=memberList)
     if pomodoro.featureOn
         fieldset
             input#pomodoro-active(type='checkbox' checked=pomodoro.active)
