@@ -1,18 +1,13 @@
 const durationByPerson = document.getElementById("minutes-by-person");
 const memberList = document.getElementById("memberList");
 const members = document.getElementById("members");
-var changingFromRemote = false;
+var interactiveChange = true;
 
 export function setupSync(socket, mobName) {
     socket.on('change length', length => durationByPerson.value = length);
     socket.on('change members', changedMembers => {
-        changingFromRemote = true;
-        $('#memberList').tagsinput('removeAll');
-        changedMembers.forEach(member => {
-            $('#memberList').tagsinput('add', member);
-        });
         updateMembers(changedMembers);
-        changingFromRemote = false;
+        updateSettingsMembers(changedMembers);
     });
 
     durationByPerson.onchange = function () {
@@ -20,7 +15,7 @@ export function setupSync(socket, mobName) {
     };
 
     memberList.onchange = function () {
-        if (!changingFromRemote) {
+        if (interactiveChange) {
             const memberArray = this.value.split(",");
             socket.emit("change members", mobName, memberArray);
             updateMembers(memberArray);
@@ -52,6 +47,15 @@ export function updateMembers(changedMembers) {
         li.append(changedMembers[index]);
         members.appendChild(li);
     }
+}
+
+export function updateSettingsMembers(changedMembers) {
+    interactiveChange = false;
+    $('#memberList').tagsinput('removeAll');
+    changedMembers.forEach(member => {
+        $('#memberList').tagsinput('add', member);
+    });
+    interactiveChange = true;
 }
 
 export function membersAsArray() {
