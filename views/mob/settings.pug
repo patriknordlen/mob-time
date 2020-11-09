@@ -11,8 +11,10 @@ section#settings
                 td
                     label(for='memberList')
                         | Members
-            tr
                 td
+                    a#randomize(class='fas fa-random')
+            tr
+                td(colspan=2)
                     input#memberList(type='text' data-role="tagsinput" value=memberList)
     if pomodoro.featureOn
         fieldset
