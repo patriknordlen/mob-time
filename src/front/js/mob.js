@@ -67,6 +67,7 @@ window.addEventListener(
         event.preventDefault();
         Notification.requestPermission().then(() => {
             document.getElementById("enableNotifications").innerHTML = "Notifications enabled!";
+            setTimeout(() => document.getElementById("enableNotifications").innerHTML = "", 3000);
       })};
       document.getElementById("enableNotifications").appendChild(enableNotificationsButton);
     }
