@@ -1,20 +1,10 @@
 const sound = require("./sound");
 const display = require("./display/display");
 require("./display/countDownMode");
-const mobTimer = require("./spi/mobTimer");
 const eventsModule = require("./events");
 const settings = require("./settings");
 const turn = require("./mob/turn");
 const pomodoro = require("./pomodoro/countdown");
-const enableNotifications = document.getElementById("enableNotifications");
-
-mobTimer.timeLeftIn(mobName, update);
-setInterval(() => mobTimer.timeLeftIn(mobName, update), 500);
-
-function update(timerStatus) {
-  eventsModule.throwEventFor(timerStatus, turn.isInProgress());
-  display.displayTimeLeft(timerStatus);
-}
 
 // --------------------------------------------
 // Sockets
@@ -59,9 +49,16 @@ socket.on("start mob", function (member) {
   var notify = new Notification("Turn started", { body: member + " started a turn." });
 });
 
+setInterval(() => socket.emit("get status", mobName), 500);
+
+socket.on("status", (timerStatus) => {
+  eventsModule.throwEventFor(timerStatus, turn.isInProgress());
+  display.displayTimeLeft(timerStatus);
+});
+
 window.addEventListener(
   "DOMContentLoaded",
-  (event) => {
+  () => {
     if (Notification.permission != "granted") {
       var enableNotificationsButton = document.createElement("button");
       enableNotificationsButton.id = "enableNotificationsButton";
@@ -69,8 +66,8 @@ window.addEventListener(
       enableNotificationsButton.onclick = (event) => {
         event.preventDefault();
         Notification.requestPermission().then(() => {
-            // enableNotificationsButton.remove();
             document.getElementById("enableNotifications").innerHTML = "Notifications enabled!";
+            setTimeout(() => document.getElementById("enableNotifications").innerHTML = "", 3000);
       })};
       document.getElementById("enableNotifications").appendChild(enableNotificationsButton);
     }

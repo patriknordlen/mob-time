@@ -47,5 +47,13 @@ exports.setup = io => {
             });
             socket.to(mobName).emit("change turns by pomodoro", number);
         });
+
+        socket.on("get status", async (mobName) => {
+            let turn = await allTurns.get(mobName);
+            let data = turn.getState();
+            // data["pomodoro"] = await pomodoro.get().status(mobName);
+
+            socket.emit("status", data);
+        });
     });
 };
