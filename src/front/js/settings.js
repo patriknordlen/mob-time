@@ -70,6 +70,6 @@ randomize.onclick = function() {
         [mArr[i], mArr[j]] = [mArr[j], mArr[i]];
     }
 
-    updateMembers(mArr);
     updateSettingsMembers(mArr);
+    memberList.onchange();
 }
