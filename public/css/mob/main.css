@@ -164,43 +164,34 @@ p a {
   font-size: .9em;
 }
 /* line 40, ../../../src/front/sass/mob/main.scss */
-#container #members {
+#container ul#members {
   font-family: Roboto, sans-serif;
   text-align: start;
   padding: 0;
+  margin-top: 50px;
+  left: 40%;
+  position: relative;
 }
-/* line 45, ../../../src/front/sass/mob/main.scss */
-#container #members li.driver, #container #members li.navigator {
+/* line 48, ../../../src/front/sass/mob/main.scss */
+#container ul#members li#driver, #container ul#members li#navigator {
   font-weight: bold;
-  font-size: 1.5em;
   width: 50%;
 }
-/* line 50, ../../../src/front/sass/mob/main.scss */
-#container #members li.driver:before {
-  content: "D:";
-  margin-right: 5px;
-  font-weight: normal;
-}
-/* line 55, ../../../src/front/sass/mob/main.scss */
-#container #members li.navigator:before {
-  content: "N:";
-  margin-right: 5px;
-  font-weight: normal;
-}
-/* line 60, ../../../src/front/sass/mob/main.scss */
-#container #members li {
+/* line 52, ../../../src/front/sass/mob/main.scss */
+#container ul#members li {
   display: block;
   list-style-type: none;
   margin: 10px 0;
   width: 33%;
+  position: relative;
 }
-/* line 65, ../../../src/front/sass/mob/main.scss */
-#container #members li i {
+/* line 58, ../../../src/front/sass/mob/main.scss */
+#container ul#members li i {
   display: inline-block;
   margin-right: 10px;
 }
 
-/* line 73, ../../../src/front/sass/mob/main.scss */
+/* line 66, ../../../src/front/sass/mob/main.scss */
 #start-pause, h1 {
   box-sizing: border-box;
   display: block;
@@ -319,7 +310,7 @@ svg#countdown circle#countdown-circle {
 }
 
 /* line 76, ../../../src/front/sass/mob/_disappearingCircle.scss */
-svg#pomodoro {
+svg#breaks {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -328,23 +319,23 @@ svg#pomodoro {
   transform: rotateZ(-90deg);
 }
 /* line 85, ../../../src/front/sass/mob/_disappearingCircle.scss */
-svg#pomodoro circle {
+svg#breaks circle {
   fill: none;
   stroke-width: 7px;
 }
 /* line 90, ../../../src/front/sass/mob/_disappearingCircle.scss */
-svg#pomodoro #pomodoro-background {
+svg#breaks #breaks-background {
   stroke: #ddd;
 }
 /* line 93, ../../../src/front/sass/mob/_disappearingCircle.scss */
-svg#pomodoro circle#pomodoro-circle {
+svg#breaks circle#breaks-circle {
   stroke-dasharray: 647.16809px;
   stroke: #999;
   transition-property: stroke-dashoffset;
   transition-duration: 100ms;
 }
 /* line 100, ../../../src/front/sass/mob/_disappearingCircle.scss */
-svg#pomodoro circle#pomodoro-outer {
+svg#breaks circle#breaks-outer {
   stroke-width: 1px;
   stroke: #ccc;
 }
