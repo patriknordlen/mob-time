@@ -1,7 +1,7 @@
 let allSettings = require("../settings/allSettings");
 let core = require("../features/core");
 
-const legalFeatures = ["pomodoro", "fastTime", "fasterTime"];
+const legalFeatures = ["breaks", "fastTime", "fasterTime"];
 
 exports.isOn = async (feature, mob) => {
     let settings = await allSettings.get(mob) || allSettings.default;

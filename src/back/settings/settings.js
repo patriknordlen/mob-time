@@ -2,28 +2,27 @@ exports.toSettings = function (data) {
     return new Settings(
         data.lengthInMinutes || 10,
         data.members || [],
-        toPomodoroSettings(data),
+        toBreaksSettings(data),
         data.features || ""
     );
 }
 
-function toPomodoroSettings(data) {
-    if (!data.pomodoro) return new PomodoroSettings(false)
-    return new PomodoroSettings(data.pomodoro.active, data.pomodoro.turns || 3);
+function toBreaksSettings(data) {
+    if (!data.breaks) return new BreaksSettings(3)
+    return new BreaksSettings(data.breaks.turns || 3);
 }
 
 class Settings {
-    constructor(lengthInMinutes, members, pomodoroSettings, features) {
+    constructor(lengthInMinutes, members, breaksSettings, features) {
         this.lengthInMinutes = lengthInMinutes;
         this.members = members;
-        this.pomodoro = pomodoroSettings;
+        this.breaks = breaksSettings;
         this.features = features;
     }
 }
 
-class PomodoroSettings {
-    constructor(active, turns) {
-        this.active = active;
+class BreaksSettings {
+    constructor(turns) {
         this.turns = turns;
     }
 }

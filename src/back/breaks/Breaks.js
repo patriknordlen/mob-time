@@ -1,4 +1,4 @@
-class Pomodoro {
+class Breaks {
     constructor(start, length) {
         this.start = start;
         this.length = length;
@@ -26,4 +26,4 @@ class Pomodoro {
     }
 }
 
-module.exports = Pomodoro;
+module.exports = Breaks;

@@ -21,11 +21,10 @@ main#panel
             svg#countdown
                 circle#countdown-circle-background(r='92' cx='99' cy='99')
                 circle#countdown-circle(r='92' cx='99' cy='99')
-            if pomodoro.featureOn
-                svg#pomodoro
-                    circle#pomodoro-outer(r='107' cx='120' cy='120')
-                    circle#pomodoro-background(r='103' cx='120' cy='120')
-                    circle#pomodoro-circle(r='103' cx='120' cy='120')
+            svg#breaks
+                circle#breaks-outer(r='107' cx='120' cy='120')
+                circle#breaks-background(r='103' cx='120' cy='120')
+                circle#breaks-circle(r='103' cx='120' cy='120')
         section#title
             h1: a(href="/" title="Home") Mob Time
             h2 You are in the <em>#{mobName}</em> mob

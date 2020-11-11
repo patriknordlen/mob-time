@@ -73,8 +73,8 @@ svg#countdown {
     }
   }
 }
-svg#pomodoro {
-  $pomodoro-circle-diameter: $circle-outside-diameter;
+svg#breaks {
+  $breaks-circle-diameter: $circle-outside-diameter;
   position: absolute;
   top: $enclosing-circle-padding;
   right: $enclosing-circle-padding;
@@ -87,18 +87,18 @@ svg#pomodoro {
     stroke-width: 7px;
   }
 
-  #pomodoro-background {
+  #breaks-background {
     stroke: #ddd;
   }
-  circle#pomodoro-circle {
-    $dasharray-pomodoro: 103px * 2 * pi();
-    stroke-dasharray: $dasharray-pomodoro;
+  circle#breaks-circle {
+    $dasharray-breaks: 103px * 2 * pi();
+    stroke-dasharray: $dasharray-breaks;
     stroke: #999;
     transition-property: stroke-dashoffset;
     transition-duration: 100ms;
   }
-  circle#pomodoro-outer {
-    $dasharray-pomodoro: 120px + 2 * pi();
+  circle#breaks-outer {
+    $dasharray-breaks: 120px + 2 * pi();
     stroke-width: 1px;
     stroke: #ccc;
   }
