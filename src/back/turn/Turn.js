@@ -1,13 +1,12 @@
 class Turn {
-    constructor(members = [], lengthInSeconds = 0, startTime = new Date()) {
-        this.members = members;
+    constructor(lengthInSeconds = 0, startTime = new Date(), rotated = false) {
         this.lengthInSeconds = lengthInSeconds;
         this.startTime = startTime;
+        this.rotated = rotated;
     }
 
     getState() {
         return {
-            members: this.members,
             lengthInMinutes: this.lengthInSeconds / 60,
             timeLeftInMillis: this.timeLeft()
         };
