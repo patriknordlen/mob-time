@@ -32,7 +32,7 @@ document.forms.container.onsubmit = function (event) {
     sound.stop();
     return;
   }
-  socket.emit("start mob", mobName, settings.membersAsArray(), settings.minutesByPerson());
+  socket.emit("start mob", mobName, settings.minutesByPerson());
 };
 
 new ClipboardJS("#share-room", {
@@ -45,15 +45,18 @@ pomodoro.setup();
 require("./pomodoro/settings").setup(socket, mobName);
 settings.setupSync(socket, mobName);
 
-socket.on("start mob", function (member) {
-  var notify = new Notification("Turn started", { body: member + " started a turn." });
+socket.on("start mob", () => {
+  var notify = new Notification("Turn started", { body: settings.membersAsArray()[0] + " started a turn." });
 });
 
 setInterval(() => socket.emit("get status", mobName), 500);
 
-socket.on("status", (timerStatus) => {
-  eventsModule.throwEventFor(timerStatus, turn.isInProgress());
-  display.displayTimeLeft(timerStatus);
+socket.on("status", (data) => {
+  settings.updateMembers(data.members);
+  settings.updateSettingsMembers(data.members);
+
+  eventsModule.throwEventFor(data, turn.isInProgress());
+  display.displayTimeLeft(data);
 });
 
 window.addEventListener(

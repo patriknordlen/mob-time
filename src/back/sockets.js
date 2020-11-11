@@ -9,13 +9,11 @@ exports.setup = io => {
             allTurns.stop(name);
         });
 
-        socket.on('start mob', async (name, members, lengthInMinutes) => {
-            let mobTurn = allTurns.start(name, members, parseFloat(lengthInMinutes));
+        socket.on('start mob', async (name, lengthInMinutes) => {
+            let mobTurn = allTurns.start(name, parseFloat(lengthInMinutes));
             await pomodoro.turnStarted(name, mobTurn);
 
-            if (members.length > 0) {
-                socket.to(name).emit('start mob', members[0]);
-            }
+            socket.to(name).emit('start mob');
         });
 
         socket.on('change length', async (mobName, lengthInMinutes) => {
@@ -25,7 +23,6 @@ exports.setup = io => {
 
         socket.on('change members', async (mobName, members) => {
             await allSettings.saveMembers(mobName, members);
-            socket.to(mobName).emit('change members', members);
         });
 
         socket.on('pomodoro activation change', (mobName, status) => {
@@ -50,7 +47,20 @@ exports.setup = io => {
 
         socket.on("get status", async (mobName) => {
             let turn = await allTurns.get(mobName);
+            let members = await allSettings.getMembers(mobName);
+
+            if (turn.timeLeft() == 0 && turn.lengthInSeconds != 0 && !turn.rotated) {
+                if (members.length > 0) {
+                    var rotatedMembers = [].concat(members.slice(1, members.length), members[0]);
+                    await allSettings.saveMembers(mobName, rotatedMembers);
+                    members = rotatedMembers;
+                }
+                turn.rotated = true;
+                allTurns.save(mobName, turn);
+            }
+
             let data = turn.getState();
+            data["members"] = members;
             // data["pomodoro"] = await pomodoro.get().status(mobName);
 
             socket.emit("status", data);
