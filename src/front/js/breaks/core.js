@@ -6,12 +6,12 @@ export function handle(data, displayTimeLeftRatio, breakSignal) {
 
     displayTimeLeftRatio(Math.max(0, 1 - data.ratio));
 
-    if (isPomodoroOver(data) && canSignalBreak(data)) {
+    if (isBreakOver(data) && canSignalBreak(data)) {
         breakSignal();
         return {breakSignaled: true}
     }
 
-    return {breakSignaled: data.state.breakSignaled && isPomodoroOver(data)};
+    return {breakSignaled: data.state.breakSignaled && isBreakOver(data)};
 }
 
 function canSignalBreak(data) {
@@ -19,6 +19,6 @@ function canSignalBreak(data) {
         && !data.turnInProgress;
 }
 
-function isPomodoroOver(data) {
+function isBreakOver(data) {
     return data.ratio >= 1;
 }

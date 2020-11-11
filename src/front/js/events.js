@@ -38,7 +38,7 @@ function details(timerStatus, mobInProgress) {
     return {
         detail: {
             "turn": {"active": mobInProgress},
-            "pomodoro": {"ratio": timerStatus.pomodoro?.ratio}
+            "breaks": {"ratio": timerStatus.breaks?.ratio}
         }
     };
 }

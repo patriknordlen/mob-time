@@ -1,5 +1,5 @@
 const crate = require("./crate");
-const Pomodoro = require("./Pomodoro");
+const Breaks = require("./Breaks");
 const Off = require("./Off");
 const allSettings = require("../settings/allSettings");
 const features = require("../features/facade");
@@ -17,27 +17,26 @@ class FeatureToggle {
     }
 
     feature(name) {
-        if (features.isOn("pomodoro", name)) return this.on;
-        return this.off;
+        return this.on;
     }
 }
 
 class FeatureOn {
     async status(name) {
-        let pomodoro = await crate.findBy(name) || new Off();
-        return pomodoro.status();
+        let breaks = await crate.findBy(name) || new Off();
+        return breaks.status();
     }
 
     async turnStarted(name, turn) {
-        let lastPomodoro = await crate.findBy(name);
-        if (lastPomodoro !== null && lastPomodoro.inProgress()) return;
-        let pomodoro = new Pomodoro(turn.startTime, await this.length(name, turn));
-        crate.save(name, pomodoro);
+        let lastBreaks = await crate.findBy(name);
+        if (lastBreaks !== null && lastBreaks.inProgress()) return;
+        let breaks = new Breaks(turn.startTime, await this.length(name, turn));
+        crate.save(name, breaks);
     }
 
     async length(name, turn) {
         let settings = await allSettings.get(name);
-        let length = turn.lengthInSeconds * settings.pomodoro.turns / 60;
+        let length = turn.lengthInSeconds * settings.breaks.turns / 60;
 
         return length;
     }
@@ -58,6 +57,8 @@ class FeatureOff {
 }
 
 const featureToggle = new FeatureToggle();
+
+exports.featureOn = () => new FeatureOn();
 
 exports.get = function () {
     return featureToggle;

@@ -5,6 +5,9 @@ section#settings
     fieldset
         input#minutes-by-person(type='number' min='1' max='60' required='' value=length size='2')
         label(for='minutes-by-person') minutes / pers.
+    fieldset#turns-before-break-fieldset
+        input#turns-before-break(type='number' min='1' max='25' required='' value=breaks.turns size='3')
+        label(for='turns-before-break') turns before break
     fieldset
         table
             tr
@@ -16,13 +19,6 @@ section#settings
             tr
                 td(colspan=2)
                     input#memberList(type='text' data-role="tagsinput" value=memberList)
-    if pomodoro.featureOn
-        fieldset
-            input#pomodoro-active(type='checkbox' checked=pomodoro.active)
-            label(for='pomodoro-active') Pomodoro (experimental)
-        fieldset#turns-by-pomodoro-fieldset
-            input#turns-by-pomodoro(type='number' min='1' max='25' required='' value=pomodoro.turns size='2')
-            label(for='turns-by-pomodoro') Number of turns by pomodoro
 
     h2
         i(class='fas fa-user-secret')

@@ -1,6 +1,6 @@
 const allTurns = require("./turn/allTurns");
 const allSettings = require("./settings/allSettings");
-const pomodoro = require("./pomodoro/facade");
+const breaks = require("./breaks/facade");
 let features = require("./features/facade");
 const slugify = require("slugify");
 
@@ -31,20 +31,12 @@ exports.start = app => {
             length: settings.lengthInMinutes,
             members: settings.members,
             memberList: settings.members.join(","),
-            pomodoro: {
-                featureOn: await features.isOn("pomodoro", mobName),
-                active: settings.pomodoro.active,
-                turns: settings.pomodoro.turns,
+            breaks: {
+                turns: settings.breaks.turns,
+                remainingTurns: settings.remainingTurns
             }
         };
         return res.render("mob/mob.pug", data);
-    });
-
-    app.get("/:mob/status", async (req, res) => {
-        let turn = await allTurns.get(req.params.mob);
-        let data = turn.getState();
-        data["pomodoro"] = await pomodoro.get().status(req.params.mob);
-        return res.json(data);
     });
 };
 

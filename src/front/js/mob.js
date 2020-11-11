@@ -4,7 +4,7 @@ require("./display/countDownMode");
 const eventsModule = require("./events");
 const settings = require("./settings");
 const turn = require("./mob/turn");
-const pomodoro = require("./pomodoro/countdown");
+const breaks = require("./breaks/countdown");
 
 // --------------------------------------------
 // Sockets
@@ -41,8 +41,8 @@ new ClipboardJS("#share-room", {
   alert("A link to this mob has been copied in your clipboard");
 });
 
-pomodoro.setup();
-require("./pomodoro/settings").setup(socket, mobName);
+breaks.setup();
+require("./breaks/settings").setup(socket, mobName);
 settings.setupSync(socket, mobName);
 
 socket.on("start mob", () => {

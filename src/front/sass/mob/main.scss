@@ -37,31 +37,24 @@
     }
   }
 
-  #members {
+  ul#members {
     font-family: Roboto, sans-serif;
     text-align: start;
     padding: 0;
+    margin-top: 50px;
+    left: 40%;
+    position: relative;
 
-    li.driver, li.navigator {
+    li#driver, li#navigator {
       font-weight: bold;
-      font-size: 1.5em;
       width: 50%;
-    }
-    li.driver:before {
-      content: "D:";
-      margin-right: 5px;
-      font-weight: normal;
-    }
-    li.navigator:before {
-      content: "N:";
-      margin-right: 5px;
-      font-weight: normal;
     }
     li {
       display: block;
       list-style-type: none;
       margin: 10px 0;
       width: 33%;
+      position: relative;
       i {
         display: inline-block;
         margin-right: 10px;

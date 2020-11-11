@@ -1,15 +1,15 @@
 const events = require("../events").events;
 const circleAnimation = require("../circle-animation");
 const core = require("./core");
-const circle = document.getElementById("countdown-circle");
+const circle = document.getElementById("breaks-circle");
 
 let state = {breakSignaled: true};
 
 function handle(evt) {
     state = core.handle(
-        {"ratio": evt.detail.pomodoro.ratio, "turnInProgress": evt.detail.turn.active, "state": state},
+        {"ratio": evt.detail.breaks.ratio, "turnInProgress": evt.detail.turn.active, "state": state},
         leftRatio => circleAnimation.progression(circle, leftRatio),
-        () => alert("Take a break!")
+        () => { new Notification("Time to take a break!"); alert("Time to take a break!"); }
     );
 }
 

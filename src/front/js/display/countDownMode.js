@@ -16,6 +16,8 @@ function turnOff() {
     container.classList.remove("counting");
 }
 
-function showNotification() {
-    var notify = new Notification("Turn ended, time to switch!", { body: "Next up: " + settings.membersAsArray()[0]});
+function showNotification(evt) {
+    if (evt.detail.breaks.ratio < 1) {
+        var notify = new Notification("Turn ended, time to switch!", { body: "Next up: " + settings.membersAsArray()[0]});
+    }
 }
