@@ -4,6 +4,111 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.handle = handle;
+
+function handle(data, displayTimeLeftRatio, breakSignal) {
+  if (!data.ratio) {
+    displayTimeLeftRatio(0);
+    return data.state;
+  }
+
+  displayTimeLeftRatio(Math.max(0, 1 - data.ratio));
+
+  if (isBreakOver(data) && canSignalBreak(data)) {
+    breakSignal();
+    return {
+      breakSignaled: true
+    };
+  }
+
+  return {
+    breakSignaled: data.state.breakSignaled && isBreakOver(data)
+  };
+}
+
+function canSignalBreak(data) {
+  return !data.state.breakSignaled && !data.turnInProgress;
+}
+
+function isBreakOver(data) {
+  return data.ratio >= 1;
+}
+
+},{}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setup = setup;
+
+var events = require("../events").events;
+
+var circleAnimation = require("../circle-animation");
+
+var core = require("./core");
+
+var circle = document.getElementById("breaks-circle");
+var state = {
+  breakSignaled: true
+};
+
+function handle(evt) {
+  state = core.handle({
+    "ratio": evt.detail.breaks.ratio,
+    "turnInProgress": evt.detail.turn.active,
+    "state": state
+  }, function (leftRatio) {
+    return circleAnimation.progression(circle, leftRatio);
+  }, function () {
+    new Notification("Time to take a break!");
+    alert("Time to take a break!");
+  });
+}
+
+function setup() {
+  document.addEventListener(events.TURN_ENDED, handle);
+  document.addEventListener(events.TIME_PASSED, handle);
+}
+
+},{"../circle-animation":4,"../events":8,"./core":1}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setup = setup;
+exports.turnsBeforeBreak = turnsBeforeBreak;
+
+function setup(socket, mobName) {
+  var fieldset = document.getElementById("turns-before-break-fieldset");
+  var circle = document.getElementById("breaks");
+  fieldset.style.display = "block";
+  circle.style.display = "block"; // ---------------------------------
+  // Turns before break
+  // ---------------------------------
+
+  var field = document.getElementById("turns-before-break");
+
+  field.onchange = function () {
+    return socket.emit("change turns before break", mobName, field.value);
+  };
+
+  socket.on("change turns before break", function (number) {
+    return field.value = number;
+  });
+}
+
+function turnsBeforeBreak() {
+  return parseInt(document.getElementById("turns-before-break").value);
+}
+
+},{}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.progression = progression;
 exports.dasharray = dasharray;
 
@@ -20,7 +125,7 @@ function dasharray(circle) {
   return window.getComputedStyle(circle).getPropertyValue("stroke-dasharray").replace("px", "");
 }
 
-},{}],2:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 var events = require("../events").events;
@@ -28,9 +133,8 @@ var events = require("../events").events;
 var settings = require("../settings");
 
 var container = document.getElementById("container");
-var memberList = document.getElementById("memberList");
 document.addEventListener(events.TURN_ENDED, turnOff);
-document.addEventListener(events.TURN_ENDED, rotateMembersAndShowNotification);
+document.addEventListener(events.TURN_ENDED, showNotification);
 document.addEventListener(events.TURN_INTERRUPTED, turnOff);
 document.addEventListener(events.TURN_STARTED, turnOn);
 
@@ -43,17 +147,15 @@ function turnOff() {
   container.classList.remove("counting");
 }
 
-function rotateMembersAndShowNotification() {
-  var memberArray = settings.membersAsArray();
-  var rotatedMemberArray = [].concat(memberArray.slice(1, memberArray.length), memberArray[0]);
-  memberList.value = rotatedMemberArray.join(",");
-  memberList.onchange();
-  var notify = new Notification("Turn ended, time to switch!", {
-    body: "Next up: " + rotatedMemberArray[0]
-  });
+function showNotification(evt) {
+  if (evt.detail.breaks.ratio < 1) {
+    var notify = new Notification("Turn ended, time to switch!", {
+      body: "Next up: " + settings.membersAsArray()[0]
+    });
+  }
 }
 
-},{"../events":5,"../settings":12}],3:[function(require,module,exports){
+},{"../events":8,"../settings":12}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -96,7 +198,7 @@ function timeFormatter() {
   return countingMode.checked ? human_readable.extended_format : human_readable.simple_format;
 }
 
-},{"../functions/human_readable_time":6,"../spi/settings":15,"./mainButton":4}],4:[function(require,module,exports){
+},{"../functions/human_readable_time":9,"../spi/settings":14,"./mainButton":7}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -144,7 +246,7 @@ function ratio(timerStatus) {
   return timerStatus.timeLeftInMillis / (timerStatus.lengthInMinutes * 60 * 1000);
 }
 
-},{"../circle-animation":1,"../sound":13}],5:[function(require,module,exports){
+},{"../circle-animation":4,"../sound":13}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -160,7 +262,7 @@ var events = {
 };
 exports.events = events;
 
-function throwEventFor(timerStatus, mob) {
+function throwEventFor(timerStatus, mobInProgress) {
   return detectFrom(timerStatus, mobInProgress);
 }
 
@@ -193,21 +295,21 @@ function send(event, timerStatus, mobInProgress) {
 }
 
 function details(timerStatus, mobInProgress) {
-  var _timerStatus$pomodoro;
+  var _timerStatus$breaks;
 
   return {
     detail: {
       "turn": {
         "active": mobInProgress
       },
-      "pomodoro": {
-        "ratio": (_timerStatus$pomodoro = timerStatus.pomodoro) === null || _timerStatus$pomodoro === void 0 ? void 0 : _timerStatus$pomodoro.ratio
+      "breaks": {
+        "ratio": (_timerStatus$breaks = timerStatus.breaks) === null || _timerStatus$breaks === void 0 ? void 0 : _timerStatus$breaks.ratio
       }
     }
   };
 }
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -241,7 +343,7 @@ function toSeconds(milliseconds) {
   return Math.round(milliseconds / 1000);
 }
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 var sound = require("./sound");
@@ -250,25 +352,13 @@ var display = require("./display/display");
 
 require("./display/countDownMode");
 
-var mobTimer = require("./spi/mobTimer");
-
 var eventsModule = require("./events");
 
 var settings = require("./settings");
 
 var turn = require("./mob/turn");
 
-var pomodoro = require("./pomodoro/countdown");
-
-mobTimer.timeLeftIn(mobName, update);
-setInterval(function () {
-  return mobTimer.timeLeftIn(mobName, update);
-}, 500);
-
-function update(timerStatus) {
-  eventsModule.throwEventFor(timerStatus, turn.isInProgress());
-  display.displayTimeLeft(timerStatus);
-} // --------------------------------------------
+var breaks = require("./breaks/countdown"); // --------------------------------------------
 // Sockets
 // --------------------------------------------
 
@@ -284,7 +374,7 @@ display.init();
 document.forms.container.onsubmit = function (event) {
   event.preventDefault();
 
-  if (Notification.permission != 'granted') {
+  if (Notification.permission != "granted") {
     Notification.requestPermission();
   }
 
@@ -298,32 +388,56 @@ document.forms.container.onsubmit = function (event) {
     return;
   }
 
-  socket.emit("start mob", mobName, settings.membersAsArray(), settings.minutesByPerson());
+  socket.emit("start mob", mobName, settings.minutesByPerson());
 };
 
 new ClipboardJS("#share-room", {
   text: function text() {
     return window.location.href;
   }
-}).on('success', function () {
-  alert('A link to this mob has been copied in your clipboard');
+}).on("success", function () {
+  alert("A link to this mob has been copied in your clipboard");
 });
-pomodoro.setup();
+breaks.setup();
 
-require("./pomodoro/settings").setup(socket, mobName);
+require("./breaks/settings").setup(socket, mobName);
 
 settings.setupSync(socket, mobName);
-socket.on("start mob", function (member) {
-  if (Notification.permission != 'granted') {
-    Notification.requestPermission();
-  }
-
+socket.on("start mob", function () {
   var notify = new Notification("Turn started", {
-    body: member + " started a turn."
+    body: settings.membersAsArray()[0] + " started a turn."
   });
 });
+setInterval(function () {
+  return socket.emit("get status", mobName);
+}, 500);
+socket.on("status", function (data) {
+  settings.updateMembers(data.members);
+  settings.updateSettingsMembers(data.members);
+  eventsModule.throwEventFor(data, turn.isInProgress());
+  display.displayTimeLeft(data);
+});
+window.addEventListener("DOMContentLoaded", function () {
+  if (Notification.permission != "granted") {
+    var enableNotificationsButton = document.createElement("button");
+    enableNotificationsButton.id = "enableNotificationsButton";
+    enableNotificationsButton.innerText = "Enable notifications";
 
-},{"./display/countDownMode":2,"./display/display":3,"./events":5,"./mob/turn":8,"./pomodoro/countdown":10,"./pomodoro/settings":11,"./settings":12,"./sound":13,"./spi/mobTimer":14}],8:[function(require,module,exports){
+    enableNotificationsButton.onclick = function (event) {
+      event.preventDefault();
+      Notification.requestPermission().then(function () {
+        document.getElementById("enableNotifications").innerHTML = "Notifications enabled!";
+        setTimeout(function () {
+          return document.getElementById("enableNotifications").innerHTML = "";
+        }, 3000);
+      });
+    };
+
+    document.getElementById("enableNotifications").appendChild(enableNotificationsButton);
+  }
+}, false);
+
+},{"./breaks/countdown":2,"./breaks/settings":3,"./display/countDownMode":5,"./display/display":6,"./events":8,"./mob/turn":11,"./settings":12,"./sound":13}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -348,133 +462,7 @@ function isInProgress() {
   return inProgress;
 }
 
-},{"../events":5}],9:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.handle = handle;
-
-function handle(data, displayTimeLeftRatio, breakSignal) {
-  if (!data.ratio) {
-    displayTimeLeftRatio(0);
-    return data.state;
-  }
-
-  displayTimeLeftRatio(Math.max(0, 1 - data.ratio));
-
-  if (isPomodoroOver(data) && canSignalBreak(data)) {
-    breakSignal();
-    return {
-      breakSignaled: true
-    };
-  }
-
-  return {
-    breakSignaled: data.state.breakSignaled && isPomodoroOver(data)
-  };
-}
-
-function canSignalBreak(data) {
-  return !data.state.breakSignaled && !data.turnInProgress;
-}
-
-function isPomodoroOver(data) {
-  return data.ratio >= 1;
-}
-
-},{}],10:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setup = setup;
-
-var events = require("../events").events;
-
-var circleAnimation = require("../circle-animation");
-
-var core = require("./core");
-
-var circle = document.getElementById("countdown-circle");
-var state = {
-  breakSignaled: true
-};
-
-function handle(evt) {
-  state = core.handle({
-    "ratio": evt.detail.pomodoro.ratio,
-    "turnInProgress": evt.detail.turn.active,
-    "state": state
-  }, function (leftRatio) {
-    return circleAnimation.progression(circle, leftRatio);
-  }, function () {
-    return alert("Take a break!");
-  });
-}
-
-function setup() {
-  document.addEventListener(events.TURN_ENDED, handle);
-  document.addEventListener(events.TIME_PASSED, handle);
-}
-
-},{"../circle-animation":1,"../events":5,"./core":9}],11:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setup = setup;
-exports.turnsByPomodoro = turnsByPomodoro;
-exports.isOn = isOn;
-var active = document.getElementById("pomodoro-active");
-
-function setup(socket, mobName) {
-  if (!active) return; // ---------------------------------
-  // Activation
-  // ---------------------------------
-
-  var fieldset = document.getElementById("turns-by-pomodoro-fieldset");
-  var circle = document.getElementById("pomodoro");
-  fieldset.style.display = active.checked ? "block" : "none";
-  circle.style.display = active.checked ? "block" : "none";
-
-  active.onchange = function () {
-    socket.emit("pomodoro activation change", mobName, active.checked);
-    fieldset.style.display = active.checked ? "block" : "none";
-    circle.style.display = active.checked ? "block" : "none";
-  };
-
-  socket.on("pomodoro activation change", function (status) {
-    active.checked = status;
-    fieldset.style.display = active.checked ? "block" : "none";
-    circle.style.display = active.checked ? "block" : "none";
-  }); // ---------------------------------
-  // Turns by pomodoro
-  // ---------------------------------
-
-  var field = document.getElementById("turns-by-pomodoro");
-
-  field.onchange = function () {
-    return socket.emit("change turns by pomodoro", mobName, field.value);
-  };
-
-  socket.on("change turns by pomodoro", function (number) {
-    return field.value = number;
-  });
-}
-
-function turnsByPomodoro() {
-  return parseInt(document.getElementById("turns-by-pomodoro").value);
-}
-
-function isOn() {
-  return active ? active.checked : false;
-}
-
-},{}],12:[function(require,module,exports){
+},{"../events":8}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -483,18 +471,30 @@ Object.defineProperty(exports, "__esModule", {
 exports.setupSync = setupSync;
 exports.minutesByPerson = minutesByPerson;
 exports.updateMembers = updateMembers;
+exports.updateSettingsMembers = updateSettingsMembers;
 exports.membersAsArray = membersAsArray;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var durationByPerson = document.getElementById("minutes-by-person");
 var memberList = document.getElementById("memberList");
 var members = document.getElementById("members");
+var randomize = document.getElementById("randomize");
+var syncChanges = false;
 
 function setupSync(socket, mobName) {
   socket.on('change length', function (length) {
     return durationByPerson.value = length;
-  });
-  socket.on('change members', function (changedMembers) {
-    memberList.value = changedMembers;
-    updateMembers(changedMembers);
   });
 
   durationByPerson.onchange = function () {
@@ -502,9 +502,11 @@ function setupSync(socket, mobName) {
   };
 
   memberList.onchange = function () {
-    var memberArray = this.value.split(",");
-    socket.emit("change members", mobName, memberArray);
-    updateMembers(memberArray);
+    if (syncChanges) {
+      var memberArray = this.value.split(",");
+      socket.emit("change members", mobName, memberArray);
+      updateMembers(memberArray);
+    }
   };
 }
 
@@ -515,31 +517,63 @@ function minutesByPerson() {
 }
 
 function updateMembers(changedMembers) {
-  members.innerHTML = "";
-  var li_ids = ["driver", "navigator", "mobbers"];
-  var i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
+  if (changedMembers != membersAsArray()) {
+    members.innerHTML = "";
+    var li_ids = ["driver", "navigator", "mobbers"];
+    var i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
 
-  for (var index = 0; index < changedMembers.length; index++) {
-    var i = document.createElement("i");
-    var li = document.createElement("li");
+    for (var index = 0; index < changedMembers.length; index++) {
+      var i = document.createElement("i");
+      var li = document.createElement("li");
 
-    if (index < li_ids.length) {
-      li.id = li_ids[index];
-      i.className = i_classes[index];
-    } else {
-      li.id = li_ids[li_ids.length - 1];
-      i.className = i_classes[i_classes.length - 1];
+      if (index < li_ids.length) {
+        li.id = li_ids[index];
+        i.className = i_classes[index];
+      } else {
+        li.id = li_ids[li_ids.length - 1];
+        i.className = i_classes[i_classes.length - 1];
+      }
+
+      li.appendChild(i);
+      li.append(changedMembers[index]);
+      members.appendChild(li);
     }
+  }
+}
 
-    li.appendChild(i);
-    li.append(changedMembers[index]);
-    members.appendChild(li);
+function updateSettingsMembers(changedMembers) {
+  if (changedMembers != membersAsArray()) {
+    syncChanges = false;
+    $('#memberList').tagsinput('removeAll');
+    changedMembers.forEach(function (member) {
+      $('#memberList').tagsinput('add', member);
+    });
+    syncChanges = true;
   }
 }
 
 function membersAsArray() {
   return memberList.value.split(",");
 }
+
+randomize.onclick = function () {
+  var mArr = _toConsumableArray($('#memberList').tagsinput('items'));
+
+  for (var i = mArr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [mArr[j], mArr[i]];
+    mArr[i] = _ref[0];
+    mArr[j] = _ref[1];
+  }
+
+  updateSettingsMembers(mArr);
+  memberList.onchange();
+};
+
+window.addEventListener("DOMContentLoaded", function () {
+  updateMembers(membersAsArray());
+  syncChanges = true;
+});
 
 },{}],13:[function(require,module,exports){
 "use strict";
@@ -600,28 +634,7 @@ function stop() {
   alarm.fastSeek(0);
 }
 
-},{"./events":5,"./spi/settings":15}],14:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.timeLeftIn = timeLeftIn;
-
-function timeLeftIn(name, callback) {
-  var xhttp = new XMLHttpRequest();
-
-  xhttp.onreadystatechange = function () {
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      callback(JSON.parse(this.responseText));
-    }
-  };
-
-  xhttp.open("GET", "/" + name + "/status", true);
-  xhttp.send();
-}
-
-},{}],15:[function(require,module,exports){
+},{"./events":8,"./spi/settings":14}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -686,4 +699,4 @@ var inMilliseconds = function inMilliseconds(year) {
   return year * 365 * 24 * 60 * 60 * 1000;
 };
 
-},{}]},{},[7]);
+},{}]},{},[10]);
