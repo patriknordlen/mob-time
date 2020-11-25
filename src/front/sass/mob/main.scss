@@ -37,27 +37,31 @@
     }
   }
 
-  ul#members {
+  table#members {
     font-family: Roboto, sans-serif;
     text-align: start;
     padding: 0;
     margin-top: 50px;
-    left: 40%;
+    margin-bottom: 50px;
+    left: 30%;
+    border-collapse: separate;
+    border-spacing: 20px 0px;
     position: relative;
 
-    li#driver, li#navigator {
+    td#driver, td#navigator {
       font-weight: bold;
       width: 50%;
     }
-    li {
-      display: block;
-      list-style-type: none;
-      margin: 10px 0;
-      width: 33%;
+    td {
       position: relative;
-      i {
+      a {
+        opacity: 0.2;
         display: inline-block;
-        margin-right: 10px;
+        margin-right: 5px;
+        text-decoration: none;
+      }
+      a:hover {
+        opacity: 1;
       }
     }
   }
