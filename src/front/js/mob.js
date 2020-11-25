@@ -52,7 +52,6 @@ socket.on("start mob", () => {
 setInterval(() => socket.emit("get status", mobName), 500);
 
 socket.on("status", (data) => {
-  settings.updateMembers(data.members);
   settings.updateSettingsMembers(data.members);
 
   eventsModule.throwEventFor(data, turn.isInProgress());

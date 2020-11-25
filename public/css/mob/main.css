@@ -164,34 +164,39 @@ p a {
   font-size: .9em;
 }
 /* line 40, ../../../src/front/sass/mob/main.scss */
-#container ul#members {
+#container table#members {
   font-family: Roboto, sans-serif;
   text-align: start;
   padding: 0;
   margin-top: 50px;
-  left: 40%;
+  margin-bottom: 50px;
+  left: 30%;
+  border-collapse: separate;
+  border-spacing: 20px 0px;
   position: relative;
 }
-/* line 48, ../../../src/front/sass/mob/main.scss */
-#container ul#members li#driver, #container ul#members li#navigator {
+/* line 51, ../../../src/front/sass/mob/main.scss */
+#container table#members td#driver, #container table#members td#navigator {
   font-weight: bold;
   width: 50%;
 }
-/* line 52, ../../../src/front/sass/mob/main.scss */
-#container ul#members li {
-  display: block;
-  list-style-type: none;
-  margin: 10px 0;
-  width: 33%;
+/* line 55, ../../../src/front/sass/mob/main.scss */
+#container table#members td {
   position: relative;
 }
-/* line 58, ../../../src/front/sass/mob/main.scss */
-#container ul#members li i {
+/* line 57, ../../../src/front/sass/mob/main.scss */
+#container table#members td a {
+  opacity: 0.2;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 5px;
+  text-decoration: none;
+}
+/* line 63, ../../../src/front/sass/mob/main.scss */
+#container table#members td a:hover {
+  opacity: 1;
 }
 
-/* line 66, ../../../src/front/sass/mob/main.scss */
+/* line 70, ../../../src/front/sass/mob/main.scss */
 #start-pause, h1 {
   box-sizing: border-box;
   display: block;

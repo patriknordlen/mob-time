@@ -26,35 +26,68 @@ export function minutesByPerson() {
     return parseInt(durationByPerson.value);
 }
 
-export function updateMembers(changedMembers) {
-    if (changedMembers != membersAsArray()) {
-        members.innerHTML = "";
-        const li_ids = ["driver", "navigator", "mobbers"];
-        const i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
-        for (var index = 0; index < changedMembers.length; index++) {
-            const i = document.createElement("i");
-            const li = document.createElement("li");
-            if (index < li_ids.length) {
-                li.id = li_ids[index];
-                i.className = i_classes[index];
-            } else {
-                li.id = li_ids[li_ids.length - 1];
-                i.className = i_classes[i_classes.length - 1];
-            }
-            li.appendChild(i);
-            li.append(changedMembers[index]);
-            members.appendChild(li);
+
+export function updateMembers(changedMembers, forceUpdate=false) {
+    members.innerHTML = "";
+    const td_ids = ["driver", "navigator", "mobbers"];
+    const i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
+    for (var index = 0; index < changedMembers.length; index++) {
+        const tr = document.createElement("tr");
+        const td_icon = document.createElement("td");
+        const td_name = document.createElement("td");
+        const td_buttons = document.createElement("td");
+
+        const a_up = document.createElement("a");
+        a_up.id = "moveup-" + index;
+        a_up.className = "fas fa-angle-up";
+        a_up.onclick = function () {
+            let memberArr = membersAsArray();
+            let memberId = parseInt(this.id.split("-")[1]);
+            let swapId = memberId > 0 ? memberId-1 : memberArr.length-1;
+            [memberArr[swapId], memberArr[memberId]] = [memberArr[memberId], memberArr[swapId]];
+            updateSettingsMembers(memberArr);
+            memberList.onchange();
         }
+
+        const a_down = document.createElement("a");
+        a_down.id = "moveup-" + index;
+        a_down.className = "fas fa-angle-down";
+        a_down.onclick = function () {
+            let memberArr = membersAsArray();
+            let memberId = parseInt(this.id.split("-")[1]);
+            let swapId = memberId < memberArr.length-1 ? memberId+1 : 0;
+            [memberArr[swapId], memberArr[memberId]] = [memberArr[memberId], memberArr[swapId]];
+            updateSettingsMembers(memberArr);
+            memberList.onchange();
+        }
+
+        td_buttons.appendChild(a_up);
+        td_buttons.appendChild(a_down);
+        const i = document.createElement("i");
+        if (index < td_ids.length) {
+            td_name.id = td_ids[index];
+            i.className = i_classes[index];
+        } else {
+            td_name.id = td_ids[td_ids.length - 1];
+            i.className = i_classes[i_classes.length - 1];
+        }
+        td_icon.appendChild(i);
+        td_name.appendChild(document.createTextNode(changedMembers[index]));
+        tr.appendChild(td_icon);
+        tr.appendChild(td_name);
+        tr.appendChild(td_buttons);
+        members.appendChild(tr);
     }
 }
 
 export function updateSettingsMembers(changedMembers) {
-    if (changedMembers != membersAsArray()) {
+    if (JSON.stringify(changedMembers) != JSON.stringify(membersAsArray())) {
         syncChanges = false;
         $('#memberList').tagsinput('removeAll');
         changedMembers.forEach(member => {
             $('#memberList').tagsinput('add', member);
         });
+        updateMembers(changedMembers);
         syncChanges = true;
     }
 }
@@ -77,7 +110,7 @@ randomize.onclick = function() {
 window.addEventListener(
     "DOMContentLoaded",
     () => {
-        updateMembers(membersAsArray());
+        updateMembers(membersAsArray(), true);
         syncChanges = true;
     }
 );
