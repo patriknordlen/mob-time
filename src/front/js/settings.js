@@ -27,7 +27,7 @@ export function minutesByPerson() {
 }
 
 
-export function updateMembers(changedMembers, forceUpdate=false) {
+export function updateMembers(changedMembers) {
     members.innerHTML = "";
     const td_ids = ["driver", "navigator", "mobbers"];
     const i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
@@ -61,8 +61,21 @@ export function updateMembers(changedMembers, forceUpdate=false) {
             memberList.onchange();
         }
 
+        var a_remove = document.createElement("a");
+        a_remove.id = "remove-" + index;
+        a_remove.className = "fas fa-times";
+
+        a_remove.onclick = function () {
+          var memberArr = membersAsArray();
+          var memberId = parseInt(this.id.split("-")[1]);
+          memberArr.splice(memberId, 1);
+          updateSettingsMembers(memberArr);
+          memberList.onchange();
+        };
+
         td_buttons.appendChild(a_up);
         td_buttons.appendChild(a_down);
+        td_buttons.appendChild(a_remove);
         const i = document.createElement("i");
         if (index < td_ids.length) {
             td_name.id = td_ids[index];
