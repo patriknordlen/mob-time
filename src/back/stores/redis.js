@@ -1,6 +1,13 @@
 const {promisify} = require('util');
 const redis = require('redis');
-const client = redis.createClient(process.env.REDIS_URL);
+const client = redis.createClient({
+    url: process.env.REDIS_URL,
+    socket: {
+        tls: true,
+        rejectUnauthorized: false
+    }
+})
+client.connect();
 const getAsync = promisify(client.get).bind(client);
 
 console.log("chose redis: " + process.env.REDIS_URL);
