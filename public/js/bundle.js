@@ -412,7 +412,6 @@ setInterval(function () {
   return socket.emit("get status", mobName);
 }, 500);
 socket.on("status", function (data) {
-  settings.updateMembers(data.members);
   settings.updateSettingsMembers(data.members);
   eventsModule.throwEventFor(data, turn.isInProgress());
   display.displayTimeLeft(data);
@@ -517,37 +516,87 @@ function minutesByPerson() {
 }
 
 function updateMembers(changedMembers) {
-  if (changedMembers != membersAsArray()) {
-    members.innerHTML = "";
-    var li_ids = ["driver", "navigator", "mobbers"];
-    var i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
+  members.innerHTML = "";
+  var td_ids = ["driver", "navigator", "mobbers"];
+  var i_classes = ["fas fa-dharmachakra", "fas fa-drafting-compass", "fas fa-user-secret"];
 
-    for (var index = 0; index < changedMembers.length; index++) {
-      var i = document.createElement("i");
-      var li = document.createElement("li");
+  for (var index = 0; index < changedMembers.length; index++) {
+    var tr = document.createElement("tr");
+    var td_icon = document.createElement("td");
+    var td_name = document.createElement("td");
+    var td_buttons = document.createElement("td");
+    var a_up = document.createElement("a");
+    a_up.id = "moveup-" + index;
+    a_up.className = "fas fa-angle-up";
 
-      if (index < li_ids.length) {
-        li.id = li_ids[index];
-        i.className = i_classes[index];
-      } else {
-        li.id = li_ids[li_ids.length - 1];
-        i.className = i_classes[i_classes.length - 1];
-      }
+    a_up.onclick = function () {
+      var memberArr = membersAsArray();
+      var memberId = parseInt(this.id.split("-")[1]);
+      var swapId = memberId > 0 ? memberId - 1 : memberArr.length - 1;
+      var _ref = [memberArr[memberId], memberArr[swapId]];
+      memberArr[swapId] = _ref[0];
+      memberArr[memberId] = _ref[1];
+      updateSettingsMembers(memberArr);
+      memberList.onchange();
+    };
 
-      li.appendChild(i);
-      li.append(changedMembers[index]);
-      members.appendChild(li);
+    var a_down = document.createElement("a");
+    a_down.id = "moveup-" + index;
+    a_down.className = "fas fa-angle-down";
+
+    a_down.onclick = function () {
+      var memberArr = membersAsArray();
+      var memberId = parseInt(this.id.split("-")[1]);
+      var swapId = memberId < memberArr.length - 1 ? memberId + 1 : 0;
+      var _ref2 = [memberArr[memberId], memberArr[swapId]];
+      memberArr[swapId] = _ref2[0];
+      memberArr[memberId] = _ref2[1];
+      updateSettingsMembers(memberArr);
+      memberList.onchange();
+    };
+
+    var a_remove = document.createElement("a");
+    a_remove.id = "remove-" + index;
+    a_remove.className = "fas fa-times";
+
+    a_remove.onclick = function () {
+      var memberArr = membersAsArray();
+      var memberId = parseInt(this.id.split("-")[1]);
+      memberArr.splice(memberId, 1);
+      updateSettingsMembers(memberArr);
+      memberList.onchange();
+    };
+
+    td_buttons.appendChild(a_up);
+    td_buttons.appendChild(a_down);
+    td_buttons.appendChild(a_remove);
+    var i = document.createElement("i");
+
+    if (index < td_ids.length) {
+      td_name.id = td_ids[index];
+      i.className = i_classes[index];
+    } else {
+      td_name.id = td_ids[td_ids.length - 1];
+      i.className = i_classes[i_classes.length - 1];
     }
+
+    td_icon.appendChild(i);
+    td_name.appendChild(document.createTextNode(changedMembers[index]));
+    tr.appendChild(td_icon);
+    tr.appendChild(td_name);
+    tr.appendChild(td_buttons);
+    members.appendChild(tr);
   }
 }
 
 function updateSettingsMembers(changedMembers) {
-  if (changedMembers != membersAsArray()) {
+  if (JSON.stringify(changedMembers) != JSON.stringify(membersAsArray())) {
     syncChanges = false;
     $('#memberList').tagsinput('removeAll');
     changedMembers.forEach(function (member) {
       $('#memberList').tagsinput('add', member);
     });
+    updateMembers(changedMembers);
     syncChanges = true;
   }
 }
@@ -561,9 +610,9 @@ randomize.onclick = function () {
 
   for (var i = mArr.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
-    var _ref = [mArr[j], mArr[i]];
-    mArr[i] = _ref[0];
-    mArr[j] = _ref[1];
+    var _ref3 = [mArr[j], mArr[i]];
+    mArr[i] = _ref3[0];
+    mArr[j] = _ref3[1];
   }
 
   updateSettingsMembers(mArr);
@@ -571,7 +620,7 @@ randomize.onclick = function () {
 };
 
 window.addEventListener("DOMContentLoaded", function () {
-  updateMembers(membersAsArray());
+  updateMembers(membersAsArray(), true);
   syncChanges = true;
 });
 
