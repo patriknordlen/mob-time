@@ -7781,3 +7781,7 @@ Settings
   height: 228px;
   font-size: .9em;
 }
+
+#banner {
+  background-color: gold;
+}
