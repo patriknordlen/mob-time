@@ -38,7 +38,7 @@
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-env": "^7.21.4",
     "async": "^3.2.0",
     "babelify": "^10.0.0",
     "chai": "^4.3.7",
