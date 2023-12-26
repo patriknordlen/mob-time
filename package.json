@@ -46,7 +46,7 @@
     "esm": "^3.2.25",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.3",
-    "start-server-and-test": "^2.0.0",
+    "start-server-and-test": "^2.0.3",
     "watchify": "^4.0.0"
   },
   "browserify": {
