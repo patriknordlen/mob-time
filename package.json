@@ -45,7 +45,7 @@
     "cypress": "^13.6.1",
     "esm": "^3.2.25",
     "mocha": "^10.2.0",
-    "nodemon": "^2.0.3",
+    "nodemon": "^3.0.3",
     "start-server-and-test": "^2.0.3",
     "watchify": "^4.0.0"
   },
