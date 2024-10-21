@@ -44,7 +44,7 @@
     "chai": "^4.4.1",
     "cypress": "^13.15.0",
     "esm": "^3.2.25",
-    "mocha": "^10.2.0",
+    "mocha": "^10.7.3",
     "nodemon": "^3.1.0",
     "start-server-and-test": "^2.0.3",
     "watchify": "^4.0.0"
